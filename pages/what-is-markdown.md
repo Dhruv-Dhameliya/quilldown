@@ -2,7 +2,7 @@
 title: What Is Markdown? A Beginner's Guide with Examples
 h1: What is Markdown? A beginner's guide
 short: What is Markdown?
-card: The plain-text writing format behind READMEs, docs and notes — explained with examples you can try.
+card: Plain-text formatting, explained.
 description: Markdown is a simple way to format text using plain characters. Learn what it is, where it's used, how the syntax works and how to start writing in 5 minutes.
 lead: Markdown is a simple way to format text using ordinary characters — # for headings, ** for bold, - for lists. This guide explains what it is, where it's used and how to write your first document in minutes.
 category: learn

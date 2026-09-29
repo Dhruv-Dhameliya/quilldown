@@ -2,11 +2,11 @@
 title: Diagrams in Markdown — Mermaid Flowcharts, Sequence and More
 h1: How to draw diagrams in Markdown with Mermaid
 short: Diagrams in Markdown
-card: Flowcharts, sequence, Gantt, class, state, ER diagrams and mind maps — written as text.
+card: Flowcharts, Gantt, mind maps.
 description: Draw diagrams in Markdown with Mermaid: flowcharts, sequence, Gantt, pie, class, state, ER and mind maps. Copy-ready examples with live previews.
 lead: Describe a diagram in a few lines of text and get a clean drawing. Mermaid turns code blocks into flowcharts, sequence diagrams, Gantt charts and more — right inside your Markdown.
 category: write
-order: 8
+order: 9
 published: 2026-09-29
 updated: 2026-09-29
 related: latex-math-in-markdown, markdown-cheat-sheet, markdown-to-pdf

@@ -21,7 +21,7 @@ const GITHUB_PROFILE = 'https://github.com/Dhruv-Dhameliya';
 const AUTHOR = 'Dhruv-Dhameliya';
 const OG_IMAGE = SITE + '/social/og-image.png';
 const CATEGORIES = [
-  { id: 'learn', title: 'Learn Markdown', blurb: 'New to Markdown, or want a reference to keep open? Start here.' },
+  { id: 'learn', title: 'Learn Markdown', blurb: 'The basics and the reference.' },
   { id: 'convert', title: 'Convert & export', blurb: 'Turn Markdown into PDF, Word, HTML or an e-book — privately, in your browser.' },
   { id: 'write', title: 'Write better documents', blurb: 'Tables, math, diagrams, emoji and READMEs — the parts of Markdown people search for most.' }
 ];
@@ -170,7 +170,12 @@ const inlineHtml = md => new Marked({ gfm: true, extensions: extensions({ order:
 function faqGroupsHTML(items) {
   const groups = [];
   for (const i of items) { let g = groups.find(x => x.name === i.group); if (!g) groups.push(g = { name: i.group, items: [] }); g.items.push(i); }
-  return groups.map((g, gi) => `<h3 class="faq-group" id="faq-${slugify(g.name)}">${esc(g.name)}</h3>\n<div class="faq">${g.items.map((i, n) => `<details${gi === 0 && n === 0 ? ' open' : ''}><summary>${esc(i.q)}</summary>${i.a}</details>`).join('\n')}</div>`).join('\n');
+  // two columns, filled in reading order until the first holds about half of the questions (open/close never shifts the other column)
+  const cols = [[], []]; let n = 0;
+  for (const g of groups) { cols[n < items.length / 2 ? 0 : 1].push(g); n += g.items.length; }
+  let first = true;
+  const group = g => `<section class="faq-set" aria-labelledby="faq-${slugify(g.name)}"><h3 class="faq-group" id="faq-${slugify(g.name)}">${esc(g.name)}</h3><div class="faq">${g.items.map(i => `<details${first && (first = false, true) ? ' open' : ''}><summary>${esc(i.q)}</summary>${i.a}</details>`).join('')}</div></section>`;
+  return cols.map(c => `<div class="faq-col">${c.map(group).join('')}</div>`).join('');
 }
 function faqHTML(items, asMarkdown) {
   return `<div class="faq">${items.map(i => `<details><summary>${esc(i.q)}</summary>${asMarkdown ? inlineHtml(i.a) : i.a}</details>`).join('')}</div>`;
@@ -186,17 +191,19 @@ const SPRITE = `<svg width="0" height="0" style="position:absolute" aria-hidden=
 <symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
 </defs></svg>`;
 const HEAD_SCRIPT = `<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>`;
-const navHTML = () => `<header class="nav" id="nav"><div class="container nav-in">
-  <a class="brand" href="/" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
-  <nav class="nav-links" aria-label="Primary"><a href="/">Editor</a><a href="/guides/markdown-cheat-sheet">Cheat sheet</a><a href="/guides">Guides</a><a href="/about">About</a></nav>
+/** One header for every page (same links as the homepage). `current` marks the Docs link on /guides and guide pages. */
+const navHTML = (current = '') => `<header class="nav" id="nav"><div class="container nav-in">
+  <a class="brand" href="/#top" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
+  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="/#features">Features</a><a href="/#how">How it works</a><a href="/guides"${current === 'docs' ? ' aria-current="page"' : ''}>Docs</a><a href="/#privacy">Privacy</a><a href="/#faq">FAQ</a><a class="m-only" href="/#editor">Open editor</a></nav>
   <div class="nav-cta">
+    <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     <a class="icon-btn" href="${GITHUB}" target="_blank" rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill"><use href="#i-github"/></svg></a>
     <button class="icon-btn" data-act="theme" aria-label="Toggle theme"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
-    <a class="btn btn-primary btn-sm" href="/">Open editor <svg class="i"><use href="#i-arrow"/></svg></a>
+    <a class="btn btn-primary btn-sm" href="/#editor">Open editor <svg class="i"><use href="#i-arrow"/></svg></a>
   </div></div></header>`;
 const footerHTML = guides => `<footer class="footer"><div class="container">
   <div class="footer-cols">
-    <div><a class="brand" href="/"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>A calm, private Markdown editor with live preview, tabs, math and diagrams. Works offline.</p></div>
+    <div><a class="brand" href="/#top"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>A calm, private Markdown editor with live preview, tabs, math and diagrams. Works offline.</p></div>
     ${CATEGORIES.map(c => `<div><h3>${esc(c.title)}</h3><ul>${guides.filter(p => p.category === c.id).map(p => `<li><a href="/guides/${p.slug}">${esc(p.short || p.h1)}</a></li>`).join('')}</ul></div>`).join('\n    ')}
     <div><h3>Contact</h3><ul>
       <li><a href="${GITHUB_PROFILE}" target="_blank" rel="me noopener noreferrer">GitHub profile</a></li>
@@ -205,9 +212,12 @@ const footerHTML = guides => `<footer class="footer"><div class="container">
       <li><a href="/about">About &amp; press</a></li>
     </ul></div>
   </div>
-  <div class="footer-base"><span>© 2026 Quilldown · built by <a href="${GITHUB_PROFILE}" target="_blank" rel="me noopener noreferrer">${AUTHOR}</a>. Your Markdown never leaves your browser.</span><span><a href="/">Editor</a> · <a href="/guides">All guides</a> · <a href="/about">About</a></span></div>
+  <div class="footer-base"><span>© 2026 Quilldown · built by <a href="${GITHUB_PROFILE}" target="_blank" rel="me noopener noreferrer">${AUTHOR}</a>. Your Markdown never leaves your browser.</span><span><a href="/#editor">Editor</a> · <a href="/guides">Docs</a> · <a href="/about">About</a></span></div>
 </div></footer>`;
-const cardHTML = p => `<a class="gcard" href="/guides/${p.slug}"><span class="tag">${esc(CATEGORIES.find(c => c.id === p.category).title)}</span><strong>${esc(p.short || p.h1)}</strong><span class="d">${esc(p.card || p.description)}</span></a>`;
+const ARROW = '<svg class="i"><use href="#i-arrow"/></svg>';
+const cardHTML = p => `<a class="gcard" href="/guides/${p.slug}"><strong>${esc(p.short || p.h1)}</strong><span class="d">${esc(p.card || '')}</span>${ARROW}</a>`;
+/** Guide navigator: one column per category, one line per guide (homepage + hub). */
+const gnavHTML = (guides, lvl = 3) => `<div class="gnav">${CATEGORIES.map((c, ci) => { const list = guides.filter(p => p.category === c.id); return `<section class="gcol" id="cat-${c.id}"><header><span class="gcol-n">0${ci + 1}</span><h${lvl}>${esc(c.title)}</h${lvl}><span class="gcol-c">${list.length} guides</span></header><ul>${list.map(p => `<li><a class="grow" href="/guides/${p.slug}"><span class="gt">${esc(p.short || p.h1)}</span><span class="gd">${esc(p.card || '')}</span>${ARROW}</a></li>`).join('')}</ul></section>`; }).join('')}</div>`;
 
 /* ---------- structured data: ONE linked @graph per page ---------- */
 const ID = { org: SITE + '/#organization', person: SITE + '/#person', site: SITE + '/#website', logo: SITE + '/#logo', app: SITE + '/#app', code: GITHUB + '#source' };
@@ -228,7 +238,7 @@ const webPageNode = (url, name, description, extra = {}) => ({ '@type': 'WebPage
 const breadcrumbNode = (url, items) => ({ '@type': 'BreadcrumbList', '@id': url + '#breadcrumb', itemListElement: items.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE + c.href })) });
 const faqNode = (url, items) => ({ '@type': 'FAQPage', '@id': url + '#faq', url, isPartOf: { '@id': url + '#webpage' }, mainEntity: items.map(i => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: stripTags(i.html) } })) });
 const graph = nodes => ({ '@context': 'https://schema.org', '@graph': nodes });
-const CRUMB_HOME = { name: 'Home', href: '/' };
+const CRUMB_HOME = { name: 'Home', href: '/#top' };
 
 /* ---------- head / chrome ---------- */
 const fontsCss = await readFile(path.join(ROOT, 'vendor/fonts/fonts.css'), 'utf8');
@@ -277,7 +287,7 @@ ${SPRITE}
 `;
 }
 const crumbsHTML = items => `<ol class="crumbs" aria-label="Breadcrumb">${items.map((c, i) => i === items.length - 1 ? `<li aria-current="page">${esc(c.name)}</li>` : `<li><a href="${c.href}">${esc(c.name)}</a></li>`).join('')}</ol>`;
-const ctaBand = (h, p) => `<section class="cta-band"><div><h2>${esc(h)}</h2><p>${esc(p)}</p></div><a class="btn btn-primary" href="/">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a></section>`;
+const ctaBand = (h, p) => `<section class="cta-band"><div><h2>${esc(h)}</h2><p>${esc(p)}</p></div><a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a></section>`;
 
 /* the stylesheet for rendered documents is generated from the single source (js/document-style.js) so guide pages
    can link it as CSS instead of running a render-blocking script */
@@ -307,6 +317,8 @@ const slugs = new Set(pages.map(p => p.slug)), siteSlugs = new Set(sitePages.map
 const LAST_UPDATED = allPages.map(p => p.updated).sort().pop();
 const FIRST_PUBLISHED = allPages.map(p => p.published || p.updated).sort()[0];
 
+const pnHTML = p => { const i = pages.indexOf(p), a = pages[i - 1], b = pages[i + 1]; return `<nav class="pn" aria-label="More guides">${a ? `<a class="pn-prev" href="/guides/${a.slug}"><span>Previous</span><strong>${esc(a.short || a.h1)}</strong></a>` : '<span></span>'}${b ? `<a class="pn-next" href="/guides/${b.slug}"><span>Next</span><strong>${esc(b.short || b.h1)}</strong></a>` : '<span></span>'}</nav>`; };
+
 /* ---------- build each page ---------- */
 await mkdir(path.join(ROOT, 'guides'), { recursive: true });
 const built = [];
@@ -320,7 +332,7 @@ for (const p of allPages) {
   if (faqItems.length) { toc.push({ id: 'faq', text: 'Frequently asked questions' }); html += `<h2 id="faq">Frequently asked questions<a class="anchor" href="#faq" aria-label="Link to this section">#</a></h2>\n${faqHTML(faqItems, true)}`; }
   const wc = words(html), mins = Math.max(1, Math.round(wc / 220));
   const related = p.related.filter(s => { if (!slugs.has(s)) { warn(`${p.slug}: unknown related page "${s}"`); return false; } return true; }).map(s => pages.find(x => x.slug === s));
-  const crumbs = p.isSite ? [CRUMB_HOME, { name: p.short || p.h1, href: urlPath }] : [CRUMB_HOME, { name: 'Guides', href: '/guides' }, { name: p.h1, href: urlPath }];
+  const crumbs = p.isSite ? [CRUMB_HOME, { name: p.short || p.h1, href: urlPath }] : [CRUMB_HOME, { name: 'Docs', href: '/guides' }, { name: p.h1, href: urlPath }];
   const eyebrow = p.isSite ? (p.eyebrow || 'About') : CATEGORIES.find(c => c.id === p.category).title;
 
   const nodes = [...baseNodes(),
@@ -336,7 +348,7 @@ for (const p of allPages) {
   if (/<h1[ >]/i.test(html)) warn(`${p.slug}: body contains an <h1>`);
   for (const m of html.matchAll(/href="\/guides\/([^"#]+)/g)) if (!slugs.has(m[1])) warn(`${p.slug}: broken internal link /guides/${m[1]}`);
 
-  p.html = headHTML({ title: p.title, description: p.description, url, math: p.math || /class="katex/.test(html), ld: graph(nodes) }) + navHTML() + `
+  p.html = headHTML({ title: p.title, description: p.description, url, math: p.math || /class="katex/.test(html), ld: graph(nodes) }) + navHTML(p.isSite ? '' : 'docs') + `
 <main class="doc-wrap">
   ${crumbsHTML(crumbs)}
   <header class="doc-head">
@@ -344,7 +356,7 @@ for (const p of allPages) {
     <h1>${esc(p.h1)}</h1>
     <p class="lead">${esc(p.lead)}</p>
     <div class="doc-meta"><span>Updated ${fmtDate(p.updated)}</span><span>${mins} min read</span><span>Free · No sign-up · Runs in your browser</span></div>
-    <div class="doc-actions"><a class="btn btn-primary" href="/">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a>${p.isSite ? `<a class="btn" href="${GITHUB_PROFILE}" target="_blank" rel="me noopener noreferrer">GitHub profile</a>` : '<a class="btn" href="/guides">All guides</a>'}</div>
+    <div class="doc-actions"><a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a>${p.isSite ? `<a class="btn" href="${GITHUB_PROFILE}" target="_blank" rel="me noopener noreferrer">GitHub profile</a>` : '<a class="btn" href="/guides">All docs</a>'}</div>
   </header>
   <div class="doc-grid">
     <aside class="toc" aria-label="On this page"><h2>On this page</h2>${toc.map(t => `<a href="#${t.id}">${esc(t.text)}</a>`).join('')}</aside>
@@ -352,6 +364,7 @@ for (const p of allPages) {
 ${html}
     </article>
   </div>
+  ${p.isSite ? '' : pnHTML(p)}
   <div class="after">
     ${related.length ? `<h2>Related guides</h2><div class="cards">${related.map(cardHTML).join('')}</div>` : ''}
     ${ctaBand(p.cta || 'Try it in Quilldown', p.ctaText || 'A free Markdown editor with live preview. Nothing to install and nothing uploaded — your writing stays in your browser.')}
@@ -368,25 +381,26 @@ ${html}
 
 /* ---------- guides hub ---------- */
 {
-  const url = `${SITE}/guides`, crumbs = [CRUMB_HOME, { name: 'Guides', href: '/guides' }];
-  const title = 'Markdown Guides & Tutorials: Cheat Sheet, PDF, Word | Quilldown';
+  const url = `${SITE}/guides`, crumbs = [CRUMB_HOME, { name: 'Docs', href: '/guides' }];
+  const title = 'Quilldown Docs: Markdown Guides & Cheat Sheet';
   const description = 'Free Markdown guides: a complete cheat sheet, how to convert Markdown to PDF, Word and HTML, plus tables, math, diagrams, emoji and README templates.';
   if (title.length > 75) warn(`hub title is ${title.length} chars`);
   if (description.length > 160) warn(`hub description is ${description.length} chars`);
   const nodes = [...baseNodes(),
     webPageNode(url, title, description, { '@type': 'CollectionPage', breadcrumb: { '@id': url + '#breadcrumb' }, datePublished: FIRST_PUBLISHED, dateModified: LAST_UPDATED, mainEntity: { '@id': url + '#list' } }),
     breadcrumbNode(url, crumbs),
-    { '@type': 'ItemList', '@id': url + '#list', name: 'Markdown guides & tutorials', numberOfItems: pages.length, itemListElement: pages.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}/guides/${p.slug}`, name: p.h1 })) }];
-  const html = headHTML({ title, description, url, type: 'website', ld: graph(nodes) }) + navHTML() + `
+    { '@type': 'ItemList', '@id': url + '#list', name: 'Quilldown docs: Markdown guides & cheat sheet', numberOfItems: pages.length, itemListElement: pages.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}/guides/${p.slug}`, name: p.h1 })) }];
+  const html = headHTML({ title, description, url, type: 'website', ld: graph(nodes) }) + navHTML('docs') + `
 <main class="doc-wrap">
   ${crumbsHTML(crumbs)}
   <header class="doc-head">
-    <p class="eyebrow">Guides</p>
-    <h1>Markdown guides &amp; tutorials</h1>
-    <p class="lead">Everything you need to write, format and share Markdown — from your first heading to a finished PDF or Word document. Every guide is free, and every example opens in the editor with one click.</p>
-    <div class="doc-actions"><a class="btn btn-primary" href="/">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a><a class="btn" href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a></div>
+    <p class="eyebrow">Docs</p>
+    <h1>Quilldown docs</h1>
+    <p class="lead">The Markdown cheat sheet and step-by-step guides. Every example opens in the editor.</p>
+    <div class="doc-actions"><a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a></div>
   </header>
-  ${CATEGORIES.map(c => `<section class="hub-group" id="${c.id}"><h2>${esc(c.title)}</h2><p>${esc(c.blurb)}</p><div class="cards">${pages.filter(p => p.category === c.id).map(cardHTML).join('')}</div></section>`).join('\n  ')}
+  <section class="docs-block"><h2 class="docs-h">Reference</h2><a class="docfeat" href="/guides/markdown-cheat-sheet"><span class="docfeat-t"><strong>Markdown cheat sheet</strong><span>Every syntax, with live examples.</span></span>${ARROW}</a></section>
+  <section class="docs-block"><h2 class="docs-h">Guides</h2>${gnavHTML(pages, 3)}</section>
   <div class="after">${ctaBand('Start writing', 'Open Quilldown and try any example from these guides — it takes one click and nothing leaves your browser.')}</div>
 </main>
 ` + footerHTML(pages) + `
@@ -428,7 +442,7 @@ ${html}
     faqNode(url, faqItems)];
   const regions = {
     FAQ: faqGroupsHTML(faqItems),
-    GUIDES: pages.filter(p => p.home === 'true').map(cardHTML).join('\n'),
+    GUIDES: gnavHTML(pages),
     FOOTER: footerHTML(pages),
     LD: `<script type="application/ld+json" id="ld-graph">${safeJson(graph(nodes))}</script>`
   };

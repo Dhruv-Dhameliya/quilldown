@@ -56,3 +56,13 @@
     Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
   }
 })();
+
+/* mobile menu */
+(function () {
+  var nav = document.getElementById('nav'), btn = nav && nav.querySelector('.nav-toggle');
+  if (!btn) return;
+  function close() { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+  btn.addEventListener('click', function () { btn.setAttribute('aria-expanded', String(nav.classList.toggle('open'))); });
+  nav.addEventListener('click', function (e) { if (e.target.closest('.nav-links a')) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+})();

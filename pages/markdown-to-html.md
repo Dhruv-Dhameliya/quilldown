@@ -2,11 +2,11 @@
 title: Markdown to HTML — Convert and Copy Clean HTML Online
 h1: Convert Markdown to HTML
 short: Markdown to HTML
-card: Get clean, ready-to-use HTML from Markdown — copy the markup or save a standalone web page.
+card: Clean markup or a standalone page.
 description: Convert Markdown to clean HTML online for free. Copy the markup for your website or CMS, or save a standalone styled page — private and runs in your browser.
 lead: Turn Markdown into clean HTML for a website, blog or CMS — copy just the markup, or download a complete, styled web page.
 category: convert
-order: 5
+order: 6
 published: 2026-09-29
 updated: 2026-09-29
 related: markdown-cheat-sheet, markdown-to-pdf, what-is-markdown

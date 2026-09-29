@@ -2,11 +2,11 @@
 title: Convert Markdown to PDF — Free, Online and Private
 h1: How to convert Markdown to PDF
 short: Markdown to PDF
-card: Turn any Markdown file into a clean PDF in your browser — free, private and no upload.
+card: A clean PDF, no upload.
 description: Convert Markdown to PDF online for free. Paste or open a .md file, check the preview and save a clean, selectable PDF — no upload, no sign-up, works offline.
 lead: Turn Markdown into a clean, print-ready PDF in under a minute — free, private and without uploading your document anywhere.
 category: convert
-order: 3
+order: 4
 home: true
 published: 2026-09-29
 updated: 2026-09-29

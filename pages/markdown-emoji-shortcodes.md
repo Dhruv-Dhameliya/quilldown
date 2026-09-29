@@ -2,11 +2,11 @@
 title: Emoji in Markdown — Shortcodes and Cheat Sheet
 h1: Emoji in Markdown: shortcodes and cheat sheet
 short: Emoji shortcodes
-card: How :shortcodes: work, with a cheat sheet of the most useful emoji codes for READMEs and docs.
+card: A cheat sheet of :shortcodes:.
 description: How to use emoji in Markdown: what :shortcodes: are, how autocomplete works, and a cheat sheet of popular codes like :rocket:, :tada: and :white_check_mark:.
 lead: Add personality to READMEs, notes and docs with emoji. Type a colon and a few letters, pick from the suggestions — or use the popular shortcodes below.
-category: write
-order: 9
+category: learn
+order: 3
 published: 2026-09-29
 updated: 2026-09-29
 related: markdown-cheat-sheet, readme-template, what-is-markdown

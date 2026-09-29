@@ -2,11 +2,11 @@
 title: Math in Markdown — Write LaTeX Equations with KaTeX
 h1: How to write math (LaTeX) in Markdown
 short: Math in Markdown
-card: Write equations with LaTeX and KaTeX: fractions, roots, sums, integrals, matrices and more.
+card: Equations with KaTeX.
 description: Write math in Markdown with LaTeX and KaTeX: inline and block equations, fractions, sums, integrals, matrices and aligned equations, with live examples.
 lead: Write beautiful equations in plain text. Wrap LaTeX in dollar signs and Quilldown typesets it instantly with KaTeX — inline in a sentence or as a centred block.
 category: write
-order: 7
+order: 8
 math: true
 published: 2026-09-29
 updated: 2026-09-29

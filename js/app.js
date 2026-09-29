@@ -663,7 +663,9 @@ const A = {
   mode: m => setMode(m),
   sync: () => setSync(!state.sync),
   theme: () => setTheme(state.theme === 'dark' ? 'light' : 'dark'),
-  full: () => setFull(!state.full)
+  full: () => setFull(!state.full),
+  startpref: () => setStartPref(!startIsHome()),
+  home: () => { setFull(false); setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 60); }
 };
 
 /* ---- toolbar + menu definitions ---- */
@@ -1978,6 +1980,22 @@ function setFull(on) {
   else { apply(); if (on) editor.focus({ preventScroll: true }); }
 }
 
+/* Start page preference: 'editor' (default — full-screen editor) or 'home' (the landing page). Read by the head script before first paint. */
+const isPhone = () => matchMedia('(max-width: 760px)').matches;
+const startIsHome = () => { const v = store.get('start', null); return v === null ? isPhone() : v === 'home'; };
+function syncStartPref() {
+  const on = startIsHome();
+  $$('[data-startpref]').forEach(i => { i.checked = on; });
+  const b = $('#btnStart');
+  if (b) { b.setAttribute('aria-pressed', String(on)); b.classList.toggle('on', on); b.title = on ? 'Opens on the homepage — click to open the editor instead' : 'Opens on the editor — click to open the homepage instead'; }
+}
+function setStartPref(home, quiet) {
+  store.set('start', home ? 'home' : 'editor');
+  syncStartPref();
+  if (!quiet) toast(home ? 'Quilldown will open on the homepage' : 'Quilldown will open the full-screen editor');
+}
+document.addEventListener('change', e => { if (e.target.matches && e.target.matches('[data-startpref]')) setStartPref(e.target.checked); });
+
 /* ---------------------------------------------------------------
    Landing page: cheat sheet, reveal, nav
 --------------------------------------------------------------- */
@@ -2138,7 +2156,13 @@ async function openSharedFromHash() {
     toast('Opened shared document “' + name + '” in a new tab');
   } catch (err) { toast(err && err.friendly ? err.message : 'That link looks damaged or incomplete, so it couldn’t be opened'); }
 }
-window.addEventListener('hashchange', () => { if (/^#d=/.test(location.hash)) openSharedFromHash(); });
+window.addEventListener('hashchange', () => {
+  const h = location.hash;
+  if (/^#d=/.test(h)) { openSharedFromHash(); return; }
+  // a link to a homepage section (e.g. #faq) while the editor is full screen: show the homepage, then jump there
+  if (h === '#editor') { history.replaceState(null, '', location.pathname + location.search); setFull(true); return; }
+  if (h.length > 1 && state.full) { setFull(false); setTimeout(() => { const el = document.getElementById(decodeURIComponent(h.slice(1))); if (el) el.scrollIntoView(); }, 400); }
+});
 
 /* ---------------------------------------------------------------
    Visual table editor — edits an existing table under the cursor, converts selected
@@ -2509,13 +2533,28 @@ renderTabs();
 setMode(['editor', 'split', 'preview'].includes(state.mode) ? state.mode : 'split');
 $('#btnSync').setAttribute('aria-pressed', String(state.sync)); $('#btnSync').classList.toggle('on', state.sync);
 $('#btnSync').title = state.sync ? 'Sync scroll: on' : 'Sync scroll: off';
-$('#btnFull').setAttribute('aria-pressed', 'true');
-landingEls.forEach(el => el.setAttribute('inert', ''));
+const startHome = document.documentElement.getAttribute('data-start') === 'home';   // set by the head script (saved preference, or a link to a homepage section)
+if (startHome) {
+  state.full = false; shell.classList.remove('is-full'); blocksDirty = linesDirty = true;
+  const b = $('#btnFull'); b.title = 'Full screen'; b.setAttribute('aria-pressed', 'false');
+} else {
+  $('#btnFull').setAttribute('aria-pressed', 'true');
+  landingEls.forEach(el => el.setAttribute('inert', ''));
+}
+syncStartPref();
+if (location.hash === '#editor') history.replaceState(null, '', location.pathname + location.search);
+(function () {   // mobile menu
+  const nav = $('#nav'), btn = nav && $('.nav-toggle', nav); if (!btn) return;
+  const close = () => { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); };
+  btn.addEventListener('click', () => btn.setAttribute('aria-expanded', String(nav.classList.toggle('open'))));
+  nav.addEventListener('click', e => { if (e.target.closest('.nav-links a')) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
 setOutline(store.get('outline', '0') === '1');
 updateStats(); updateCursor(); render(); renderCheats();
 if (enginesReady) renderMath($('#features'), 'html'); else $$('#features .math').forEach(el => el.textContent = dec(el.dataset.tex));
 observeReveals();
-editor.focus({ preventScroll: true });
+if (!startHome) editor.focus({ preventScroll: true });
 openSharedFromHash();
 
 /* ---------------------------------------------------------------

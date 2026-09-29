@@ -2,11 +2,11 @@
 title: Convert Markdown to Word and Google Docs — Free Online
 h1: Convert Markdown to Word (.docx) and Google Docs
 short: Markdown to Word & Google Docs
-card: Export a real .docx file or paste formatted text into Google Docs with clean heading sizes.
+card: A real .docx, or a clean Docs paste.
 description: Convert Markdown to Word (.docx) or paste it into Google Docs with headings, tables and lists intact. Free, online, private — nothing is uploaded.
 lead: Two ways to get Markdown into a word processor: export a real Word (.docx) file, or copy formatted text straight into Google Docs. Both are free, private and take one click.
 category: convert
-order: 4
+order: 5
 home: true
 published: 2026-09-29
 updated: 2026-09-29
