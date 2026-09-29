@@ -1,0 +1,12 @@
+# Vercel CLI link folder (created by `vercel` / `vercel link`)
+.vercel
+
+# Not needed here — this project has no npm dependencies
+node_modules
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.vscode
