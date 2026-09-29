@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Markdown Cheat Sheet — Complete Syntax Guide with Examples</title>
-<meta name="description" content="The complete Markdown cheat sheet: headings, lists, links, images, code, tables, task lists, footnotes, math and diagrams — each with a live example.">
+<meta name="description" content="Markdown cheat sheet with every syntax: headings, lists, links, images, code, tables, task lists, footnotes, math and diagrams, plus fixes for common problems.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Dhruv-Dhameliya">
 <meta name="theme-color" content="#fbfbfa">
@@ -16,7 +16,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://quilldown.vercel.app/guides/markdown-cheat-sheet">
 <meta property="og:title" content="Markdown Cheat Sheet — Complete Syntax Guide with Examples">
-<meta property="og:description" content="The complete Markdown cheat sheet: headings, lists, links, images, code, tables, task lists, footnotes, math and diagrams — each with a live example.">
+<meta property="og:description" content="Markdown cheat sheet with every syntax: headings, lists, links, images, code, tables, task lists, footnotes, math and diagrams, plus fixes for common problems.">
 <meta property="og:image" content="https://quilldown.vercel.app/social/og-image.png">
 <meta property="og:image:secure_url" content="https://quilldown.vercel.app/social/og-image.png">
 <meta property="og:image:type" content="image/png">
@@ -25,7 +25,7 @@
 <meta property="og:image:alt" content="Quilldown — Write Markdown. Watch it come alive.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Markdown Cheat Sheet — Complete Syntax Guide with Examples">
-<meta name="twitter:description" content="The complete Markdown cheat sheet: headings, lists, links, images, code, tables, task lists, footnotes, math and diagrams — each with a live example.">
+<meta name="twitter:description" content="Markdown cheat sheet with every syntax: headings, lists, links, images, code, tables, task lists, footnotes, math and diagrams, plus fixes for common problems.">
 <meta name="twitter:image" content="https://quilldown.vercel.app/social/og-image.png">
 <meta name="twitter:image:alt" content="Quilldown — Write Markdown. Watch it come alive.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230f0f10'/%3E%3Cpath d='M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5' stroke='%23fff' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -37,38 +37,41 @@
 <link rel="stylesheet" href="/css/styles.css">
 <link rel="stylesheet" href="/css/document.css">
 <link rel="stylesheet" href="/css/site.css">
-<script type="application/ld+json" id="ld-graph">{"@context":"https://schema.org","@graph":[{"@type":"ImageObject","@id":"https://quilldown.vercel.app/#logo","url":"https://quilldown.vercel.app/icons/icon-512.png","contentUrl":"https://quilldown.vercel.app/icons/icon-512.png","width":512,"height":512,"caption":"Quilldown logo"},{"@type":"Organization","@id":"https://quilldown.vercel.app/#organization","name":"Quilldown","url":"https://quilldown.vercel.app/","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, PNG and EPUB. It runs in your browser and works offline.","logo":{"@id":"https://quilldown.vercel.app/#logo"},"image":{"@id":"https://quilldown.vercel.app/#logo"},"founder":{"@id":"https://quilldown.vercel.app/#person"},"sameAs":["https://github.com/Dhruv-Dhameliya/quilldown","https://github.com/Dhruv-Dhameliya"],"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","url":"https://github.com/Dhruv-Dhameliya/quilldown/issues","availableLanguage":"English"},{"@type":"ContactPoint","contactType":"media relations","url":"https://github.com/Dhruv-Dhameliya","availableLanguage":"English"}]},{"@type":"Person","@id":"https://quilldown.vercel.app/#person","name":"Dhruv-Dhameliya","url":"https://github.com/Dhruv-Dhameliya","sameAs":["https://github.com/Dhruv-Dhameliya"],"worksFor":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebSite","@id":"https://quilldown.vercel.app/#website","url":"https://quilldown.vercel.app/","name":"Quilldown","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, PNG and EPUB. It runs in your browser and works offline.","inLanguage":"en","publisher":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebPage","@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#webpage","url":"https://quilldown.vercel.app/guides/markdown-cheat-sheet","name":"Markdown Cheat Sheet — Complete Syntax Guide with Examples","description":"The complete Markdown cheat sheet: headings, lists, links, images, code, tables, task lists, footnotes, math and diagrams — each with a live example.","inLanguage":"en","isPartOf":{"@id":"https://quilldown.vercel.app/#website"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown — Write Markdown. Watch it come alive."},"image":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown — Write Markdown. Watch it come alive."},"breadcrumb":{"@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#breadcrumb"},"datePublished":"2026-09-29","dateModified":"2026-09-29","mainEntity":{"@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#article"}},{"@type":"BreadcrumbList","@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quilldown.vercel.app/#top"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://quilldown.vercel.app/guides"},{"@type":"ListItem","position":3,"name":"Markdown cheat sheet","item":"https://quilldown.vercel.app/guides/markdown-cheat-sheet"}]},{"@type":"Article","@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#article","headline":"Markdown cheat sheet","description":"The complete Markdown cheat sheet: headings, lists, links, images, code, tables, task lists, footnotes, math and diagrams — each with a live example.","image":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown — Write Markdown. Watch it come alive."},"datePublished":"2026-09-29","dateModified":"2026-09-29","inLanguage":"en","wordCount":1638,"articleSection":"Learn Markdown","isAccessibleForFree":true,"author":{"@id":"https://quilldown.vercel.app/#person"},"publisher":{"@id":"https://quilldown.vercel.app/#organization"},"mainEntityOfPage":{"@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#webpage"},"isPartOf":{"@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#webpage"}},{"@type":"FAQPage","@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#faq","url":"https://quilldown.vercel.app/guides/markdown-cheat-sheet","isPartOf":{"@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#webpage"},"mainEntity":[{"@type":"Question","name":"What is the difference between `*` and `_` for italics?","acceptedAnswer":{"@type":"Answer","text":"They are interchangeable for whole words. Use asterisks when you want to italicise part of a word, because underscores inside words are usually ignored."}},{"@type":"Question","name":"How do I make text a different color in Markdown?","acceptedAnswer":{"@type":"Answer","text":"Markdown has no color syntax. If your tool allows raw HTML you can use a styled tag, but formatting like color is deliberately outside Markdown's scope — that's what keeps the files portable."}},{"@type":"Question","name":"How do I add a page break or center text?","acceptedAnswer":{"@type":"Answer","text":"There is no Markdown syntax for either. Quilldown supports \u003cdiv align=\"center\"> for centering. For page breaks, use your export target's settings — for example the print dialog when you convert Markdown to PDF."}},{"@type":"Question","name":"Does every Markdown editor support tables, task lists and footnotes?","acceptedAnswer":{"@type":"Answer","text":"Tables, task lists and strikethrough come from GitHub Flavored Markdown and are widely supported. Footnotes, math, diagrams and callouts are extensions, so support varies. Quilldown supports all of them."}},{"@type":"Question","name":"Where can I practise?","acceptedAnswer":{"@type":"Answer","text":"Open the Quilldown editor, press New → Sample document for a guided tour, or use the Open in editor button on any example above."}}]}]}</script>
+<script type="application/ld+json" id="ld-graph">{"@context":"https://schema.org","@graph":[{"@type":"ImageObject","@id":"https://quilldown.vercel.app/#logo","url":"https://quilldown.vercel.app/icons/icon-512.png","contentUrl":"https://quilldown.vercel.app/icons/icon-512.png","width":512,"height":512,"caption":"Quilldown logo"},{"@type":"Organization","@id":"https://quilldown.vercel.app/#organization","name":"Quilldown","url":"https://quilldown.vercel.app/","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, PNG and EPUB. It runs in your browser and works offline.","logo":{"@id":"https://quilldown.vercel.app/#logo"},"image":{"@id":"https://quilldown.vercel.app/#logo"},"founder":{"@id":"https://quilldown.vercel.app/#person"},"sameAs":["https://github.com/Dhruv-Dhameliya/quilldown","https://github.com/Dhruv-Dhameliya"],"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","url":"https://github.com/Dhruv-Dhameliya/quilldown/issues","availableLanguage":"English"},{"@type":"ContactPoint","contactType":"media relations","url":"https://github.com/Dhruv-Dhameliya","availableLanguage":"English"}]},{"@type":"Person","@id":"https://quilldown.vercel.app/#person","name":"Dhruv-Dhameliya","url":"https://github.com/Dhruv-Dhameliya","sameAs":["https://github.com/Dhruv-Dhameliya"],"worksFor":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebSite","@id":"https://quilldown.vercel.app/#website","url":"https://quilldown.vercel.app/","name":"Quilldown","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, PNG and EPUB. It runs in your browser and works offline.","inLanguage":"en","publisher":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebPage","@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#webpage","url":"https://quilldown.vercel.app/guides/markdown-cheat-sheet","name":"Markdown Cheat Sheet — Complete Syntax Guide with Examples","description":"Markdown cheat sheet with every syntax: headings, lists, links, images, code, tables, task lists, footnotes, math and diagrams, plus fixes for common problems.","inLanguage":"en","isPartOf":{"@id":"https://quilldown.vercel.app/#website"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown — Write Markdown. Watch it come alive."},"image":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown — Write Markdown. Watch it come alive."},"breadcrumb":{"@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#breadcrumb"},"datePublished":"2026-09-29","dateModified":"2026-09-29","mainEntity":{"@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#article"}},{"@type":"BreadcrumbList","@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quilldown.vercel.app/#top"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://quilldown.vercel.app/guides"},{"@type":"ListItem","position":3,"name":"Markdown cheat sheet","item":"https://quilldown.vercel.app/guides/markdown-cheat-sheet"}]},{"@type":"Article","@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#article","headline":"Markdown cheat sheet","description":"Markdown cheat sheet with every syntax: headings, lists, links, images, code, tables, task lists, footnotes, math and diagrams, plus fixes for common problems.","image":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown — Write Markdown. Watch it come alive."},"datePublished":"2026-09-29","dateModified":"2026-09-29","inLanguage":"en","wordCount":3158,"articleSection":"Learn Markdown","isAccessibleForFree":true,"author":{"@id":"https://quilldown.vercel.app/#person"},"publisher":{"@id":"https://quilldown.vercel.app/#organization"},"mainEntityOfPage":{"@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#webpage"},"isPartOf":{"@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#webpage"}},{"@type":"FAQPage","@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#faq","url":"https://quilldown.vercel.app/guides/markdown-cheat-sheet","isPartOf":{"@id":"https://quilldown.vercel.app/guides/markdown-cheat-sheet#webpage"},"mainEntity":[{"@type":"Question","name":"What is the difference between `*` and `_` for italics?","acceptedAnswer":{"@type":"Answer","text":"They are interchangeable for whole words. Use asterisks when you want to italicise part of a word, because underscores inside words are usually ignored, which also keeps names like snake_case_name intact."}},{"@type":"Question","name":"How do I make text a different color in Markdown?","acceptedAnswer":{"@type":"Answer","text":"Markdown has no color syntax. If your tool allows raw HTML you can use a styled tag, but many platforms strip inline styles. Formatting like color is deliberately outside Markdown's scope, and that is what keeps the files portable."}},{"@type":"Question","name":"How do I add a page break or center text?","acceptedAnswer":{"@type":"Answer","text":"Neither has Markdown syntax. Many renderers, including GitHub, honor \u003cdiv align=\"center\"> for centering, but check how your target treats HTML. For page breaks, use your export target's settings, such as the print dialog when you convert Markdown to PDF."}},{"@type":"Question","name":"How do I show backticks or a code fence inside code?","acceptedAnswer":{"@type":"Answer","text":"For inline code, wrap it in double backticks and put a space inside each end. For a fenced block that contains another fence, use four backticks on the outside and three on the inside. The outer fence just has to be longer than any fence inside it."}},{"@type":"Question","name":"Does every Markdown editor support tables, task lists and footnotes?","acceptedAnswer":{"@type":"Answer","text":"Tables, task lists and strikethrough come from GitHub Flavored Markdown and are widely supported. Footnotes, math, diagrams and callouts are extensions, so support varies. Quilldown supports all of them."}},{"@type":"Question","name":"How do I create a line break without starting a new paragraph?","acceptedAnswer":{"@type":"Answer","text":"End the line with two spaces or with a backslash, or write \u003cbr>. The backslash is the most reliable because editors often strip trailing spaces."}},{"@type":"Question","name":"Where can I practise?","acceptedAnswer":{"@type":"Answer","text":"Open the Quilldown editor, press New → Sample document for a guided tour, or use the Open in editor button on any example above."}}]}]}</script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 <symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5" style="stroke:var(--logo-fg)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M6.34 6.34 4.93 4.93m14.14 14.14-1.41-1.41"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
 <symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
 </defs></svg>
 <header class="nav" id="nav"><div class="container nav-in">
   <a class="brand" href="/#top" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
-  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="/#features">Features</a><a href="/#how">How it works</a><a href="/guides" aria-current="page">Docs</a><a href="/#privacy">Privacy</a><a href="/#faq">FAQ</a><a class="m-only" href="/#editor">Open editor</a></nav>
+  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="/#features">Features</a><a href="/#how">How it works</a><a href="/guides" aria-current="page">Docs</a><a href="/#privacy">Privacy</a><a href="/#faq">FAQ</a><label class="m-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label><a class="m-only" href="/#editor">Open editor</a></nav>
   <div class="nav-cta">
+    <label class="nav-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label>
     <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     <a class="icon-btn" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill"><use href="#i-github"/></svg></a>
     <button class="icon-btn" data-act="theme" aria-label="Toggle theme"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
-    <a class="btn btn-primary btn-sm" href="/#editor">Open editor <svg class="i"><use href="#i-arrow"/></svg></a>
+    <a class="btn btn-primary btn-sm" href="/#editor">Open editor <svg class="i"><use href="#i-max"/></svg></a>
   </div></div></header>
 <main class="doc-wrap">
   <ol class="crumbs" aria-label="Breadcrumb"><li><a href="/#top">Home</a></li><li><a href="/guides">Docs</a></li><li aria-current="page">Markdown cheat sheet</li></ol>
   <header class="doc-head">
     <p class="eyebrow">Learn Markdown</p>
     <h1>Markdown cheat sheet</h1>
-    <p class="lead">A complete reference for Markdown syntax. Every example shows the Markdown on the left and the result on the right — and opens in the editor with one click.</p>
-    <div class="doc-meta"><span>Updated September 29, 2026</span><span>7 min read</span><span>Free · No sign-up · Runs in your browser</span></div>
+    <p class="lead">A complete Markdown reference with a live example for every syntax, the rules that trip people up, and a fix for each common problem. Every example opens in the editor with one click.</p>
+    <div class="doc-meta"><span>Updated September 29, 2026</span><span>14 min read</span><span>Free · No sign-up · Runs in your browser</span></div>
     <div class="doc-actions"><a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a><a class="btn" href="/guides">All docs</a></div>
   </header>
   <div class="doc-grid">
-    <aside class="toc" aria-label="On this page"><h2>On this page</h2><a href="#syntax-at-a-glance">Syntax at a glance</a><a href="#headings">Headings</a><a href="#paragraphs-and-line-breaks">Paragraphs and line breaks</a><a href="#bold-italic-and-strikethrough">Bold, italic and strikethrough</a><a href="#blockquotes">Blockquotes</a><a href="#lists">Lists</a><a href="#code">Code</a><a href="#links">Links</a><a href="#images">Images</a><a href="#horizontal-rules">Horizontal rules</a><a href="#tables">Tables</a><a href="#footnotes">Footnotes</a><a href="#math">Math</a><a href="#diagrams">Diagrams</a><a href="#callouts-alerts">Callouts (alerts)</a><a href="#emoji">Emoji</a><a href="#html-inside-markdown">HTML inside Markdown</a><a href="#escaping-and-comments">Escaping and comments</a><a href="#common-problems-and-fixes">Common problems and fixes</a><a href="#faq">Frequently asked questions</a></aside>
+    <aside class="toc" aria-label="On this page"><h2>On this page</h2><a href="#syntax-at-a-glance">Syntax at a glance</a><a href="#headings">Headings</a><a href="#paragraphs-and-line-breaks">Paragraphs and line breaks</a><a href="#bold-italic-and-strikethrough">Bold, italic and strikethrough</a><a href="#blockquotes">Blockquotes</a><a href="#lists">Lists</a><a href="#code">Code</a><a href="#links">Links</a><a href="#images">Images</a><a href="#horizontal-rules">Horizontal rules</a><a href="#tables">Tables</a><a href="#footnotes">Footnotes</a><a href="#math">Math</a><a href="#diagrams">Diagrams</a><a href="#callouts-alerts">Callouts (alerts)</a><a href="#emoji">Emoji</a><a href="#html-inside-markdown">HTML inside Markdown</a><a href="#escaping-and-comments">Escaping and comments</a><a href="#what-works-where">What works where</a><a href="#common-problems-and-fixes">Common problems and fixes</a><a href="#write-faster-in-quilldown">Write faster in Quilldown</a><a href="#faq">Frequently asked questions</a></aside>
     <article class="doc-body">
 <h2 id="syntax-at-a-glance">Syntax at a glance<a class="anchor" href="#syntax-at-a-glance" aria-label="Link to this section">#</a></h2>
+<p>Everything on this page in one table. The sections below explain each row with an example and the edge cases that cause most &quot;why doesn&#39;t this work?&quot; moments.</p>
 <div class="tbl"><table><thead><tr>
 <th>Element</th>
 <th>Markdown syntax</th>
@@ -138,8 +141,28 @@
 <td><code>text[^1]</code> and <code>[^1]: note</code></td>
 </tr>
 <tr>
+<td>Hard line break</td>
+<td>two trailing spaces, or <code>\</code> at the end of the line</td>
+</tr>
+<tr>
+<td>Escape a symbol</td>
+<td><code>\*</code> <code>\#</code> <code>\_</code></td>
+</tr>
+<tr>
+<td>Comment</td>
+<td><code>&lt;!-- hidden --&gt;</code></td>
+</tr>
+<tr>
 <td>Math</td>
 <td><code>$x^2$</code> inline, <code>$$ … $$</code> block</td>
+</tr>
+<tr>
+<td>Diagram</td>
+<td>a fenced block tagged <code>mermaid</code></td>
+</tr>
+<tr>
+<td>Callout</td>
+<td><code>&gt; [!NOTE]</code> then the text on the next line</td>
 </tr>
 <tr>
 <td>Emoji</td>
@@ -147,7 +170,7 @@
 </tr>
 </tbody></table></div>
 <h2 id="headings">Headings<a class="anchor" href="#headings" aria-label="Link to this section">#</a></h2>
-<p>Start a line with one to six <code>#</code> characters followed by a space. One <code>#</code> is the top-level title; more <code>#</code> mean smaller headings.</p>
+<p>Start a line with one to six <code>#</code> characters followed by a space. One <code>#</code> is the top-level title; more <code>#</code> mean smaller headings. There is also an older underline style, which only covers the top two levels.</p>
 <figure class="ex"><div class="ex-title"><span>Heading levels</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c1">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiIjIEhlYWRpbmcgMVxuIyMgSGVhZGluZyAyXG4jIyMgSGVhZGluZyAzXG4jIyMjIEhlYWRpbmcgNFxuIyMjIyMgSGVhZGluZyA1XG4jIyMjIyMgSGVhZGluZyA2XG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c1"># Heading 1
 ## Heading 2
 ### Heading 3
@@ -160,11 +183,18 @@
 <p class="md-h md-h5">Heading 5</p>
 <p class="md-h md-h6">Heading 6</p>
 </div></div></figure>
-<aside class="callout callout-tip"><p class="callout-title">Tip</p><p>Use one <code>#</code> heading per document as the title, then <code>##</code> for sections. It keeps your outline clean, your table of contents useful and your page search-friendly.</p>
+<figure class="ex"><div class="ex-title"><span>Underline style (levels 1 and 2 only)</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c2">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJUaXRsZSB3aXRoIGVxdWFscyBzaWduc1xuPT09PT09PT09PT09PT09PT09PT09PT1cblxuU3VidGl0bGUgd2l0aCBoeXBoZW5zXG4tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c2">Title with equals signs
+=======================
+
+Subtitle with hyphens
+---------------------</pre><div class="ex-out md"><p class="md-h md-h1">Title with equals signs</p>
+<p class="md-h md-h2">Subtitle with hyphens</p>
+</div></div></figure>
+<aside class="callout callout-tip"><p class="callout-title">Tip</p><p>Use one <code>#</code> heading per document as the title, then <code>##</code> for sections, and do not skip levels. It keeps your outline clean and your table of contents useful. Put a blank line above and below every heading.</p>
 </aside>
 <h2 id="paragraphs-and-line-breaks">Paragraphs and line breaks<a class="anchor" href="#paragraphs-and-line-breaks" aria-label="Link to this section">#</a></h2>
-<p>Separate paragraphs with a blank line. A single new line is treated as a space. To force a line break inside a paragraph, end the line with <strong>two spaces</strong> or a backslash.</p>
-<figure class="ex"><div class="ex-title"><span>Paragraphs and line breaks</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c2">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJUaGlzIGlzIHRoZSBmaXJzdCBwYXJhZ3JhcGguXG5cblRoaXMgaXMgdGhlIHNlY29uZCBwYXJhZ3JhcGguXG5cblJvc2VzIGFyZSByZWQsXFxcbnZpb2xldHMgYXJlIGJsdWUuXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c2">This is the first paragraph.
+<p>Separate paragraphs with a blank line. A single new line inside a paragraph is treated as a space. To force a line break, end the line with <strong>two spaces</strong> or a backslash.</p>
+<figure class="ex"><div class="ex-title"><span>Paragraphs and line breaks</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c3">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJUaGlzIGlzIHRoZSBmaXJzdCBwYXJhZ3JhcGguXG5cblRoaXMgaXMgdGhlIHNlY29uZCBwYXJhZ3JhcGguXG5cblJvc2VzIGFyZSByZWQsXFxcbnZpb2xldHMgYXJlIGJsdWUuXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c3">This is the first paragraph.
 
 This is the second paragraph.
 
@@ -173,21 +203,29 @@ violets are blue.</pre><div class="ex-out md"><p>This is the first paragraph.</p
 <p>This is the second paragraph.</p>
 <p>Roses are red,<br>violets are blue.</p>
 </div></div></figure>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p><p>Trailing spaces are invisible and many editors strip them on save, which silently removes your line break. The backslash is easier to see and survives. A few places, such as GitHub issue comments, turn every new line into a break, but do not rely on that in files.</p>
+</aside>
 <h2 id="bold-italic-and-strikethrough">Bold, italic and strikethrough<a class="anchor" href="#bold-italic-and-strikethrough" aria-label="Link to this section">#</a></h2>
-<figure class="ex"><div class="ex-title"><span>Emphasis</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c3">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiIqKkJvbGQqKiB3aXRoIGFzdGVyaXNrcywgX19ib2xkX18gd2l0aCB1bmRlcnNjb3Jlcy5cblxuKkl0YWxpYyogd2l0aCBhc3Rlcmlza3MsIF9pdGFsaWNfIHdpdGggdW5kZXJzY29yZXMuXG5cbioqKkJvbGQgYW5kIGl0YWxpYyoqKiB0b2dldGhlci5cblxufn5TdHJpa2V0aHJvdWdofn4gZm9yIGRlbGV0ZWQgdGV4dC5cbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c3">**Bold** with asterisks, __bold__ with underscores.
+<figure class="ex"><div class="ex-title"><span>Emphasis</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c4">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiIqKkJvbGQqKiB3aXRoIGFzdGVyaXNrcywgX19ib2xkX18gd2l0aCB1bmRlcnNjb3Jlcy5cblxuKkl0YWxpYyogd2l0aCBhc3Rlcmlza3MsIF9pdGFsaWNfIHdpdGggdW5kZXJzY29yZXMuXG5cbioqKkJvbGQgYW5kIGl0YWxpYyoqKiB0b2dldGhlci5cblxufn5TdHJpa2V0aHJvdWdofn4gZm9yIGRlbGV0ZWQgdGV4dC5cblxuTWlkLXdvcmQgZW1waGFzaXM6IHVuKipiZWxpZXYqKmFibGUuXG5VbmRlcnNjb3JlcyBpbnNpZGUgd29yZHMgc3RheSBsaXRlcmFsOiBzbmFrZV9jYXNlX25hbWUuXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c4">**Bold** with asterisks, __bold__ with underscores.
 
 *Italic* with asterisks, _italic_ with underscores.
 
 ***Bold and italic*** together.
 
-~~Strikethrough~~ for deleted text.</pre><div class="ex-out md"><p><strong>Bold</strong> with asterisks, <strong>bold</strong> with underscores.</p>
+~~Strikethrough~~ for deleted text.
+
+Mid-word emphasis: un**believ**able.
+Underscores inside words stay literal: snake_case_name.</pre><div class="ex-out md"><p><strong>Bold</strong> with asterisks, <strong>bold</strong> with underscores.</p>
 <p><em>Italic</em> with asterisks, <em>italic</em> with underscores.</p>
 <p><em><strong>Bold and italic</strong></em> together.</p>
 <p><del>Strikethrough</del> for deleted text.</p>
+<p>Mid-word emphasis: un<strong>believ</strong>able.
+Underscores inside words stay literal: snake_case_name.</p>
 </div></div></figure>
+<p>Asterisks work everywhere, including inside a word. Underscores are ignored inside words, which is why identifiers such as <code>snake_case_name</code> do not turn italic. The opening symbol must touch the text: <code>** bold **</code> with spaces inside does not work.</p>
 <h2 id="blockquotes">Blockquotes<a class="anchor" href="#blockquotes" aria-label="Link to this section">#</a></h2>
 <p>Start each line with <code>&gt;</code>. Add more <code>&gt;</code> to nest quotes, and use other Markdown inside them.</p>
-<figure class="ex"><div class="ex-title"><span>Blockquote</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c4">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiI-IE1hcmtkb3duIGlzIGludGVuZGVkIHRvIGJlIGFzIGVhc3ktdG8tcmVhZCBhbmQgZWFzeS10by13cml0ZSBhcyBpcyBmZWFzaWJsZS5cbj5cbj4g4oCUIEpvaG4gR3J1YmVyXG4-XG4-ID4gUXVvdGVzIGNhbiBiZSBuZXN0ZWQuXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c4">&gt; Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
+<figure class="ex"><div class="ex-title"><span>Blockquote</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c5">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiI-IE1hcmtkb3duIGlzIGludGVuZGVkIHRvIGJlIGFzIGVhc3ktdG8tcmVhZCBhbmQgZWFzeS10by13cml0ZSBhcyBpcyBmZWFzaWJsZS5cbj5cbj4g4oCUIEpvaG4gR3J1YmVyXG4-XG4-ID4gUXVvdGVzIGNhbiBiZSBuZXN0ZWQuXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c5">&gt; Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
 &gt;
 &gt; — John Gruber
 &gt;
@@ -201,8 +239,8 @@ violets are blue.</pre><div class="ex-out md"><p>This is the first paragraph.</p
 </div></div></figure>
 <h2 id="lists">Lists<a class="anchor" href="#lists" aria-label="Link to this section">#</a></h2>
 <h3 id="unordered-lists">Unordered lists<a class="anchor" href="#unordered-lists" aria-label="Link to this section">#</a></h3>
-<p>Use <code>-</code>, <code>*</code> or <code>+</code>. Indent by two spaces to nest.</p>
-<figure class="ex"><div class="ex-title"><span>Bullet list with nesting</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c5">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiItIEZydWl0XG4gIC0gQXBwbGVzXG4gIC0gUGVhcnNcbi0gVmVnZXRhYmxlc1xuLSBCcmVhZFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c5">- Fruit
+<p>Use <code>-</code>, <code>*</code> or <code>+</code>. Nest an item by indenting it under the text of its parent. Two spaces work for <code>-</code> bullets.</p>
+<figure class="ex"><div class="ex-title"><span>Bullet list with nesting</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c6">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiItIEZydWl0XG4gIC0gQXBwbGVzXG4gIC0gUGVhcnNcbi0gVmVnZXRhYmxlc1xuLSBCcmVhZFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c6">- Fruit
   - Apples
   - Pears
 - Vegetables
@@ -216,9 +254,10 @@ violets are blue.</pre><div class="ex-out md"><p>This is the first paragraph.</p
 <li>Bread</li>
 </ul>
 </div></div></figure>
+<p>Pick one marker per list. In CommonMark, switching from <code>-</code> to <code>*</code> starts a new, separate list.</p>
 <h3 id="ordered-lists">Ordered lists<a class="anchor" href="#ordered-lists" aria-label="Link to this section">#</a></h3>
-<p>The numbers you type don&#39;t matter for the rendered order; the list always counts up from the first number.</p>
-<figure class="ex"><div class="ex-title"><span>Numbered list</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c6">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiIxLiBNaXggdGhlIGluZ3JlZGllbnRzXG4yLiBCYWtlIGZvciAyMCBtaW51dGVzXG4gICAxLiBDaGVjayBhZnRlciAxNVxuICAgMi4gUm90YXRlIHRoZSB0cmF5XG4zLiBMZXQgaXQgY29vbFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c6">1. Mix the ingredients
+<p>Only the first number matters. The list counts up from it, so you can start at any number, and you never have to renumber after inserting an item.</p>
+<figure class="ex"><div class="ex-title"><span>Numbered list</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c7">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiIxLiBNaXggdGhlIGluZ3JlZGllbnRzXG4yLiBCYWtlIGZvciAyMCBtaW51dGVzXG4gICAxLiBDaGVjayBhZnRlciAxNVxuICAgMi4gUm90YXRlIHRoZSB0cmF5XG4zLiBMZXQgaXQgY29vbFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c7">1. Mix the ingredients
 2. Bake for 20 minutes
    1. Check after 15
    2. Rotate the tray
@@ -232,8 +271,37 @@ violets are blue.</pre><div class="ex-out md"><p>This is the first paragraph.</p
 <li>Let it cool</li>
 </ol>
 </div></div></figure>
+<figure class="ex"><div class="ex-title"><span>Starting at 5, ignoring later numbers</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c8">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiI1LiBTdGFydHMgYXQgZml2ZVxuMS4gUmVuZGVyZWQgYXMgc2l4XG4xLiBSZW5kZXJlZCBhcyBzZXZlblxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c8">5. Starts at five
+1. Rendered as six
+1. Rendered as seven</pre><div class="ex-out md"><ol start="5">
+<li>Starts at five</li>
+<li>Rendered as six</li>
+<li>Rendered as seven</li>
+</ol>
+</div></div></figure>
+<p>The rule for nesting is to line the child up with the first character of the parent&#39;s text. After <code>1. </code> that is three spaces, after <code>- </code> it is two. Nesting a bullet under a numbered item with only two spaces makes it a separate list.</p>
+<h3 id="paragraphs-and-code-inside-list-items">Paragraphs and code inside list items<a class="anchor" href="#paragraphs-and-code-inside-list-items" aria-label="Link to this section">#</a></h3>
+<p>Indent the extra content to the same column as the item&#39;s text and separate it with blank lines.</p>
+<figure class="ex"><div class="ex-title"><span>Multiple blocks in one list item</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c9">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiIxLiBJbnN0YWxsIHRoZSBkZXBlbmRlbmNpZXM6XG5cbiAgIGBgYGJhc2hcbiAgIG5wbSBpbnN0YWxsXG4gICBgYGBcblxuMi4gU3RhcnQgdGhlIGFwcC5cblxuICAgT3BlbiB0aGUgYWRkcmVzcyBpdCBwcmludHMuXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c9">1. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Start the app.
+
+   Open the address it prints.</pre><div class="ex-out md"><ol>
+<li><p>Install the dependencies:</p>
+<pre data-lang="bash"><code class="hljs">npm install</code></pre>
+</li>
+<li><p>Start the app.</p>
+<p>Open the address it prints.</p>
+</li>
+</ol>
+</div></div></figure>
 <h3 id="task-lists">Task lists<a class="anchor" href="#task-lists" aria-label="Link to this section">#</a></h3>
-<figure class="ex"><div class="ex-title"><span>Task list</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c7">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiItIFt4XSBXcml0ZSB0aGUgb3V0bGluZVxuLSBbeF0gRHJhZnQgdGhlIGludHJvZHVjdGlvblxuLSBbIF0gQWRkIGV4YW1wbGVzXG4tIFsgXSBQcm9vZnJlYWRcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c7">- [x] Write the outline
+<p>Task lists come from GitHub Flavored Markdown. The box is <code>[ ]</code> with a space inside, or <code>[x]</code>, and it needs a space after the closing bracket.</p>
+<figure class="ex"><div class="ex-title"><span>Task list</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c10">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiItIFt4XSBXcml0ZSB0aGUgb3V0bGluZVxuLSBbeF0gRHJhZnQgdGhlIGludHJvZHVjdGlvblxuLSBbIF0gQWRkIGV4YW1wbGVzXG4tIFsgXSBQcm9vZnJlYWRcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c10">- [x] Write the outline
 - [x] Draft the introduction
 - [ ] Add examples
 - [ ] Proofread</pre><div class="ex-out md"><ul>
@@ -244,8 +312,8 @@ violets are blue.</pre><div class="ex-out md"><p>This is the first paragraph.</p
 </ul>
 </div></div></figure>
 <h2 id="code">Code<a class="anchor" href="#code" aria-label="Link to this section">#</a></h2>
-<p>Wrap short code in single backticks. For a block, put three backticks on their own lines and add the language after the opening fence to get syntax highlighting.</p>
-<figure class="ex"><div class="ex-title"><span>Inline code and a fenced block</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c8">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJSdW4gYG5wbSBpbnN0YWxsYCB0byBnZXQgc3RhcnRlZC5cblxuYGBganNcbmZ1bmN0aW9uIGdyZWV0KG5hbWUpIHtcbiAgcmV0dXJuIGBIZWxsbywgJHtuYW1lfSFgO1xufVxuYGBgXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c8">Run `npm install` to get started.
+<p>Wrap short code in single backticks. For a block, put three backticks on their own lines and add the language after the opening fence for syntax highlighting. Tildes (<code>~~~</code>) work as a fence too, and so does indenting every line by four spaces, though fences are clearer.</p>
+<figure class="ex"><div class="ex-title"><span>Inline code and a fenced block</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c11">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJSdW4gYG5wbSBpbnN0YWxsYCB0byBnZXQgc3RhcnRlZC5cblxuYGBganNcbmZ1bmN0aW9uIGdyZWV0KG5hbWUpIHtcbiAgcmV0dXJuIGBIZWxsbywgJHtuYW1lfSFgO1xufVxuYGBgXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c11">Run `npm install` to get started.
 
 ```js
 function greet(name) {
@@ -256,10 +324,22 @@ function greet(name) {
   <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello, <span class="hljs-subst">${name}</span>!`</span>;
 }</code></pre>
 </div></div></figure>
-<aside class="callout callout-note"><p class="callout-title">Note</p><p>To show backticks <em>inside</em> inline code, wrap it in double backticks. To show a fenced block <em>inside</em> a fenced block, use four backticks on the outside.</p>
+<p>To show backticks <em>inside</em> inline code, wrap the code in double backticks with a space on each side. To show a fenced block <em>inside</em> a fenced block, make the outer fence longer, four backticks against three.</p>
+<figure class="ex"><div class="ex-title"><span>Backticks inside code</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c12">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJgYCBgbGl0ZXJhbCBiYWNrdGlja3NgIGBgXG5cbmBgYGBgXG5gYGBcbmEgZmVuY2Ugc2hvd24gYXMgdGV4dFxuYGBgXG5gYGBgYFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c12">`` `literal backticks` ``
+
+`````
+```
+a fence shown as text
+```
+`````</pre><div class="ex-out md"><p><code>`literal backticks`</code></p>
+<pre><code class="hljs">```
+a fence shown as text
+```</code></pre>
+</div></div></figure>
+<aside class="callout callout-note"><p class="callout-title">Note</p><p>The closing fence must be at least as long as the opening one. If a code block swallows the rest of your document, a missing or shorter closing fence is almost always the reason.</p>
 </aside>
 <h2 id="links">Links<a class="anchor" href="#links" aria-label="Link to this section">#</a></h2>
-<figure class="ex"><div class="ex-title"><span>Links</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c9">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJbSW5saW5lIGxpbmtdKGh0dHBzOi8vY29tbW9ubWFyay5vcmcgXCJPcHRpb25hbCB0aXRsZVwiKVxuXG5bUmVmZXJlbmNlLXN0eWxlIGxpbmtdW3NwZWNdXG5cbkJhcmUgYWRkcmVzczogPGh0dHBzOi8vY29tbW9ubWFyay5vcmc-XG5cbltKdW1wIHRvIGEgaGVhZGluZ10oI2hlYWRpbmdzKVxuXG5bc3BlY106IGh0dHBzOi8vc3BlYy5jb21tb25tYXJrLm9yZy9cbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c9">[Inline link](https://commonmark.org "Optional title")
+<figure class="ex"><div class="ex-title"><span>Links</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c13">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJbSW5saW5lIGxpbmtdKGh0dHBzOi8vY29tbW9ubWFyay5vcmcgXCJPcHRpb25hbCB0aXRsZVwiKVxuXG5bUmVmZXJlbmNlLXN0eWxlIGxpbmtdW3NwZWNdXG5cbkJhcmUgYWRkcmVzczogPGh0dHBzOi8vY29tbW9ubWFyay5vcmc-XG5cbltKdW1wIHRvIGEgaGVhZGluZ10oI2hlYWRpbmdzKVxuXG5bRmlsZSBuYW1lIHdpdGggc3BhY2VzXSg8bXkgbm90ZXMubWQ-KVxuXG5bc3BlY106IGh0dHBzOi8vc3BlYy5jb21tb25tYXJrLm9yZy9cbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c13">[Inline link](https://commonmark.org "Optional title")
 
 [Reference-style link][spec]
 
@@ -267,14 +347,18 @@ Bare address: &lt;https://commonmark.org&gt;
 
 [Jump to a heading](#headings)
 
+[File name with spaces](&lt;my notes.md&gt;)
+
 [spec]: https://spec.commonmark.org/</pre><div class="ex-out md"><p><a href="https://commonmark.org" title="Optional title">Inline link</a></p>
 <p><a href="https://spec.commonmark.org/">Reference-style link</a></p>
 <p>Bare address: <a href="https://commonmark.org">https://commonmark.org</a></p>
-<p><a href="#headings">Jump to a heading</a></p>
+<p><a class="demo-link">Jump to a heading</a></p>
+<p><a class="demo-link">File name with spaces</a></p>
 </div></div></figure>
+<p>Reference-style links keep long URLs out of your sentences, and the definition can sit anywhere in the file. Heading links (<code>#headings</code>) use an anchor the renderer generates from the heading text. The usual rule is lowercase with hyphens instead of spaces and most punctuation removed, but the exact result depends on the tool. If an address contains spaces, wrap it in <code>&lt;...&gt;</code> or write <code>%20</code>. GitHub Flavored Markdown also turns bare <code>https://</code> addresses into links automatically, and <code>&lt;address&gt;</code> is the explicit form that works everywhere.</p>
 <h2 id="images">Images<a class="anchor" href="#images" aria-label="Link to this section">#</a></h2>
-<p>An image is a link with a leading <code>!</code>. The text in brackets is the <em>alt text</em>, which screen readers read aloud and search engines index — always write something meaningful.</p>
-<figure class="ex"><div class="ex-title"><span>Image syntax</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c10">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiIhW0EgZ3JhZGllbnQgYmFubmVyXShiYW5uZXIucG5nIFwiT3B0aW9uYWwgdGl0bGVcIilcblxuTWFrZSBhbiBpbWFnZSBjbGlja2FibGUgYnkgd3JhcHBpbmcgaXQgaW4gYSBsaW5rOlxuXG5bIVtMb2dvXShsb2dvLnBuZyldKGh0dHBzOi8vZXhhbXBsZS5jb20pXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c10">![A gradient banner](banner.png "Optional title")
+<p>An image is a link with a leading <code>!</code>. The text in brackets is the <em>alt text</em>, which screen readers read aloud and search engines index, so always write something meaningful.</p>
+<figure class="ex"><div class="ex-title"><span>Image syntax</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c14">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiIhW0EgZ3JhZGllbnQgYmFubmVyXShiYW5uZXIucG5nIFwiT3B0aW9uYWwgdGl0bGVcIilcblxuTWFrZSBhbiBpbWFnZSBjbGlja2FibGUgYnkgd3JhcHBpbmcgaXQgaW4gYSBsaW5rOlxuXG5bIVtMb2dvXShsb2dvLnBuZyldKGh0dHBzOi8vZXhhbXBsZS5jb20pXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c14">![A gradient banner](banner.png "Optional title")
 
 Make an image clickable by wrapping it in a link:
 
@@ -282,10 +366,10 @@ Make an image clickable by wrapping it in a link:
 <p>Make an image clickable by wrapping it in a link:</p>
 <p><a href="https://example.com"><span class="img-ph" role="img" aria-label="Logo">🖼 Logo</span></a></p>
 </div></div></figure>
-<p>In Quilldown you can also paste or drop an image straight into the editor. See the <a href="/#features">feature overview</a>.</p>
+<p>Markdown has no syntax for image size or alignment. Where HTML is allowed, an <code>&lt;img src=&quot;logo.png&quot; width=&quot;120&quot; alt=&quot;Logo&quot;&gt;</code> tag is the usual workaround. In Quilldown you can also paste, drop or upload an image straight into the editor, and it is stored with the document. See the <a href="/#features">feature overview</a>.</p>
 <h2 id="horizontal-rules">Horizontal rules<a class="anchor" href="#horizontal-rules" aria-label="Link to this section">#</a></h2>
 <p>Three or more hyphens, asterisks or underscores on their own line make a divider.</p>
-<figure class="ex"><div class="ex-title"><span>Horizontal rule</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c11">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJBYm92ZSB0aGUgbGluZVxuXG4tLS1cblxuQmVsb3cgdGhlIGxpbmVcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c11">Above the line
+<figure class="ex"><div class="ex-title"><span>Horizontal rule</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c15">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJBYm92ZSB0aGUgbGluZVxuXG4tLS1cblxuQmVsb3cgdGhlIGxpbmVcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c15">Above the line
 
 ---
 
@@ -293,9 +377,10 @@ Below the line</pre><div class="ex-out md"><p>Above the line</p>
 <hr>
 <p>Below the line</p>
 </div></div></figure>
+<p>Leave a blank line above <code>---</code>. Directly under a line of text it turns that text into a level-2 heading instead of drawing a line.</p>
 <h2 id="tables">Tables<a class="anchor" href="#tables" aria-label="Link to this section">#</a></h2>
-<p>Separate columns with pipes and add a row of hyphens under the header. Colons in that row set alignment. For more, see the <a href="/guides/markdown-table-generator">Markdown table guide</a>.</p>
-<figure class="ex"><div class="ex-title"><span>Table with alignment</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c12">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJ8IEl0ZW0gICAgIHwgUXR5IHwgIFByaWNlIHxcbnwgOi0tLS0tLS0gfCA6LTogfCAtLS0tLTogfFxufCBOb3RlYm9vayB8ICAyICB8ICAgNC41MCB8XG58IFBlbiAgICAgIHwgMTAgIHwgICAxLjIwIHxcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c12">| Item     | Qty |  Price |
+<p>Separate columns with pipes and add a row of hyphens under the header. Colons in that row set alignment: left, centered or right. Tables come from GitHub Flavored Markdown, and there is a full walkthrough in the <a href="/guides/markdown-table-generator">Markdown table guide</a>.</p>
+<figure class="ex"><div class="ex-title"><span>Table with alignment</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c16">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJ8IEl0ZW0gICAgIHwgUXR5IHwgIFByaWNlIHxcbnwgOi0tLS0tLS0gfCA6LTogfCAtLS0tLTogfFxufCBOb3RlYm9vayB8ICAyICB8ICAgNC41MCB8XG58IFBlbiAgICAgIHwgMTAgIHwgICAxLjIwIHxcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c16">| Item     | Qty |  Price |
 | :------- | :-: | -----: |
 | Notebook |  2  |   4.50 |
 | Pen      | 10  |   1.20 |</pre><div class="ex-out md"><table>
@@ -318,16 +403,48 @@ Below the line</pre><div class="ex-out md"><p>Above the line</p>
 </tr>
 </tbody></table>
 </div></div></figure>
+<p>A few rules keep tables from breaking:</p>
+<ul>
+<li>The header row and the separator row must have the same number of columns, or the table is not recognised at all.</li>
+<li>Cells hold inline Markdown only: bold, links, code, images. Lists and paragraphs do not work inside a cell. Use <code>&lt;br&gt;</code> to force a line break within one.</li>
+<li>To put a literal pipe in a cell, escape it: <code>\|</code>.</li>
+<li>Aligning the pipes in your source is optional and only makes the source easier to read.</li>
+</ul>
+<figure class="ex"><div class="ex-title"><span>Formatting and line breaks inside cells</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c17">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJ8IENvbW1hbmQgfCBXaGF0IGl0IGRvZXMgfFxufCAtLS0gfCAtLS0gfFxufCBgZ2l0IHN0YXR1c2AgfCBTaG93cyAqKmNoYW5nZWQqKiBmaWxlcyB8XG58IGBhIFxcfCBiYCB8IEEgcGlwZSBpbnNpZGUgY29kZSB8XG58IFR3byBsaW5lcyB8IEZpcnN0IGxpbmU8YnI-U2Vjb25kIGxpbmUgfFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c17">| Command | What it does |
+| --- | --- |
+| `git status` | Shows **changed** files |
+| `a \| b` | A pipe inside code |
+| Two lines | First line&lt;br&gt;Second line |</pre><div class="ex-out md"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>git status</code></td>
+<td>Shows <strong>changed</strong> files</td>
+</tr>
+<tr>
+<td><code>a | b</code></td>
+<td>A pipe inside code</td>
+</tr>
+<tr>
+<td>Two lines</td>
+<td>First line<br>Second line</td>
+</tr>
+</tbody></table>
+</div></div></figure>
 <h2 id="footnotes">Footnotes<a class="anchor" href="#footnotes" aria-label="Link to this section">#</a></h2>
-<p>Add a marker in the text and define the note anywhere in the document. Footnotes are numbered automatically and collected at the bottom.</p>
-<figure class="ex"><div class="ex-title"><span>Footnotes</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c13">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJNYXJrZG93biB3YXMgcmVsZWFzZWQgaW4gMjAwNC5bXjFdIEl0IGlzIG5vdyBldmVyeXdoZXJlLlteMl1cblxuW14xXTogQ3JlYXRlZCBieSBKb2huIEdydWJlciwgd2l0aCBjb250cmlidXRpb25zIGZyb20gQWFyb24gU3dhcnR6LlxuW14yXTogRnJvbSBSRUFETUVzIHRvIGRvY3VtZW50YXRpb24gc2l0ZXMgYW5kIG5vdGUgYXBwcy5cbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c13">Markdown was released in 2004.[^1] It is now everywhere.[^2]
+<p>Add a marker in the text and define the note anywhere in the document. Footnotes are numbered automatically and collected at the bottom. They are an extension, not part of the CommonMark or GFM specifications, so check that your target supports them.</p>
+<figure class="ex"><div class="ex-title"><span>Footnotes</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c18">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJNYXJrZG93biB3YXMgcmVsZWFzZWQgaW4gMjAwNC5bXjFdIEl0IGlzIG5vdyBldmVyeXdoZXJlLlteMl1cblxuW14xXTogQ3JlYXRlZCBieSBKb2huIEdydWJlciwgd2l0aCBjb250cmlidXRpb25zIGZyb20gQWFyb24gU3dhcnR6LlxuW14yXTogRnJvbSBSRUFETUVzIHRvIGRvY3VtZW50YXRpb24gc2l0ZXMgYW5kIG5vdGUgYXBwcy5cbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c18">Markdown was released in 2004.[^1] It is now everywhere.[^2]
 
 [^1]: Created by John Gruber, with contributions from Aaron Swartz.
 [^2]: From READMEs to documentation sites and note apps.</pre><div class="ex-out md"><p>Markdown was released in 2004.<sup class="fn-ref"><a href="#fn-1" id="fnref-1">1</a></sup> It is now everywhere.<sup class="fn-ref"><a href="#fn-2" id="fnref-2">2</a></sup></p>
 <section class="footnotes"><hr><ol><li id="fn-1">Created by John Gruber, with contributions from Aaron Swartz. <a class="fn-back" href="#fnref-1">↩</a></li><li id="fn-2">From READMEs to documentation sites and note apps. <a class="fn-back" href="#fnref-2">↩</a></li></ol></section></div></div></figure>
 <h2 id="math">Math<a class="anchor" href="#math" aria-label="Link to this section">#</a></h2>
 <p>Wrap LaTeX in single dollar signs for inline math and double for a block. Learn more in <a href="/guides/latex-math-in-markdown">math in Markdown</a>.</p>
-<figure class="ex"><div class="ex-title"><span>Inline and block math</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c14">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJUaGUgYXJlYSBvZiBhIGNpcmNsZSBpcyAkQSA9IFxccGkgcl4yJC5cblxuJCRcblxcaW50X3stXFxpbmZ0eX1ee1xcaW5mdHl9IGVeey14XjJ9XFwsZHggPSBcXHNxcnR7XFxwaX1cbiQkXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c14">The area of a circle is $A = \pi r^2$.
+<figure class="ex"><div class="ex-title"><span>Inline and block math</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c19">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJUaGUgYXJlYSBvZiBhIGNpcmNsZSBpcyAkQSA9IFxccGkgcl4yJC5cblxuJCRcblxcaW50X3stXFxpbmZ0eX1ee1xcaW5mdHl9IGVeey14XjJ9XFwsZHggPSBcXHNxcnR7XFxwaX1cbiQkXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c19">The area of a circle is $A = \pi r^2$.
 
 $$
 \int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
@@ -344,17 +461,18 @@ H400000v40H845.2724
 s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
 c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
 M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1908em;"><span></span></span></span></span></span></span></span></span></span></div></div></div></figure>
+<p>In Quilldown, inline math needs no space just inside the dollar signs: <code>$x^2$</code> is math, <code>$ x^2 $</code> is not. If a paragraph mixes prices and math, escape the price as <code>\$5</code>.</p>
 <h2 id="diagrams">Diagrams<a class="anchor" href="#diagrams" aria-label="Link to this section">#</a></h2>
-<p>Put Mermaid code in a fenced block tagged <code>mermaid</code> and supporting editors draw it as a diagram. Quilldown renders it live — see <a href="/guides/mermaid-diagrams-in-markdown">diagrams in Markdown</a> for every diagram type.</p>
-<figure class="ex"><div class="ex-title"><span>Mermaid flowchart source</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c15">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJgYGBtZXJtYWlkXG5mbG93Y2hhcnQgTFJcbiAgQVtXcml0ZV0gLS0-IEJbUHJldmlld10gLS0-IENbRXhwb3J0XVxuYGBgXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c15">```mermaid
+<p>Put Mermaid code in a fenced block tagged <code>mermaid</code> and supporting editors draw it as a diagram. Quilldown renders it live. See <a href="/guides/mermaid-diagrams-in-markdown">diagrams in Markdown</a> for every diagram type.</p>
+<figure class="ex"><div class="ex-title"><span>Mermaid flowchart source</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c20">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJgYGBtZXJtYWlkXG5mbG93Y2hhcnQgTFJcbiAgQVtXcml0ZV0gLS0-IEJbUHJldmlld10gLS0-IENbRXhwb3J0XVxuYGBgXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c20">```mermaid
 flowchart LR
   A[Write] --&gt; B[Preview] --&gt; C[Export]
 ```</pre><div class="ex-out md"><pre data-lang="mermaid"><code class="hljs">flowchart LR
   A[Write] --&gt; B[Preview] --&gt; C[Export]</code></pre>
 </div></div></figure>
 <h2 id="callouts-alerts">Callouts (alerts)<a class="anchor" href="#callouts-alerts" aria-label="Link to this section">#</a></h2>
-<p>Start a blockquote with <code>[!NOTE]</code>, <code>[!TIP]</code>, <code>[!IMPORTANT]</code>, <code>[!WARNING]</code> or <code>[!CAUTION]</code> to get a highlighted box.</p>
-<figure class="ex"><div class="ex-title"><span>Callouts</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c16">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiI-IFshTk9URV1cbj4gVXNlZnVsIGluZm9ybWF0aW9uLCBldmVuIHdoZW4gc2tpbW1pbmcuXG5cbj4gWyFXQVJOSU5HXVxuPiBVcmdlbnQgaW5mbyB0aGF0IG5lZWRzIGF0dGVudGlvbi5cbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c16">&gt; [!NOTE]
+<p>Start a blockquote with <code>[!NOTE]</code>, <code>[!TIP]</code>, <code>[!IMPORTANT]</code>, <code>[!WARNING]</code> or <code>[!CAUTION]</code> to get a highlighted box. The marker goes alone on the first line, and the text follows on the next.</p>
+<figure class="ex"><div class="ex-title"><span>Callouts</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c21">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiI-IFshTk9URV1cbj4gVXNlZnVsIGluZm9ybWF0aW9uLCBldmVuIHdoZW4gc2tpbW1pbmcuXG5cbj4gWyFXQVJOSU5HXVxuPiBVcmdlbnQgaW5mbyB0aGF0IG5lZWRzIGF0dGVudGlvbi5cbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c21">&gt; [!NOTE]
 &gt; Useful information, even when skimming.
 
 &gt; [!WARNING]
@@ -363,13 +481,14 @@ flowchart LR
 <blockquote class="alert alert-warning"><p class="alert-title">Warning</p><p>Urgent info that needs attention.</p>
 </blockquote>
 </div></div></figure>
+<p>A tool that does not understand callouts shows them as an ordinary blockquote that begins with the literal text <code>[!NOTE]</code>. The content is still readable, which makes them a safe choice.</p>
 <h2 id="emoji">Emoji<a class="anchor" href="#emoji" aria-label="Link to this section">#</a></h2>
-<p>Type an emoji shortcode between colons. See the full <a href="/guides/markdown-emoji-shortcodes">emoji shortcode list</a>.</p>
-<figure class="ex"><div class="ex-title"><span>Emoji shortcodes</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c17">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJTaGlwIGl0IDpyb2NrZXQ6IGFuZCBjZWxlYnJhdGUgOnRhZGE6XG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c17">Ship it :rocket: and celebrate :tada:</pre><div class="ex-out md"><p>Ship it 🚀 and celebrate 🎉</p>
+<p>Type an emoji shortcode between colons. In Quilldown, typing a colon and the first letters, such as <code>:roc</code>, opens an autocomplete list. See the full <a href="/guides/markdown-emoji-shortcodes">emoji shortcode list</a>.</p>
+<figure class="ex"><div class="ex-title"><span>Emoji shortcodes</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c22">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJTaGlwIGl0IDpyb2NrZXQ6IGFuZCBjZWxlYnJhdGUgOnRhZGE6XG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c22">Ship it :rocket: and celebrate :tada:</pre><div class="ex-out md"><p>Ship it 🚀 and celebrate 🎉</p>
 </div></div></figure>
 <h2 id="html-inside-markdown">HTML inside Markdown<a class="anchor" href="#html-inside-markdown" aria-label="Link to this section">#</a></h2>
-<p>When Markdown has no syntax for what you need, you can mix in HTML.</p>
-<figure class="ex"><div class="ex-title"><span>Useful HTML tags</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c18">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJQcmVzcyA8a2JkPkN0cmw8L2tiZD4gKyA8a2JkPlM8L2tiZD4gdG8gc2F2ZS5cblxuSDxzdWI-Mjwvc3ViPk8gYW5kIEUgPSBtYzxzdXA-Mjwvc3VwPiwgd2l0aCA8bWFyaz5oaWdobGlnaHRlZDwvbWFyaz4gYW5kIDx1PnVuZGVybGluZWQ8L3U-IHRleHQuXG5cbjxkZXRhaWxzPlxuPHN1bW1hcnk-Q2xpY2sgdG8gZXhwYW5kPC9zdW1tYXJ5PlxuXG5IaWRkZW4gY29udGVudCwgd2l0aCAqKk1hcmtkb3duKiogc3RpbGwgd29ya2luZyBpbnNpZGUuXG5cbjwvZGV0YWlscz5cbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c18">Press &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt; to save.
+<p>When Markdown has no syntax for what you need, you can mix in HTML. Many platforms sanitize it, so tags such as <code>&lt;script&gt;</code> and inline styles are often removed.</p>
+<figure class="ex"><div class="ex-title"><span>Useful HTML tags</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c23">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJQcmVzcyA8a2JkPkN0cmw8L2tiZD4gKyA8a2JkPlM8L2tiZD4gdG8gc2F2ZS5cblxuSDxzdWI-Mjwvc3ViPk8gYW5kIEUgPSBtYzxzdXA-Mjwvc3VwPiwgd2l0aCA8bWFyaz5oaWdobGlnaHRlZDwvbWFyaz4gYW5kIDx1PnVuZGVybGluZWQ8L3U-IHRleHQuXG5cbjxkZXRhaWxzPlxuPHN1bW1hcnk-Q2xpY2sgdG8gZXhwYW5kPC9zdW1tYXJ5PlxuXG5IaWRkZW4gY29udGVudCwgd2l0aCAqKk1hcmtkb3duKiogc3RpbGwgd29ya2luZyBpbnNpZGUuXG5cbjwvZGV0YWlscz5cbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c23">Press &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt; to save.
 
 H&lt;sub&gt;2&lt;/sub&gt;O and E = mc&lt;sup&gt;2&lt;/sup&gt;, with &lt;mark&gt;highlighted&lt;/mark&gt; and &lt;u&gt;underlined&lt;/u&gt; text.
 
@@ -385,9 +504,10 @@ Hidden content, with **Markdown** still working inside.
 
 <p>Hidden content, with <strong>Markdown</strong> still working inside.</p>
 </details></div></div></figure>
+<p>Leave a blank line after the <code>&lt;/summary&gt;</code> line (as above) if you want Markdown inside a <code>&lt;details&gt;</code> block to render.</p>
 <h2 id="escaping-and-comments">Escaping and comments<a class="anchor" href="#escaping-and-comments" aria-label="Link to this section">#</a></h2>
-<p>Put a backslash before a symbol to show it literally. Comments are invisible in the rendered result.</p>
-<figure class="ex"><div class="ex-title"><span>Escapes and comments</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c19">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJcXCpOb3QgaXRhbGljXFwqIGFuZCBcXCMgbm90IGEgaGVhZGluZy5cblxuPCEtLSBUaGlzIGNvbW1lbnQgZG9lcyBub3QgYXBwZWFyIGluIHRoZSBwcmV2aWV3LiAtLT5cblxuVmlzaWJsZSB0ZXh0LlxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c19">\*Not italic\* and \# not a heading.
+<p>Put a backslash before a symbol to show it literally. Comments are invisible in the rendered result but still visible to anyone who reads the source, so keep secrets out of them.</p>
+<figure class="ex"><div class="ex-title"><span>Escapes and comments</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c24">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJcXCpOb3QgaXRhbGljXFwqIGFuZCBcXCMgbm90IGEgaGVhZGluZy5cblxuPCEtLSBUaGlzIGNvbW1lbnQgZG9lcyBub3QgYXBwZWFyIGluIHRoZSBwcmV2aWV3LiAtLT5cblxuVmlzaWJsZSB0ZXh0LlxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c24">\*Not italic\* and \# not a heading.
 
 &lt;!-- This comment does not appear in the preview. --&gt;
 
@@ -396,6 +516,108 @@ Visible text.</pre><div class="ex-out md"><p>*Not italic* and # not a heading.</
 
 <p>Visible text.</p>
 </div></div></figure>
+<p>Symbols worth escaping when you mean them literally:</p>
+<div class="tbl"><table><thead><tr>
+<th>Character</th>
+<th>When it causes trouble</th>
+</tr>
+</thead><tbody><tr>
+<td><code>*</code> and <code>_</code></td>
+<td>Wrapped around text, they become emphasis</td>
+</tr>
+<tr>
+<td><code>#</code></td>
+<td>At the start of a line, it becomes a heading</td>
+</tr>
+<tr>
+<td><code>-</code>, <code>+</code> and <code>1.</code></td>
+<td>At the start of a line, they become list items</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>At the start of a line, it becomes a quote</td>
+</tr>
+<tr>
+<td><code>`</code></td>
+<td>Pairs up into inline code</td>
+</tr>
+<tr>
+<td><code>[</code> and <code>]</code></td>
+<td>With parentheses after them, they form a link</td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td>Inside a table row, it splits the cell</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>Around text with no spaces, it can form math</td>
+</tr>
+</tbody></table></div>
+<h2 id="what-works-where">What works where<a class="anchor" href="#what-works-where" aria-label="Link to this section">#</a></h2>
+<p>The core syntax works everywhere. The rest depends on the dialect, so check this before you publish somewhere new.</p>
+<div class="tbl"><table><thead><tr>
+<th>Feature</th>
+<th>Core CommonMark</th>
+<th>GitHub Flavored Markdown</th>
+<th>Quilldown</th>
+</tr>
+</thead><tbody><tr>
+<td>Headings, emphasis, lists, links, images, code, quotes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Tables</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Task lists</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Strikethrough</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Footnotes</td>
+<td>No</td>
+<td>Not in the spec</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Math (<code>$…$</code>)</td>
+<td>No</td>
+<td>Not in the spec</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Mermaid diagrams</td>
+<td>No</td>
+<td>Not in the spec</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Callouts (<code>&gt; [!NOTE]</code>)</td>
+<td>No</td>
+<td>Not in the spec</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Emoji shortcodes</td>
+<td>No</td>
+<td>Not in the spec</td>
+<td>Yes</td>
+</tr>
+</tbody></table></div>
+<p>&quot;Not in the spec&quot; means the written specification does not define it. Individual platforms may still support it, so test in the place you are publishing. For the background on these dialects, read <a href="/guides/what-is-markdown">what Markdown is</a>.</p>
 <h2 id="common-problems-and-fixes">Common problems and fixes<a class="anchor" href="#common-problems-and-fixes" aria-label="Link to this section">#</a></h2>
 <div class="tbl"><table><thead><tr>
 <th>Problem</th>
@@ -415,7 +637,11 @@ Visible text.</pre><div class="ex-out md"><p>*Not italic* and # not a heading.</
 </tr>
 <tr>
 <td>Table does not render</td>
-<td>Make sure the <code>---</code> separator row is present and every row has the same number of columns</td>
+<td>Make sure the <code>---</code> separator row is present and has the same number of columns as the header</td>
+</tr>
+<tr>
+<td>A pipe splits a table cell</td>
+<td>Escape it with a backslash: <code>|</code></td>
 </tr>
 <tr>
 <td>A <code>*</code> or <code>_</code> makes text italic by accident</td>
@@ -423,15 +649,33 @@ Visible text.</pre><div class="ex-out md"><p>*Not italic* and # not a heading.</
 </tr>
 <tr>
 <td>Nested list does not indent</td>
-<td>Indent nested items by two or four spaces</td>
+<td>Line the child up with the first character of the parent&#39;s text: two spaces after <code>- </code>, three after <code>1. </code></td>
 </tr>
 <tr>
-<td>Currency <code>$5 … $10</code> turns into math</td>
+<td>A code block never ends</td>
+<td>The closing fence is missing or shorter than the opening one</td>
+</tr>
+<tr>
+<td>Text above <code>---</code> became a big heading</td>
+<td>Leave a blank line above the rule</td>
+</tr>
+<tr>
+<td>Markdown inside an HTML block is not rendered</td>
+<td>Leave a blank line after the opening tag</td>
+</tr>
+<tr>
+<td>A price like <code>$5</code> turns into math</td>
 <td>Escape the dollar sign: <code>\$5</code></td>
 </tr>
+<tr>
+<td>Footnote appears as plain text</td>
+<td>Check that the marker and the <code>[^1]:</code> definition use the same label</td>
+</tr>
 </tbody></table></div>
+<h2 id="write-faster-in-quilldown">Write faster in Quilldown<a class="anchor" href="#write-faster-in-quilldown" aria-label="Link to this section">#</a></h2>
+<p>The toolbar inserts the right syntax with one click, and the shortcuts work in the editor: Ctrl+B for bold, Ctrl+I for italic, Ctrl+E for inline code and Ctrl+K for a link. Ctrl+F opens find and Ctrl+H opens replace. For tables, the visual Table editor lets you build, edit or convert a table and paste one from Excel or Google Sheets, so you never align pipes by hand.</p>
 <h2 id="faq">Frequently asked questions<a class="anchor" href="#faq" aria-label="Link to this section">#</a></h2>
-<div class="faq"><details><summary>What is the difference between `*` and `_` for italics?</summary><p>They are interchangeable for whole words. Use asterisks when you want to italicise <em>part</em> of a word, because underscores inside words are usually ignored.</p></details><details><summary>How do I make text a different color in Markdown?</summary><p>Markdown has no color syntax. If your tool allows raw HTML you can use a styled tag, but formatting like color is deliberately outside Markdown&#39;s scope — that&#39;s what keeps the files portable.</p></details><details><summary>How do I add a page break or center text?</summary><p>There is no Markdown syntax for either. Quilldown supports <code>&lt;div align=&quot;center&quot;&gt;</code> for centering. For page breaks, use your export target&#39;s settings — for example the print dialog when you <a href="/guides/markdown-to-pdf">convert Markdown to PDF</a>.</p></details><details><summary>Does every Markdown editor support tables, task lists and footnotes?</summary><p>Tables, task lists and strikethrough come from GitHub Flavored Markdown and are widely supported. Footnotes, math, diagrams and callouts are extensions, so support varies. Quilldown supports all of them.</p></details><details><summary>Where can I practise?</summary><p>Open the <a href="/">Quilldown editor</a>, press <strong>New → Sample document</strong> for a guided tour, or use the <strong>Open in editor</strong> button on any example above.</p></details></div>
+<div class="faq"><details><summary>What is the difference between `*` and `_` for italics?</summary><p>They are interchangeable for whole words. Use asterisks when you want to italicise <em>part</em> of a word, because underscores inside words are usually ignored, which also keeps names like <code>snake_case_name</code> intact.</p></details><details><summary>How do I make text a different color in Markdown?</summary><p>Markdown has no color syntax. If your tool allows raw HTML you can use a styled tag, but many platforms strip inline styles. Formatting like color is deliberately outside Markdown&#39;s scope, and that is what keeps the files portable.</p></details><details><summary>How do I add a page break or center text?</summary><p>Neither has Markdown syntax. Many renderers, including GitHub, honor <code>&lt;div align=&quot;center&quot;&gt;</code> for centering, but check how your target treats HTML. For page breaks, use your export target&#39;s settings, such as the print dialog when you <a href="/guides/markdown-to-pdf">convert Markdown to PDF</a>.</p></details><details><summary>How do I show backticks or a code fence inside code?</summary><p>For inline code, wrap it in double backticks and put a space inside each end. For a fenced block that contains another fence, use four backticks on the outside and three on the inside. The outer fence just has to be longer than any fence inside it.</p></details><details><summary>Does every Markdown editor support tables, task lists and footnotes?</summary><p>Tables, task lists and strikethrough come from GitHub Flavored Markdown and are widely supported. Footnotes, math, diagrams and callouts are extensions, so support varies. Quilldown supports all of them.</p></details><details><summary>How do I create a line break without starting a new paragraph?</summary><p>End the line with two spaces or with a backslash, or write <code>&lt;br&gt;</code>. The backslash is the most reliable because editors often strip trailing spaces.</p></details><details><summary>Where can I practise?</summary><p>Open the <a href="/">Quilldown editor</a>, press <strong>New → Sample document</strong> for a guided tour, or use the <strong>Open in editor</strong> button on any example above.</p></details></div>
     </article>
   </div>
   <nav class="pn" aria-label="More guides"><a class="pn-prev" href="/guides/what-is-markdown"><span>Previous</span><strong>What is Markdown?</strong></a><a class="pn-next" href="/guides/markdown-emoji-shortcodes"><span>Next</span><strong>Emoji shortcodes</strong></a></nav>

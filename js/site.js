@@ -57,6 +57,20 @@
   }
 })();
 
+/* start-page toggle (header): homepage by default, or the full-screen editor */
+(function () {
+  var boxes = document.querySelectorAll('[data-starteditor]');
+  if (!boxes.length) return;
+  var pref = null; try { pref = localStorage.getItem('quilldown:start'); } catch (e) { }
+  boxes.forEach(function (b) {
+    b.checked = pref === 'editor';
+    b.addEventListener('change', function () {
+      try { localStorage.setItem('quilldown:start', b.checked ? 'editor' : 'home'); } catch (e) { }
+      boxes.forEach(function (o) { o.checked = b.checked; });
+    });
+  });
+})();
+
 /* mobile menu */
 (function () {
   var nav = document.getElementById('nav'), btn = nav && nav.querySelector('.nav-toggle');

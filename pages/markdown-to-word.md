@@ -3,8 +3,8 @@ title: Convert Markdown to Word and Google Docs — Free Online
 h1: Convert Markdown to Word (.docx) and Google Docs
 short: Markdown to Word & Google Docs
 card: A real .docx, or a clean Docs paste.
-description: Convert Markdown to Word (.docx) or paste it into Google Docs with headings, tables and lists intact. Free, online, private — nothing is uploaded.
-lead: Two ways to get Markdown into a word processor: export a real Word (.docx) file, or copy formatted text straight into Google Docs. Both are free, private and take one click.
+description: Convert Markdown to Word (.docx) or paste it into Google Docs with real headings, tables and footnotes. Free, private, nothing uploaded. Includes fixes.
+lead: To convert Markdown to Word, paste it into Quilldown and choose Export → Word (.docx). To get it into Google Docs, click Copy for Docs and paste. Both are free and private, and this guide shows what each one keeps, what it cannot, and how to fix the rough edges.
 category: convert
 order: 5
 home: true
@@ -17,44 +17,67 @@ ctaText: Write or paste Markdown, then choose Export → Word (.docx), or use Co
 
 ## Two ways to convert Markdown to Word
 
+Quilldown gives you a file route and a clipboard route. Pick by where the content needs to end up.
+
 | | **Export → Word (.docx)** | **Copy for Docs** |
 | --- | --- | --- |
 | **Result** | A real `.docx` file you can open in Word, Google Docs, Pages or LibreOffice | Formatted text on your clipboard |
 | **Best for** | Sending or storing a finished document | Pasting into an existing Google Doc or Word file |
+| **Footnotes** | Real Word footnotes | Whatever the destination app makes of them |
 | **Where** | Export menu → Word (.docx) | Preview pane → Copy for Docs |
 
-## Method 1 — Export a Word (.docx) file
+If you are new to the syntax, [what is Markdown](/guides/what-is-markdown) is a five-minute primer.
+
+## Method 1: export a Word (.docx) file
 
 <ol class="steps">
 <li><strong>Open <a href="/">Quilldown</a></strong> and paste, type or open your Markdown.</li>
 <li><strong>Check the preview</strong> on the right.</li>
 <li><strong>Choose Export → Word (.docx).</strong> The file downloads straight away.</li>
-<li><strong>Open it in Word</strong> — or upload it to Google Drive and open it with Google Docs.</li>
+<li><strong>Open it in Word</strong>, or upload it to Google Drive and open it with Google Docs.</li>
 </ol>
 
-The file is a genuine Word document, not a web page in disguise. It contains:
+The file is a genuine Word document, not a web page in disguise. Word may open a freshly downloaded file in Protected View; click **Enable Editing** to work on it.
 
-- **Real heading styles** (Heading 1–6) sized **23, 17, 14 and 12 pt**, so Word's Navigation Pane and table of contents work.
-- **Numbered and bulleted lists**, including nested lists and task lists (☑ / ☐).
-- **Tables** with borders and a shaded header row.
-- **Links** that stay clickable, plus bold, italic, underline, strikethrough, highlight, superscript and subscript.
-- **Code** in a monospace font with a shaded background, and **callouts** as bordered paragraphs.
-- **Images and diagrams** embedded in the document.
-- **Real Word footnotes** from `[^1]` footnotes.
+### What becomes what
+
+| In Markdown | In the Word file |
+| --- | --- |
+| `#` to `######` headings | Real Heading 1 to 6 styles, sized **23, 17, 14 and 12 pt**, so the Navigation Pane and a table of contents work |
+| `-` and `1.` lists, nested lists | Bulleted and numbered lists with their nesting |
+| `- [x]` and `- [ ]` task lists | Checked (☑) and unchecked (☐) items |
+| Tables | Word tables with borders and a shaded header row |
+| `[text](url)` | Clickable hyperlinks |
+| Bold, italic, underline, strikethrough, highlight, superscript, subscript | The matching character formatting |
+| `` `code` `` and fenced code | Monospace text with a shaded background |
+| `> [!NOTE]` callouts | Bordered paragraphs |
+| Images and Mermaid diagrams | Pictures embedded in the document |
+| `[^1]` footnotes | Real Word footnotes |
+
+## What does not carry over
+
+A Word file cannot hold everything Markdown can express. Know these before you send the file.
+
+| Content | What you get in Word | What to do |
+| --- | --- | --- |
+| **LaTeX math** (`$…$`, `$$…$$`) | The TeX source as plain text, not a native equation | Retype key equations in Word's equation editor, or send a [PDF](/guides/markdown-to-pdf) |
+| **Mermaid diagrams** | A picture, so you cannot edit the nodes in Word | Keep the Markdown as the source and re-export after changes |
+| **Merged table cells** | Not possible; Markdown tables have none | Merge cells in Word afterwards |
+| **Fonts and colors** | Word's defaults for the styles above | Change the styles once in Word (see below) |
 
 > [!NOTE]
-> Math written in LaTeX is included as its text (the TeX source) rather than as a native Word equation. If equations are important, export a [PDF](/guides/markdown-to-pdf) or retype them with Word's equation editor.
+> Equations are the most common surprise. A line such as `$E = mc^2$` arrives as those literal characters. If your document is mostly math, a PDF is the safer format; see [LaTeX math in Markdown](/guides/latex-math-in-markdown).
 
-## Method 2 — Paste into Google Docs with Copy for Docs
+## Method 2: paste into Google Docs with Copy for Docs
 
-Google Docs uses point sizes, and it applies your own font to anything that doesn't specify one. **Copy for Docs** is built around that: it copies your formatted document using point sizes and *no font family*, so the text picks up your document's font.
+Google Docs uses point sizes, and it applies your own font to anything that does not specify one. **Copy for Docs** is built around that: it copies your formatted document using point sizes and *no font family*, so the text picks up your document's font.
 
 | Element | Size copied |
 | --- | --- |
 | Heading 1 | **23 pt**, bold |
 | Heading 2 | **17 pt**, bold |
 | Heading 3 | **14 pt**, bold |
-| Heading 4–6 | 12 pt, bold |
+| Heading 4 to 6 | 12 pt, bold |
 | Body text, lists and tables | **12 pt** |
 | Code | 11 pt monospace |
 
@@ -62,13 +85,23 @@ Google Docs uses point sizes, and it applies your own font to anything that does
 <li><strong>Write your Markdown</strong> in <a href="/">Quilldown</a>.</li>
 <li>On the <strong>Preview</strong> pane, click <strong>Copy for Docs</strong>.</li>
 <li><strong>Click into your Google Doc</strong> where the content should go.</li>
-<li>Press <kbd>Ctrl</kbd> + <kbd>V</kbd> (<kbd>⌘</kbd> + <kbd>V</kbd> on a Mac). Use the normal paste — <em>not</em> “paste without formatting”, which would strip the styling.</li>
+<li>Press <kbd>Ctrl</kbd> + <kbd>V</kbd> (<kbd>⌘</kbd> + <kbd>V</kbd> on a Mac). Use the normal paste, <em>not</em> “paste without formatting”, which would strip the styling.</li>
 </ol>
 
-Headings are copied as real heading elements, so Google Docs usually maps them to its own Heading styles and your document outline works.
+Headings are copied as real heading elements, so Google Docs usually maps them to its own Heading styles and the document outline on the left works.
+
+### Why no font is set
+
+Web pages and word processors handle fonts differently. If the copied text named a font, Google Docs would keep it, and your pasted section would sit in a different typeface from the rest of the document. Leaving the font out lets the destination decide, so the paste blends in with the surrounding text.
 
 > [!TIP]
-> Pasting into an existing document? Because no font is set, the pasted text takes on that document's default font — so it blends in instead of arriving in a different typeface.
+> Pasting into an existing document? Set that document's Normal text and heading styles first. The pasted text then follows them, and you can update every heading later with the **Update … to match** option under **Format → Paragraph styles**.
+
+## Pasting into Word or Pages
+
+Copy for Docs is designed for Google Docs, but the clipboard content is ordinary formatted text, so you can also paste it into other apps. Results vary by app and paste option: in Word, the paste-options button that appears after pasting lets you choose whether to keep source formatting or match the destination. For anything you plan to keep or send, the `.docx` export is more predictable because it uses real Word styles.
+
+The **Copy** menu has other routes too. **Copy formatted** puts rich text on the clipboard for general use, **Copy HTML** gives you the markup for a web page or email template, and **Copy Markdown** gives back the source. See [Markdown to HTML](/guides/markdown-to-html) if the destination is a web page.
 
 ## Opening a .docx in Google Docs
 
@@ -78,42 +111,108 @@ Headings are copied as real heading elements, so Google Docs usually maps them t
 <li>Optionally use <strong>File → Save as Google Docs</strong> to keep a native copy.</li>
 </ol>
 
-## Which should I use?
+## Which route should I use?
 
-- **Sending a finished document to someone?** Export a `.docx` (or a [PDF](/guides/markdown-to-pdf) if they don't need to edit it).
-- **Building a document in Google Docs from notes?** Use **Copy for Docs**.
-- **Need the text to become a web page?** See [Markdown to HTML](/guides/markdown-to-html).
+| Situation | Best route |
+| --- | --- |
+| Sending a finished document to a colleague or client | Export a **.docx** |
+| Sending something no one will edit | Export a [PDF](/guides/markdown-to-pdf) |
+| Adding a section to an existing Google Doc | **Copy for Docs** |
+| Document has footnotes | **.docx** (real footnotes) |
+| Document is full of equations | [PDF](/guides/markdown-to-pdf) |
+| Content is going onto a web page | **Copy HTML** or the [HTML guide](/guides/markdown-to-html) |
+| Working in Pages or LibreOffice | Export a **.docx** and open it there |
+
+## What a document that converts well looks like
+
+Word conversions go best when the Markdown is structured the way a Word document would be: headings for sections, real lists, and simple tables.
+
+````example title="A memo that converts cleanly"
+## Project update
+
+The launch is on track. Two items need a decision.[^1]
+
+| Item | Owner | Status |
+| --- | --- | --- |
+| Pricing page | Sam | Done |
+| Onboarding email | Lee | In review |
+
+- [x] Confirm the date
+- [ ] Sign off the budget
+
+[^1]: Decisions are due by Friday.
+````
+
+In the `.docx` this becomes a Heading, a paragraph with a real footnote at the bottom of the page, a table with a shaded header row, and a two-item checklist.
+
+## Tables, task lists and footnotes
+
+**Tables** convert to Word tables with borders and a shaded header row. Keep cells short, because long paragraphs inside cells make a Word table hard to read. Build or reshape one with the [table editor guide](/guides/markdown-table-generator), which also covers pasting from a spreadsheet.
+
+**Task lists** convert to ☑ and ☐ characters. They are text symbols, not clickable checkboxes, so ticking a box later means replacing the symbol.
+
+**Footnotes** written as `[^1]` and defined with `[^1]: text` become real Word footnotes, numbered by Word. In Google Docs they follow the same route when you open the `.docx`. The full syntax is in the [Markdown cheat sheet](/guides/markdown-cheat-sheet).
+
+## Style the document once you have it
+
+Because headings are real Word styles, you restyle the whole document by changing the style, not each heading.
+
+1. In Word, right-click **Heading 1** in the Styles gallery on the Home tab and choose **Modify**.
+2. Set your font, size and color, and apply it.
+3. Repeat for Heading 2, Heading 3 and Normal text.
+4. To add a contents page, use **References → Table of Contents**. It works because the headings are real headings.
+
+If one heading does not follow the change, reapply the style to it from the Styles gallery. To keep your settings for next time, save the styled file as a template and paste or open new exports into it.
+
+## Common problems and fixes
+
+| Problem | Likely cause | Fix |
+| --- | --- | --- |
+| A heading shows `## Title` as plain text | No space after the `#` marks | Write `## Title` with a space |
+| Bullets appear as one paragraph | No blank line before the list | Add an empty line above it |
+| Equation appears as `$x^2$` | Math is exported as TeX text | Retype it with Word's equation editor |
+| Pasted text is a different font in Google Docs | The copied text carried its own font, for example from a different copy route or source | Use **Copy for Docs**, which sets no font |
+| Formatting is missing after pasting into Docs | You used *Paste without formatting* | Use the normal paste (Ctrl+V) |
+| An image did not come through with Copy for Docs | The destination did not accept it | Use the Word export, or insert the picture manually |
+| File opens read-only in Word | Protected View for downloaded files | Click **Enable Editing** |
+| Page layout differs between Word and Google Docs | Each app has its own defaults | Set page size and margins in the app you will share from |
 
 ## Tips for the best result
 
-- **Start each section with a heading** (`##`) — they become real headings in Word and Docs.
-- **Keep tables simple.** Markdown tables can't merge cells; if you need that, build the table in Word afterwards.
-- **Add alt text to images** — `![Describe the image](photo.png)` — and it is preserved.
-- **Use the [table editor](/guides/markdown-table-generator)** to paste spreadsheet data and get a tidy table.
-- **Check images after pasting into Docs.** If an image doesn't come through with Copy for Docs, use the Word export or insert the picture manually.
+- **Start each section with a heading** (`##`). They become real headings in Word and Docs.
+- **Use one `#` heading as the title** and `##` for sections so the outline is sensible.
+- **Add alt text to images**: `![Describe the image](photo.png)`. It is preserved.
+- **Keep tables simple**, and merge cells in Word afterwards if you must.
+- **Keep the Markdown as your source.** Edit there, then export again, rather than editing the `.docx` and the Markdown separately.
+
+You can also [read how the app works and who builds it](/about).
 
 ## Frequently asked questions
 
 ### Can I convert Markdown to Word for free?
 
-Yes. Quilldown's Word export is free, needs no account and runs in your browser — your Markdown is never uploaded.
+Yes. Quilldown's Word export is free, needs no account and runs in your browser, so your Markdown is never uploaded. Paste or open your text, choose **Export → Word (.docx)** and the file downloads. It also works offline after your first visit.
 
 ### Will headings, bold text, lists and tables survive?
 
-Yes. Headings become real Word heading styles, and bold, italic, lists, links and tables are all preserved as native formatting.
+Yes. Headings become real Word heading styles, and bold, italic, lists, links and tables are all preserved as native formatting. Footnotes become real Word footnotes, and images and diagrams are embedded in the file.
 
 ### How do I paste Markdown into Google Docs with formatting?
 
-Click **Copy for Docs** on the preview pane, then paste normally into Google Docs (Ctrl+V). The headings arrive at 23, 17 and 14 pt with body text at 12 pt, in your document's own font.
+Click **Copy for Docs** on the preview pane, then paste normally into Google Docs with Ctrl+V. The headings arrive at 23, 17 and 14 pt with body text at 12 pt, in your document's own font. Do not use *Paste without formatting*, because that removes the styling.
 
-### Why doesn't my equation look right in Word?
+### Why does my equation look wrong in Word?
 
-Word exports include math as its TeX source text, not as a Word equation. Retype the equation with Word's equation editor, or share a [PDF](/guides/markdown-to-pdf) instead.
+Word exports include math as its TeX source text, not as a Word equation. Retype the equation with Word's equation editor, or share a [PDF](/guides/markdown-to-pdf) instead, where the math is typeset. The [LaTeX math guide](/guides/latex-math-in-markdown) covers the syntax.
+
+### Should I export a .docx or use Copy for Docs?
+
+Export a `.docx` when you want a finished file to send, store or open in Word, Pages or LibreOffice. Use Copy for Docs when you are adding content to a Google Doc that already exists, because it sets no font and so takes on that document's styling.
 
 ### Can I open the .docx in Pages or LibreOffice?
 
-Yes. The file is a standard Office Open XML document, so Word, Google Docs, Apple Pages and LibreOffice can all open it.
+Yes. The file is a standard Office Open XML document, so Word, Google Docs, Apple Pages and LibreOffice can all open it. Small layout differences between apps are normal, so check the result in the app you will share from.
 
-### Does it work offline?
+### Do diagrams stay editable in Word?
 
-Yes. Once Quilldown has loaded, you can convert without a connection — everything the exporter needs is bundled with the app.
+No. Mermaid diagrams are exported as pictures, so you cannot edit their nodes in Word. Keep the Mermaid source in your Markdown, change it there and export again. The [Mermaid guide](/guides/mermaid-diagrams-in-markdown) shows the syntax.

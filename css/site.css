@@ -204,18 +204,6 @@ main{counter-reset:ch}
 .section-head::before{content:"";position:absolute;z-index:-1;left:50%;top:-70px;width:min(640px,100%);height:220px;translate:-50% 0;background:radial-gradient(closest-side,var(--glow),transparent);opacity:.45;pointer-events:none}
 
 /* ---- FAQ in two columns (groups stay together) ---- */
-.faq-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 72px;align-items:start;max-width:1120px;margin:0 auto}
-.faq-col{min-width:0}
-.faq-set{margin-bottom:44px}
-.faq-group{margin:0 0 2px;padding-bottom:12px;border-bottom:1px solid var(--line);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);font-weight:650}
-.faq-cols .faq{max-width:none;margin:0}
-.faq-cols .faq summary{padding:18px 0;font-size:16.5px}
-.faq-cols .faq details p,.faq-cols .faq details ul{margin:0 0 14px;max-width:none;font-size:15px;line-height:1.7;color:var(--text-2)}
-.faq-cols .faq details ul{padding-left:1.3em}
-.faq-cols .faq details li{margin:.3em 0}
-.faq-cols .faq details>:last-child{margin-bottom:22px}
-.faq-cols .faq details a{color:var(--accent);text-underline-offset:3px}
-.faq-cols .faq code{font-family:var(--font-mono);font-size:.86em;padding:.1em .38em;border:1px solid var(--line-2);border-radius:6px;background:var(--surface-2)}
 
 /* ---- export flow: one draft, every format ---- */
 .flow{display:grid;grid-template-columns:minmax(0,290px) 80px minmax(0,1fr);align-items:center;max-width:1080px;margin:0 auto}
@@ -238,35 +226,19 @@ main{counter-reset:ch}
 @media (prefers-reduced-motion:reduce){.flow-link i{animation:none;opacity:0}}
 
 /* ---- contact ---- */
-.contact-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.contact-card{display:flex;flex-direction:column;gap:4px;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--surface);color:inherit;text-decoration:none;transition:border-color .15s,transform .15s}
-.contact-card:hover{border-color:var(--text-3);transform:translateY(-2px)}
-.contact-card .i{margin-bottom:12px;color:var(--accent)}
-.contact-card strong{font-size:15.5px;letter-spacing:-.015em}
-.contact-card span{color:var(--text-3);font-size:13.5px;line-height:1.5}
 
 /* ---- compact at-a-glance bar (end of the page) ---- */
-.specbar{border-top:1px solid var(--line);background:var(--surface-2)}
-.specbar dl{margin:0;padding:22px 0;display:grid;grid-template-columns:repeat(6,auto);justify-content:space-between;gap:16px 28px}
-.specbar dt{font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3)}
-.specbar dd{margin:2px 0 0;font-size:14px;font-weight:550;color:var(--text)}
-.specbar a{color:var(--accent);text-underline-offset:3px}
 
 @media (max-width:980px){
   .gnav{grid-template-columns:1fr}
   .gcol{border-right:0;border-bottom:1px solid var(--line)}
   .gcol:last-child{border-bottom:0}
-  .faq-cols{grid-template-columns:1fr;gap:0}
   .flow{grid-template-columns:1fr}
   .flow-link{width:2px;height:44px;margin:14px auto;background:linear-gradient(180deg,transparent,var(--accent),transparent)}
   .flow-link i{display:none}
-  .contact-grid{grid-template-columns:1fr 1fr}
-  .specbar dl{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:560px){
   .flow-out{grid-template-columns:1fr 1fr}
-  .contact-grid{grid-template-columns:1fr}
-  .specbar dl{grid-template-columns:1fr 1fr}
   .pn{grid-template-columns:1fr}.pn-next{text-align:left}
 }
 
@@ -323,16 +295,10 @@ button.brand-mini:hover{background:var(--hover)}
   .band p.big{margin-bottom:26px}
   .band-item{padding:18px}
   .cta{padding:72px 0}
-  .faq-set{margin-bottom:28px}
-  .faq-cols .faq summary{padding:15px 0;font-size:16px}
-  .faq-cols .faq details>:last-child{margin-bottom:16px}
   .gcol{padding:20px 20px 8px}
   .flow-src pre{padding:14px}
   .flow-out li{padding:14px}
   .flow-out b{margin-bottom:10px}
-  .contact-card{padding:18px}
-  .contact-card .i{margin-bottom:8px}
-  .specbar dl{padding:18px 0;gap:14px 20px}
   .footer-cols{gap:22px}
   .hero-after{margin-top:16px}
   .switch{margin-top:10px;text-align:left}
@@ -340,4 +306,144 @@ button.brand-mini:hover{background:var(--hover)}
   .doc-head{margin-bottom:28px}
   .after{margin-top:56px}
   .cta-band{margin-top:40px}
+}
+
+/* =====================================================================
+   Layout v3 — one compact rhythm for the whole homepage
+   ===================================================================== */
+.section{padding:72px 0!important}
+.section-head,.section-head.center{max-width:none;margin:0 0 32px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);column-gap:56px;align-items:end;text-align:left}
+.section-head .eyebrow{grid-column:1/-1}
+.section-head h2.title{grid-column:1;margin:10px 0 0;font-size:clamp(28px,3.6vw,42px);line-height:1.1}
+.section-head p{grid-column:2;margin:0;max-width:540px;padding-bottom:4px;font-size:16.5px;line-height:1.6;color:var(--text-2)}
+.section-head::before{left:32%}
+.card{padding:22px}
+.bento{gap:14px}
+.mini{padding:20px}
+.band{padding:44px 44px}
+.band p.big{margin-bottom:28px}
+.cta{padding:72px 0}
+.cta h2.title{font-size:clamp(30px,4.6vw,52px);margin-bottom:22px}
+.trust-in{padding:20px 0}
+.gcol{padding:22px 22px 10px}
+.grow{padding:10px 12px}
+.more-row{text-align:center;margin-top:24px}
+.cta-links{margin:22px 0 0;font-size:14px;color:var(--text-3)}
+.cta-links a{color:var(--text-2);text-underline-offset:3px}
+.cta-links a:hover{color:var(--text)}
+
+/* why markdown: three short points */
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:14px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.why>div{display:grid;gap:2px;padding:18px 22px}
+.why>div+div{border-left:1px solid var(--line)}
+.why b{font-size:15px;letter-spacing:-.01em}
+.why span{font-size:14px;line-height:1.55;color:var(--text-2)}
+
+/* how it works: three compact steps */
+.how-steps{list-style:none;margin:0 0 20px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.how-steps li{display:flex;gap:14px;padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.how-steps b{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font:650 13px var(--font-sans)}
+.how-steps strong{display:block;margin-bottom:2px;font-size:15.5px;letter-spacing:-.01em}
+.how-steps span{font-size:14px;line-height:1.55;color:var(--text-2)}
+
+/* FAQ: sticky intro + topic tabs + one clean accordion */
+.faq-layout{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:56px;align-items:start;max-width:1120px}
+.faq-side{position:sticky;top:96px}
+.faq-side h2.title{margin:10px 0 12px;font-size:clamp(28px,3.4vw,40px)}
+.faq-side>p{margin:0 0 22px;font-size:15.5px;line-height:1.6;color:var(--text-2)}
+.faq-help{display:grid;gap:4px;padding:18px 20px;border:1px solid var(--line);border-radius:18px;background:radial-gradient(300px 120px at 0 0,var(--glow),transparent 70%),var(--surface)}
+.faq-help strong{font-size:15px}
+.faq-help span{font-size:13.5px;color:var(--text-3)}
+.faq-help div{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.faq-main{min-width:0}
+.faq-tabs{display:none;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.faq-main.js .faq-tabs{display:flex}
+.faq-tabs button{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text-2);font:550 13.5px var(--font-sans);cursor:pointer;white-space:nowrap;transition:border-color .15s,color .15s,background .15s}
+.faq-tabs button span{font-size:11.5px;color:var(--text-3)}
+.faq-tabs button:hover{border-color:var(--text-3);color:var(--text)}
+.faq-tabs button[aria-selected="true"]{background:var(--text);border-color:var(--text);color:var(--bg)}
+.faq-tabs button[aria-selected="true"] span{color:inherit;opacity:.6}
+.faq-panel+.faq-panel{margin-top:32px}
+.faq-main.js .faq-panel+.faq-panel{margin-top:0}
+.faq-panel .faq-group{margin:0 0 10px;font-size:12.5px;font-weight:650;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.faq-main.js .faq-panel .faq-group{display:none}
+.faq-panel[hidden]{display:none}
+.faq-panel .faq{max-width:none;margin:0;border:1px solid var(--line);border-radius:18px;background:var(--surface);overflow:hidden}
+.faq-panel .faq details{padding:0 22px;border-bottom:1px solid var(--line);transition:background .2s}
+.faq-panel .faq details:last-child{border-bottom:0}
+.faq-panel .faq details[open]{background:linear-gradient(var(--accent-soft),transparent 72px)}
+.faq-panel .faq summary{gap:18px;padding:17px 0;font-size:16px;font-weight:580;letter-spacing:-.012em}
+.faq-panel .faq summary:hover{color:var(--accent)}
+.faq-panel .faq summary::after{width:14px;height:14px;margin:0;border:0;transform:none;flex:none;background:linear-gradient(var(--text-3),var(--text-3)) center/100% 1.5px no-repeat,linear-gradient(var(--text-3),var(--text-3)) center/1.5px 100% no-repeat;transition:background-size .2s}
+.faq-panel .faq details[open] summary::after{transform:none;background-size:100% 1.5px,1.5px 0}
+.faq-panel .faq .ans{max-width:660px;padding:0 0 18px}
+.faq-panel .faq .ans>*{margin:0 0 12px;font-size:15px;line-height:1.7;color:var(--text-2)}
+.faq-panel .faq .ans>:last-child{margin-bottom:0}
+.faq-panel .faq .ans ul{padding-left:1.25em}
+.faq-panel .faq .ans li{margin:.3em 0}
+.faq-panel .faq .ans a{color:var(--accent);text-underline-offset:3px}
+.faq-panel .faq .ans code{font-family:var(--font-mono);font-size:.86em;padding:.1em .38em;border:1px solid var(--line-2);border-radius:6px;background:var(--surface-2)}
+
+@media (max-width:980px){
+  .faq-layout{grid-template-columns:minmax(0,1fr);gap:26px}
+  .faq-side{position:static}
+  .faq-side>p{margin-bottom:16px}
+  .how-steps,.why{grid-template-columns:minmax(0,1fr)}
+  .why>div+div{border-left:0;border-top:1px solid var(--line)}
+}
+@media (max-width:820px){
+  .section-head,.section-head.center{grid-template-columns:minmax(0,1fr)}
+  .section-head h2.title,.section-head p{grid-column:1}
+  .section-head p{margin-top:12px;max-width:none}
+}
+@media (max-width:640px){
+  .section{padding:52px 0!important}
+  .section-head,.section-head.center{margin-bottom:24px}
+  .faq-tabs{flex-wrap:nowrap;overflow-x:auto;margin-inline:-20px;padding:0 20px 4px;scrollbar-width:none}
+  .faq-tabs::-webkit-scrollbar{display:none}
+  .faq-panel .faq details{padding:0 16px}
+  .band{padding:30px 20px}
+  .cta{padding:56px 0}
+}
+.ex-out a.demo-link{cursor:default}
+
+/* ---- header toggle: what opens first (homepage by default, or the full-screen editor) ---- */
+.nav-switch,.m-switch{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--text-2);cursor:pointer;user-select:none;white-space:nowrap}
+.nav-switch{margin-right:8px;padding:0 4px}
+.nav-switch input,.m-switch input{position:absolute;opacity:0;pointer-events:none}
+.nav-switch:hover,.m-switch:hover{color:var(--text)}
+.nav-switch input:checked+.switch-ui,.m-switch input:checked+.switch-ui{background:var(--accent)}
+.nav-switch input:checked+.switch-ui::after,.m-switch input:checked+.switch-ui::after{transform:translateX(14px)}
+.nav-switch input:focus-visible+.switch-ui,.m-switch input:focus-visible+.switch-ui{outline:2px solid var(--accent);outline-offset:2px}
+.nav-links .m-switch{display:none}
+@media (max-width:980px){
+  .nav-cta .nav-switch{display:none}
+  .nav.open .nav-links .m-switch{display:flex;justify-content:space-between;flex-direction:row-reverse;padding:12px 2px;font-size:16px;color:var(--text);border-bottom:1px solid var(--line-2)}
+}
+
+/* ---- phones: a more compact editor (chrome only — every control is still there) ---- */
+@media (max-width:640px){
+  .tool-top{height:46px;padding:0 8px;gap:2px}
+  .tool-top>.fname,.tool-top>.grow,.tool-top>.tb-sep{display:none}
+  .tool-top>.brand-mini{order:0;padding:4px;margin:0}
+  .tool-top>[data-act="open"]{order:1}
+  .tool-top>[data-menu="new"]{order:2}
+  .tool-top>[data-menu="copy"]{order:3}
+  .tool-top>[data-menu="export"]{order:4}
+  .tool-top>.seg{order:5;margin:0 4px}
+  .tool-top>#btnFull{order:6}
+  .tool-top>[data-act="share"]{order:7}
+  .tool-top>#btnFind{order:8}
+  .tool-top>#btnOutline{order:9}
+  .tool-top>#btnSync{order:10}
+  .tool-top>[data-act="theme"]{order:11}
+  .tool-top>[data-act="install"]{order:12}
+  .tool-top .tbtn{padding:0 7px;gap:3px}
+  .tool-top .tbtn.icon{padding:0}
+  .tabs{height:34px;padding:6px 8px 0}
+  .snippet-bar{height:38px;padding:0 6px}
+  .sbtn{min-width:30px;height:28px;padding:0 5px}
+  .pane-label{height:26px;padding:0 14px}
+  .ed-text{padding:12px 14px 64px}
+  .status{height:26px;padding:0 12px;gap:12px}
 }

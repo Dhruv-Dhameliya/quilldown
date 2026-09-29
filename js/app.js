@@ -30,7 +30,7 @@ const panes = $('#panes'), shell = $('#tool'), gutter = $('#gutter'), fileNameIn
 const SAMPLE = window.QUILLDOWN_SAMPLE || '';
 const state = {
   theme: document.documentElement.getAttribute('data-theme') || 'light',
-  mode: store.get('mode', 'split'),
+  mode: store.get('mode', matchMedia('(max-width: 640px)').matches ? 'editor' : 'split'),   // phones: one pane at a time
   sync: store.get('sync', '1') === '1',
   full: true
 };
@@ -664,7 +664,6 @@ const A = {
   sync: () => setSync(!state.sync),
   theme: () => setTheme(state.theme === 'dark' ? 'light' : 'dark'),
   full: () => setFull(!state.full),
-  startpref: () => setStartPref(!startIsHome()),
   home: () => { setFull(false); setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 60); }
 };
 
@@ -1980,21 +1979,18 @@ function setFull(on) {
   else { apply(); if (on) editor.focus({ preventScroll: true }); }
 }
 
-/* Start page preference: 'editor' (default — full-screen editor) or 'home' (the landing page). Read by the head script before first paint. */
-const isPhone = () => matchMedia('(max-width: 760px)').matches;
-const startIsHome = () => { const v = store.get('start', null); return v === null ? isPhone() : v === 'home'; };
+/* Start page preference (header toggle "Start in editor"): 'home' (default) or 'editor'. Read by the head script before first paint. */
+const startIsHome = () => store.get('start', 'home') !== 'editor';
 function syncStartPref() {
-  const on = startIsHome();
-  $$('[data-startpref]').forEach(i => { i.checked = on; });
-  const b = $('#btnStart');
-  if (b) { b.setAttribute('aria-pressed', String(on)); b.classList.toggle('on', on); b.title = on ? 'Opens on the homepage — click to open the editor instead' : 'Opens on the editor — click to open the homepage instead'; }
+  const editorFirst = !startIsHome();
+  $$('[data-starteditor]').forEach(i => { i.checked = editorFirst; });
 }
 function setStartPref(home, quiet) {
   store.set('start', home ? 'home' : 'editor');
   syncStartPref();
   if (!quiet) toast(home ? 'Quilldown will open on the homepage' : 'Quilldown will open the full-screen editor');
 }
-document.addEventListener('change', e => { if (e.target.matches && e.target.matches('[data-startpref]')) setStartPref(e.target.checked); });
+document.addEventListener('change', e => { if (e.target.matches && e.target.matches('[data-starteditor]')) setStartPref(!e.target.checked); });
 
 /* ---------------------------------------------------------------
    Landing page: cheat sheet, reveal, nav
@@ -2554,6 +2550,25 @@ setOutline(store.get('outline', '0') === '1');
 updateStats(); updateCursor(); render(); renderCheats();
 if (enginesReady) renderMath($('#features'), 'html'); else $$('#features .math').forEach(el => el.textContent = dec(el.dataset.tex));
 observeReveals();
+(function faqTabs() {   // FAQ topics: without JS every topic is listed; with JS the tabs show one topic at a time
+  const main = $('#faqMain'), tabs = main && $('.faq-tabs', main);
+  if (!tabs) return;
+  const btns = $$('[role="tab"]', tabs), panels = $$('.faq-panel', main);
+  const show = (i, focus) => {
+    btns.forEach((b, j) => { b.setAttribute('aria-selected', String(i === j)); b.tabIndex = i === j ? 0 : -1; });
+    panels.forEach((p, j) => { p.hidden = i !== j; });
+    if (focus) btns[i].focus();
+    if (i) btns[i].scrollIntoView({ block: 'nearest', inline: 'center', behavior: reducedMotion ? 'instant' : 'smooth' });
+  };
+  btns.forEach((b, i) => {
+    b.addEventListener('click', () => show(i));
+    b.addEventListener('keydown', e => {
+      const d = { ArrowRight: 1, ArrowLeft: -1, Home: -btns.length, End: btns.length }[e.key];
+      if (d) { e.preventDefault(); show(e.key === 'Home' ? 0 : e.key === 'End' ? btns.length - 1 : (i + d + btns.length) % btns.length, true); }
+    });
+  });
+  main.classList.add('js'); show(0);
+})();
 if (!startHome) editor.focus({ preventScroll: true });
 openSharedFromHash();
 

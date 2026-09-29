@@ -3,8 +3,8 @@ title: What Is Markdown? A Beginner's Guide with Examples
 h1: What is Markdown? A beginner's guide
 short: What is Markdown?
 card: Plain-text formatting, explained.
-description: Markdown is a simple way to format text using plain characters. Learn what it is, where it's used, how the syntax works and how to start writing in 5 minutes.
-lead: Markdown is a simple way to format text using ordinary characters — # for headings, ** for bold, - for lists. This guide explains what it is, where it's used and how to write your first document in minutes.
+description: What is Markdown? A plain-text way to write headings, lists, links and tables. See how it works, where it's used, how flavors differ and how to start.
+lead: Markdown is a way to format text using ordinary characters: # for headings, ** for bold, - for lists. This guide explains what it is, how it works, where it's used and how to write your first document in minutes.
 category: learn
 order: 1
 home: true
@@ -17,9 +17,9 @@ ctaText: Open the free editor and type on the left — the formatted result appe
 
 ## Markdown in one minute
 
-**Markdown is a lightweight markup language for writing formatted text in a plain-text file.** Instead of clicking toolbar buttons, you type a few simple symbols next to your words. A Markdown *editor* or *converter* turns those symbols into headings, bold text, lists, links, tables and more.
+**Markdown is a lightweight markup language: you write formatted text as plain text, using a few symbols next to your words.** A `#` at the start of a line makes a heading, `**` around a phrase makes it bold, and a `-` starts a bullet. A Markdown editor or converter reads those symbols and produces headings, bold text, lists, links, tables and more.
 
-The result is a document that is readable even before it is converted — and that can be turned into HTML, PDF, Word, an e-book or a web page whenever you need.
+The file stays readable before it is converted, and the same file can become a web page, a PDF, a Word document or an e-book whenever you need one.
 
 ````example title="Plain text in, formatted text out"
 # My first document
@@ -33,86 +33,95 @@ Markdown is **easy** to learn and *quick* to write.
 Read more on the [Quilldown cheat sheet](https://quilldown.vercel.app/guides/markdown-cheat-sheet).
 ````
 
-Files written in Markdown usually end in **`.md`** or **`.markdown`**. Any text editor can open them, and any Markdown editor — such as [Quilldown](/) — can show them formatted.
+Files written in Markdown usually end in **`.md`** or **`.markdown`**. Any text editor can open them, and a Markdown editor such as [Quilldown](/) shows them formatted.
+
+## How Markdown works
+
+Markdown is two things: a set of writing conventions, and a program (a *parser*) that applies them. The parser reads your text, recognises the patterns and outputs HTML, the language browsers display. PDF, Word and e-book exports are normally built from that same parsed structure.
+
+| You type | The parser produces |
+| --- | --- |
+| `# Title` | `<h1>Title</h1>` |
+| `**bold**` | `<strong>bold</strong>` |
+| `- item` | `<ul><li>item</li></ul>` |
+| `[text](https://example.com)` | `<a href="https://example.com">text</a>` |
+| `` `code` `` | `<code>code</code>` |
+
+Markdown does not decide how the result *looks*. Fonts, colors and spacing come from a stylesheet or template applied afterwards. That is why one `.md` file looks different on GitHub, on a documentation site and in an editor, and why Markdown is deliberately weak at page layout. It describes structure (this is a heading, this is a list) and leaves appearance to whatever displays it.
 
 ## Why people use Markdown
 
-- **It is fast.** Your hands never leave the keyboard. Formatting is a symbol or two, not a menu.
-- **It is portable.** A `.md` file is just text, so it opens everywhere and will still open in twenty years.
-- **It is readable as-is.** Even unconverted, a Markdown document is easy to read.
-- **It works with version control.** Because it is plain text, tools like Git can show exactly what changed between versions.
-- **It separates writing from styling.** You focus on the words; the look is applied when you export.
-- **It converts to almost anything.** HTML, PDF, Word, EPUB, slides and more.
+- **It is fast.** Your hands stay on the keyboard. Formatting is a symbol or two, not a trip to a menu.
+- **It is portable.** A `.md` file is plain text, so it opens on any system with any editor and does not depend on one program surviving.
+- **It is readable as-is.** Even unconverted, a Markdown document reads like a tidy plain-text note.
+- **It works with version control.** Tools such as Git show exactly which lines changed between versions and can merge two people's edits. A Word file is a zipped bundle of XML, so the same comparison is far less useful.
+- **It separates writing from styling.** You focus on the words; the look is applied when you publish or export.
+- **It converts to many formats.** HTML, PDF, Word, EPUB, slides and more, from one source.
+
+## A realistic example: meeting notes
+
+Here is what everyday Markdown looks like. It takes about two minutes to type and uses headings, a numbered list, a table, a task list and a quote.
+
+````example title="Meeting notes in Markdown"
+# Weekly sync
+
+**Attendees:** Ada, Grace, Linus
+
+## Decisions
+
+1. Ship the beta on Friday.
+2. Move the design review to Monday.
+
+## Action items
+
+| Owner | Task | Due |
+| --- | --- | --- |
+| Ada | Update the changelog | Thu |
+| Grace | Book the review room | Fri |
+
+- [x] Send the agenda
+- [ ] Share the notes
+
+> Next meeting: same time, next week.
+````
+
+Read the left side without the preview and you can still follow every line. That is the design goal. Quilldown has a meeting-notes template under **New → Templates**, along with README, résumé, blog post, email, tables, to-do list and notes.
 
 ## Where Markdown is used
 
 | Where | What it's used for |
 | --- | --- |
 | **GitHub and GitLab** | `README.md` files, issues, pull requests and wikis |
-| **Documentation sites** | Static-site generators and docs tools build web pages from Markdown files |
-| **Note-taking apps** | Many notes apps let you write or export notes in Markdown |
+| **Documentation sites** | Static-site generators such as Jekyll and Hugo, and docs tools such as MkDocs and Docusaurus, build pages from `.md` files |
+| **Note-taking apps** | Apps such as Obsidian and Joplin keep notes as Markdown text |
 | **Blogs and websites** | Posts are written in Markdown and published as HTML |
-| **Chat and forums** | Communities such as Reddit and Discord support a subset of Markdown formatting |
+| **Chat and forums** | Reddit, Discord and Stack Overflow support Markdown or a subset of it |
+| **Notebooks** | Jupyter notebooks use Markdown cells for the explanatory text |
+| **AI assistants** | Chat assistants commonly format their answers in Markdown |
 | **Books and papers** | Authors write manuscripts in Markdown and export to PDF, Word or EPUB |
 
-If you are writing a project description, see our guide to [writing a great README](/guides/readme-template).
+Support is not uniform. A chat app may understand only bold, italic, code and quotes, while a docs tool may add tabs, diagrams and admonitions. If you are writing a project description, our guide to [writing a great README](/guides/readme-template) has a structure that works.
 
 ## A short history
 
-Markdown was created by **John Gruber**, with contributions from Aaron Swartz, and released in **2004**. The goal was a format that reads naturally as plain text and converts cleanly to HTML.
+Markdown was created by **John Gruber**, with contributions from Aaron Swartz, and released in **2004** together with a Perl script that converted it to HTML. The goal was a format that reads naturally as plain text and converts cleanly to web pages.
 
-The original description left some details open, so different tools handled edge cases differently. In 2014 the **CommonMark** project published a precise specification to remove the ambiguity. **GitHub Flavored Markdown (GFM)**, later formalised as a strict superset of CommonMark, added tables, task lists, strikethrough and automatic links — and is now what most people mean by "Markdown".
+The original description left details open, and different tools handled the edge cases differently: does a list need a blank line before it, how deep can a list nest, what happens to `_` inside a word? In **2014** the **CommonMark** project began work on a precise, testable specification to end the guesswork. In 2016 the `text/markdown` media type was registered as RFC 7763, and in 2017 GitHub published a specification for **GitHub Flavored Markdown (GFM)**, defined as a strict superset of CommonMark. GFM added tables, task lists, strikethrough and automatic links, and it is what most people now mean by "Markdown".
 
-## The ten things to learn first
+## Markdown flavors and why files render differently
 
-You can write useful documents knowing only these. Our [Markdown cheat sheet](/guides/markdown-cheat-sheet) has the complete list.
+"Markdown" is a family of closely related dialects. The core (headings, emphasis, lists, links, images, code, quotes) is the same everywhere. The differences are at the edges.
 
-````example title="Headings, emphasis and lists"
-# Heading 1
-## Heading 2
+| Flavor | What it is | What you notice |
+| --- | --- | --- |
+| **Original Markdown** | The 2004 baseline | No tables, no fenced code blocks, ambiguous edge cases |
+| **CommonMark** | A strict specification of the baseline | Same syntax, but every tool behaves the same way |
+| **GitHub Flavored Markdown** | CommonMark plus tables, task lists, strikethrough and autolinks | The de facto standard for READMEs and issues |
+| **Extended flavors** | Footnotes, math, diagrams and callouts, depending on the tool | Powerful, but a document may look different in another tool |
 
-**Bold**, *italic* and ~~strikethrough~~
+Some formats only *resemble* Markdown. Slack's message formatting, for example, uses a single asterisk for bold, where Markdown uses two. Do not assume a habit from one app transfers to another.
 
-1. First
-2. Second
-
-- Bullet
-- Bullet
-````
-
-````example title="Links, images, quotes and code"
-[A link](https://commonmark.org)
-
-![Alt text for an image](photo.jpg)
-
-> A quotation
-
-Inline `code` and a divider:
-
----
-````
-
-````example title="Tables and task lists"
-| Name | Role |
-| --- | --- |
-| Ada | Engineer |
-
-- [x] Learn the basics
-- [ ] Write something great
-````
-
-## Markdown flavors explained
-
-"Markdown" is a family of closely related dialects:
-
-| Flavor | What it adds |
-| --- | --- |
-| **Original Markdown** | The 2004 baseline: headings, emphasis, lists, links, images, code, quotes |
-| **CommonMark** | A strict, unambiguous specification of the baseline |
-| **GitHub Flavored Markdown** | Tables, task lists, strikethrough, autolinks, fenced code |
-| **Extended flavors** | Footnotes, math, diagrams and callouts, depending on the tool |
-
-Quilldown supports GitHub Flavored Markdown plus footnotes, [LaTeX math](/guides/latex-math-in-markdown), [Mermaid diagrams](/guides/mermaid-diagrams-in-markdown), GitHub-style callouts and [emoji shortcodes](/guides/markdown-emoji-shortcodes).
+Quilldown supports GitHub Flavored Markdown plus footnotes, [LaTeX math](/guides/latex-math-in-markdown), [Mermaid diagrams](/guides/mermaid-diagrams-in-markdown), GitHub-style callouts and emoji shortcodes.
 
 ## Markdown vs Word, Google Docs and HTML
 
@@ -123,50 +132,84 @@ Quilldown supports GitHub Flavored Markdown plus footnotes, [LaTeX math](/guides
 | **Readable unrendered** | Yes | No | Hard |
 | **Works with Git** | Excellent | Poor | Good |
 | **Page layout control** | Limited (by design) | Excellent | Excellent |
+| **Track changes and comments** | Through other tools | Built in | Through other tools |
 | **Best for** | Writing, docs, notes, READMEs | Formatted, shared documents | Web pages |
 
 You do not have to choose. Write in Markdown, then [convert it to Word or Google Docs](/guides/markdown-to-word), [to PDF](/guides/markdown-to-pdf) or [to HTML](/guides/markdown-to-html) when you need a finished document.
 
+## When Markdown is the right tool, and when it is not
+
+**Markdown fits well when:**
+
+- The content is mostly text: documentation, notes, articles, READMEs, drafts, meeting minutes, study notes.
+- You want a plain file that will still open in ten years.
+- The document will be versioned, reviewed line by line, or published in more than one format.
+- You would rather write than fiddle with formatting.
+
+**Choose something else when:**
+
+- Exact page layout matters: brochures, multi-column newsletters, forms, custom fonts.
+- A large group of non-technical reviewers needs to mark up the same file with tracked changes.
+- The content is really data. Use a spreadsheet, and put a summary table in Markdown.
+
+There is a middle path that works for many people: draft in Markdown, export a Word file for reviewers who insist on Word, and do any final layout there.
+
 ## How to start writing Markdown in five minutes
 
 <ol class="steps">
-<li><strong>Open an editor.</strong> Use <a href="/">Quilldown</a> — it runs in your browser, so there is nothing to install or sign up for.</li>
+<li><strong>Open an editor.</strong> Use <a href="/">Quilldown</a>. It runs in your browser, so there is nothing to install or sign up for.</li>
 <li><strong>Type on the left.</strong> Start a line with <code>#</code> and a space to make a heading, wrap a word in <code>**</code> to make it bold, start lines with <code>-</code> for a bullet list.</li>
 <li><strong>Watch the preview.</strong> The formatted document updates as you type on the right.</li>
-<li><strong>Use the toolbar if you forget a symbol.</strong> One click inserts the right Markdown and shows you the syntax.</li>
+<li><strong>Use the toolbar if you forget a symbol.</strong> One click inserts the right Markdown, and shortcuts such as Ctrl+B for bold, Ctrl+I for italic and Ctrl+K for a link work as you type.</li>
 <li><strong>Copy or export.</strong> Copy the formatted text into Google Docs, or export to PDF, Word, HTML, EPUB or an image.</li>
 </ol>
 
-## Common beginner mistakes
+> [!NOTE]
+> Quilldown autosaves your text in your browser's local storage, which is cleared if you clear the site's data. For anything you cannot afford to lose, press Ctrl+S to save a `.md` file.
 
-- **No space after the symbol.** `#Heading` is plain text; `# Heading` is a heading.
-- **No blank line before a list.** Leave an empty line between a paragraph and the list that follows.
-- **Line breaks vanish.** A single new line joins into the same paragraph. End the line with two spaces, or leave a blank line, to start a new one.
-- **Lists that will not nest.** Indent nested items by two or four spaces.
-- **Special characters turning into formatting.** Put a backslash before a symbol to show it literally, for example `\*not italic\*`.
+## Habits that keep Markdown tidy
+
+1. **Use one `#` heading as the title and `##` for sections.** Do not skip levels, and do not pick a heading because you like its size. Headings describe structure, and tools build outlines and tables of contents from them.
+2. **Leave a blank line around lists, tables, code blocks and quotes.** Most rendering surprises come from a missing blank line.
+3. **Write link text that makes sense alone.** `[setup guide](url)` beats `[here](url)`, because readers and screen readers often see links out of context. Add alt text to every image.
+4. **Name files in lowercase with hyphens**, such as `project-notes.md`. It avoids problems with spaces and capital letters in links and on case-sensitive systems.
+5. **Preview where it will be published.** A document can look different on GitHub, on your blog and in your editor, especially for tables, footnotes and math.
+
+## Mistakes beginners make
+
+- **Using Markdown for layout.** There is no syntax for columns, margins or fonts, and adding tricks to force them makes the file fragile. If layout is the point, export to Word or PDF and adjust there.
+- **Assuming every app renders the same.** Anything beyond the core syntax is an extension. Check what your target supports before relying on it.
+- **Writing a wall of text.** Without blank lines, single line breaks are treated as spaces and everything merges into one paragraph.
+- **Forgetting the space after a symbol.** `#Heading` is plain text, and `# Heading` is a heading.
+
+For the exact syntax and a troubleshooting table, keep the [Markdown cheat sheet](/guides/markdown-cheat-sheet) open while you write.
 
 ## Frequently asked questions
 
+### What is Markdown used for?
+
+Markdown is used to write formatted text quickly in plain text. Developers use it for README files, documentation and issues, while writers use it for blog posts, notes, manuscripts and study material. Because it converts to HTML, PDF, Word and EPUB, one Markdown file can serve several purposes.
+
 ### Is Markdown a programming language?
 
-No. Markdown is a markup language — a way to describe how text should be formatted. It has no logic, variables or loops. Tools read the symbols and produce formatted output such as HTML.
+No. Markdown is a markup language, a way to describe how text should be structured and formatted. It has no logic, variables or loops. Tools read the symbols and produce formatted output such as HTML.
 
 ### What is a .md file and how do I open it?
 
 A `.md` file is a plain-text document written in Markdown. You can open it in any text editor to see the raw text, or in a Markdown editor such as Quilldown (use **Open** or drag the file onto the page) to see it formatted.
 
-### Is Markdown free to use?
+### Is Markdown the same everywhere?
 
-Yes. Markdown itself is an open, free format, and Quilldown is a free online Markdown editor with no account required.
-
-### Do I need to install anything to write Markdown?
-
-No. Any plain-text editor works, and browser-based editors like Quilldown need no installation. Quilldown can also be installed as an app and works offline.
+The core syntax is: headings, bold, italic, lists, links, images, code and quotes work the same in nearly every tool. Tables, task lists, footnotes, math, diagrams and callouts are extensions, so support varies. The [Markdown cheat sheet](/guides/markdown-cheat-sheet) shows which features belong to the core and which come from GitHub Flavored Markdown.
 
 ### What is the difference between Markdown and HTML?
 
-HTML describes web pages with tags such as `<h1>` and `<strong>`. Markdown is a shorter, friendlier way to write the same structure — `# Title` instead of `<h1>Title</h1>`. Most Markdown tools convert to HTML, and you can even mix raw HTML into a Markdown document when you need something extra.
+HTML describes web pages with tags such as `<h1>` and `<strong>`. Markdown is a shorter, friendlier way to write the same structure: `# Title` instead of `<h1>Title</h1>`. Most Markdown tools convert to HTML, and many let you mix raw HTML into a Markdown document when you need something extra.
 
 ### Can I convert Markdown to Word or PDF?
 
-Yes. In Quilldown, use Export to save a PDF or a real Word (.docx) file, or Copy for Docs to paste formatted text into Google Docs. See the guides on [Markdown to PDF](/guides/markdown-to-pdf) and [Markdown to Word](/guides/markdown-to-word).
+Yes. In Quilldown, use Export to save a PDF (through your browser's print dialog) or a Word (.docx) file, or use Copy for Docs to paste formatted text into Google Docs. See the guides on [Markdown to PDF](/guides/markdown-to-pdf) and [Markdown to Word](/guides/markdown-to-word).
+
+### Is Markdown free, and do I need to install anything?
+
+Markdown is an open, free format, and any plain-text editor can write it. Quilldown is a free online Markdown editor that needs no account and no installation, and it can also be installed as an app and used offline after your first visit.

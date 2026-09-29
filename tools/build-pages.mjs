@@ -92,6 +92,8 @@ function renderExample(src) {
   } });
   let html = m.parse(src) + footnotesHTML(st, m);
   html = html.replace(/<blockquote>\s*<p>\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(?:<br\s*\/?>)?\s*/gi, (all, t) => `<blockquote class="alert alert-${t.toLowerCase()}"><p class="alert-title">${ALERT_TITLES[t.toUpperCase()]}</p><p>`);
+  // demo links (relative files, #anchors that only exist in the example) must not act as real navigation
+  html = html.replace(/<a href="([^"]*)"([^>]*)>/g, (all, href, rest) => /^(https?:|mailto:|tel:|\/|#fn|#fnref)/.test(href) ? all : `<a class="demo-link"${rest.replace(/\s(target|rel)="[^"]*"/g, '')}>`);
   // examples must not add headings to the page outline → show them as styled paragraphs
   html = html.replace(/<h([1-6])(?: [^>]*)?>([\s\S]*?)<\/h\1>/g, (m, l, inner) => `<p class="md-h md-h${l}">${inner}</p>`);
   return html;
@@ -170,12 +172,9 @@ const inlineHtml = md => new Marked({ gfm: true, extensions: extensions({ order:
 function faqGroupsHTML(items) {
   const groups = [];
   for (const i of items) { let g = groups.find(x => x.name === i.group); if (!g) groups.push(g = { name: i.group, items: [] }); g.items.push(i); }
-  // two columns, filled in reading order until the first holds about half of the questions (open/close never shifts the other column)
-  const cols = [[], []]; let n = 0;
-  for (const g of groups) { cols[n < items.length / 2 ? 0 : 1].push(g); n += g.items.length; }
-  let first = true;
-  const group = g => `<section class="faq-set" aria-labelledby="faq-${slugify(g.name)}"><h3 class="faq-group" id="faq-${slugify(g.name)}">${esc(g.name)}</h3><div class="faq">${g.items.map(i => `<details${first && (first = false, true) ? ' open' : ''}><summary>${esc(i.q)}</summary>${i.a}</details>`).join('')}</div></section>`;
-  return cols.map(c => `<div class="faq-col">${c.map(group).join('')}</div>`).join('');
+  const tabs = groups.map((g, gi) => `<button type="button" role="tab" id="faq-tab-${gi}" aria-controls="faq-panel-${gi}" aria-selected="${gi === 0}">${esc(g.name)}<span>${g.items.length}</span></button>`).join('');
+  const panels = groups.map((g, gi) => `<div class="faq-panel" role="tabpanel" id="faq-panel-${gi}" aria-labelledby="faq-tab-${gi}"><h3 class="faq-group">${esc(g.name)}</h3><div class="faq">${g.items.map((i, n) => `<details name="faq-${gi}"${gi === 0 && n === 0 ? ' open' : ''}><summary>${esc(i.q)}</summary><div class="ans">${i.a}</div></details>`).join('')}</div></div>`).join('');
+  return `<div class="faq-tabs" role="tablist" aria-label="FAQ topics">${tabs}</div>${panels}`;
 }
 function faqHTML(items, asMarkdown) {
   return `<div class="faq">${items.map(i => `<details><summary>${esc(i.q)}</summary>${asMarkdown ? inlineHtml(i.a) : i.a}</details>`).join('')}</div>`;
@@ -187,20 +186,25 @@ const SPRITE = `<svg width="0" height="0" style="position:absolute" aria-hidden=
 <symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5" style="stroke:var(--logo-fg)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M6.34 6.34 4.93 4.93m14.14 14.14-1.41-1.41"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
 <symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
 </defs></svg>`;
 const HEAD_SCRIPT = `<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>`;
-/** One header for every page (same links as the homepage). `current` marks the Docs link on /guides and guide pages. */
-const navHTML = (current = '') => `<header class="nav" id="nav"><div class="container nav-in">
-  <a class="brand" href="/#top" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
-  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="/#features">Features</a><a href="/#how">How it works</a><a href="/guides"${current === 'docs' ? ' aria-current="page"' : ''}>Docs</a><a href="/#privacy">Privacy</a><a href="/#faq">FAQ</a><a class="m-only" href="/#editor">Open editor</a></nav>
+/** ONE header for every page. `current` marks the Docs link; `home` uses in-page anchors (the homepage itself). Written into index.html's <!--NAV--> region too. */
+const navHTML = (current = '', home = false) => {
+  const a = id => (home ? '#' : '/#') + id;
+  return `<header class="nav" id="nav"><div class="container nav-in">
+  <a class="brand" href="${a('top')}" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
+  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="${a('features')}">Features</a><a href="${a('how')}">How it works</a><a href="/guides"${current === 'docs' ? ' aria-current="page"' : ''}>Docs</a><a href="${a('privacy')}">Privacy</a><a href="${a('faq')}">FAQ</a><label class="m-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label><a class="m-only" href="${a('editor')}">Open editor</a></nav>
   <div class="nav-cta">
+    <label class="nav-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label>
     <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     <a class="icon-btn" href="${GITHUB}" target="_blank" rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill"><use href="#i-github"/></svg></a>
     <button class="icon-btn" data-act="theme" aria-label="Toggle theme"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
-    <a class="btn btn-primary btn-sm" href="/#editor">Open editor <svg class="i"><use href="#i-arrow"/></svg></a>
+    <a class="btn btn-primary btn-sm" href="${a('editor')}">Open editor <svg class="i"><use href="#i-max"/></svg></a>
   </div></div></header>`;
+};
 const footerHTML = guides => `<footer class="footer"><div class="container">
   <div class="footer-cols">
     <div><a class="brand" href="/#top"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>A calm, private Markdown editor with live preview, tabs, math and diagrams. Works offline.</p></div>
@@ -443,6 +447,7 @@ ${html}
   const regions = {
     FAQ: faqGroupsHTML(faqItems),
     GUIDES: gnavHTML(pages),
+    NAV: navHTML('', true),
     FOOTER: footerHTML(pages),
     LD: `<script type="application/ld+json" id="ld-graph">${safeJson(graph(nodes))}</script>`
   };

@@ -17,7 +17,7 @@ Quilldown is a calm, private Markdown editor that runs entirely in your browser.
 - **Export** to PDF, Word, PNG, EPUB, HTML, Markdown and plain text.
 - **Math and diagrams** with KaTeX and Mermaid.
 - **Works offline** and installs as an app on your computer or phone.
-- **Full-screen by default**, with a landing page one keypress away (`Esc`). On phones it opens the homepage instead. Prefer the other way round? Flip the start-page switch (on the homepage, or the house icon in the editor toolbar). The logo always takes you to the homepage.
+- **Homepage first, editor one click away** — Quilldown opens on its homepage (with the editor built in); press **Open editor** for full screen and `Esc` to come back. Prefer to land straight in the editor? Turn on **Start in editor** in the header.
 
 ---
 

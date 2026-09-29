@@ -51,6 +51,12 @@
       try { t = localStorage.getItem('quilldown:theme'); } catch (e) { }
       if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', t);
+      // Start page: the homepage by default; the header toggle ("Start in editor") switches it to the full-screen editor.
+      // #editor always opens the editor; a link to a homepage section (#features, #faq …) always shows the homepage; share links (#d=) open the editor.
+      var sp = null; try { sp = localStorage.getItem('quilldown:start'); } catch (e) { }
+      var hh = location.hash, home = sp !== 'editor';
+      if (hh === '#editor' || /^#d=/.test(hh)) home = false; else if (hh.length > 1) home = true;
+      if (home) { document.documentElement.classList.remove('tool-open'); document.documentElement.setAttribute('data-start', 'home'); }
       // The web-app manifest can't be fetched from file://, so only attach it when served over http(s).
       if (/^https?:$/.test(location.protocol)) { var l = document.createElement('link'); l.rel = 'manifest'; l.href = 'manifest.webmanifest'; document.head.appendChild(l); }
     })();
@@ -70,9 +76,8 @@
   <script defer src="vendor/emoji.js"></script>
 
   <!--LD:start-->
-  <script type="application/ld+json"
-    id="ld-graph">{"@context":"https://schema.org","@graph":[{"@type":"ImageObject","@id":"https://quilldown.vercel.app/#logo","url":"https://quilldown.vercel.app/icons/icon-512.png","contentUrl":"https://quilldown.vercel.app/icons/icon-512.png","width":512,"height":512,"caption":"Quilldown logo"},{"@type":"Organization","@id":"https://quilldown.vercel.app/#organization","name":"Quilldown","url":"https://quilldown.vercel.app/","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, PNG and EPUB. It runs in your browser and works offline.","logo":{"@id":"https://quilldown.vercel.app/#logo"},"image":{"@id":"https://quilldown.vercel.app/#logo"},"founder":{"@id":"https://quilldown.vercel.app/#person"},"sameAs":["https://github.com/Dhruv-Dhameliya/quilldown","https://github.com/Dhruv-Dhameliya"],"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","url":"https://github.com/Dhruv-Dhameliya/quilldown/issues","availableLanguage":"English"},{"@type":"ContactPoint","contactType":"media relations","url":"https://github.com/Dhruv-Dhameliya","availableLanguage":"English"}]},{"@type":"Person","@id":"https://quilldown.vercel.app/#person","name":"Dhruv-Dhameliya","url":"https://github.com/Dhruv-Dhameliya","sameAs":["https://github.com/Dhruv-Dhameliya"],"worksFor":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebSite","@id":"https://quilldown.vercel.app/#website","url":"https://quilldown.vercel.app/","name":"Quilldown","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, PNG and EPUB. It runs in your browser and works offline.","inLanguage":"en","publisher":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebPage","@id":"https://quilldown.vercel.app/#webpage","url":"https://quilldown.vercel.app/","name":"Quilldown - Free Markdown Editor","description":"A calm, private Markdown editor with live preview, tabs, math and diagrams. Copy for Google Docs, export to PDF, Word, PNG and EPUB. Works offline.","inLanguage":"en","isPartOf":{"@id":"https://quilldown.vercel.app/#website"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown — Write Markdown. Watch it come alive."},"image":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown — Write Markdown. Watch it come alive."},"datePublished":"2026-09-29","dateModified":"2026-09-29","about":{"@id":"https://quilldown.vercel.app/#app"},"mainEntity":{"@id":"https://quilldown.vercel.app/#app"}},{"@type":"WebApplication","@id":"https://quilldown.vercel.app/#app","name":"Quilldown","alternateName":"Quilldown Markdown editor","url":"https://quilldown.vercel.app/","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, PNG and EPUB. It runs in your browser and works offline.","applicationCategory":"UtilitiesApplication","applicationSubCategory":"Markdown editor","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript. Works in current Chrome, Edge, Firefox and Safari.","isAccessibleForFree":true,"inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock"},"featureList":["Live Markdown preview with synced scrolling","Tabs for multiple documents","Copy for Google Docs with clean heading sizes","Export to PDF, Word (.docx), PNG, EPUB, HTML, Markdown and plain text","LaTeX math with KaTeX","Mermaid diagrams","Visual table editor and emoji picker","Find and replace, outline and footnotes","Works offline and installs as an app","Private: nothing is uploaded"],"image":"https://quilldown.vercel.app/social/og-image.png","screenshot":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown — Write Markdown. Watch it come alive."},"softwareHelp":{"@type":"CreativeWork","name":"Quilldown guides","url":"https://quilldown.vercel.app/guides"},"installUrl":"https://quilldown.vercel.app/","datePublished":"2026-09-29","dateModified":"2026-09-29","author":{"@id":"https://quilldown.vercel.app/#person"},"publisher":{"@id":"https://quilldown.vercel.app/#organization"},"sameAs":["https://github.com/Dhruv-Dhameliya/quilldown"],"isBasedOn":{"@id":"https://github.com/Dhruv-Dhameliya/quilldown#source"}},{"@type":"SoftwareSourceCode","@id":"https://github.com/Dhruv-Dhameliya/quilldown#source","name":"Quilldown source code","codeRepository":"https://github.com/Dhruv-Dhameliya/quilldown","programmingLanguage":["JavaScript","HTML","CSS"],"runtimePlatform":"Web browser","author":{"@id":"https://quilldown.vercel.app/#person"},"url":"https://github.com/Dhruv-Dhameliya/quilldown"},{"@type":"FAQPage","@id":"https://quilldown.vercel.app/#faq","url":"https://quilldown.vercel.app/","isPartOf":{"@id":"https://quilldown.vercel.app/#webpage"},"mainEntity":[{"@type":"Question","name":"What is Quilldown?","acceptedAnswer":{"@type":"Answer","text":"Quilldown is a free online Markdown editor with a live preview. You write Markdown on the left and see the formatted document on the right, updating as you type.When the document is ready you can copy it into Google Docs, or export it as a PDF, Word file, PNG image, EPUB e-book, HTML page or plain text. Everything runs in your browser, so there is nothing to install and no account to create."}},{"@type":"Question","name":"Is there a free online Markdown editor with live preview?","acceptedAnswer":{"@type":"Answer","text":"Yes — Quilldown is free, needs no account, and shows the formatted preview as you type, with synced scrolling so the two panes stay lined up.Around the editor you also get tabs for several documents, find and replace, a document outline, a visual table editor, an emoji picker and a set of starter templates."}},{"@type":"Question","name":"Is Quilldown free? Do I need an account?","acceptedAnswer":{"@type":"Answer","text":"It’s free and there is no account, no sign-up and no email address to give. Open the page and start writing.Quilldown is also open source, so you can read exactly how it works on GitHub."}},{"@type":"Question","name":"Who is Quilldown for?","acceptedAnswer":{"@type":"Answer","text":"Anyone who prefers to write in plain text but needs a polished result: developers writing READMEs and docs, students and researchers taking notes with equations, bloggers drafting posts, and teams writing meeting notes or reports.New to Markdown? Start with what Markdown is, then keep the Markdown cheat sheet open while you write."}},{"@type":"Question","name":"Where is my text stored? Is it private?","acceptedAnswer":{"@type":"Answer","text":"Only in your browser. Every tab is autosaved to local storage on your own device, and nothing you write is ever uploaded to a server.Everything the editor needs — libraries, fonts and icons — is bundled with the site, so Quilldown makes no third-party requests while you work.One thing to remember: clearing your browser’s site data removes saved tabs, so export or save anything important as a file."}},{"@type":"Question","name":"Does Quilldown use trackers or cookies?","acceptedAnswer":{"@type":"Answer","text":"No account, no sign-in and no tracking of what you write. Rendering, copying and every export happen locally in your browser.The only things Quilldown keeps are your own drafts and preferences (such as the theme), and they stay in your browser’s storage on your device."}},{"@type":"Question","name":"Which Markdown flavor is supported?","acceptedAnswer":{"@type":"Answer","text":"GitHub Flavored Markdown: tables, task lists, strikethrough, autolinks and fenced code blocks with syntax highlighting.On top of that you get:KaTeX math with $…$ and $$…$$Mermaid diagrams from mermaid code blocksfootnotes, emoji shortcodes and GitHub-style callouts such as > [!NOTE]See the Markdown cheat sheet for every piece of syntax, each with a live example."}},{"@type":"Question","name":"Does it support LaTeX math and diagrams?","acceptedAnswer":{"@type":"Answer","text":"Yes. Write math with $…$ (inline) or $$…$$ (block) and it renders with KaTeX.Flowcharts, sequence diagrams, Gantt charts, class, state and ER diagrams and mind maps are drawn from mermaid code blocks, and they follow the light or dark theme.Guides: math in Markdown and Mermaid diagrams."}},{"@type":"Question","name":"Can I make a Markdown table without typing pipes?","acceptedAnswer":{"@type":"Answer","text":"Yes. Click the Table button to build a table in a visual grid. You can also place your cursor inside an existing table, or select spreadsheet rows, and click it to edit or convert them.Rows copied from Excel or Google Sheets can be pasted straight in. See the Markdown table guide for the syntax and alignment options."}},{"@type":"Question","name":"Can I add images, footnotes, emoji and templates?","acceptedAnswer":{"@type":"Answer","text":"Yes, all four:Images — paste, drop or upload them. They are stored with the document and included in exports.Footnotes — write [^1]; the Word export turns them into real footnotes.Emoji — type :roc for suggestions, or open the emoji picker.Templates — start from a README, meeting notes, résumé, blog post, email, tables, to-do list or notes via New → Templates."}},{"@type":"Question","name":"Which formats can I export to?","acceptedAnswer":{"@type":"Answer","text":"Seven formats:PDF — through your browser’s print dialog; choose “Save as PDF”.Word (.docx) — opens in Word, Google Docs and Pages.PNG — an image of the whole document.EPUB — an e-book for Apple Books, Kobo and other readers.HTML — a standalone, styled web page.Markdown (.md) and plain text (.txt).In the Word export, equations are included as text (their TeX source) and diagrams as images. Very long documents are too tall for a single PNG, so use PDF for those."}},{"@type":"Question","name":"How do I convert Markdown to PDF?","acceptedAnswer":{"@type":"Answer","text":"Write or paste your Markdown, choose Export → PDF, and pick “Save as PDF” in the print dialog that opens. It is private, free and works offline.Step-by-step, with tips for page breaks and print styling: how to convert Markdown to PDF."}},{"@type":"Question","name":"How do I convert Markdown to Word or Google Docs?","acceptedAnswer":{"@type":"Answer","text":"There are two routes. Use Export → Word (.docx) for a real Word document, or press Copy for Docs on the preview pane and paste into Google Docs.Copy for Docs uses point sizes Docs understands — H1 23 pt, H2 17 pt, H3 14 pt, body 12 pt — and sets no font, so the text takes the font of your document.More detail: Markdown to Word and Google Docs."}},{"@type":"Question","name":"Can I convert Markdown to HTML?","acceptedAnswer":{"@type":"Answer","text":"Yes. Copy → HTML gives you clean markup to paste into a website or CMS, and Export → HTML saves a standalone, styled web page.Read Markdown to HTML for what the generated markup looks like and where it works best."}},{"@type":"Question","name":"Can I work on several documents at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each document opens in its own tab. Add a blank one with +, open or drop several files at once, drag tabs to reorder them, double-click a name to rename, and middle-click to close.Closed a tab by accident? Press Undo in the message that appears."}},{"@type":"Question","name":"Can I open and save .md files from my computer?","acceptedAnswer":{"@type":"Answer","text":"Yes — click Open (or press Ctrl+O), or drag and drop .md, .markdown or .txt files anywhere on the page. Each opens in its own tab.In Chrome and Edge the tab stays linked to the file, shown by a small dot on the tab, so Ctrl+S saves straight back to it; an orange dot means unsaved changes. In other browsers, Ctrl+S downloads a .md file instead.Installed as an app, Quilldown also appears in your system’s Open with menu for Markdown files."}},{"@type":"Question","name":"Does it work offline? Can I install it?","acceptedAnswer":{"@type":"Answer","text":"Yes. All libraries, fonts and icons are bundled with Quilldown, so it never needs a third-party server.Once the page has loaded, a service worker caches everything and an Install button appears in Chrome, Edge and other supporting browsers. You can then run Quilldown like a desktop or phone app, with or without a connection.Your documents are stored on your device either way."}},{"@type":"Question","name":"How does sharing work? Is my document uploaded?","acceptedAnswer":{"@type":"Answer","text":"Click Share and Quilldown compresses your document into the link itself. Nothing is uploaded: the part of a link after the # is never sent to a server, so anyone who opens it gets their own private copy in a new tab.Long documents make long links. There is a warning above about 8,000 characters and a hard stop at 64,000, and pasted images aren’t included in shared links."}},{"@type":"Question","name":"Where is the source code? How do I report a bug?","acceptedAnswer":{"@type":"Answer","text":"Quilldown’s code is on GitHub. You can browse it there, and report a problem or suggest a feature by opening an issue.For press or general enquiries, the maintainer’s GitHub profile is the best place to reach out — see also the About & press page."}}]}]}</script>
-  <!--LD:end-->
+<script type="application/ld+json" id="ld-graph">{"@context":"https://schema.org","@graph":[{"@type":"ImageObject","@id":"https://quilldown.vercel.app/#logo","url":"https://quilldown.vercel.app/icons/icon-512.png","contentUrl":"https://quilldown.vercel.app/icons/icon-512.png","width":512,"height":512,"caption":"Quilldown logo"},{"@type":"Organization","@id":"https://quilldown.vercel.app/#organization","name":"Quilldown","url":"https://quilldown.vercel.app/","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, PNG and EPUB. It runs in your browser and works offline.","logo":{"@id":"https://quilldown.vercel.app/#logo"},"image":{"@id":"https://quilldown.vercel.app/#logo"},"founder":{"@id":"https://quilldown.vercel.app/#person"},"sameAs":["https://github.com/Dhruv-Dhameliya/quilldown","https://github.com/Dhruv-Dhameliya"],"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","url":"https://github.com/Dhruv-Dhameliya/quilldown/issues","availableLanguage":"English"},{"@type":"ContactPoint","contactType":"media relations","url":"https://github.com/Dhruv-Dhameliya","availableLanguage":"English"}]},{"@type":"Person","@id":"https://quilldown.vercel.app/#person","name":"Dhruv-Dhameliya","url":"https://github.com/Dhruv-Dhameliya","sameAs":["https://github.com/Dhruv-Dhameliya"],"worksFor":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebSite","@id":"https://quilldown.vercel.app/#website","url":"https://quilldown.vercel.app/","name":"Quilldown","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, PNG and EPUB. It runs in your browser and works offline.","inLanguage":"en","publisher":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebPage","@id":"https://quilldown.vercel.app/#webpage","url":"https://quilldown.vercel.app/","name":"Quilldown — Free Markdown Editor","description":"A calm, private Markdown editor with live preview, tabs, math and diagrams. Copy for Google Docs, export to PDF, Word, PNG and EPUB. Works offline.","inLanguage":"en","isPartOf":{"@id":"https://quilldown.vercel.app/#website"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown — Write Markdown. Watch it come alive."},"image":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown — Write Markdown. Watch it come alive."},"datePublished":"2026-09-29","dateModified":"2026-09-29","about":{"@id":"https://quilldown.vercel.app/#app"},"mainEntity":{"@id":"https://quilldown.vercel.app/#app"}},{"@type":"WebApplication","@id":"https://quilldown.vercel.app/#app","name":"Quilldown","alternateName":"Quilldown Markdown editor","url":"https://quilldown.vercel.app/","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, PNG and EPUB. It runs in your browser and works offline.","applicationCategory":"UtilitiesApplication","applicationSubCategory":"Markdown editor","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript. Works in current Chrome, Edge, Firefox and Safari.","isAccessibleForFree":true,"inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock"},"featureList":["Live Markdown preview with synced scrolling","Tabs for multiple documents","Copy for Google Docs with clean heading sizes","Export to PDF, Word (.docx), PNG, EPUB, HTML, Markdown and plain text","LaTeX math with KaTeX","Mermaid diagrams","Visual table editor and emoji picker","Find and replace, outline and footnotes","Works offline and installs as an app","Private: nothing is uploaded"],"image":"https://quilldown.vercel.app/social/og-image.png","screenshot":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown — Write Markdown. Watch it come alive."},"softwareHelp":{"@type":"CreativeWork","name":"Quilldown guides","url":"https://quilldown.vercel.app/guides"},"installUrl":"https://quilldown.vercel.app/","datePublished":"2026-09-29","dateModified":"2026-09-29","author":{"@id":"https://quilldown.vercel.app/#person"},"publisher":{"@id":"https://quilldown.vercel.app/#organization"},"sameAs":["https://github.com/Dhruv-Dhameliya/quilldown"],"isBasedOn":{"@id":"https://github.com/Dhruv-Dhameliya/quilldown#source"}},{"@type":"SoftwareSourceCode","@id":"https://github.com/Dhruv-Dhameliya/quilldown#source","name":"Quilldown source code","codeRepository":"https://github.com/Dhruv-Dhameliya/quilldown","programmingLanguage":["JavaScript","HTML","CSS"],"runtimePlatform":"Web browser","author":{"@id":"https://quilldown.vercel.app/#person"},"url":"https://github.com/Dhruv-Dhameliya/quilldown"},{"@type":"FAQPage","@id":"https://quilldown.vercel.app/#faq","url":"https://quilldown.vercel.app/","isPartOf":{"@id":"https://quilldown.vercel.app/#webpage"},"mainEntity":[{"@type":"Question","name":"What is Quilldown, and who is it for?","acceptedAnswer":{"@type":"Answer","text":"Quilldown is a free online Markdown editor. You type Markdown on one side and a live preview updates on the other, then you copy the result into Google Docs or export it as a PDF, Word file, PNG, EPUB, HTML page or plain text.It suits anyone who likes to write in plain text but has to hand over a polished document: developers writing READMEs, students taking notes with equations, bloggers drafting posts, and teams writing meeting notes or specs. If Markdown is new to you, start with what Markdown is."}},{"@type":"Question","name":"Is Quilldown free? Do I need an account?","acceptedAnswer":{"@type":"Answer","text":"Yes, it is free, and there is no account, sign-up or email address to give. Open the page and start writing.Quilldown is also open source, so you can read exactly what it does on GitHub."}},{"@type":"Question","name":"Which browsers and devices does it work on?","acceptedAnswer":{"@type":"Answer","text":"Any current version of Chrome, Edge, Firefox or Safari, on desktop, tablet or phone. On phones the editor shows one pane at a time — switch between writing and preview with the view buttons in the top bar. Quilldown opens on the homepage everywhere; turn on Start in editor in the header if you would rather land in the full-screen editor.A few conveniences depend on the browser: linking a tab to a file on disk (so Ctrl+S saves back to it) works in Chrome and Edge, and the Install button appears in browsers that support installing web apps."}},{"@type":"Question","name":"How is this different from writing in Word or Google Docs?","acceptedAnswer":{"@type":"Answer","text":"The source is plain text, so your writing is portable, easy to search and safe to keep in Git. Formatting is typed (#, **, -) instead of clicked, which keeps your hands on the keyboard and keeps the structure consistent.You still end up with a formatted document: Copy for Docs pastes clean headings and lists into Google Docs, and Export → Word (.docx) produces a real Word file. You choose the destination after writing, not before."}},{"@type":"Question","name":"Where is my text stored? Is it private?","acceptedAnswer":{"@type":"Answer","text":"Only in your browser. Every tab is autosaved to your device’s local storage, and nothing you write is uploaded to a server. There is no account, so there is no cloud copy either.Everything the editor needs — libraries, fonts and icons — ships with the site, so Quilldown makes no third-party requests while you work. You can confirm that in your browser’s network panel."}},{"@type":"Question","name":"What happens if I clear my browser data?","acceptedAnswer":{"@type":"Answer","text":"Saved tabs are removed with it, and because nothing is stored elsewhere they cannot be recovered. Save important documents as files with Export → Markdown (.md) or Ctrl+S.Browsers typically allow around 5 MB of local storage per site. Text uses very little of that, but pasted images are stored with the document and count towards the limit, so a document with many large images can hit it first."}},{"@type":"Question","name":"Does Quilldown use cookies, trackers or analytics on my writing?","acceptedAnswer":{"@type":"Answer","text":"No. Rendering, copying and every export happen locally in your browser, and nothing about what you write is measured or sent anywhere.The only things Quilldown keeps are your own drafts and a few preferences, such as the theme and your start-page choice, all in your browser’s storage on your device."}},{"@type":"Question","name":"Which Markdown flavor does Quilldown support?","acceptedAnswer":{"@type":"Answer","text":"GitHub Flavored Markdown (GFM): everything in the original Markdown plus tables, task lists, strikethrough, autolinks and fenced code blocks with syntax highlighting. It is the flavor GitHub, GitLab and most documentation tools use.On top of GFM you get KaTeX math ($…$ and $$…$$), Mermaid diagrams, footnotes, emoji shortcodes and GitHub-style callouts such as > [!NOTE]. The Markdown cheat sheet shows every piece of syntax with a live example."}},{"@type":"Question","name":"Does it support LaTeX math and diagrams?","acceptedAnswer":{"@type":"Answer","text":"Yes. Write inline math with $…$ and display math with $$…$$; it renders with KaTeX, including fractions, sums, integrals, matrices and aligned equations.Flowcharts, sequence diagrams, Gantt charts, class, state and ER diagrams and mind maps are drawn from mermaid code blocks, and they follow the light or dark theme. See math in Markdown and Mermaid diagrams."}},{"@type":"Question","name":"Can I make a Markdown table without typing pipes?","acceptedAnswer":{"@type":"Answer","text":"Yes. Click Table to build one in a visual grid, set column alignment, and insert it. Put the cursor inside an existing table, or select rows copied from a spreadsheet, and click it again to edit or convert them.Rows copied from Excel or Google Sheets can be pasted straight in. The Markdown table guide explains the syntax behind it."}},{"@type":"Question","name":"Can I add images, footnotes and emoji?","acceptedAnswer":{"@type":"Answer","text":"Images — paste, drop or upload them. They are stored with the document and included in exports.Footnotes — write [^1] where the note belongs; the Word export turns them into real footnotes.Emoji — type :roc for suggestions or use the emoji picker (shortcode list)."}},{"@type":"Question","name":"Are there templates and keyboard shortcuts?","acceptedAnswer":{"@type":"Answer","text":"Templates for a README, meeting notes, résumé, blog post, email, tables, a to-do list and notes are under New → Templates.Shortcuts include Ctrl+B bold, Ctrl+I italic, Ctrl+U underline, Ctrl+E inline code, Ctrl+K link, Ctrl+F find, Ctrl+H replace, Ctrl+O open, Ctrl+S save and Esc to leave full screen (⌘ instead of Ctrl on a Mac). Hover any toolbar button to see its shortcut."}},{"@type":"Question","name":"Which formats can I export to?","acceptedAnswer":{"@type":"Answer","text":"PDF — through your browser’s print dialog; choose “Save as PDF”.Word (.docx) — opens in Word, Google Docs and Pages.PNG — an image of the whole document.EPUB — an e-book for Apple Books, Kobo and other readers.HTML — a standalone, styled web page.Markdown (.md) and plain text (.txt).Very long documents are too tall for a single PNG, so use PDF for those."}},{"@type":"Question","name":"How do I convert Markdown to PDF?","acceptedAnswer":{"@type":"Answer","text":"Write or paste your Markdown, choose Export → PDF, and pick “Save as PDF” as the destination in the print dialog. It is free, private and works offline.If code blocks or tables look flat, turn on “Background graphics” in the print options. The Markdown to PDF guide covers page breaks and print settings in detail."}},{"@type":"Question","name":"How do I convert Markdown to Word or Google Docs?","acceptedAnswer":{"@type":"Answer","text":"Two routes. Export → Word (.docx) gives you a real Word document. Copy for Docs (on the preview pane) puts formatted text on your clipboard, ready to paste into Google Docs.Copy for Docs uses point sizes Docs understands — H1 23 pt, H2 17 pt, H3 14 pt, body 12 pt — and sets no font, so the text takes on your document’s font. More in Markdown to Word and Google Docs."}},{"@type":"Question","name":"Can I convert Markdown to HTML?","acceptedAnswer":{"@type":"Answer","text":"Yes. Copy → HTML puts clean markup on your clipboard for a website or CMS, and Export → HTML saves a standalone, styled web page. Markdown to HTML shows what the generated markup looks like."}},{"@type":"Question","name":"Why do equations and diagrams look different in Word?","acceptedAnswer":{"@type":"Answer","text":"Word has no KaTeX or Mermaid renderer, so the .docx keeps equations as their TeX source text and inserts diagrams as images. If equations need to look typeset, export to PDF instead, where they render exactly as in the preview."}},{"@type":"Question","name":"Can I work on several documents at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each document opens in its own tab. Add a blank one with +, open or drop several files at once, drag tabs to reorder them, double-click a name to rename it and middle-click to close.Closed a tab by accident? Press Undo in the message that appears."}},{"@type":"Question","name":"Can I open and save .md files from my computer?","acceptedAnswer":{"@type":"Answer","text":"Yes — click Open (Ctrl+O) or drag and drop .md, .markdown or .txt files anywhere on the page. Each opens in its own tab.In Chrome and Edge the tab stays linked to the file (a small dot on the tab), so Ctrl+S saves straight back to it and an orange dot means unsaved changes. Elsewhere, Ctrl+S downloads a .md file. Once installed as an app, Quilldown also appears in your system’s “Open with” menu for Markdown files."}},{"@type":"Question","name":"Does it work offline? Can I install it?","acceptedAnswer":{"@type":"Answer","text":"Yes. Everything ships with the site, and after the first visit a service worker caches it, so Quilldown loads and exports without a connection. An Install button appears in Chrome, Edge and other browsers that support it, letting you run Quilldown like a desktop or phone app."}},{"@type":"Question","name":"How does sharing work? Is my document uploaded?","acceptedAnswer":{"@type":"Answer","text":"Click Share and Quilldown compresses your document into the link itself. Nothing is uploaded: the part of a link after the # is never sent to a server, so anyone who opens it gets their own private copy in a new tab.Long documents make long links — there is a warning above about 8,000 characters and a hard stop at 64,000 — and pasted images are not included in shared links."}},{"@type":"Question","name":"How do I report a bug or contact the maintainer?","acceptedAnswer":{"@type":"Answer","text":"Open an issue on GitHub with your browser and, if possible, a small sample of the Markdown involved. The code is public at Dhruv-Dhameliya/quilldown.For press or general enquiries, use the maintainer’s GitHub profile; the About & press page has a logo and boilerplate."}}]}]}</script>
+<!--LD:end-->
 
   <noscript>
     <style>
@@ -257,6 +262,9 @@
       <symbol id="i-rich" viewBox="0 0 24 24">
         <path d="M4 7V4h16v3M9 20h6M12 4v16" />
       </symbol>
+      <symbol id="i-home" viewBox="0 0 24 24">
+        <path d="m3 11 9-8 9 8M5 10v10h5v-6h4v6h5V10" />
+      </symbol>
       <symbol id="i-note" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="10" />
         <path d="M12 16v-4M12 8h.01" />
@@ -339,38 +347,18 @@
   <div id="page">
 
     <!-- ============================ NAV ============================ -->
-    <header class="nav" id="nav">
-      <div class="container nav-in">
-        <a class="brand" href="#top" aria-label="Quilldown home"><svg class="logo">
-            <use href="#i-logo" />
-          </svg>Quilldown</a>
-        <nav class="nav-links" aria-label="Primary">
-          <a href="#features">Features</a>
-          <a href="#syntax">Syntax</a>
-          <a href="/guides">Guides</a>
-          <a href="#how">How it works</a>
-          <a href="#privacy">Privacy</a>
-          <a href="#faq">FAQ</a>
-        </nav>
-        <div class="nav-cta">
-          <a class="icon-btn" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank"
-            rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill">
-              <use href="#i-github" />
-            </svg></a>
-          <button class="icon-btn" data-act="theme" aria-label="Toggle theme">
-            <svg class="i theme-icon-sun">
-              <use href="#i-sun" />
-            </svg><svg class="i theme-icon-moon">
-              <use href="#i-moon" />
-            </svg>
-          </button>
-          <button class="btn btn-sm" data-act="install" hidden>Install app</button>
-          <button class="btn btn-primary btn-sm" data-act="full">Open editor <svg class="i">
-              <use href="#i-max" />
-            </svg></button>
-        </div>
-      </div>
-    </header>
+    <!--NAV:start-->
+<header class="nav" id="nav"><div class="container nav-in">
+  <a class="brand" href="#top" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
+  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="#features">Features</a><a href="#how">How it works</a><a href="/guides">Docs</a><a href="#privacy">Privacy</a><a href="#faq">FAQ</a><label class="m-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label><a class="m-only" href="#editor">Open editor</a></nav>
+  <div class="nav-cta">
+    <label class="nav-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label>
+    <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="icon-btn" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill"><use href="#i-github"/></svg></a>
+    <button class="icon-btn" data-act="theme" aria-label="Toggle theme"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
+    <a class="btn btn-primary btn-sm" href="#editor">Open editor <svg class="i"><use href="#i-max"/></svg></a>
+  </div></div></header>
+<!--NAV:end-->
 
     <main>
       <!-- ============================ HERO + TOOL ============================ -->
@@ -378,9 +366,7 @@
         <div class="container hero-copy">
           <span class="pill"><span class="dot"></span>Free &amp; private — runs entirely in your browser</span>
           <h1 class="display">The Markdown editor <br>that <em>comes alive.</em></h1>
-          <p class="lede">Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and
-            one-click export to PDF, Word and Google Docs. Paste, type or drop a file — everything stays in your
-            browser.</p>
+          <p class="lede">Quilldown is a free online Markdown editor with live preview, tabs, LaTeX math and Mermaid diagrams. Paste or drop a file, then copy clean formatting into Google Docs or export to PDF, Word, PNG or EPUB — all in your browser, with nothing uploaded.</p>
           <div class="hero-actions">
             <button class="btn btn-primary" data-act="full">Open full-screen editor <svg class="i">
                 <use href="#i-max" />
@@ -395,9 +381,9 @@
             <!-- ========================= THE TOOL ========================= -->
             <div class="tool-shell is-full" id="tool" role="application" aria-label="Markdown editor">
               <div class="tool-top">
-                <div class="brand-mini"><svg class="logo">
+                <button type="button" class="brand-mini" data-act="home" title="Back to the Quilldown homepage" aria-label="Quilldown homepage"><svg class="logo">
                     <use href="#i-logo" />
-                  </svg><span>Quilldown</span></div>
+                  </svg><span>Quilldown</span></button>
                 <label class="fname" title="File name">
                   <svg class="i">
                     <use href="#i-file" />
@@ -576,8 +562,7 @@
             <!-- ============================================================ -->
 
           </div>
-          <p class="hero-after">Want more room? <button data-act="full">Go full screen</button> · press <kbd>Esc</kbd>
-            to come back here.</p>
+          <p class="hero-after">Want more room? <button data-act="full">Go full screen</button> · press <kbd>Esc</kbd> to come back here.</p>
         </div>
       </section>
 
@@ -599,91 +584,47 @@
         </div>
       </section>
 
-      <!-- ============================ WHAT IS MARKDOWN ============================ -->
+      <!-- ============================ WHY MARKDOWN ============================ -->
       <section class="section" id="what">
         <div class="container">
           <div class="section-head reveal">
-            <div class="eyebrow">Markdown, explained</div>
+            <div class="eyebrow">Why Markdown</div>
             <h2 class="title">Write in plain text. <em>Publish anywhere.</em></h2>
-            <p>Markdown is a simple way to format text with ordinary characters — <code>#</code> for headings,
-              <code>**bold**</code>, <code>-</code> for lists. A Markdown editor like Quilldown shows the formatted
-              result as you type, so you get the speed of plain text and the polish of a word processor. New to it? Read
-              <a href="/guides/what-is-markdown">what Markdown is</a>, or keep the <a
-                href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a> open while you write.
-            </p>
-          </div>
-          <div class="bento">
-            <article class="card reveal">
-              <h3>Fast to write</h3>
-              <p>Formatting is a symbol or two, so your hands never leave the keyboard: <code>**bold**</code>,
-                <code># heading</code>, <code>- list</code>, <code>[link](url)</code>.
-              </p>
-              <a class="more-link" href="/guides/markdown-cheat-sheet">See the full syntax →</a>
-            </article>
-            <article class="card reveal">
-              <h3>Readable anywhere</h3>
-              <p>A <code>.md</code> file is plain text. It opens in any editor, works with Git, and will still open in
-                twenty years — no proprietary format to get locked into.</p>
-              <a class="more-link" href="/guides/what-is-markdown">What is Markdown? →</a>
-            </article>
-            <article class="card reveal">
-              <h3>Converts to anything</h3>
-              <p>Turn the same document into a PDF, a Word or Google Docs file, a web page or an e-book — without
-                retyping or reformatting.</p>
-              <span class="more-links"><a class="more-link" href="/guides/markdown-to-pdf">Markdown to PDF →</a><a
-                  class="more-link" href="/guides/markdown-to-word">to Word &amp; Docs →</a><a class="more-link"
-                  href="/guides/markdown-to-html">to HTML →</a></span>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============================ USE CASES ============================ -->
-      <section class="section" id="use-cases" style="padding-top:0">
-        <div class="container">
-          <div class="section-head center reveal">
-            <div class="eyebrow">Who it's for</div>
-            <h2 class="title">Made for the way <em>you write.</em></h2>
-            <p>From a project README to a research note, Quilldown handles the formatting so you can focus on the words.
-            </p>
+            <p>Markdown turns a few keystrokes — <code>#</code> for headings, <code>**bold**</code>, <code>-</code> for lists — into a formatted document. The file stays plain text, so it opens anywhere and works with Git. Quilldown handles the last mile: PDF, Word or a web page from the same source. New to it? Read <a href="/guides/what-is-markdown">what Markdown is</a> or keep the <a href="/guides/markdown-cheat-sheet">cheat sheet</a> open.</p>
           </div>
           <div class="mini-grid" style="padding-top:0">
             <article class="mini reveal">
-              <div class="card-ico"><svg class="i">
-                  <use href="#i-code" />
-                </svg></div>
+              <div class="card-ico"><svg class="i"><use href="#i-code" /></svg></div>
               <h3>Developers</h3>
-              <p>Write READMEs, docs and changelogs with syntax-highlighted code, tables and task lists.</p><a
-                class="more-link" href="/guides/readme-template">README template →</a>
+              <p>READMEs, changelogs and docs with GitHub-flavored tables, task lists and syntax-highlighted code.</p>
+              <a class="more-link" href="/guides/readme-template">README template →</a>
             </article>
             <article class="mini reveal">
-              <div class="card-ico"><svg class="i">
-                  <use href="#i-file" />
-                </svg></div>
+              <div class="card-ico"><svg class="i"><use href="#i-file" /></svg></div>
               <h3>Writers &amp; bloggers</h3>
-              <p>Draft distraction-free, then copy clean HTML or export a finished page.</p><a class="more-link"
-                href="/guides/markdown-to-html">Markdown to HTML →</a>
+              <p>Draft without distraction, then copy clean HTML for your CMS or export a styled page.</p>
+              <a class="more-link" href="/guides/markdown-to-html">Markdown to HTML →</a>
             </article>
             <article class="mini reveal">
-              <div class="card-ico"><svg class="i">
-                  <use href="#i-math" />
-                </svg></div>
+              <div class="card-ico"><svg class="i"><use href="#i-math" /></svg></div>
               <h3>Students &amp; researchers</h3>
-              <p>Take notes with LaTeX equations, footnotes and diagrams, and export to PDF.</p><a class="more-link"
-                href="/guides/latex-math-in-markdown">Math in Markdown →</a>
+              <p>Lecture notes with LaTeX equations, footnotes and diagrams — exported to PDF for submission.</p>
+              <a class="more-link" href="/guides/latex-math-in-markdown">Math in Markdown →</a>
             </article>
             <article class="mini reveal">
-              <div class="card-ico"><svg class="i">
-                  <use href="#i-docs" />
-                </svg></div>
+              <div class="card-ico"><svg class="i"><use href="#i-docs" /></svg></div>
               <h3>Teams &amp; professionals</h3>
-              <p>Meeting notes, reports and résumés — paste into Google Docs or export to Word.</p><a class="more-link"
-                href="/guides/markdown-to-word">Markdown to Word →</a>
+              <p>Meeting notes, specs and résumés — paste into Google Docs with real heading sizes, or export .docx.</p>
+              <a class="more-link" href="/guides/markdown-to-word">Markdown to Word →</a>
             </article>
+          </div>
+          <div class="why reveal">
+            <div><b>Fast to write</b><span>Formatting is a symbol or two, so your hands never leave the keyboard.</span></div>
+            <div><b>Readable anywhere</b><span>A .md file is plain text: any editor opens it and Git diffs it cleanly. No lock-in.</span></div>
+            <div><b>Converts to anything</b><span>One source becomes a PDF, Word file, web page or e-book — no retyping.</span></div>
           </div>
         </div>
       </section>
-
 
       <!-- ============================ FEATURES ============================ -->
       <section class="section" id="features">
@@ -691,13 +632,8 @@
           <div class="section-head reveal">
             <div class="eyebrow">Features</div>
             <h2 class="title">Everything you need to write. <em>Nothing you don’t.</em></h2>
-            <p>Quilldown keeps the interface out of the way and puts the details right where a writer would look for
-              them.</p>
-            <p>Below is a tour of what is built in — from the editing basics (tabs, find and replace, an outline) to
-              the finishing touches (clean Google Docs formatting, Word and e-book export, math and diagrams). All of it
-              works offline and none of it needs an account.</p>
+            <p>Live preview, tabs, find and replace, math, diagrams and seven export formats — in one calm window that works offline.</p>
           </div>
-
           <div class="bento">
             <article class="card span2 reveal">
               <div class="card-ico"><svg class="i i-lg">
@@ -1025,11 +961,10 @@
       <!-- ============================ SYNTAX ============================ -->
       <section class="section" id="syntax" style="background:var(--surface-2);border-block:1px solid var(--line)">
         <div class="container">
-          <div class="section-head center reveal">
+          <div class="section-head reveal">
             <div class="eyebrow">Syntax</div>
-            <h2 class="title">Markdown, <em>at a glance.</em></h2>
-            <p>The essentials on the left, the result on the right. Hit “Try it” to drop any example straight into the
-              editor — or open the <a href="/guides/markdown-cheat-sheet">complete Markdown cheat sheet</a>.</p>
+            <h2 class="title">Learn the syntax <em>by watching it.</em></h2>
+            <p>The essentials on the left, the result on the right. “Try it” drops any example into the editor — or open the complete <a href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a>.</p>
           </div>
           <div class="cheats" id="cheats"></div>
           <div class="more-wrap">
@@ -1052,32 +987,37 @@
       <!-- ============================ HOW IT WORKS ============================ -->
       <section class="section" id="how">
         <div class="container">
-          <div class="section-head center reveal">
+          <div class="section-head reveal">
             <div class="eyebrow">How it works</div>
-            <h2 class="title">From messy draft to <em>finished page</em> in three steps.</h2>
-            <p>There is nothing to set up. Open the editor, write, and take the result wherever it needs to go.</p>
+            <h2 class="title">Write once. <em>Export anywhere.</em></h2>
+            <p>Three steps, no setup and no account — and the format is a choice you make at the end.</p>
           </div>
-          <div class="steps">
-            <div class="step reveal">
-              <h3>Paste, type or drop</h3>
-              <p>Start from scratch, paste existing Markdown, or drag in a .md file from your computer. Not sure where
-                to begin? Pick a starter template — README, meeting notes, résumé, blog post and more.</p>
+          <ol class="how-steps reveal">
+            <li><b>1</b><div><strong>Write or paste</strong><span>Type, paste existing Markdown, drop a .md file, or start from a template — README, meeting notes, résumé, blog post.</span></div></li>
+            <li><b>2</b><div><strong>Watch it render</strong><span>The preview updates as you type and scrolls in sync, drawing tables, equations and diagrams as they will appear.</span></div></li>
+            <li><b>3</b><div><strong>Copy or export</strong><span>Copy formatted text for Google Docs, or export to PDF, Word, PNG, EPUB, HTML, Markdown or text — generated locally.</span></div></li>
+          </ol>
+          <div class="flow reveal">
+            <div class="flow-src" aria-hidden="true">
+              <div class="flow-file"><svg class="i"><use href="#i-md" /></svg>launch-notes.md</div>
+              <pre><b># Launch notes</b>
+Ship <b>**Friday**</b>.
+
+<b>-</b> [x] Docs
+<b>-</b> [ ] Demo day</pre>
             </div>
-            <div class="step reveal">
-              <h3>Watch it render</h3>
-              <p>The live preview updates as you type, with synced scrolling so you never lose your place. Tables,
-                task lists, code, equations and diagrams all appear exactly as they will in the finished document.</p>
-            </div>
-            <div class="step reveal">
-              <h3>Copy or export</h3>
-              <p>Copy as formatted text, for Docs, Markdown or HTML — or export a PDF, Word file, PNG, EPUB, web page or
-                plain text in a click. Everything is produced locally in your browser.</p>
-            </div>
+            <div class="flow-link" aria-hidden="true"><i></i><i></i><i></i></div>
+            <ul class="flow-out">
+              <li><b>.pdf</b><strong>PDF</strong><span>Print-ready</span></li>
+              <li><b>.docx</b><strong>Word</strong><span>Also Docs, Pages</span></li>
+              <li class="hot"><b>Docs</b><strong>Copy for Docs</strong><span>Clean heading sizes</span></li>
+              <li><b>.png</b><strong>Image</strong><span>Whole document</span></li>
+              <li><b>.epub</b><strong>E-book</strong><span>Apple Books, Kobo</span></li>
+              <li><b>.html</b><strong>Web page</strong><span>Styled, standalone</span></li>
+              <li><b>.md</b><strong>Markdown</strong><span>Plain source</span></li>
+              <li><b>.txt</b><strong>Plain text</strong><span>No markup</span></li>
+            </ul>
           </div>
-          <div style="text-align:center;margin-top:48px" class="reveal"><button class="btn btn-primary"
-              data-act="full">Start writing <svg class="i">
-                <use href="#i-arrow" />
-              </svg></button></div>
         </div>
       </section>
 
@@ -1104,330 +1044,40 @@
           </div>
         </div>
       </section>
-      <!-- ============================ AT A GLANCE ============================ -->
-      <section class="section" id="glance" style="padding-top:0">
+      <!-- ============================ DOCS ============================ -->
+      <section class="section" id="guides">
         <div class="container">
-          <div class="section-head center reveal">
-            <div class="eyebrow">At a glance</div>
-            <h2 class="title">Quilldown, <em>in short.</em></h2>
-            <p>The key facts about the editor, in one place.</p>
+          <div class="section-head reveal">
+            <div class="eyebrow">Docs</div>
+            <h2 class="title">From heading <em>to finished PDF.</em></h2>
+            <p>The cheat sheet and nine guides — every example opens in the editor.</p>
           </div>
-          <dl class="facts reveal">
-            <div>
-              <dt>Price</dt>
-              <dd>Free — no account, no sign-up, no ads.</dd>
-            </div>
-            <div>
-              <dt>Runs on</dt>
-              <dd>Any current browser: Chrome, Edge, Firefox and Safari, on desktop or mobile.</dd>
-            </div>
-            <div>
-              <dt>Markdown</dt>
-              <dd>GitHub Flavored Markdown, plus KaTeX math, Mermaid diagrams, footnotes, emoji and callouts.</dd>
-            </div>
-            <div>
-              <dt>Export</dt>
-              <dd>PDF, Word (.docx), PNG, EPUB, HTML, Markdown and plain text — plus Copy for Google Docs.</dd>
-            </div>
-            <div>
-              <dt>Privacy</dt>
-              <dd>Everything stays in your browser. Nothing you write is uploaded, and there are no third-party
-                requests.
-              </dd>
-            </div>
-            <div>
-              <dt>Offline</dt>
-              <dd>Works without a connection and can be installed like an app.</dd>
-            </div>
-            <div>
-              <dt>Open source</dt>
-              <dd>The code is public on <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank"
-                  rel="noopener noreferrer">GitHub</a>.</dd>
-            </div>
-            <div>
-              <dt>Made by</dt>
-              <dd><a href="https://github.com/Dhruv-Dhameliya" target="_blank"
-                  rel="me noopener noreferrer">Dhruv-Dhameliya</a>
-                — see the <a href="/about">About page</a>.</dd>
-            </div>
-          </dl>
-        </div>
-      </section>
-      <!-- ============================ GUIDES ============================ -->
-      <section class="section" id="guides" style="padding-top:0">
-        <div class="container">
-          <div class="section-head center reveal">
-            <div class="eyebrow">Guides</div>
-            <h2 class="title">Learn Markdown. <em>Go further.</em></h2>
-            <p>Free tutorials, a full cheat sheet and step-by-step conversion guides — every example opens in the editor
-              with one click.</p>
-          </div>
-          <div class="cards reveal">
+          <div class="reveal">
             <!--GUIDES:start-->
-            <a class="gcard" href="/guides/what-is-markdown"><span class="tag">Learn Markdown</span><strong>What is
-                Markdown?</strong><span class="d">The plain-text writing format behind READMEs, docs and notes —
-                explained with examples you can try.</span></a>
-            <a class="gcard" href="/guides/markdown-cheat-sheet"><span class="tag">Learn Markdown</span><strong>Markdown
-                cheat sheet</strong><span class="d">Every piece of Markdown syntax with live examples — headings, lists,
-                tables, code, math, diagrams and more.</span></a>
-            <a class="gcard" href="/guides/markdown-to-pdf"><span class="tag">Convert &amp;
-                export</span><strong>Markdown to PDF</strong><span class="d">Turn any Markdown file into a clean PDF in
-                your browser — free, private and no upload.</span></a>
-            <a class="gcard" href="/guides/markdown-to-word"><span class="tag">Convert &amp;
-                export</span><strong>Markdown to Word &amp; Google Docs</strong><span class="d">Export a real .docx file
-                or paste formatted text into Google Docs with clean heading sizes.</span></a>
-            <a class="gcard" href="/guides/markdown-table-generator"><span class="tag">Write better
-                documents</span><strong>Markdown tables</strong><span class="d">Build Markdown tables in a visual grid,
-                paste from Excel or Sheets, and learn the syntax.</span></a>
-            <a class="gcard" href="/guides/readme-template"><span class="tag">Write better
-                documents</span><strong>README template</strong><span class="d">What to put in a README, a copy-ready
-                template and tips for a project page people actually read.</span></a>
-            <!--GUIDES:end-->
+<div class="gnav"><section class="gcol" id="cat-learn"><header><span class="gcol-n">01</span><h3>Learn Markdown</h3><span class="gcol-c">3 guides</span></header><ul><li><a class="grow" href="/guides/what-is-markdown"><span class="gt">What is Markdown?</span><span class="gd">Plain-text formatting, explained.</span><svg class="i"><use href="#i-arrow"/></svg></a></li><li><a class="grow" href="/guides/markdown-cheat-sheet"><span class="gt">Markdown cheat sheet</span><span class="gd">Every syntax, with live examples.</span><svg class="i"><use href="#i-arrow"/></svg></a></li><li><a class="grow" href="/guides/markdown-emoji-shortcodes"><span class="gt">Emoji shortcodes</span><span class="gd">A cheat sheet of :shortcodes:.</span><svg class="i"><use href="#i-arrow"/></svg></a></li></ul></section><section class="gcol" id="cat-convert"><header><span class="gcol-n">02</span><h3>Convert &amp; export</h3><span class="gcol-c">3 guides</span></header><ul><li><a class="grow" href="/guides/markdown-to-pdf"><span class="gt">Markdown to PDF</span><span class="gd">A clean PDF, no upload.</span><svg class="i"><use href="#i-arrow"/></svg></a></li><li><a class="grow" href="/guides/markdown-to-word"><span class="gt">Markdown to Word &amp; Google Docs</span><span class="gd">A real .docx, or a clean Docs paste.</span><svg class="i"><use href="#i-arrow"/></svg></a></li><li><a class="grow" href="/guides/markdown-to-html"><span class="gt">Markdown to HTML</span><span class="gd">Clean markup or a standalone page.</span><svg class="i"><use href="#i-arrow"/></svg></a></li></ul></section><section class="gcol" id="cat-write"><header><span class="gcol-n">03</span><h3>Write better documents</h3><span class="gcol-c">4 guides</span></header><ul><li><a class="grow" href="/guides/markdown-table-generator"><span class="gt">Markdown tables</span><span class="gd">A visual grid. Paste from Excel.</span><svg class="i"><use href="#i-arrow"/></svg></a></li><li><a class="grow" href="/guides/latex-math-in-markdown"><span class="gt">Math in Markdown</span><span class="gd">Equations with KaTeX.</span><svg class="i"><use href="#i-arrow"/></svg></a></li><li><a class="grow" href="/guides/mermaid-diagrams-in-markdown"><span class="gt">Diagrams in Markdown</span><span class="gd">Flowcharts, Gantt, mind maps.</span><svg class="i"><use href="#i-arrow"/></svg></a></li><li><a class="grow" href="/guides/readme-template"><span class="gt">README template</span><span class="gd">A copy-ready README.</span><svg class="i"><use href="#i-arrow"/></svg></a></li></ul></section></div>
+<!--GUIDES:end-->
           </div>
-          <div style="text-align:center;margin-top:32px" class="reveal"><a class="btn" href="/guides">Browse all guides
-              <svg class="i">
-                <use href="#i-arrow" />
-              </svg></a></div>
+          <div class="more-row reveal"><a class="btn" href="/guides">Open the docs <svg class="i"><use href="#i-arrow" /></svg></a></div>
         </div>
       </section>
-
 
       <!-- ============================ FAQ ============================ -->
-      <section class="section" id="faq" style="padding-top:24px">
-        <div class="container">
-          <div class="section-head center reveal">
+      <section class="section" id="faq">
+        <div class="container faq-layout">
+          <div class="faq-side reveal">
             <div class="eyebrow">FAQ</div>
-            <h2 class="title">Questions, <em>answered.</em></h2>
-            <p>Straight answers about privacy, Markdown support, exporting and working offline. Can’t find what you’re
-              looking for? <a href="#contact">Get in touch</a>.</p>
+            <h2 class="title">Fair questions, <em>straight answers.</em></h2>
+            <p>What people check before trusting a new editor: privacy, formats, offline use and Markdown support.</p>
+            <div class="faq-help">
+              <strong>Still curious?</strong>
+              <span>Browse the docs or ask on GitHub.</span>
+              <div><a class="btn btn-sm" href="/guides">Read the docs</a><a class="btn btn-sm" href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">Ask on GitHub</a></div>
+            </div>
           </div>
-          <div class="faq-home reveal">
+          <div class="faq-main reveal" id="faqMain">
             <!--FAQ:start-->
-            <h3 class="faq-group" id="faq-getting-started">Getting started</h3>
-            <div class="faq">
-              <details open>
-                <summary>What is Quilldown?</summary>
-                <p>Quilldown is a free online Markdown editor with a live preview. You write Markdown on the left and
-                  see the formatted document on the right, updating as you type.</p>
-                <p>When the document is ready you can copy it into Google Docs, or export it as a PDF, Word file, PNG
-                  image, EPUB e-book, HTML page or plain text. Everything runs in your browser, so there is nothing to
-                  install and no account to create.</p>
-              </details>
-              <details>
-                <summary>Is there a free online Markdown editor with live preview?</summary>
-                <p>Yes — Quilldown is free, needs no account, and shows the formatted preview as you type, with synced
-                  scrolling so the two panes stay lined up.</p>
-                <p>Around the editor you also get tabs for several documents, find and replace, a document outline, a
-                  visual table editor, an emoji picker and a set of starter templates.</p>
-              </details>
-              <details>
-                <summary>Is Quilldown free? Do I need an account?</summary>
-                <p>It’s free and there is no account, no sign-up and no email address to give. Open the page and start
-                  writing.</p>
-                <p>Quilldown is also open source, so you can read exactly how it works on <a
-                    href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank"
-                    rel="noopener noreferrer">GitHub</a>.</p>
-              </details>
-              <details>
-                <summary>Who is Quilldown for?</summary>
-                <p>Anyone who prefers to write in plain text but needs a polished result: developers writing READMEs and
-                  docs, students and researchers taking notes with equations, bloggers drafting posts, and teams writing
-                  meeting notes or reports.</p>
-                <p>New to Markdown? Start with <a href="/guides/what-is-markdown">what Markdown is</a>, then keep the <a
-                    href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a> open while you write.</p>
-              </details>
-            </div>
-            <h3 class="faq-group" id="faq-privacy-storage">Privacy &amp; storage</h3>
-            <div class="faq">
-              <details>
-                <summary>Where is my text stored? Is it private?</summary>
-                <p>Only in your browser. Every tab is autosaved to local storage on your own device, and nothing you
-                  write is ever uploaded to a server.</p>
-                <p>Everything the editor needs — libraries, fonts and icons — is bundled with the site, so Quilldown
-                  makes no third-party requests while you work.</p>
-                <p>One thing to remember: clearing your browser’s site data removes saved tabs, so export or save
-                  anything important as a file.</p>
-              </details>
-              <details>
-                <summary>Does Quilldown use trackers or cookies?</summary>
-                <p>No account, no sign-in and no tracking of what you write. Rendering, copying and every export happen
-                  locally in your browser.</p>
-                <p>The only things Quilldown keeps are your own drafts and preferences (such as the theme), and they
-                  stay in your browser’s storage on your device.</p>
-              </details>
-            </div>
-            <h3 class="faq-group" id="faq-writing-markdown">Writing &amp; Markdown</h3>
-            <div class="faq">
-              <details>
-                <summary>Which Markdown flavor is supported?</summary>
-                <p>GitHub Flavored Markdown: tables, task lists, strikethrough, autolinks and fenced code blocks with
-                  syntax highlighting.</p>
-                <p>On top of that you get:</p>
-                <ul>
-                  <li>KaTeX math with <code>$…$</code> and <code>$$…$$</code></li>
-                  <li>Mermaid diagrams from <code>mermaid</code> code blocks</li>
-                  <li>footnotes, emoji shortcodes and GitHub-style callouts such as <code>&gt; [!NOTE]</code></li>
-                </ul>
-                <p>See the <a href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a> for every piece of syntax,
-                  each with a live example.</p>
-              </details>
-              <details>
-                <summary>Does it support LaTeX math and diagrams?</summary>
-                <p>Yes. Write math with <code>$…$</code> (inline) or <code>$$…$$</code> (block) and it renders with
-                  KaTeX.</p>
-                <p>Flowcharts, sequence diagrams, Gantt charts, class, state and ER diagrams and mind maps are drawn
-                  from <code>mermaid</code> code blocks, and they follow the light or dark theme.</p>
-                <p>Guides: <a href="/guides/latex-math-in-markdown">math in Markdown</a> and <a
-                    href="/guides/mermaid-diagrams-in-markdown">Mermaid diagrams</a>.</p>
-              </details>
-              <details>
-                <summary>Can I make a Markdown table without typing pipes?</summary>
-                <p>Yes. Click the <strong>Table</strong> button to build a table in a visual grid. You can also place
-                  your cursor inside an existing table, or select spreadsheet rows, and click it to edit or convert
-                  them.</p>
-                <p>Rows copied from Excel or Google Sheets can be pasted straight in. See <a
-                    href="/guides/markdown-table-generator">the Markdown table guide</a> for the syntax and alignment
-                  options.</p>
-              </details>
-              <details>
-                <summary>Can I add images, footnotes, emoji and templates?</summary>
-                <p>Yes, all four:</p>
-                <ul>
-                  <li><strong>Images</strong> — paste, drop or upload them. They are stored with the document and
-                    included in exports.</li>
-                  <li><strong>Footnotes</strong> — write <code>[^1]</code>; the Word export turns them into real
-                    footnotes.</li>
-                  <li><strong>Emoji</strong> — type <code>:roc</code> for suggestions, or open the emoji picker.</li>
-                  <li><strong>Templates</strong> — start from a README, meeting notes, résumé, blog post, email, tables,
-                    to-do list or notes via <strong>New → Templates</strong>.</li>
-                </ul>
-              </details>
-            </div>
-            <h3 class="faq-group" id="faq-exporting-converting">Exporting &amp; converting</h3>
-            <div class="faq">
-              <details>
-                <summary>Which formats can I export to?</summary>
-                <p>Seven formats:</p>
-                <ul>
-                  <li><strong>PDF</strong> — through your browser’s print dialog; choose “Save as PDF”.</li>
-                  <li><strong>Word (.docx)</strong> — opens in Word, Google Docs and Pages.</li>
-                  <li><strong>PNG</strong> — an image of the whole document.</li>
-                  <li><strong>EPUB</strong> — an e-book for Apple Books, Kobo and other readers.</li>
-                  <li><strong>HTML</strong> — a standalone, styled web page.</li>
-                  <li><strong>Markdown (.md)</strong> and <strong>plain text (.txt)</strong>.</li>
-                </ul>
-                <p>In the Word export, equations are included as text (their TeX source) and diagrams as images. Very
-                  long documents are too tall for a single PNG, so use PDF for those.</p>
-              </details>
-              <details>
-                <summary>How do I convert Markdown to PDF?</summary>
-                <p>Write or paste your Markdown, choose <strong>Export → PDF</strong>, and pick “Save as PDF” in the
-                  print dialog that opens. It is private, free and works offline.</p>
-                <p>Step-by-step, with tips for page breaks and print styling: <a href="/guides/markdown-to-pdf">how to
-                    convert Markdown to PDF</a>.</p>
-              </details>
-              <details>
-                <summary>How do I convert Markdown to Word or Google Docs?</summary>
-                <p>There are two routes. Use <strong>Export → Word (.docx)</strong> for a real Word document, or press
-                  <strong>Copy for Docs</strong> on the preview pane and paste into Google Docs.
-                </p>
-                <p>Copy for Docs uses point sizes Docs understands — H1 23&nbsp;pt, H2 17&nbsp;pt, H3 14&nbsp;pt, body
-                  12&nbsp;pt — and sets no font, so the text takes the font of your document.</p>
-                <p>More detail: <a href="/guides/markdown-to-word">Markdown to Word and Google Docs</a>.</p>
-              </details>
-              <details>
-                <summary>Can I convert Markdown to HTML?</summary>
-                <p>Yes. <strong>Copy → HTML</strong> gives you clean markup to paste into a website or CMS, and
-                  <strong>Export → HTML</strong> saves a standalone, styled web page.
-                </p>
-                <p>Read <a href="/guides/markdown-to-html">Markdown to HTML</a> for what the generated markup looks like
-                  and where it works best.</p>
-              </details>
-            </div>
-            <h3 class="faq-group" id="faq-files-tabs-offline">Files, tabs &amp; offline</h3>
-            <div class="faq">
-              <details>
-                <summary>Can I work on several documents at once?</summary>
-                <p>Yes. Each document opens in its own tab. Add a blank one with <strong>+</strong>, open or drop
-                  several files at once, drag tabs to reorder them, double-click a name to rename, and middle-click to
-                  close.</p>
-                <p>Closed a tab by accident? Press <strong>Undo</strong> in the message that appears.</p>
-              </details>
-              <details>
-                <summary>Can I open and save .md files from my computer?</summary>
-                <p>Yes — click <strong>Open</strong> (or press Ctrl+O), or drag and drop .md, .markdown or .txt files
-                  anywhere on the page. Each opens in its own tab.</p>
-                <p>In Chrome and Edge the tab stays <em>linked</em> to the file, shown by a small dot on the tab, so
-                  <strong>Ctrl+S</strong> saves straight back to it; an orange dot means unsaved changes. In other
-                  browsers, Ctrl+S downloads a .md file instead.
-                </p>
-                <p>Installed as an app, Quilldown also appears in your system’s <strong>Open with</strong> menu for
-                  Markdown files.</p>
-              </details>
-              <details>
-                <summary>Does it work offline? Can I install it?</summary>
-                <p>Yes. All libraries, fonts and icons are bundled with Quilldown, so it never needs a third-party
-                  server.</p>
-                <p>Once the page has loaded, a service worker caches everything and an <strong>Install</strong> button
-                  appears in Chrome, Edge and other supporting browsers. You can then run Quilldown like a desktop or
-                  phone app, with or without a connection.</p>
-                <p>Your documents are stored on your device either way.</p>
-              </details>
-            </div>
-            <h3 class="faq-group" id="faq-sharing-support">Sharing &amp; support</h3>
-            <div class="faq">
-              <details>
-                <summary>How does sharing work? Is my document uploaded?</summary>
-                <p>Click <strong>Share</strong> and Quilldown compresses your document into the link itself. Nothing is
-                  uploaded: the part of a link after the <code>#</code> is never sent to a server, so anyone who opens
-                  it gets their own private copy in a new tab.</p>
-                <p>Long documents make long links. There is a warning above about 8,000 characters and a hard stop at
-                  64,000, and pasted images aren’t included in shared links.</p>
-              </details>
-              <details>
-                <summary>Where is the source code? How do I report a bug?</summary>
-                <p>Quilldown’s code is on <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank"
-                    rel="noopener noreferrer">GitHub</a>. You can browse it there, and report a problem or suggest a
-                  feature by <a href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank"
-                    rel="noopener noreferrer">opening an issue</a>.</p>
-                <p>For press or general enquiries, the maintainer’s <a href="https://github.com/Dhruv-Dhameliya"
-                    target="_blank" rel="me noopener noreferrer">GitHub profile</a> is the best place to reach out — see
-                  also the <a href="/about">About &amp; press</a> page.</p>
-              </details>
-            </div>
-            <!--FAQ:end-->
-          </div>
-        </div>
-      </section>
-
-      <!-- ============================ CONTACT ============================ -->
-      <section class="section" id="contact" style="padding-top:0">
-        <div class="container">
-          <div class="section-head center reveal">
-            <div class="eyebrow">Contact</div>
-            <h2 class="title">Get in touch, <em>or contribute.</em></h2>
-            <p>Found a bug, have an idea, or writing about Quilldown? Everything goes through GitHub — it is the
-              official place to reach the maintainer.</p>
-          </div>
-          <div class="contact-grid reveal">
-            <a class="contact-card" href="https://github.com/Dhruv-Dhameliya" target="_blank"
-              rel="me noopener noreferrer"><svg class="i i-fill i-lg">
-                <use href="#i-github" />
-              </svg><strong>Media &amp; general enquiries</strong><span>Visit the maintainer’s GitHub profile:
-                Dhruv-Dhameliya.</span></a>
-            <a class="contact-card" href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank"
-              rel="noopener noreferrer"><svg class="i i-lg">
-                <use href="#i-check" />
-              </svg><strong>Report a bug or request a feature</strong><span>Open an issue on the Quilldown
-                repository.</span></a>
-            <a class="contact-card" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank"
-              rel="noopener noreferrer"><svg class="i i-lg">
-                <use href="#i-code" />
-              </svg><strong>Source code</strong><span>Browse, star or fork the project on GitHub.</span></a>
-            <a class="contact-card" href="/about"><svg class="i i-lg">
-                <use href="#i-file" />
-              </svg><strong>About &amp; press kit</strong><span>Short description, logo and preview image for
-                writers.</span></a>
+<div class="faq-tabs" role="tablist" aria-label="FAQ topics"><button type="button" role="tab" id="faq-tab-0" aria-controls="faq-panel-0" aria-selected="true">Getting started<span>4</span></button><button type="button" role="tab" id="faq-tab-1" aria-controls="faq-panel-1" aria-selected="false">Privacy &amp; storage<span>3</span></button><button type="button" role="tab" id="faq-tab-2" aria-controls="faq-panel-2" aria-selected="false">Writing &amp; Markdown<span>5</span></button><button type="button" role="tab" id="faq-tab-3" aria-controls="faq-panel-3" aria-selected="false">Exporting &amp; converting<span>5</span></button><button type="button" role="tab" id="faq-tab-4" aria-controls="faq-panel-4" aria-selected="false">Files, tabs &amp; offline<span>3</span></button><button type="button" role="tab" id="faq-tab-5" aria-controls="faq-panel-5" aria-selected="false">Sharing &amp; support<span>2</span></button></div><div class="faq-panel" role="tabpanel" id="faq-panel-0" aria-labelledby="faq-tab-0"><h3 class="faq-group">Getting started</h3><div class="faq"><details name="faq-0" open><summary>What is Quilldown, and who is it for?</summary><div class="ans"><p>Quilldown is a free online Markdown editor. You type Markdown on one side and a live preview updates on the other, then you copy the result into Google Docs or export it as a PDF, Word file, PNG, EPUB, HTML page or plain text.</p><p>It suits anyone who likes to write in plain text but has to hand over a polished document: developers writing READMEs, students taking notes with equations, bloggers drafting posts, and teams writing meeting notes or specs. If Markdown is new to you, start with <a href="/guides/what-is-markdown">what Markdown is</a>.</p></div></details><details name="faq-0"><summary>Is Quilldown free? Do I need an account?</summary><div class="ans"><p>Yes, it is free, and there is no account, sign-up or email address to give. Open the page and start writing.</p><p>Quilldown is also open source, so you can read exactly what it does on <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">GitHub</a>.</p></div></details><details name="faq-0"><summary>Which browsers and devices does it work on?</summary><div class="ans"><p>Any current version of Chrome, Edge, Firefox or Safari, on desktop, tablet or phone. On phones the editor shows one pane at a time — switch between writing and preview with the view buttons in the top bar. Quilldown opens on the homepage everywhere; turn on <strong>Start in editor</strong> in the header if you would rather land in the full-screen editor.</p><p>A few conveniences depend on the browser: linking a tab to a file on disk (so Ctrl+S saves back to it) works in Chrome and Edge, and the Install button appears in browsers that support installing web apps.</p></div></details><details name="faq-0"><summary>How is this different from writing in Word or Google Docs?</summary><div class="ans"><p>The source is plain text, so your writing is portable, easy to search and safe to keep in Git. Formatting is typed (<code>#</code>, <code>**</code>, <code>-</code>) instead of clicked, which keeps your hands on the keyboard and keeps the structure consistent.</p><p>You still end up with a formatted document: <strong>Copy for Docs</strong> pastes clean headings and lists into Google Docs, and <strong>Export → Word (.docx)</strong> produces a real Word file. You choose the destination after writing, not before.</p></div></details></div></div><div class="faq-panel" role="tabpanel" id="faq-panel-1" aria-labelledby="faq-tab-1"><h3 class="faq-group">Privacy &amp; storage</h3><div class="faq"><details name="faq-1"><summary>Where is my text stored? Is it private?</summary><div class="ans"><p>Only in your browser. Every tab is autosaved to your device’s local storage, and nothing you write is uploaded to a server. There is no account, so there is no cloud copy either.</p><p>Everything the editor needs — libraries, fonts and icons — ships with the site, so Quilldown makes no third-party requests while you work. You can confirm that in your browser’s network panel.</p></div></details><details name="faq-1"><summary>What happens if I clear my browser data?</summary><div class="ans"><p>Saved tabs are removed with it, and because nothing is stored elsewhere they cannot be recovered. Save important documents as files with <strong>Export → Markdown (.md)</strong> or Ctrl+S.</p><p>Browsers typically allow around 5&nbsp;MB of local storage per site. Text uses very little of that, but pasted images are stored with the document and count towards the limit, so a document with many large images can hit it first.</p></div></details><details name="faq-1"><summary>Does Quilldown use cookies, trackers or analytics on my writing?</summary><div class="ans"><p>No. Rendering, copying and every export happen locally in your browser, and nothing about what you write is measured or sent anywhere.</p><p>The only things Quilldown keeps are your own drafts and a few preferences, such as the theme and your start-page choice, all in your browser’s storage on your device.</p></div></details></div></div><div class="faq-panel" role="tabpanel" id="faq-panel-2" aria-labelledby="faq-tab-2"><h3 class="faq-group">Writing &amp; Markdown</h3><div class="faq"><details name="faq-2"><summary>Which Markdown flavor does Quilldown support?</summary><div class="ans"><p>GitHub Flavored Markdown (GFM): everything in the original Markdown plus tables, task lists, strikethrough, autolinks and fenced code blocks with syntax highlighting. It is the flavor GitHub, GitLab and most documentation tools use.</p><p>On top of GFM you get KaTeX math (<code>$…$</code> and <code>$$…$$</code>), Mermaid diagrams, footnotes, emoji shortcodes and GitHub-style callouts such as <code>&gt; [!NOTE]</code>. The <a href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a> shows every piece of syntax with a live example.</p></div></details><details name="faq-2"><summary>Does it support LaTeX math and diagrams?</summary><div class="ans"><p>Yes. Write inline math with <code>$…$</code> and display math with <code>$$…$$</code>; it renders with KaTeX, including fractions, sums, integrals, matrices and aligned equations.</p><p>Flowcharts, sequence diagrams, Gantt charts, class, state and ER diagrams and mind maps are drawn from <code>mermaid</code> code blocks, and they follow the light or dark theme. See <a href="/guides/latex-math-in-markdown">math in Markdown</a> and <a href="/guides/mermaid-diagrams-in-markdown">Mermaid diagrams</a>.</p></div></details><details name="faq-2"><summary>Can I make a Markdown table without typing pipes?</summary><div class="ans"><p>Yes. Click <strong>Table</strong> to build one in a visual grid, set column alignment, and insert it. Put the cursor inside an existing table, or select rows copied from a spreadsheet, and click it again to edit or convert them.</p><p>Rows copied from Excel or Google Sheets can be pasted straight in. The <a href="/guides/markdown-table-generator">Markdown table guide</a> explains the syntax behind it.</p></div></details><details name="faq-2"><summary>Can I add images, footnotes and emoji?</summary><div class="ans"><ul><li><strong>Images</strong> — paste, drop or upload them. They are stored with the document and included in exports.</li><li><strong>Footnotes</strong> — write <code>[^1]</code> where the note belongs; the Word export turns them into real footnotes.</li><li><strong>Emoji</strong> — type <code>:roc</code> for suggestions or use the emoji picker (<a href="/guides/markdown-emoji-shortcodes">shortcode list</a>).</li></ul></div></details><details name="faq-2"><summary>Are there templates and keyboard shortcuts?</summary><div class="ans"><p>Templates for a README, meeting notes, résumé, blog post, email, tables, a to-do list and notes are under <strong>New → Templates</strong>.</p><p>Shortcuts include Ctrl+B bold, Ctrl+I italic, Ctrl+U underline, Ctrl+E inline code, Ctrl+K link, Ctrl+F find, Ctrl+H replace, Ctrl+O open, Ctrl+S save and Esc to leave full screen (⌘ instead of Ctrl on a Mac). Hover any toolbar button to see its shortcut.</p></div></details></div></div><div class="faq-panel" role="tabpanel" id="faq-panel-3" aria-labelledby="faq-tab-3"><h3 class="faq-group">Exporting &amp; converting</h3><div class="faq"><details name="faq-3"><summary>Which formats can I export to?</summary><div class="ans"><ul><li><strong>PDF</strong> — through your browser’s print dialog; choose “Save as PDF”.</li><li><strong>Word (.docx)</strong> — opens in Word, Google Docs and Pages.</li><li><strong>PNG</strong> — an image of the whole document.</li><li><strong>EPUB</strong> — an e-book for Apple Books, Kobo and other readers.</li><li><strong>HTML</strong> — a standalone, styled web page.</li><li><strong>Markdown (.md)</strong> and <strong>plain text (.txt)</strong>.</li></ul><p>Very long documents are too tall for a single PNG, so use PDF for those.</p></div></details><details name="faq-3"><summary>How do I convert Markdown to PDF?</summary><div class="ans"><p>Write or paste your Markdown, choose <strong>Export → PDF</strong>, and pick “Save as PDF” as the destination in the print dialog. It is free, private and works offline.</p><p>If code blocks or tables look flat, turn on “Background graphics” in the print options. The <a href="/guides/markdown-to-pdf">Markdown to PDF guide</a> covers page breaks and print settings in detail.</p></div></details><details name="faq-3"><summary>How do I convert Markdown to Word or Google Docs?</summary><div class="ans"><p>Two routes. <strong>Export → Word (.docx)</strong> gives you a real Word document. <strong>Copy for Docs</strong> (on the preview pane) puts formatted text on your clipboard, ready to paste into Google Docs.</p><p>Copy for Docs uses point sizes Docs understands — H1 23&nbsp;pt, H2 17&nbsp;pt, H3 14&nbsp;pt, body 12&nbsp;pt — and sets no font, so the text takes on your document’s font. More in <a href="/guides/markdown-to-word">Markdown to Word and Google Docs</a>.</p></div></details><details name="faq-3"><summary>Can I convert Markdown to HTML?</summary><div class="ans"><p>Yes. <strong>Copy → HTML</strong> puts clean markup on your clipboard for a website or CMS, and <strong>Export → HTML</strong> saves a standalone, styled web page. <a href="/guides/markdown-to-html">Markdown to HTML</a> shows what the generated markup looks like.</p></div></details><details name="faq-3"><summary>Why do equations and diagrams look different in Word?</summary><div class="ans"><p>Word has no KaTeX or Mermaid renderer, so the .docx keeps equations as their TeX source text and inserts diagrams as images. If equations need to look typeset, export to PDF instead, where they render exactly as in the preview.</p></div></details></div></div><div class="faq-panel" role="tabpanel" id="faq-panel-4" aria-labelledby="faq-tab-4"><h3 class="faq-group">Files, tabs &amp; offline</h3><div class="faq"><details name="faq-4"><summary>Can I work on several documents at once?</summary><div class="ans"><p>Yes. Each document opens in its own tab. Add a blank one with <strong>+</strong>, open or drop several files at once, drag tabs to reorder them, double-click a name to rename it and middle-click to close.</p><p>Closed a tab by accident? Press <strong>Undo</strong> in the message that appears.</p></div></details><details name="faq-4"><summary>Can I open and save .md files from my computer?</summary><div class="ans"><p>Yes — click <strong>Open</strong> (Ctrl+O) or drag and drop .md, .markdown or .txt files anywhere on the page. Each opens in its own tab.</p><p>In Chrome and Edge the tab stays linked to the file (a small dot on the tab), so Ctrl+S saves straight back to it and an orange dot means unsaved changes. Elsewhere, Ctrl+S downloads a .md file. Once installed as an app, Quilldown also appears in your system’s “Open with” menu for Markdown files.</p></div></details><details name="faq-4"><summary>Does it work offline? Can I install it?</summary><div class="ans"><p>Yes. Everything ships with the site, and after the first visit a service worker caches it, so Quilldown loads and exports without a connection. An <strong>Install</strong> button appears in Chrome, Edge and other browsers that support it, letting you run Quilldown like a desktop or phone app.</p></div></details></div></div><div class="faq-panel" role="tabpanel" id="faq-panel-5" aria-labelledby="faq-tab-5"><h3 class="faq-group">Sharing &amp; support</h3><div class="faq"><details name="faq-5"><summary>How does sharing work? Is my document uploaded?</summary><div class="ans"><p>Click <strong>Share</strong> and Quilldown compresses your document into the link itself. Nothing is uploaded: the part of a link after the <code>#</code> is never sent to a server, so anyone who opens it gets their own private copy in a new tab.</p><p>Long documents make long links — there is a warning above about 8,000 characters and a hard stop at 64,000 — and pasted images are not included in shared links.</p></div></details><details name="faq-5"><summary>How do I report a bug or contact the maintainer?</summary><div class="ans"><p>Open an issue on <a href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">GitHub</a> with your browser and, if possible, a small sample of the Markdown involved. The code is public at <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">Dhruv-Dhameliya/quilldown</a>.</p><p>For press or general enquiries, use the maintainer’s <a href="https://github.com/Dhruv-Dhameliya" target="_blank" rel="me noopener noreferrer">GitHub profile</a>; the <a href="/about">About &amp; press</a> page has a logo and boilerplate.</p></div></details></div></div>
+<!--FAQ:end-->
           </div>
         </div>
       </section>
@@ -1435,68 +1085,34 @@
       <!-- ============================ FINAL CTA ============================ -->
       <section class="cta">
         <div class="container reveal">
-          <h2 class="title">Ready when you are.</h2>
-          <button class="btn btn-primary" data-act="full">Open the editor <svg class="i">
-              <use href="#i-max" />
-            </svg></button>
+          <h2 class="title">Your next draft <em>starts here.</em></h2>
+          <button class="btn btn-primary" data-act="full">Open the editor <svg class="i"><use href="#i-max" /></svg></button>
+          <p class="cta-links">Questions, ideas or press?
+            <a href="https://github.com/Dhruv-Dhameliya" target="_blank" rel="me noopener noreferrer">GitHub profile</a> ·
+            <a href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">Report an issue</a> ·
+            <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">Source code</a> ·
+            <a href="/about">About &amp; press</a></p>
         </div>
       </section>
     </main>
 
     <!--FOOTER:start-->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-cols">
-          <div><a class="brand" href="/"><svg class="logo">
-                <use href="#i-logo" />
-              </svg>Quilldown</a>
-            <p>A calm, private Markdown editor with live preview, tabs, math and diagrams. Works offline.</p>
-          </div>
-          <div>
-            <h3>Learn Markdown</h3>
-            <ul>
-              <li><a href="/guides/what-is-markdown">What is Markdown?</a></li>
-              <li><a href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>Convert &amp; export</h3>
-            <ul>
-              <li><a href="/guides/markdown-to-pdf">Markdown to PDF</a></li>
-              <li><a href="/guides/markdown-to-word">Markdown to Word &amp; Google Docs</a></li>
-              <li><a href="/guides/markdown-to-html">Markdown to HTML</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>Write better documents</h3>
-            <ul>
-              <li><a href="/guides/markdown-table-generator">Markdown tables</a></li>
-              <li><a href="/guides/latex-math-in-markdown">Math in Markdown</a></li>
-              <li><a href="/guides/mermaid-diagrams-in-markdown">Diagrams in Markdown</a></li>
-              <li><a href="/guides/markdown-emoji-shortcodes">Emoji shortcodes</a></li>
-              <li><a href="/guides/readme-template">README template</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>Contact</h3>
-            <ul>
-              <li><a href="https://github.com/Dhruv-Dhameliya" target="_blank" rel="me noopener noreferrer">GitHub
-                  profile</a></li>
-              <li><a href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank"
-                  rel="noopener noreferrer">Report an issue</a></li>
-              <li><a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank"
-                  rel="noopener noreferrer">Source code</a></li>
-              <li><a href="/about">About &amp; press</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-base"><span>© 2026 Quilldown · built by <a href="https://github.com/Dhruv-Dhameliya"
-              target="_blank" rel="me noopener noreferrer">Dhruv-Dhameliya</a>. Your Markdown never leaves your
-            browser.</span><span><a href="/">Editor</a> · <a href="/guides">All guides</a> · <a
-              href="/about">About</a></span></div>
-      </div>
-    </footer>
-    <!--FOOTER:end-->
+<footer class="footer"><div class="container">
+  <div class="footer-cols">
+    <div><a class="brand" href="/#top"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>A calm, private Markdown editor with live preview, tabs, math and diagrams. Works offline.</p></div>
+    <div><h3>Learn Markdown</h3><ul><li><a href="/guides/what-is-markdown">What is Markdown?</a></li><li><a href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a></li><li><a href="/guides/markdown-emoji-shortcodes">Emoji shortcodes</a></li></ul></div>
+    <div><h3>Convert &amp; export</h3><ul><li><a href="/guides/markdown-to-pdf">Markdown to PDF</a></li><li><a href="/guides/markdown-to-word">Markdown to Word &amp; Google Docs</a></li><li><a href="/guides/markdown-to-html">Markdown to HTML</a></li></ul></div>
+    <div><h3>Write better documents</h3><ul><li><a href="/guides/markdown-table-generator">Markdown tables</a></li><li><a href="/guides/latex-math-in-markdown">Math in Markdown</a></li><li><a href="/guides/mermaid-diagrams-in-markdown">Diagrams in Markdown</a></li><li><a href="/guides/readme-template">README template</a></li></ul></div>
+    <div><h3>Contact</h3><ul>
+      <li><a href="https://github.com/Dhruv-Dhameliya" target="_blank" rel="me noopener noreferrer">GitHub profile</a></li>
+      <li><a href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">Report an issue</a></li>
+      <li><a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">Source code</a></li>
+      <li><a href="/about">About &amp; press</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-base"><span>© 2026 Quilldown · built by <a href="https://github.com/Dhruv-Dhameliya" target="_blank" rel="me noopener noreferrer">Dhruv-Dhameliya</a>. Your Markdown never leaves your browser.</span><span><a href="/#editor">Editor</a> · <a href="/guides">Docs</a> · <a href="/about">About</a></span></div>
+</div></footer>
+<!--FOOTER:end-->
   </div>
 
   <!-- global bits -->
