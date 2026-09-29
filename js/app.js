@@ -2529,13 +2529,15 @@ renderTabs();
 setMode(['editor', 'split', 'preview'].includes(state.mode) ? state.mode : 'split');
 $('#btnSync').setAttribute('aria-pressed', String(state.sync)); $('#btnSync').classList.toggle('on', state.sync);
 $('#btnSync').title = state.sync ? 'Sync scroll: on' : 'Sync scroll: off';
-const startHome = document.documentElement.getAttribute('data-start') === 'home';   // set by the head script (saved preference, or a link to a homepage section)
-if (startHome) {
-  state.full = false; shell.classList.remove('is-full'); blocksDirty = linesDirty = true;
-  const b = $('#btnFull'); b.title = 'Full screen'; b.setAttribute('aria-pressed', 'false');
-} else {
+const startEditor = document.documentElement.getAttribute('data-start') === 'editor';   // set by the head script (saved preference, #editor or a share link)
+const startHome = !startEditor;
+if (startEditor) {
+  shell.classList.add('is-full'); document.documentElement.removeAttribute('data-start');   // hand over from the pre-paint CSS to the normal class
   $('#btnFull').setAttribute('aria-pressed', 'true');
   landingEls.forEach(el => el.setAttribute('inert', ''));
+} else {
+  state.full = false; blocksDirty = linesDirty = true;
+  const b = $('#btnFull'); b.title = 'Full screen'; b.setAttribute('aria-pressed', 'false');
 }
 syncStartPref();
 if (location.hash === '#editor') history.replaceState(null, '', location.pathname + location.search);

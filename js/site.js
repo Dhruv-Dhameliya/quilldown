@@ -80,3 +80,22 @@
   nav.addEventListener('click', function (e) { if (e.target.closest('.nav-links a')) close(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 })();
+
+/* docs hub: topic chips + search */
+(function () {
+  var grid = document.getElementById('docsGrid');
+  if (!grid) return;
+  var cards = [].slice.call(grid.children), input = document.getElementById('docsSearch'), empty = document.getElementById('docsEmpty'), count = document.getElementById('docsCount');
+  var chips = [].slice.call(document.querySelectorAll('.docs-chips button')), cat = 'all';
+  function apply() {
+    var q = (input.value || '').trim().toLowerCase(), n = 0;
+    cards.forEach(function (c) { var ok = (cat === 'all' || c.dataset.cat === cat) && (!q || c.dataset.text.indexOf(q) > -1); c.hidden = !ok; if (ok) n++; });
+    count.textContent = n; empty.hidden = n > 0;
+  }
+  chips.forEach(function (b) { b.addEventListener('click', function () { cat = b.dataset.cat; chips.forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); }); apply(); }); });
+  input.addEventListener('input', apply);
+  input.addEventListener('keydown', function (e) { if (e.key === 'Escape') { input.value = ''; apply(); input.blur(); } });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && !e.ctrlKey && !e.metaKey && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) { e.preventDefault(); input.focus(); }
+  });
+})();

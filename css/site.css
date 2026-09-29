@@ -255,15 +255,6 @@ main{counter-reset:ch}
 
 /* ---- docs page ---- */
 .nav-links a[aria-current]{color:var(--text)}
-.docs-block{margin-top:36px}
-.docs-h{margin:0 0 14px;font-size:12.5px;font-weight:650;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3)}
-.docfeat{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 26px;border:1px solid var(--line);border-radius:20px;color:var(--text);text-decoration:none;background:radial-gradient(420px 160px at 0% 0%,var(--glow),transparent 70%),var(--surface);transition:border-color .2s,transform .2s}
-.docfeat:hover{border-color:var(--text-3);transform:translateY(-2px)}
-.docfeat-t{display:flex;flex-direction:column;gap:2px}
-.docfeat strong{font-size:18px;letter-spacing:-.02em}
-.docfeat-t span{font-size:14px;color:var(--text-3)}
-.docfeat .i{color:var(--text-3);transition:transform .15s,color .15s}
-.docfeat:hover .i{transform:translateX(4px);color:var(--accent)}
 
 /* ---- mobile menu + logo button ---- */
 .nav-toggle{display:none}
@@ -447,3 +438,94 @@ button.brand-mini:hover{background:var(--hover)}
   .ed-text{padding:12px 14px 64px}
   .status{height:26px;padding:0 12px;gap:12px}
 }
+
+/* =====================================================================
+   Docs v3 — the docs hub and guide pages share the homepage's look
+   ===================================================================== */
+.doc-wrap{padding:28px 0 72px}
+.crumbs{margin-bottom:18px}
+.doc-head{position:relative;isolation:isolate;max-width:none;margin:0 0 30px;padding:0 0 26px;border-bottom:1px solid var(--line)}
+.doc-head::before{content:"";position:absolute;z-index:-1;left:-60px;top:-90px;width:560px;height:280px;background:radial-gradient(closest-side,var(--glow),transparent);opacity:.5;pointer-events:none}
+.doc-head .eyebrow{display:inline-flex;margin:0;padding:3px 11px;border-radius:999px;background:var(--accent-soft);letter-spacing:.06em}
+.doc-head .eyebrow::before{content:none}
+.doc-head h1{margin:14px 0 12px;max-width:860px;font-size:clamp(30px,4.2vw,46px);line-height:1.08}
+.doc-head .lead{max-width:780px;font-size:clamp(16px,1.6vw,18px);line-height:1.6}
+.doc-meta{gap:8px;margin-top:16px}
+.doc-meta span{padding:3px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-size:12.5px;color:var(--text-2)}
+.doc-actions{margin-top:18px}
+.doc-actions .btn{height:40px;padding:0 18px;font-size:14px}
+.doc-grid{grid-template-columns:230px minmax(0,1fr);gap:52px}
+.doc-body{font-size:16.5px;line-height:1.72}
+.doc-body h2{margin:2em 0 .5em;font-size:clamp(23px,2.6vw,28px)}
+.doc-body h3{margin:1.6em 0 .4em;font-size:18.5px}
+.toc a.on{background:linear-gradient(90deg,var(--accent-soft),transparent)}
+/* numbered how-to lists inside guides (the landing page's .steps grid must not apply here) */
+.doc-body .steps{display:block;margin:0 0 1.3em;padding:0;gap:0}
+.doc-body .steps>li{margin:0 0 .9em}
+.after{margin-top:56px}
+.cta-band{margin-top:40px}
+
+/* docs hub */
+.docs-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);column-gap:48px;align-items:end;margin-bottom:6px;border-bottom:0;padding-bottom:0}
+.docs-hero>*{grid-column:1}
+.docs-hero .docs-search{grid-column:2;grid-row:1/span 3;align-self:end;margin-bottom:4px}
+.docs-search{display:flex;align-items:center;gap:10px;height:48px;padding:0 14px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--text-3);box-shadow:var(--shadow-sm);transition:border-color .15s,box-shadow .15s}
+.docs-search:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.docs-search input{flex:1;min-width:0;border:0;outline:0;background:none;color:var(--text);font:inherit;font-size:15px}
+.docs-search input::placeholder{color:var(--text-3)}
+.docs-search kbd{padding:1px 7px;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;background:var(--surface-2);font:500 12px var(--font-mono);color:var(--text-3)}
+.docs-block{margin-top:30px}
+.docs-h{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:12.5px;font-weight:650;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3)}
+.docs-h span{padding:1px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);letter-spacing:0}
+.docs-feat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.fcard{display:flex;flex-direction:column;gap:6px;padding:22px 22px 16px;border:1px solid var(--line);border-radius:20px;color:var(--text);text-decoration:none;background:radial-gradient(360px 170px at 0% 0%,var(--glow),transparent 70%),var(--surface);transition:border-color .2s,transform .2s,box-shadow .25s}
+.fcard:hover{border-color:var(--text-3);transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(30,20,90,.35)}
+.fcard-n{font-family:var(--font-serif);font-style:italic;font-size:30px;line-height:1;color:var(--accent)}
+.fcard-k{margin-top:12px;font-size:11.5px;font-weight:650;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3)}
+.fcard strong{font-size:19px;letter-spacing:-.02em}
+.fcard-d{font-size:14px;line-height:1.5;color:var(--text-2)}
+.fcard-f{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:16px;font-size:12.5px;color:var(--text-3)}
+.fcard-f .i,.dcard .i{width:16px;height:16px;color:var(--text-3);transition:transform .15s,color .15s}
+.fcard:hover .i,.dcard:hover .i{transform:translateX(3px);color:var(--accent)}
+.docs-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;margin-bottom:14px}
+.docs-bar .docs-h{margin:0}
+.docs-chips{display:flex;flex-wrap:wrap;gap:8px}
+.docs-chips button{height:34px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text-2);font:550 13px var(--font-sans);cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+.docs-chips button:hover{border-color:var(--text-3);color:var(--text)}
+.docs-chips button[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:var(--bg)}
+.docs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.dcard{position:relative;display:flex;flex-direction:column;gap:5px;min-height:118px;padding:18px 46px 16px 20px;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--text);text-decoration:none;transition:border-color .2s,transform .2s,box-shadow .25s}
+.dcard:hover{border-color:var(--text-3);transform:translateY(-2px);box-shadow:0 16px 34px -22px rgba(30,20,90,.35)}
+.dcard[hidden]{display:none}
+.dcard-top{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;color:var(--text-3)}
+.dcard-cat{font-weight:650;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.dcard strong{margin-top:4px;font-size:16px;letter-spacing:-.015em}
+.dcard-d{font-size:13.5px;line-height:1.5;color:var(--text-2)}
+.dcard .i{position:absolute;right:16px;bottom:16px}
+.docs-empty{padding:34px 0;text-align:center;color:var(--text-3)}
+
+@media (max-width:980px){
+  .docs-hero{grid-template-columns:minmax(0,1fr)}
+  .docs-hero .docs-search{grid-column:1;grid-row:auto;margin-top:18px}
+  .docs-feat{grid-template-columns:minmax(0,1fr)}
+  .docs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .doc-wrap{padding:20px 0 56px}
+  .doc-head{margin-bottom:22px;padding-bottom:20px}
+  .docs-grid{grid-template-columns:minmax(0,1fr)}
+  .dcard{min-height:0}
+  .docs-chips{flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding:0 16px 2px;scrollbar-width:none}
+  .docs-chips::-webkit-scrollbar{display:none}
+  .docs-chips button{flex:none}
+}
+.doc-head .eyebrow{width:fit-content;justify-self:start}
+@media (max-width:640px){
+  .docs-bar{display:block}
+  .docs-bar .docs-h{margin-bottom:10px}
+  .docs-chips{max-width:none}
+}
+@media (max-width:980px){.doc-grid{grid-template-columns:minmax(0,1fr);gap:0}}
+.doc-head::before{left:0;width:min(560px,100%)}
+/* KaTeX's hidden MathML is absolutely positioned; keep it inside the scrolling math block so it can't widen the page */
+.math-block,.katex-display,.doc-body .katex{position:relative}

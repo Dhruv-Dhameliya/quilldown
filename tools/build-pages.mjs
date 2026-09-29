@@ -186,6 +186,7 @@ const SPRITE = `<svg width="0" height="0" style="position:absolute" aria-hidden=
 <symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5" style="stroke:var(--logo-fg)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M6.34 6.34 4.93 4.93m14.14 14.14-1.41-1.41"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
 <symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
 <symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
@@ -196,7 +197,7 @@ const navHTML = (current = '', home = false) => {
   const a = id => (home ? '#' : '/#') + id;
   return `<header class="nav" id="nav"><div class="container nav-in">
   <a class="brand" href="${a('top')}" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
-  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="${a('features')}">Features</a><a href="${a('how')}">How it works</a><a href="/guides"${current === 'docs' ? ' aria-current="page"' : ''}>Docs</a><a href="${a('privacy')}">Privacy</a><a href="${a('faq')}">FAQ</a><label class="m-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label><a class="m-only" href="${a('editor')}">Open editor</a></nav>
+  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="${a('features')}">Features</a><a href="${a('how')}">How it works</a><a href="/guides"${current === 'docs' ? ' aria-current="page"' : ''}>Docs</a><a href="/about"${current === 'about' ? ' aria-current="page"' : ''}>About</a><a href="${a('privacy')}">Privacy</a><a href="${a('faq')}">FAQ</a><label class="m-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label><a class="m-only" href="${a('editor')}">Open editor</a></nav>
   <div class="nav-cta">
     <label class="nav-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label>
     <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -352,7 +353,7 @@ for (const p of allPages) {
   if (/<h1[ >]/i.test(html)) warn(`${p.slug}: body contains an <h1>`);
   for (const m of html.matchAll(/href="\/guides\/([^"#]+)/g)) if (!slugs.has(m[1])) warn(`${p.slug}: broken internal link /guides/${m[1]}`);
 
-  p.html = headHTML({ title: p.title, description: p.description, url, math: p.math || /class="katex/.test(html), ld: graph(nodes) }) + navHTML(p.isSite ? '' : 'docs') + `
+  p.html = headHTML({ title: p.title, description: p.description, url, math: p.math || /class="katex/.test(html), ld: graph(nodes) }) + navHTML(p.isSite ? 'about' : 'docs') + `
 <main class="doc-wrap">
   ${crumbsHTML(crumbs)}
   <header class="doc-head">
@@ -384,6 +385,10 @@ ${html}
 }
 
 /* ---------- guides hub ---------- */
+const minsOf = slug => (built.find(b => b.slug === slug) || {}).mins || 5;
+const START_HERE = [{ slug: 'what-is-markdown', k: 'New to Markdown?' }, { slug: 'markdown-cheat-sheet', k: 'Keep it open' }, { slug: 'markdown-to-pdf', k: 'Most popular task' }];
+const fcardHTML = (s, i) => { const p = pages.find(x => x.slug === s.slug); return `<a class="fcard" href="/guides/${p.slug}"><span class="fcard-n">0${i + 1}</span><span class="fcard-k">${esc(s.k)}</span><strong>${esc(p.short || p.h1)}</strong><span class="fcard-d">${esc(p.card || '')}</span><span class="fcard-f"><span>${minsOf(p.slug)} min read</span>${ARROW}</span></a>`; };
+const dcardHTML = p => `<a class="dcard" href="/guides/${p.slug}" data-cat="${p.category}" data-text="${escAttr((p.short + ' ' + (p.card || '') + ' ' + p.description).toLowerCase())}"><span class="dcard-top"><span class="dcard-cat">${esc(CATEGORIES.find(c => c.id === p.category).title)}</span><span>${minsOf(p.slug)} min</span></span><strong>${esc(p.short || p.h1)}</strong><span class="dcard-d">${esc(p.card || '')}</span>${ARROW}</a>`;
 {
   const url = `${SITE}/guides`, crumbs = [CRUMB_HOME, { name: 'Docs', href: '/guides' }];
   const title = 'Quilldown Docs: Markdown Guides & Cheat Sheet';
@@ -395,16 +400,26 @@ ${html}
     breadcrumbNode(url, crumbs),
     { '@type': 'ItemList', '@id': url + '#list', name: 'Quilldown docs: Markdown guides & cheat sheet', numberOfItems: pages.length, itemListElement: pages.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}/guides/${p.slug}`, name: p.h1 })) }];
   const html = headHTML({ title, description, url, type: 'website', ld: graph(nodes) }) + navHTML('docs') + `
-<main class="doc-wrap">
+<main class="doc-wrap docs-hub">
   ${crumbsHTML(crumbs)}
-  <header class="doc-head">
+  <header class="doc-head docs-hero">
     <p class="eyebrow">Docs</p>
     <h1>Quilldown docs</h1>
-    <p class="lead">The Markdown cheat sheet and step-by-step guides. Every example opens in the editor.</p>
-    <div class="doc-actions"><a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a></div>
+    <p class="lead">Guides and a cheat sheet for writing, formatting and exporting Markdown. Every example opens in the editor.</p>
+    <label class="docs-search"><svg class="i"><use href="#i-search"/></svg><input type="search" id="docsSearch" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><kbd>/</kbd></label>
   </header>
-  <section class="docs-block"><h2 class="docs-h">Reference</h2><a class="docfeat" href="/guides/markdown-cheat-sheet"><span class="docfeat-t"><strong>Markdown cheat sheet</strong><span>Every syntax, with live examples.</span></span>${ARROW}</a></section>
-  <section class="docs-block"><h2 class="docs-h">Guides</h2>${gnavHTML(pages, 3)}</section>
+  <section class="docs-block" aria-labelledby="docsStart">
+    <h2 class="docs-h" id="docsStart">Start here</h2>
+    <div class="docs-feat">${START_HERE.map((s, i) => fcardHTML(s, i)).join('')}</div>
+  </section>
+  <section class="docs-block" aria-labelledby="docsAll">
+    <div class="docs-bar">
+      <h2 class="docs-h" id="docsAll">All guides <span id="docsCount">${pages.length}</span></h2>
+      <div class="docs-chips" role="group" aria-label="Filter by topic"><button type="button" aria-pressed="true" data-cat="all">All</button>${CATEGORIES.map(c => `<button type="button" aria-pressed="false" data-cat="${c.id}">${esc(c.title)}</button>`).join('')}</div>
+    </div>
+    <div class="docs-grid" id="docsGrid">${pages.map(dcardHTML).join('')}</div>
+    <p class="docs-empty" id="docsEmpty" hidden>No guides match that search. Try “PDF”, “table” or “math”.</p>
+  </section>
   <div class="after">${ctaBand('Start writing', 'Open Quilldown and try any example from these guides — it takes one click and nothing leaves your browser.')}</div>
 </main>
 ` + footerHTML(pages) + `

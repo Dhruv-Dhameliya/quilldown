@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="tool-open">
+<html lang="en">
 
 <head>
   <meta name="google-site-verification" content="_FDWKao7eOGbrBA3bA8I5Z46wrG8Zp04j5_PAfm5wWI" />
@@ -54,9 +54,10 @@
       // Start page: the homepage by default; the header toggle ("Start in editor") switches it to the full-screen editor.
       // #editor always opens the editor; a link to a homepage section (#features, #faq …) always shows the homepage; share links (#d=) open the editor.
       var sp = null; try { sp = localStorage.getItem('quilldown:start'); } catch (e) { }
-      var hh = location.hash, home = sp !== 'editor';
-      if (hh === '#editor' || /^#d=/.test(hh)) home = false; else if (hh.length > 1) home = true;
-      if (home) { document.documentElement.classList.remove('tool-open'); document.documentElement.setAttribute('data-start', 'home'); }
+      var hh = location.hash, editor = sp === 'editor';
+      if (hh === '#editor' || /^#d=/.test(hh)) editor = true; else if (hh.length > 1) editor = false;
+      // The page is the homepage in the HTML itself (no flash); only "editor first" needs a class before first paint.
+      if (editor) { document.documentElement.classList.add('tool-open'); document.documentElement.setAttribute('data-start', 'editor'); }
       // The web-app manifest can't be fetched from file://, so only attach it when served over http(s).
       if (/^https?:$/.test(location.protocol)) { var l = document.createElement('link'); l.rel = 'manifest'; l.href = 'manifest.webmanifest'; document.head.appendChild(l); }
     })();
@@ -350,7 +351,7 @@
     <!--NAV:start-->
 <header class="nav" id="nav"><div class="container nav-in">
   <a class="brand" href="#top" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
-  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="#features">Features</a><a href="#how">How it works</a><a href="/guides">Docs</a><a href="#privacy">Privacy</a><a href="#faq">FAQ</a><label class="m-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label><a class="m-only" href="#editor">Open editor</a></nav>
+  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="#features">Features</a><a href="#how">How it works</a><a href="/guides">Docs</a><a href="/about">About</a><a href="#privacy">Privacy</a><a href="#faq">FAQ</a><label class="m-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label><a class="m-only" href="#editor">Open editor</a></nav>
   <div class="nav-cta">
     <label class="nav-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label>
     <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -379,7 +380,7 @@
           <div class="tool-slot" id="toolSlot">
 
             <!-- ========================= THE TOOL ========================= -->
-            <div class="tool-shell is-full" id="tool" role="application" aria-label="Markdown editor">
+            <div class="tool-shell" id="tool" role="application" aria-label="Markdown editor">
               <div class="tool-top">
                 <button type="button" class="brand-mini" data-act="home" title="Back to the Quilldown homepage" aria-label="Quilldown homepage"><svg class="logo">
                     <use href="#i-logo" />

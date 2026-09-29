@@ -232,7 +232,7 @@ h2.title em{font-family:var(--font-serif);font-style:italic;font-weight:400;lett
    ============================================================ */
 .tool-slot{position:relative;height:clamp(620px,84vh,880px)}
 .tool-shell{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);view-transition-name:tool;font-size:13px}
-.tool-shell.is-full{position:fixed;inset:0;z-index:100;border:0;border-radius:0;box-shadow:none}
+.tool-shell.is-full,html[data-start="editor"] .tool-shell{position:fixed;inset:0;z-index:100;border:0;border-radius:0;box-shadow:none}
 ::view-transition-group(tool){animation-duration:.42s;animation-timing-function:cubic-bezier(.3,.7,.2,1)}
 ::view-transition-old(tool),::view-transition-new(tool){height:100%;object-fit:fill}
 
@@ -254,7 +254,7 @@ h2.title em{font-family:var(--font-serif);font-style:italic;font-weight:400;lett
 .seg button:hover{color:var(--text)}
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--text);box-shadow:var(--shadow-sm)}
 .full-max{display:block}.full-min{display:none}
-.is-full .full-max{display:none}.is-full .full-min{display:block}
+.is-full .full-max,html[data-start="editor"] .full-max{display:none}.is-full .full-min,html[data-start="editor"] .full-min{display:block}
 
 /* tabs (multiple documents) */
 .tabs{display:flex;align-items:flex-end;gap:2px;height:40px;padding:8px 10px 0;background:var(--surface-2);border-bottom:1px solid var(--line);overflow-x:auto;flex:none;scrollbar-width:none}
