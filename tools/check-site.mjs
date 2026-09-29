@@ -11,6 +11,7 @@ const bad = m => problems.push(m);
 
 const exists = async p => { try { return (await stat(p)).isFile(); } catch { return false; } };
 const pages = [{ file: 'index.html', url: '/' }];
+for (const f of ['about']) if (await exists(path.join(ROOT, f + '.html'))) pages.push({ file: f + '.html', url: '/' + f });
 for (const f of (await readdir(path.join(ROOT, 'guides'))).sort()) {
   if (!f.endsWith('.html')) continue;
   pages.push({ file: 'guides/' + f, url: f === 'index.html' ? '/guides' : '/guides/' + f.replace(/\.html$/, '') });
@@ -33,16 +34,39 @@ for (const p of pages) {
   const title = (/<title>([^<]*)<\/title>/.exec(h) || [])[1], desc = (/<meta name="description"\s+content="([^"]*)"/.exec(h) || [])[1];
   const canon = (/<link rel="canonical" href="([^"]*)"/.exec(h) || [])[1];
   if (!title) bad(`${where}: missing <title>`); else { if (title.length > 70) bad(`${where}: title is ${title.length} chars`); if (titles.has(title)) bad(`${where}: duplicate title with ${titles.get(title)}`); titles.set(title, where); }
-  if (!desc) bad(`${where}: missing meta description`); else { if (desc.length < 100 || desc.length > 170) bad(`${where}: description is ${desc.length} chars`); if (descs.has(desc)) bad(`${where}: duplicate description with ${descs.get(desc)}`); descs.set(desc, where); }
+  if (!desc) bad(`${where}: missing meta description`); else { if (desc.length < 100 || desc.length > 160) bad(`${where}: description is ${desc.length} chars`); if (descs.has(desc)) bad(`${where}: duplicate description with ${descs.get(desc)}`); descs.set(desc, where); }
   const wantCanon = SITE + (p.url === '/' ? '/' : p.url);
   if (canon !== wantCanon) bad(`${where}: canonical is ${canon}, expected ${wantCanon}`);
   const h1s = (h.match(/<h1[\s>]/g) || []).length;
   if (h1s !== 1) bad(`${where}: ${h1s} <h1> elements (want exactly 1)`);
   if (!/<meta property="og:image" content="https:\/\/quilldown\.vercel\.app\/social\/og-image\.png">/.test(h)) bad(`${where}: missing og:image`);
   if (!/<html lang="en"/.test(h)) bad(`${where}: missing lang`);
-  // structured data must parse
-  for (const m of h.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
-    try { const o = JSON.parse(m[1]); if (o['@type'] === 'FAQPage' && !o.mainEntity.length) bad(`${where}: empty FAQPage`); } catch (e) { bad(`${where}: invalid JSON-LD (${e.message})`); }
+  // no render-blocking scripts in <head> (external scripts must be defer/async/module)
+  const head = (/<head[\s\S]*?<\/head>/.exec(h) || [''])[0].replace(/<noscript>[\s\S]*?<\/noscript>/g, '');
+  for (const m of head.matchAll(/<script\b([^>]*)\bsrc="([^"]+)"([^>]*)>/g)) if (!/\b(defer|async)\b|type="module"/.test(m[1] + m[3])) bad(`${where}: render-blocking <script src="${m[2]}"> in <head>`);
+  for (const m of head.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*>/g)) if (/katex/.test(m[0]) && !/media="print"/.test(m[0])) bad(`${where}: KaTeX stylesheet blocks first paint`);
+  if (!/<meta name="author" content="Dhruv-Dhameliya">/.test(h)) bad(`${where}: missing author meta`);
+  if (!/<meta name="robots" content="index, follow/.test(h)) bad(`${where}: missing robots meta`);
+  if (!h.includes('href="https://github.com/Dhruv-Dhameliya"')) bad(`${where}: no link to the GitHub profile (contact)`);
+  // structured data: ONE parseable @graph whose @id references all resolve
+  const lds = [...h.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
+  if (lds.length !== 1) bad(`${where}: ${lds.length} JSON-LD scripts (want one @graph)`);
+  for (const m of lds) {
+    try {
+      const g = JSON.parse(m[1])['@graph'];
+      if (!Array.isArray(g)) { bad(`${where}: JSON-LD has no @graph`); continue; }
+      const ids = new Set(g.map(n => n['@id']).filter(Boolean)), types = g.flatMap(n => [].concat(n['@type']));
+      for (const need of ['Organization', 'Person', 'WebSite']) if (!types.includes(need)) bad(`${where}: @graph lacks ${need}`);
+      if (!types.some(x => /^(WebPage|AboutPage|CollectionPage|ContactPage)$/.test(x))) bad(`${where}: @graph lacks a WebPage`);
+      const refs = [];
+      (function walk(x) { if (Array.isArray(x)) x.forEach(walk); else if (x && typeof x === 'object') { const ks = Object.keys(x); if (ks.length === 1 && ks[0] === '@id') refs.push(x['@id']); else ks.forEach(k => walk(x[k])); } })(g);
+      for (const r of refs) if (!ids.has(r)) bad(`${where}: JSON-LD references unknown @id ${r}`);
+      const faq = g.find(n => n['@type'] === 'FAQPage');
+      if (faq && !faq.mainEntity.length) bad(`${where}: empty FAQPage`);
+      if (p.url === '/' && !types.includes('WebApplication')) bad(`${where}: homepage graph lacks WebApplication`);
+      if (p.url.startsWith('/guides/') && !types.includes('Article')) bad(`${where}: guide graph lacks Article`);
+      if (p.url !== '/' && !types.includes('BreadcrumbList')) bad(`${where}: graph lacks BreadcrumbList`);
+    } catch (e) { bad(`${where}: invalid JSON-LD (${e.message})`); }
   }
   // images need alt text
   for (const m of h.matchAll(/<img\b[^>]*>/g)) if (!/\salt="/.test(m[0])) bad(`${where}: <img> without alt: ${m[0].slice(0, 60)}`);

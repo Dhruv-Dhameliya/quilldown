@@ -169,6 +169,26 @@ function mdToHTML(src, wrap) {
   return DOMPurify.sanitize(out, { FORBID_TAGS: ['style'] });
 }
 
+/** The page itself owns the only <h1>. A document's "# Title" therefore shows as an <h2 class="md-h1"> in the live preview
+ *  (same look); exports are built from the original HTML and keep the real <h1>. */
+function demoteH1(root) {
+  $$('h1', root).forEach(h => {
+    const n = document.createElement('h2');
+    n.className = 'md-h1';
+    while (h.firstChild) n.appendChild(h.firstChild);
+    h.replaceWith(n);
+  });
+}
+/** Headings inside the landing page's syntax cards are examples, not page headings → styled paragraphs. */
+function headingsToParagraphs(root) {
+  $$('h1,h2,h3,h4,h5,h6', root).forEach(h => {
+    const p = document.createElement('p');
+    p.className = 'md-h md-h' + h.tagName[1];
+    while (h.firstChild) p.appendChild(h.firstChild);
+    h.replaceWith(p);
+  });
+}
+
 function slugify(s) {
   return s.trim().toLowerCase().replace(/[^\p{L}\p{N}\s-]/gu, '').replace(/\s+/g, '-') || 'section';
 }
@@ -232,7 +252,7 @@ function loadMermaid() {
   if (window.mermaid) return Promise.resolve(window.mermaid);
   return mermaidLoad || (mermaidLoad = new Promise((res, rej) => {
     const s = document.createElement('script');
-    s.src = MERMAID_URL; s.onload = () => res(window.mermaid);
+    s.src = MERMAID_URL; s.async = true; s.onload = () => res(window.mermaid);
     s.onerror = () => { mermaidLoad = null; rej(new Error('Could not load the diagram engine (check your connection).')); };
     document.head.appendChild(s);
   }));
@@ -261,20 +281,32 @@ function mermaidSVG(code, theme) {
   mermaidQueue = job.catch(() => {});
   return job;
 }
-function renderMermaidIn(root, theme) {
-  const tasks = $$('.mermaid-block', root).map(node => {
-    const code = dec(node.dataset.src);
-    const cached = mermaidCache.get(theme + '\u0000' + code);
-    if (cached) { node.innerHTML = cached; return null; }
+function renderOneDiagram(node, theme) {
+  return mermaidSVG(dec(node.dataset.src), theme).then(svg => { node.innerHTML = svg; }, err => {
+    node.innerHTML = '';
+    const box = document.createElement('div');
+    box.className = 'mermaid-error';
+    box.textContent = 'Diagram error: ' + String((err && err.message) || err).split('\n').slice(0, 3).join('\n');
+    node.appendChild(box);
+  });
+}
+/** Draws every diagram under `root`. With `lazy`, uncached diagrams are only drawn (and the ~2.5 MB diagram library only
+ *  loaded) once they scroll near the viewport, which keeps the first paint fast. Exports call it eagerly. */
+function renderMermaidIn(root, theme, lazy) {
+  const tasks = [], pending = [];
+  for (const node of $$('.mermaid-block', root)) {
+    const cached = mermaidCache.get(theme + '\u0000' + dec(node.dataset.src));
+    if (cached) { node.innerHTML = cached; continue; }
     node.innerHTML = '<span class="mermaid-loading">Rendering diagram…</span>';
-    return mermaidSVG(code, theme).then(svg => { node.innerHTML = svg; }, err => {
-      node.innerHTML = '';
-      const box = document.createElement('div');
-      box.className = 'mermaid-error';
-      box.textContent = 'Diagram error: ' + String((err && err.message) || err).split('\n').slice(0, 3).join('\n');
-      node.appendChild(box);
-    });
-  }).filter(Boolean);
+    if (lazy && 'IntersectionObserver' in window) pending.push(node); else tasks.push(renderOneDiagram(node, theme));
+  }
+  if (root._diagramIO) { root._diagramIO.disconnect(); root._diagramIO = null; }
+  if (pending.length) {
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (en.isIntersecting) { io.unobserve(en.target); renderOneDiagram(en.target, theme); }
+    }), { root: root.closest('#previewPane'), rootMargin: '400px 0px' });
+    root._diagramIO = io; pending.forEach(n => io.observe(n));
+  }
   return Promise.all(tasks);
 }
 
@@ -295,9 +327,10 @@ function render() {
   const html = mdToHTML(src, true);
   lastHTML = html;
   preview.innerHTML = html;
+  demoteH1(preview);
   postProcess(preview, 'preview');
   assignIds(preview);
-  renderMermaidIn(preview, mermaidTheme());
+  renderMermaidIn(preview, mermaidTheme(), true);
   blocksDirty = true;
   updateOutline();
   if (state.sync && document.activeElement === editor) requestAnimationFrame(() => { claim('editor'); editorToPreview(); });
@@ -1033,7 +1066,7 @@ function loadDocx() {
   if (window.docx) return Promise.resolve(window.docx);
   return docxLoad || (docxLoad = new Promise((res, rej) => {
     const s = document.createElement('script');
-    s.src = DOCX_URL; s.onload = () => res(window.docx);
+    s.src = DOCX_URL; s.async = true; s.onload = () => res(window.docx);
     s.onerror = () => { docxLoad = null; rej(new Error('load')); };
     document.head.appendChild(s);
   }));
@@ -1225,7 +1258,7 @@ function loadHtml2Canvas() {
   if (window.html2canvas) return Promise.resolve(window.html2canvas);
   return h2cLoad || (h2cLoad = new Promise((res, rej) => {
     const s = document.createElement('script');
-    s.src = 'vendor/html2canvas.min.js'; s.onload = () => res(window.html2canvas);
+    s.src = 'vendor/html2canvas.min.js'; s.async = true; s.onload = () => res(window.html2canvas);
     s.onerror = () => { h2cLoad = null; rej(new Error('load')); };
     document.head.appendChild(s);
   }));
@@ -1979,8 +2012,9 @@ function renderCheats() {
     const md = CHEATS[+out.dataset.i].md;
     if (/!\[/.test(md)) { out.innerHTML = '<p style="color:var(--md-muted)">Renders an image with alt text and an optional title.</p>'; return; }
     out.innerHTML = mdToHTML(md, false);
+    headingsToParagraphs(out);
     postProcess(out, 'landing');
-    renderMermaidIn(out, mermaidTheme());
+    renderMermaidIn(out, mermaidTheme(), true);
   });
 }
 /* "Show more" panels — keep the landing page short, everything else one click away */

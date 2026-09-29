@@ -3,7 +3,7 @@ title: How to Write a Great README.md — With a Free Template
 h1: How to write a great README.md (with a free template)
 short: README template
 card: What to put in a README, a copy-ready template and tips for a project page people actually read.
-description: Learn how to write a README.md: the sections to include, a free copy-ready Markdown template, formatting tips and common mistakes — with a live editor to try it.
+description: How to write a README.md: the sections to include, a free copy-ready Markdown template, formatting tips and common mistakes — with a live editor.
 lead: A README is your project's front door. This guide shows what to include, how to format it in Markdown, and gives you a template you can copy or open in the editor in one click.
 category: write
 order: 10

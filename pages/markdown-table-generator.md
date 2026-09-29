@@ -3,7 +3,7 @@ title: Markdown Table Generator and Syntax Guide
 h1: Markdown table generator and syntax guide
 short: Markdown tables
 card: Build Markdown tables in a visual grid, paste from Excel or Sheets, and learn the syntax.
-description: Create Markdown tables without typing pipes. Use the visual table editor, paste from Excel or Google Sheets, set alignment — plus the full table syntax explained.
+description: Create Markdown tables without typing pipes: use the visual table editor, paste from Excel or Google Sheets, set alignment — and learn the full syntax.
 lead: Build Markdown tables in a visual grid — no pipes to count — paste rows straight from Excel or Google Sheets, and get neatly aligned Markdown back. Includes the full syntax if you'd rather type it.
 category: write
 order: 6

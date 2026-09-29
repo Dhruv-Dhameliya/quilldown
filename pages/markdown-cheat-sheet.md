@@ -3,7 +3,7 @@ title: Markdown Cheat Sheet — Complete Syntax Guide with Examples
 h1: Markdown cheat sheet
 short: Markdown cheat sheet
 card: Every piece of Markdown syntax with live examples — headings, lists, tables, code, math, diagrams and more.
-description: The complete Markdown cheat sheet: headings, bold, lists, links, images, code, tables, task lists, footnotes, math, diagrams and more — each with a live example.
+description: The complete Markdown cheat sheet: headings, lists, links, images, code, tables, task lists, footnotes, math and diagrams — each with a live example.
 lead: A complete reference for Markdown syntax. Every example shows the Markdown on the left and the result on the right — and opens in the editor with one click.
 category: learn
 order: 2
