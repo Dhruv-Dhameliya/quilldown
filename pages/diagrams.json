@@ -1,0 +1,42 @@
+{
+  "flowchart": {
+    "title": "Flowchart",
+    "alt": "Flowchart: Write Markdown, then a decision 'Looks right?'. Yes leads to Export or share, No loops back to Write Markdown.",
+    "source": "flowchart LR\n  A[Write Markdown] --> B{Looks right?}\n  B -- Yes --> C[Export or share]\n  B -- No --> A"
+  },
+  "sequence": {
+    "title": "Sequence diagram",
+    "alt": "Sequence diagram: You type Markdown in the editor, get a live preview, choose Copy for Docs, and the formatted text is pasted into Google Docs.",
+    "source": "sequenceDiagram\n  participant You\n  participant Editor\n  participant Docs as Google Docs\n  You->>Editor: Type Markdown\n  Editor-->>You: Live preview\n  You->>Editor: Copy for Docs\n  Editor->>Docs: Paste with formatting"
+  },
+  "gantt": {
+    "title": "Gantt chart",
+    "alt": "Gantt chart of a writing plan: an outline and first draft under Draft, then review and publish under Publish.",
+    "source": "gantt\n  title Writing plan\n  dateFormat YYYY-MM-DD\n  section Draft\n  Outline      :done,   a1, 2026-01-05, 3d\n  First draft  :active, a2, after a1, 5d\n  section Publish\n  Review       :        a3, after a2, 3d\n  Publish      :        a4, after a3, 1d"
+  },
+  "pie": {
+    "title": "Pie chart",
+    "alt": "Pie chart of where writing time goes: drafting 45, editing 35, formatting 10 and publishing 10.",
+    "source": "pie title Where writing time goes\n  \"Drafting\" : 45\n  \"Editing\" : 35\n  \"Formatting\" : 10\n  \"Publishing\" : 10"
+  },
+  "class": {
+    "title": "Class diagram",
+    "alt": "Class diagram: a Template class with name and open(), extended by Readme and MeetingNotes.",
+    "source": "classDiagram\n  class Template {\n    +String name\n    +open()\n  }\n  class Readme\n  class MeetingNotes\n  Template <|-- Readme\n  Template <|-- MeetingNotes"
+  },
+  "state": {
+    "title": "State diagram",
+    "alt": "State diagram: Draft goes to Review on submit; Review returns to Draft when changes are requested or moves to Published on approval.",
+    "source": "stateDiagram-v2\n  [*] --> Draft\n  Draft --> Review : submit\n  Review --> Draft : changes requested\n  Review --> Published : approve\n  Published --> [*]"
+  },
+  "er": {
+    "title": "Entity-relationship diagram",
+    "alt": "Entity-relationship diagram: an author writes many posts, and each post is tagged with one or more tags.",
+    "source": "erDiagram\n  AUTHOR ||--o{ POST : writes\n  POST ||--|{ TAG : \"is tagged with\""
+  },
+  "mindmap": {
+    "title": "Mind map",
+    "alt": "Mind map with Markdown at the centre and three branches: Write (headings, lists), Format (bold, links) and Export (PDF, Word).",
+    "source": "mindmap\n  root((Markdown))\n    Write\n      Headings\n      Lists\n    Format\n      Bold\n      Links\n    Export\n      PDF\n      Word"
+  }
+}

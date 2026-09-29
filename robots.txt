@@ -1,0 +1,5 @@
+# Quilldown — everything is public and indexable.
+User-agent: *
+Allow: /
+
+Sitemap: https://quilldown.vercel.app/sitemap.xml

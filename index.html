@@ -1,533 +1,1397 @@
 <!doctype html>
 <html lang="en" class="tool-open">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Quilldown — Free Online Markdown Editor with Live Preview</title>
-<meta name="description" content="A calm, powerful online Markdown editor. Live preview, synced scrolling, math, Mermaid diagrams, one-click copy as formatted text, Markdown or HTML, and export to PDF. Private — runs entirely in your browser.">
-<meta name="theme-color" content="#fbfbfa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Quilldown — Free Online Markdown Editor with Live Preview">
-<meta property="og:description" content="Write Markdown, watch it come alive. Live preview, synced scroll, math, diagrams, copy and PDF export — all in your browser.">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230f0f10'/%3E%3Cpath d='M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5' stroke='%23fff' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <meta name="google-site-verification" content="_FDWKao7eOGbrBA3bA8I5Z46wrG8Zp04j5_PAfm5wWI" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Quilldown - Free Markdown Editor</title>
+  <meta name="description"
+    content="A calm, private Markdown editor with live preview, tabs, math and diagrams. Copy for Google Docs, export to PDF, Word, PNG and EPUB. Works offline.">
+  <meta name="theme-color" content="#fbfbfa">
+  <link rel="canonical" href="https://quilldown.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Quilldown">
+  <meta property="og:url" content="https://quilldown.vercel.app/">
+  <meta property="og:title" content="Quilldown — Free Online Markdown Editor with Live Preview">
+  <meta property="og:description"
+    content="Write Markdown, watch it come alive. Live preview, tabs, math, diagrams and offline use — export to PDF, Word, PNG and EPUB. Free and private.">
+  <meta property="og:image" content="https://quilldown.vercel.app/social/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"
+    content="Quilldown — Write Markdown. Watch it come alive. A Markdown editor with live preview, tabs, math and diagrams.">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quilldown — Free Online Markdown Editor with Live Preview">
+  <meta name="twitter:description"
+    content="Write Markdown, watch it come alive. Live preview, tabs, math, diagrams and offline use — export to PDF, Word, PNG and EPUB. Free and private.">
+  <meta name="twitter:image" content="https://quilldown.vercel.app/social/og-image.png">
+  <meta name="twitter:image:alt"
+    content="Quilldown — Write Markdown. Watch it come alive. A Markdown editor with live preview, tabs, math and diagrams.">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230f0f10'/%3E%3Cpath d='M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5' stroke='%23fff' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 
-<script>
-  // Set the theme before first paint to avoid a flash.
-  (function () {
-    // Renamed from Inkdown: move any saved data (tabs, images, settings) to the new key prefix, one key at a time.
-    try {
-      var old = [];
-      for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && k.indexOf('inkdown:') === 0) old.push(k); }
-      old.forEach(function (k) { var nk = 'quilldown:' + k.slice(8); if (localStorage.getItem(nk) === null) localStorage.setItem(nk, localStorage.getItem(k)); localStorage.removeItem(k); });
-    } catch (e) {}
-    var t = null;
-    try { t = localStorage.getItem('quilldown:theme'); } catch (e) {}
-    if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', t);
-    // The web-app manifest can't be fetched from file://, so only attach it when served over http(s).
-    if (/^https?:$/.test(location.protocol)) { var l = document.createElement('link'); l.rel = 'manifest'; l.href = 'manifest.webmanifest'; document.head.appendChild(l); }
-  })();
-</script>
+  <script>
+    // Set the theme before first paint to avoid a flash.
+    (function () {
+      // Renamed from Inkdown: move any saved data (tabs, images, settings) to the new key prefix, one key at a time.
+      try {
+        var old = [];
+        for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && k.indexOf('inkdown:') === 0) old.push(k); }
+        old.forEach(function (k) { var nk = 'quilldown:' + k.slice(8); if (localStorage.getItem(nk) === null) localStorage.setItem(nk, localStorage.getItem(k)); localStorage.removeItem(k); });
+      } catch (e) { }
+      var t = null;
+      try { t = localStorage.getItem('quilldown:theme'); } catch (e) { }
+      if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      // The web-app manifest can't be fetched from file://, so only attach it when served over http(s).
+      if (/^https?:$/.test(location.protocol)) { var l = document.createElement('link'); l.rel = 'manifest'; l.href = 'manifest.webmanifest'; document.head.appendChild(l); }
+    })();
+  </script>
 
-<!-- Everything the app needs is bundled in ./vendor (see tools/fetch-vendor.mjs) so it works offline. -->
-<link rel="stylesheet" href="vendor/fonts/fonts.css">
-<link rel="stylesheet" href="vendor/katex/katex.min.css">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<script defer src="vendor/marked.min.js"></script>
-<script defer src="vendor/purify.min.js"></script>
-<script defer src="vendor/highlight.min.js"></script>
-<script defer src="vendor/katex/katex.min.js"></script>
-<script defer src="vendor/emoji.js"></script>
+  <!-- Everything the app needs is bundled in ./vendor (see tools/fetch-vendor.mjs) so it works offline. -->
+  <link rel="stylesheet" href="vendor/fonts/fonts.css">
+  <link rel="stylesheet" href="vendor/katex/katex.min.css">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <script defer src="vendor/marked.min.js"></script>
+  <script defer src="vendor/purify.min.js"></script>
+  <script defer src="vendor/highlight.min.js"></script>
+  <script defer src="vendor/katex/katex.min.js"></script>
+  <script defer src="vendor/emoji.js"></script>
 
-<script type="application/ld+json">
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Quilldown",
+  "url": "https://quilldown.vercel.app/",
+  "sameAs": ["https://github.com/Dhruv-Dhameliya/quilldown"],
+  "image": "https://quilldown.vercel.app/social/og-image.png",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
   "description": "Free online Markdown editor with live preview, synced scrolling, math, diagrams, and export to PDF, Word, PNG, EPUB, HTML and Markdown. Works offline.",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["Live Markdown preview with synced scrolling", "Tabs for multiple documents", "Copy for Google Docs with clean heading sizes", "Export to PDF, Word (.docx), PNG, EPUB, HTML, Markdown and plain text", "LaTeX math with KaTeX", "Mermaid diagrams", "Table editor and emoji picker", "Find and replace, outline and footnotes", "Works offline and installs as an app"],
+  "browserRequirements": "Requires JavaScript. Works in current Chrome, Edge, Firefox and Safari."
 }
 </script>
+  <script
+    type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Quilldown","url":"https://quilldown.vercel.app/","description":"Free online Markdown editor with live preview."}</script>
+  <script type="application/ld+json"
+    id="ld-faq">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Quilldown?","acceptedAnswer":{"@type":"Answer","text":"Quilldown is a free online Markdown editor with a live preview. You write Markdown on the left, see the formatted document on the right, and then copy it into Google Docs or export it as a PDF, Word file, PNG image, EPUB e-book, HTML or plain text. It runs entirely in your browser."}},{"@type":"Question","name":"Is there a free online Markdown editor with live preview?","acceptedAnswer":{"@type":"Answer","text":"Yes — Quilldown is free, needs no account, and shows the formatted preview as you type, with synced scrolling. It also has tabs, find and replace, an outline, a table editor and an emoji picker."}},{"@type":"Question","name":"Is Quilldown free? Do I need an account?","acceptedAnswer":{"@type":"Answer","text":"It’s free and there is no account. Open the page and start writing."}},{"@type":"Question","name":"Where is my text stored? Is it private?","acceptedAnswer":{"@type":"Answer","text":"Only in your browser. Every tab is autosaved to local storage on your device and is never uploaded. Everything the editor needs — libraries and fonts included — is bundled with the site, so it makes no third-party requests. Clearing your browser’s site data will remove saved tabs, so export anything important."}},{"@type":"Question","name":"Which Markdown flavor is supported?","acceptedAnswer":{"@type":"Answer","text":"GitHub Flavored Markdown — tables, task lists, strikethrough, autolinks and fenced code with syntax highlighting — plus KaTeX math ($…$ and $$…$$), Mermaid diagrams, footnotes, emoji shortcodes and GitHub-style callouts like > [!NOTE]. See the Markdown cheat sheet for every piece of syntax."}},{"@type":"Question","name":"How do I convert Markdown to PDF?","acceptedAnswer":{"@type":"Answer","text":"Write or paste your Markdown, choose Export → PDF, and pick “Save as PDF” in the print dialog that opens. It is private, free and works offline. Step-by-step: how to convert Markdown to PDF."}},{"@type":"Question","name":"How do I convert Markdown to Word or Google Docs?","acceptedAnswer":{"@type":"Answer","text":"Use Export → Word (.docx) for a real Word document, or Copy for Docs on the preview pane and paste into Google Docs. Copy for Docs uses point sizes Docs understands — H1 23 pt, H2 17 pt, H3 14 pt, body 12 pt — and sets no font, so the text takes the font of your document. See Markdown to Word and Google Docs."}},{"@type":"Question","name":"Can I convert Markdown to HTML?","acceptedAnswer":{"@type":"Answer","text":"Yes. Copy → HTML gives you clean markup to paste into a website or CMS, and Export → HTML saves a standalone, styled web page. Read Markdown to HTML."}},{"@type":"Question","name":"Which formats can I export to?","acceptedAnswer":{"@type":"Answer","text":"PDF (through your browser’s print dialog — choose “Save as PDF”), Word (.docx) that opens in Word, Google Docs and Pages, a PNG image of the whole document, an EPUB e-book for Apple Books, Kobo and other readers, a standalone HTML page, Markdown (.md) and plain text (.txt). In the Word export, equations are included as text (their TeX source) and diagrams as images; very long documents are too tall for a single PNG, so use PDF for those."}},{"@type":"Question","name":"Does it support LaTeX math and diagrams?","acceptedAnswer":{"@type":"Answer","text":"Yes. Write math with $…$ (inline) or $$…$$ (block) and it renders with KaTeX. Flowcharts, sequence diagrams, Gantt charts, class, state and ER diagrams and mind maps are drawn from mermaid code blocks. Guides: math in Markdown and Mermaid diagrams."}},{"@type":"Question","name":"Can I make a Markdown table without typing pipes?","acceptedAnswer":{"@type":"Answer","text":"Yes. Click the Table button to build a table in a visual grid — or place your cursor inside an existing table (or select spreadsheet rows) and click it to edit or convert. You can paste rows straight from Excel or Google Sheets. See the Markdown table guide."}},{"@type":"Question","name":"Can I work on several documents at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each document opens in its own tab — add a blank one with +, open or drop several files at once, drag tabs to reorder, double-click a name to rename, and middle-click to close. Closed a tab by accident? Hit Undo in the message that appears."}},{"@type":"Question","name":"Does it work offline? Can I install it?","acceptedAnswer":{"@type":"Answer","text":"Yes. All libraries, fonts and icons are bundled with Quilldown, so it never needs a third-party server. Once loaded, a service worker caches everything and an Install button appears (Chrome, Edge and other browsers) so you can run it like a desktop or phone app — with or without a connection. Your documents are stored on your device either way."}},{"@type":"Question","name":"Can I open and save .md files from my computer?","acceptedAnswer":{"@type":"Answer","text":"Yes — click Open (or press Ctrl+O), or drag and drop .md, .markdown or .txt files anywhere on the page; each opens in its own tab. In Chrome and Edge the tab stays linked to the file (a small dot on the tab), so Ctrl+S saves your changes straight back to it — an orange dot means unsaved changes. In other browsers, Ctrl+S downloads a .md instead. Installed as an app, Quilldown also appears in your system’s Open with menu for Markdown files."}},{"@type":"Question","name":"How does sharing work? Is my document uploaded?","acceptedAnswer":{"@type":"Answer","text":"Click Share and Quilldown compresses your document into the link itself. Nothing is uploaded — the part of a link after the # is never sent to a server — so anyone who opens the link gets their own private copy in a new tab. Long documents make long links (there is a warning above ~8,000 characters and a hard stop at 64,000), and pasted images aren’t included."}},{"@type":"Question","name":"Can I add images, footnotes, emoji and templates?","acceptedAnswer":{"@type":"Answer","text":"Yes. Paste, drop or upload images (they are stored with the document and included in exports); use [^1] for footnotes (real footnotes in Word); type :roc for emoji suggestions or use the emoji picker; and start from a README, meeting notes, résumé, blog post, email, tables, to-do list or notes template via New → Templates."}},{"@type":"Question","name":"Where is the source code? How do I report a bug?","acceptedAnswer":{"@type":"Answer","text":"Quilldown’s code is on GitHub. You can browse it there, and report a problem or suggest a feature by opening an issue."}}]}</script>
 
-<noscript><style>html.tool-open{overflow:auto}.tool-shell.is-full{position:relative;inset:auto}</style></noscript>
+  <noscript>
+    <style>
+      html.tool-open {
+        overflow: auto
+      }
 
-<!-- ============================================================
+      .tool-shell.is-full {
+        position: relative;
+        inset: auto
+      }
+    </style>
+  </noscript>
+
+  <!-- ============================================================
      APP STYLES (tokens, landing page, tool chrome)
      ============================================================ -->
-<link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/site.css">
 
-<!-- ============================================================
+  <!-- ============================================================
      DOCUMENT (PREVIEW) STYLES — reused verbatim by HTML/PDF export.
      Only uses --md-* / --tok-* / --font-* variables.
      ============================================================ -->
-<script src="js/document-style.js"></script>
+  <script src="js/document-style.js"></script>
 </head>
 
 <body>
-<!-- ============================================================
+  <!-- ============================================================
      ICON SPRITE
      ============================================================ -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <defs>
-    <symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5" style="stroke:var(--logo-fg)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-bold" viewBox="0 0 24 24"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6zM6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></symbol>
-    <symbol id="i-italic" viewBox="0 0 24 24"><path d="M19 4h-9M14 20H5M15 4 9 20"/></symbol>
-    <symbol id="i-underline" viewBox="0 0 24 24"><path d="M6 4v6a6 6 0 0 0 12 0V4M4 20h16"/></symbol>
-    <symbol id="i-strike" viewBox="0 0 24 24"><path d="M16 4H9a3 3 0 0 0-2.83 4M14 12a4 4 0 0 1 0 8H6M4 12h16"/></symbol>
-    <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
-    <symbol id="i-heading" viewBox="0 0 24 24"><path d="M6 12h12M6 20V4M18 20V4"/></symbol>
-    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zM15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></symbol>
-    <symbol id="i-codeblock" viewBox="0 0 24 24"><path d="m10 9-3 3 3 3M14 15l3-3-3-3"/><rect x="3" y="3" width="18" height="18" rx="2"/></symbol>
-    <symbol id="i-hr" viewBox="0 0 24 24"><path d="M4 12h16M8 6l4-3 4 3M8 18l4 3 4-3"/></symbol>
-    <symbol id="i-ul" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
-    <symbol id="i-ol" viewBox="0 0 24 24"><path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h2M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></symbol>
-    <symbol id="i-task" viewBox="0 0 24 24"><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4M13 6h8M13 12h8M13 18h8"/></symbol>
-    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
-    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></symbol>
-    <symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M12 3v18"/></symbol>
-    <symbol id="i-math" viewBox="0 0 24 24"><path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2"/></symbol>
-    <symbol id="i-diagram" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect x="13" y="13" width="8" height="8" rx="2"/></symbol>
-    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
-    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
-    <symbol id="i-open" viewBox="0 0 24 24"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></symbol>
-    <symbol id="i-newfile" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M12 18v-6M9 15h6"/></symbol>
-    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5zM14 2v6h6M16 13H8M16 17H8M10 9H8"/></symbol>
-    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
-    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
-    <symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
-    <symbol id="i-min" viewBox="0 0 24 24"><path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M16 21v-3a2 2 0 0 1 2-2h3"/></symbol>
-    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M6.34 6.34 4.93 4.93m14.14 14.14-1.41-1.41"/></symbol>
-    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
-    <symbol id="i-sync" viewBox="0 0 24 24"><path d="m3 16 4 4 4-4M7 20V4m14 4-4-4-4 4M17 4v16"/></symbol>
-    <symbol id="i-cols" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18"/></symbol>
-    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
-    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
-    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
-    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
-    <symbol id="i-kbd" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></symbol>
-    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
-    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></symbol>
-    <symbol id="i-html" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/></symbol>
-    <symbol id="i-md" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 15V9l3 3.5L12 9v6M18 9v6m-2.5-2.5L18 15l2.5-2.5"/></symbol>
-    <symbol id="i-rich" viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></symbol>
-    <symbol id="i-note" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
-    <symbol id="i-chevr" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
-    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></symbol>
-    <symbol id="i-redo" viewBox="0 0 24 24"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3L21 13"/></symbol>
-    <symbol id="i-highlight" viewBox="0 0 24 24"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></symbol>
-    <symbol id="i-mathblock" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M15 8H9l3 4-3 4h6"/></symbol>
-    <symbol id="i-center" viewBox="0 0 24 24"><path d="M21 6H3M17 12H7M19 18H5"/></symbol>
-    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
-    <symbol id="i-docs" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
-    <symbol id="i-text" viewBox="0 0 24 24"><path d="M4 7V5h16v2M9 19h6M12 5v14"/></symbol>
-    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
-    <symbol id="i-outline" viewBox="0 0 24 24"><path d="M3 6h18M3 12h10M7 18h14"/><path d="M3 18h.01"/></symbol>
-    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
-    <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></symbol>
-    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
-    <symbol id="i-alignleft" viewBox="0 0 24 24"><path d="M17 10H3M21 6H3M21 14H3M17 18H3"/></symbol>
-    <symbol id="i-alignright" viewBox="0 0 24 24"><path d="M21 10H7M21 6H3M21 14H3M21 18H7"/></symbol>
-    <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></symbol>
-    <symbol id="i-tabs" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M3 11h18M7 7V4h6v3"/></symbol>
-  </defs>
-</svg>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-logo" viewBox="0 0 32 32">
+        <rect width="32" height="32" rx="9" fill="currentColor" />
+        <path d="M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5" style="stroke:var(--logo-fg)" stroke-width="2.4"
+          fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="i-bold" viewBox="0 0 24 24">
+        <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6zM6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
+      </symbol>
+      <symbol id="i-italic" viewBox="0 0 24 24">
+        <path d="M19 4h-9M14 20H5M15 4 9 20" />
+      </symbol>
+      <symbol id="i-underline" viewBox="0 0 24 24">
+        <path d="M6 4v6a6 6 0 0 0 12 0V4M4 20h16" />
+      </symbol>
+      <symbol id="i-strike" viewBox="0 0 24 24">
+        <path d="M16 4H9a3 3 0 0 0-2.83 4M14 12a4 4 0 0 1 0 8H6M4 12h16" />
+      </symbol>
+      <symbol id="i-code" viewBox="0 0 24 24">
+        <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
+      </symbol>
+      <symbol id="i-heading" viewBox="0 0 24 24">
+        <path d="M6 12h12M6 20V4M18 20V4" />
+      </symbol>
+      <symbol id="i-quote" viewBox="0 0 24 24">
+        <path
+          d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zM15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
+      </symbol>
+      <symbol id="i-codeblock" viewBox="0 0 24 24">
+        <path d="m10 9-3 3 3 3M14 15l3-3-3-3" />
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+      </symbol>
+      <symbol id="i-hr" viewBox="0 0 24 24">
+        <path d="M4 12h16M8 6l4-3 4 3M8 18l4 3 4-3" />
+      </symbol>
+      <symbol id="i-ul" viewBox="0 0 24 24">
+        <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+      </symbol>
+      <symbol id="i-ol" viewBox="0 0 24 24">
+        <path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h2M6 18H4c0-1 2-2 2-3s-1-1.5-2-1" />
+      </symbol>
+      <symbol id="i-task" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="6" height="6" rx="1" />
+        <path d="m3 17 2 2 4-4M13 6h8M13 12h8M13 18h8" />
+      </symbol>
+      <symbol id="i-link" viewBox="0 0 24 24">
+        <path
+          d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+      </symbol>
+      <symbol id="i-image" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <circle cx="9" cy="9" r="2" />
+        <path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21" />
+      </symbol>
+      <symbol id="i-table" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M3 9h18M3 15h18M12 3v18" />
+      </symbol>
+      <symbol id="i-math" viewBox="0 0 24 24">
+        <path
+          d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2" />
+      </symbol>
+      <symbol id="i-diagram" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="8" height="8" rx="2" />
+        <path d="M7 11v4a2 2 0 0 0 2 2h4" />
+        <rect x="13" y="13" width="8" height="8" rx="2" />
+      </symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12h14" />
+      </symbol>
+      <symbol id="i-chev" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6" />
+      </symbol>
+      <symbol id="i-open" viewBox="0 0 24 24">
+        <path
+          d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
+      </symbol>
+      <symbol id="i-newfile" viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M12 18v-6M9 15h6" />
+      </symbol>
+      <symbol id="i-file" viewBox="0 0 24 24">
+        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5zM14 2v6h6M16 13H8M16 17H8M10 9H8" />
+      </symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24">
+        <rect x="8" y="8" width="14" height="14" rx="2" />
+        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+      </symbol>
+      <symbol id="i-download" viewBox="0 0 24 24">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+      </symbol>
+      <symbol id="i-max" viewBox="0 0 24 24">
+        <path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3" />
+      </symbol>
+      <symbol id="i-min" viewBox="0 0 24 24">
+        <path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M16 21v-3a2 2 0 0 1 2-2h3" />
+      </symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4" />
+        <path
+          d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M6.34 6.34 4.93 4.93m14.14 14.14-1.41-1.41" />
+      </symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24">
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+      </symbol>
+      <symbol id="i-sync" viewBox="0 0 24 24">
+        <path d="m3 16 4 4 4-4M7 20V4m14 4-4-4-4 4M17 4v16" />
+      </symbol>
+      <symbol id="i-cols" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M12 3v18" />
+      </symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24">
+        <path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z" />
+      </symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24">
+        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" />
+        <circle cx="12" cy="12" r="3" />
+      </symbol>
+      <symbol id="i-check" viewBox="0 0 24 24">
+        <path d="M20 6 9 17l-5-5" />
+      </symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="m9 12 2 2 4-4" />
+      </symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24">
+        <rect x="3" y="11" width="18" height="11" rx="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </symbol>
+      <symbol id="i-zap" viewBox="0 0 24 24">
+        <path d="M13 2 3 14h9l-1 8 10-12h-9z" />
+      </symbol>
+      <symbol id="i-kbd" viewBox="0 0 24 24">
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10" />
+      </symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24">
+        <path d="M5 12h14m-7-7 7 7-7 7" />
+      </symbol>
+      <symbol id="i-upload" viewBox="0 0 24 24">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+      </symbol>
+      <symbol id="i-html" viewBox="0 0 24 24">
+        <path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16" />
+      </symbol>
+      <symbol id="i-md" viewBox="0 0 24 24">
+        <rect x="2" y="5" width="20" height="14" rx="2" />
+        <path d="M6 15V9l3 3.5L12 9v6M18 9v6m-2.5-2.5L18 15l2.5-2.5" />
+      </symbol>
+      <symbol id="i-rich" viewBox="0 0 24 24">
+        <path d="M4 7V4h16v3M9 20h6M12 4v16" />
+      </symbol>
+      <symbol id="i-note" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 16v-4M12 8h.01" />
+      </symbol>
+      <symbol id="i-chevr" viewBox="0 0 24 24">
+        <path d="m9 18 6-6-6-6" />
+      </symbol>
+      <symbol id="i-undo" viewBox="0 0 24 24">
+        <path d="M3 7v6h6" />
+        <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13" />
+      </symbol>
+      <symbol id="i-redo" viewBox="0 0 24 24">
+        <path d="M21 7v6h-6" />
+        <path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3L21 13" />
+      </symbol>
+      <symbol id="i-highlight" viewBox="0 0 24 24">
+        <path d="m9 11-6 6v3h9l3-3" />
+        <path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4" />
+      </symbol>
+      <symbol id="i-mathblock" viewBox="0 0 24 24">
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="M15 8H9l3 4-3 4h6" />
+      </symbol>
+      <symbol id="i-center" viewBox="0 0 24 24">
+        <path d="M21 6H3M17 12H7M19 18H5" />
+      </symbol>
+      <symbol id="i-x" viewBox="0 0 24 24">
+        <path d="M18 6 6 18M6 6l12 12" />
+      </symbol>
+      <symbol id="i-docs" viewBox="0 0 24 24">
+        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5z" />
+        <path d="M14 2v6h6M8 13h8M8 17h5" />
+      </symbol>
+      <symbol id="i-text" viewBox="0 0 24 24">
+        <path d="M4 7V5h16v2M9 19h6M12 5v14" />
+      </symbol>
+      <symbol id="i-search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m21 21-4.3-4.3" />
+      </symbol>
+      <symbol id="i-outline" viewBox="0 0 24 24">
+        <path d="M3 6h18M3 12h10M7 18h14" />
+        <path d="M3 18h.01" />
+      </symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24">
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="m22 7-10 6L2 7" />
+      </symbol>
+      <symbol id="i-share" viewBox="0 0 24 24">
+        <circle cx="18" cy="5" r="3" />
+        <circle cx="6" cy="12" r="3" />
+        <circle cx="18" cy="19" r="3" />
+        <path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98" />
+      </symbol>
+      <symbol id="i-book" viewBox="0 0 24 24">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+      </symbol>
+      <symbol id="i-alignleft" viewBox="0 0 24 24">
+        <path d="M17 10H3M21 6H3M21 14H3M17 18H3" />
+      </symbol>
+      <symbol id="i-alignright" viewBox="0 0 24 24">
+        <path d="M21 10H7M21 6H3M21 14H3M21 18H7" />
+      </symbol>
+      <symbol id="i-smile" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" />
+      </symbol>
+      <symbol id="i-github" viewBox="0 0 16 16">
+        <path
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+      </symbol>
+      <symbol id="i-tabs" viewBox="0 0 24 24">
+        <rect x="3" y="7" width="18" height="14" rx="2" />
+        <path d="M3 11h18M7 7V4h6v3" />
+      </symbol>
+    </defs>
+  </svg>
 
-<div id="page">
+  <div id="page">
 
-  <!-- ============================ NAV ============================ -->
-  <header class="nav" id="nav">
-    <div class="container nav-in">
-      <a class="brand" href="#top" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#features">Features</a>
-        <a href="#syntax">Syntax</a>
-        <a href="#how">How it works</a>
-        <a href="#privacy">Privacy</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-      <div class="nav-cta">
-        <button class="icon-btn" data-act="theme" aria-label="Toggle theme">
-          <svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg>
-        </button>
-        <button class="btn btn-sm" data-act="install" hidden>Install app</button>
-        <button class="btn btn-primary btn-sm" data-act="full">Open editor <svg class="i"><use href="#i-max"/></svg></button>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <!-- ============================ HERO + TOOL ============================ -->
-    <section class="hero" id="top">
-      <div class="container hero-copy">
-        <span class="pill"><span class="dot"></span>Free &amp; private — runs entirely in your browser</span>
-        <h1 class="display">Write Markdown.<br>Watch it <em>come alive.</em></h1>
-        <p class="lede">A calm, powerful Markdown editor with live preview, synced scrolling, math, diagrams and one-click export. Paste, type or drop a file — that’s all it takes.</p>
-        <div class="hero-actions">
-          <button class="btn btn-primary" data-act="full">Open full-screen editor <svg class="i"><use href="#i-max"/></svg></button>
-          <a class="btn" href="#features">Explore features</a>
+    <!-- ============================ NAV ============================ -->
+    <header class="nav" id="nav">
+      <div class="container nav-in">
+        <a class="brand" href="#top" aria-label="Quilldown home"><svg class="logo">
+            <use href="#i-logo" />
+          </svg>Quilldown</a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#features">Features</a>
+          <a href="#syntax">Syntax</a>
+          <a href="/guides">Guides</a>
+          <a href="#how">How it works</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <div class="nav-cta">
+          <a class="icon-btn" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank"
+            rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill">
+              <use href="#i-github" />
+            </svg></a>
+          <button class="icon-btn" data-act="theme" aria-label="Toggle theme">
+            <svg class="i theme-icon-sun">
+              <use href="#i-sun" />
+            </svg><svg class="i theme-icon-moon">
+              <use href="#i-moon" />
+            </svg>
+          </button>
+          <button class="btn btn-sm" data-act="install" hidden>Install app</button>
+          <button class="btn btn-primary btn-sm" data-act="full">Open editor <svg class="i">
+              <use href="#i-max" />
+            </svg></button>
         </div>
       </div>
+    </header>
 
-      <div class="container wide">
-        <div class="tool-slot" id="toolSlot">
+    <main>
+      <!-- ============================ HERO + TOOL ============================ -->
+      <section class="hero" id="top">
+        <div class="container hero-copy">
+          <span class="pill"><span class="dot"></span>Free &amp; private — runs entirely in your browser</span>
+          <h1 class="display">The Markdown editor <br>that <em>comes alive.</em></h1>
+          <p class="lede">Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and
+            one-click export to PDF, Word and Google Docs. Paste, type or drop a file — everything stays in your
+            browser.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-act="full">Open full-screen editor <svg class="i">
+                <use href="#i-max" />
+              </svg></button>
+            <a class="btn" href="#features">Explore features</a>
+          </div>
+        </div>
 
-          <!-- ========================= THE TOOL ========================= -->
-          <div class="tool-shell is-full" id="tool" role="application" aria-label="Markdown editor">
-            <div class="tool-top">
-              <div class="brand-mini"><svg class="logo"><use href="#i-logo"/></svg><span>Quilldown</span></div>
-              <label class="fname" title="File name">
-                <svg class="i"><use href="#i-file"/></svg>
-                <input id="fileName" value="untitled.md" spellcheck="false" autocomplete="off" aria-label="File name">
-              </label>
-              <span class="grow"></span>
+        <div class="container wide">
+          <div class="tool-slot" id="toolSlot">
 
-              <button class="tbtn" data-act="open" title="Open a Markdown file (Ctrl+O)"><svg class="i"><use href="#i-open"/></svg><span class="lbl">Open</span></button>
-              <button class="tbtn" data-menu="new" title="New document"><svg class="i"><use href="#i-newfile"/></svg><span class="lbl">New</span><svg class="i chev"><use href="#i-chev"/></svg></button>
-              <span class="tb-sep"></span>
-              <button class="tbtn" data-menu="copy" title="Copy"><svg class="i"><use href="#i-copy"/></svg><span class="lbl">Copy</span><svg class="i chev"><use href="#i-chev"/></svg></button>
-              <button class="tbtn" data-menu="export" title="Export"><svg class="i"><use href="#i-download"/></svg><span class="lbl">Export</span><svg class="i chev"><use href="#i-chev"/></svg></button>
-              <button class="tbtn" data-act="share" title="Share as a link"><svg class="i"><use href="#i-share"/></svg><span class="lbl">Share</span></button>
-              <button class="tbtn" data-act="install" hidden title="Install Quilldown as an app"><svg class="i"><use href="#i-download"/></svg><span class="lbl">Install</span></button>
-              <span class="tb-sep"></span>
+            <!-- ========================= THE TOOL ========================= -->
+            <div class="tool-shell is-full" id="tool" role="application" aria-label="Markdown editor">
+              <div class="tool-top">
+                <div class="brand-mini"><svg class="logo">
+                    <use href="#i-logo" />
+                  </svg><span>Quilldown</span></div>
+                <label class="fname" title="File name">
+                  <svg class="i">
+                    <use href="#i-file" />
+                  </svg>
+                  <input id="fileName" value="untitled.md" spellcheck="false" autocomplete="off" aria-label="File name">
+                </label>
+                <span class="grow"></span>
 
-              <button class="tbtn icon" id="btnFind" data-act="find" title="Find &amp; replace (Ctrl+F)" aria-label="Find and replace"><svg class="i"><use href="#i-search"/></svg></button>
-              <button class="tbtn icon" id="btnOutline" data-act="outline" aria-pressed="false" title="Outline (headings)" aria-label="Toggle outline"><svg class="i"><use href="#i-outline"/></svg></button>
-              <div class="seg" role="group" aria-label="View mode">
-                <button data-act="mode:editor" aria-pressed="false" title="Editor only"><svg class="i"><use href="#i-pen"/></svg></button>
-                <button data-act="mode:split" aria-pressed="true" title="Split view"><svg class="i"><use href="#i-cols"/></svg></button>
-                <button data-act="mode:preview" aria-pressed="false" title="Preview only"><svg class="i"><use href="#i-eye"/></svg></button>
-              </div>
-              <button class="tbtn icon" id="btnSync" data-act="sync" aria-pressed="true" title="Sync scroll"><svg class="i"><use href="#i-sync"/></svg></button>
-              <button class="tbtn icon" data-act="theme" title="Toggle light / dark"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
-              <button class="tbtn icon" id="btnFull" data-act="full" title="Exit full screen (Esc)" aria-label="Toggle full screen">
-                <svg class="i full-max"><use href="#i-max"/></svg><svg class="i full-min"><use href="#i-min"/></svg>
-              </button>
-            </div>
+                <button class="tbtn" data-act="open" title="Open a Markdown file (Ctrl+O)"><svg class="i">
+                    <use href="#i-open" />
+                  </svg><span class="lbl">Open</span></button>
+                <button class="tbtn" data-menu="new" title="New document"><svg class="i">
+                    <use href="#i-newfile" />
+                  </svg><span class="lbl">New</span><svg class="i chev">
+                    <use href="#i-chev" />
+                  </svg></button>
+                <span class="tb-sep"></span>
+                <button class="tbtn" data-menu="copy" title="Copy"><svg class="i">
+                    <use href="#i-copy" />
+                  </svg><span class="lbl">Copy</span><svg class="i chev">
+                    <use href="#i-chev" />
+                  </svg></button>
+                <button class="tbtn" data-menu="export" title="Export"><svg class="i">
+                    <use href="#i-download" />
+                  </svg><span class="lbl">Export</span><svg class="i chev">
+                    <use href="#i-chev" />
+                  </svg></button>
+                <button class="tbtn" data-act="share" title="Share as a link"><svg class="i">
+                    <use href="#i-share" />
+                  </svg><span class="lbl">Share</span></button>
+                <button class="tbtn" data-act="install" hidden title="Install Quilldown as an app"><svg class="i">
+                    <use href="#i-download" />
+                  </svg><span class="lbl">Install</span></button>
+                <span class="tb-sep"></span>
 
-            <div class="tabs" id="tabs" role="tablist" aria-label="Open documents"></div>
-
-            <div class="snippet-bar" id="snippetBar" role="toolbar" aria-label="Markdown snippets"></div>
-
-            <div class="work" id="work">
-            <aside class="outline" id="outline" aria-label="Document outline">
-              <div class="ol-head"><span>Outline</span><button type="button" class="pbtn" data-act="outline" aria-label="Close outline"><svg class="i"><use href="#i-x"/></svg></button></div>
-              <nav class="ol-list" id="olList"></nav>
-            </aside>
-            <div class="panes" id="panes" data-mode="split">
-              <section class="pane pane-editor" aria-label="Markdown source">
-                <div class="pane-label"><span>Markdown</span>
-                  <span class="pane-actions"><button type="button" class="pbtn" data-act="copy-md" title="Copy the Markdown source"><svg class="i"><use href="#i-copy"/></svg>Copy Markdown</button></span>
+                <button class="tbtn icon" id="btnFind" data-act="find" title="Find &amp; replace (Ctrl+F)"
+                  aria-label="Find and replace"><svg class="i">
+                    <use href="#i-search" />
+                  </svg></button>
+                <button class="tbtn icon" id="btnOutline" data-act="outline" aria-pressed="false"
+                  title="Outline (headings)" aria-label="Toggle outline"><svg class="i">
+                    <use href="#i-outline" />
+                  </svg></button>
+                <div class="seg" role="group" aria-label="View mode">
+                  <button data-act="mode:editor" aria-pressed="false" title="Editor only"><svg class="i">
+                      <use href="#i-pen" />
+                    </svg></button>
+                  <button data-act="mode:split" aria-pressed="true" title="Split view"><svg class="i">
+                      <use href="#i-cols" />
+                    </svg></button>
+                  <button data-act="mode:preview" aria-pressed="false" title="Preview only"><svg class="i">
+                      <use href="#i-eye" />
+                    </svg></button>
                 </div>
-                <div class="editor-wrap">
-                  <div id="hl" class="ed-text" aria-hidden="true"></div>
-                  <textarea id="editor" class="ed-text" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="soft" aria-label="Markdown editor" placeholder="Paste or type Markdown here — or drop a .md file anywhere…"></textarea>
-                  <div id="mirror" class="ed-text" aria-hidden="true"></div>
-                  <div class="findbar" id="findbar" hidden role="search" aria-label="Find and replace">
-                    <div class="fb-row">
-                      <button type="button" class="fb-btn fb-expand" id="fbExpand" aria-expanded="false" title="Show replace (Ctrl+H)" aria-label="Toggle replace"><svg class="i"><use href="#i-chevr"/></svg></button>
-                      <input id="findInput" class="fb-input" placeholder="Find" spellcheck="false" autocomplete="off" aria-label="Find">
-                      <button type="button" class="fb-btn fb-opt" id="fbCase" aria-pressed="false" title="Match case (Alt+C)">Aa</button>
-                      <button type="button" class="fb-btn fb-opt" id="fbWord" aria-pressed="false" title="Whole word (Alt+W)">ab</button>
-                      <button type="button" class="fb-btn fb-opt" id="fbRegex" aria-pressed="false" title="Regular expression (Alt+R)">.*</button>
-                      <span class="fb-count" id="fbCount" aria-live="polite">No results</span>
-                      <button type="button" class="fb-btn" data-fb="prev" title="Previous (Shift+Enter)" aria-label="Previous match"><svg class="i" style="transform:rotate(180deg)"><use href="#i-chev"/></svg></button>
-                      <button type="button" class="fb-btn" data-fb="next" title="Next (Enter)" aria-label="Next match"><svg class="i"><use href="#i-chev"/></svg></button>
-                      <button type="button" class="fb-btn" data-fb="close" title="Close (Esc)" aria-label="Close find"><svg class="i"><use href="#i-x"/></svg></button>
+                <button class="tbtn icon" id="btnSync" data-act="sync" aria-pressed="true" title="Sync scroll"><svg
+                    class="i">
+                    <use href="#i-sync" />
+                  </svg></button>
+                <button class="tbtn icon" data-act="theme" title="Toggle light / dark"><svg class="i theme-icon-sun">
+                    <use href="#i-sun" />
+                  </svg><svg class="i theme-icon-moon">
+                    <use href="#i-moon" />
+                  </svg></button>
+                <button class="tbtn icon" id="btnFull" data-act="full" title="Exit full screen (Esc)"
+                  aria-label="Toggle full screen">
+                  <svg class="i full-max">
+                    <use href="#i-max" />
+                  </svg><svg class="i full-min">
+                    <use href="#i-min" />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="tabs" id="tabs" role="tablist" aria-label="Open documents"></div>
+
+              <div class="snippet-bar" id="snippetBar" role="toolbar" aria-label="Markdown snippets"></div>
+
+              <div class="work" id="work">
+                <aside class="outline" id="outline" aria-label="Document outline">
+                  <div class="ol-head"><span>Outline</span><button type="button" class="pbtn" data-act="outline"
+                      aria-label="Close outline"><svg class="i">
+                        <use href="#i-x" />
+                      </svg></button></div>
+                  <nav class="ol-list" id="olList"></nav>
+                </aside>
+                <div class="panes" id="panes" data-mode="split">
+                  <section class="pane pane-editor" aria-label="Markdown source">
+                    <div class="pane-label"><span>Markdown</span>
+                      <span class="pane-actions"><button type="button" class="pbtn" data-act="copy-md"
+                          title="Copy the Markdown source"><svg class="i">
+                            <use href="#i-copy" />
+                          </svg>Copy Markdown</button></span>
                     </div>
-                    <div class="fb-row" id="replaceRow" hidden>
-                      <span class="fb-spacer"></span>
-                      <input id="replaceInput" class="fb-input" placeholder="Replace with" spellcheck="false" autocomplete="off" aria-label="Replace with">
-                      <button type="button" class="fb-txt" data-fb="replace">Replace</button>
-                      <button type="button" class="fb-txt" data-fb="replaceAll">All</button>
+                    <div class="editor-wrap">
+                      <div id="hl" class="ed-text" aria-hidden="true"></div>
+                      <textarea id="editor" class="ed-text" spellcheck="false" autocapitalize="off" autocomplete="off"
+                        autocorrect="off" wrap="soft" aria-label="Markdown editor"
+                        placeholder="Paste or type Markdown here — or drop a .md file anywhere…"></textarea>
+                      <div id="mirror" class="ed-text" aria-hidden="true"></div>
+                      <div class="findbar" id="findbar" hidden role="search" aria-label="Find and replace">
+                        <div class="fb-row">
+                          <button type="button" class="fb-btn fb-expand" id="fbExpand" aria-expanded="false"
+                            title="Show replace (Ctrl+H)" aria-label="Toggle replace"><svg class="i">
+                              <use href="#i-chevr" />
+                            </svg></button>
+                          <input id="findInput" class="fb-input" placeholder="Find" spellcheck="false"
+                            autocomplete="off" aria-label="Find">
+                          <button type="button" class="fb-btn fb-opt" id="fbCase" aria-pressed="false"
+                            title="Match case (Alt+C)">Aa</button>
+                          <button type="button" class="fb-btn fb-opt" id="fbWord" aria-pressed="false"
+                            title="Whole word (Alt+W)">ab</button>
+                          <button type="button" class="fb-btn fb-opt" id="fbRegex" aria-pressed="false"
+                            title="Regular expression (Alt+R)">.*</button>
+                          <span class="fb-count" id="fbCount" aria-live="polite">No results</span>
+                          <button type="button" class="fb-btn" data-fb="prev" title="Previous (Shift+Enter)"
+                            aria-label="Previous match"><svg class="i" style="transform:rotate(180deg)">
+                              <use href="#i-chev" />
+                            </svg></button>
+                          <button type="button" class="fb-btn" data-fb="next" title="Next (Enter)"
+                            aria-label="Next match"><svg class="i">
+                              <use href="#i-chev" />
+                            </svg></button>
+                          <button type="button" class="fb-btn" data-fb="close" title="Close (Esc)"
+                            aria-label="Close find"><svg class="i">
+                              <use href="#i-x" />
+                            </svg></button>
+                        </div>
+                        <div class="fb-row" id="replaceRow" hidden>
+                          <span class="fb-spacer"></span>
+                          <input id="replaceInput" class="fb-input" placeholder="Replace with" spellcheck="false"
+                            autocomplete="off" aria-label="Replace with">
+                          <button type="button" class="fb-txt" data-fb="replace">Replace</button>
+                          <button type="button" class="fb-txt" data-fb="replaceAll">All</button>
+                        </div>
+                      </div>
                     </div>
+                  </section>
+                  <div class="gutter" id="gutter" role="separator" aria-orientation="vertical" aria-label="Resize panes"
+                    tabindex="0"></div>
+                  <section class="pane pane-preview" aria-label="Preview">
+                    <div class="pane-label"><span>Preview</span>
+                      <span class="pane-actions">
+                        <button type="button" class="pbtn" data-act="copy-rich" title="Copy formatted text"><svg
+                            class="i">
+                            <use href="#i-copy" />
+                          </svg>Copy</button>
+                        <button type="button" class="pbtn" data-act="copy-docs"
+                          title="Copy with Google Docs sizes: H1 23 · H2 17 · H3 14 · text 12 pt"><svg class="i">
+                            <use href="#i-docs" />
+                          </svg>Copy for Docs</button>
+                      </span>
+                    </div>
+                    <div class="preview-scroll" id="previewPane">
+                      <article class="md" id="preview"
+                        style="padding:28px 40px 96px;max-width:860px;margin-inline:auto"></article>
+                    </div>
+                  </section>
+                </div>
+              </div>
+
+              <div class="status">
+                <span><b id="stWords">0</b> words</span>
+                <span class="hide-sm"><b id="stChars">0</b> characters</span>
+                <span class="hide-sm"><b id="stRead">0</b> min read</span>
+                <span class="grow"></span>
+                <span class="ed-only hide-sm">Ln <b id="stLn">1</b>, Col <b id="stCol">1</b></span>
+                <span class="offline-pill hide-sm" id="stOffline" hidden
+                  title="Everything the editor needs is stored locally"><svg class="i">
+                    <use href="#i-zap" />
+                  </svg>Works offline</span>
+                <span class="saved" id="stSaved"><svg class="i">
+                    <use href="#i-check" />
+                  </svg>Saved locally</span>
+              </div>
+            </div>
+            <!-- ============================================================ -->
+
+          </div>
+          <p class="hero-after">Want more room? <button data-act="full">Go full screen</button> · press <kbd>Esc</kbd>
+            to come back here.</p>
+        </div>
+      </section>
+
+      <!-- ============================ TRUST STRIP ============================ -->
+      <section class="trust" aria-label="Highlights">
+        <div class="container trust-in">
+          <div class="trust-item"><svg class="i i-lg">
+              <use href="#i-lock" />
+            </svg>Private &amp; works offline</div>
+          <div class="trust-item"><svg class="i i-lg">
+              <use href="#i-zap" />
+            </svg>Instant live preview</div>
+          <div class="trust-item"><svg class="i i-lg">
+              <use href="#i-md" />
+            </svg>GitHub-flavored Markdown</div>
+          <div class="trust-item"><svg class="i i-lg">
+              <use href="#i-math" />
+            </svg>Math &amp; diagrams built in</div>
+        </div>
+      </section>
+
+      <!-- ============================ WHAT IS MARKDOWN ============================ -->
+      <section class="section" id="what">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="eyebrow">Markdown, explained</div>
+            <h2 class="title">Write in plain text. <em>Publish anywhere.</em></h2>
+            <p>Markdown is a simple way to format text with ordinary characters — <code>#</code> for headings,
+              <code>**bold**</code>, <code>-</code> for lists. A Markdown editor like Quilldown shows the formatted
+              result as you type, so you get the speed of plain text and the polish of a word processor. New to it? Read
+              <a href="/guides/what-is-markdown">what Markdown is</a>, or keep the <a
+                href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a> open while you write.
+            </p>
+          </div>
+          <div class="bento">
+            <article class="card reveal">
+              <h3>Fast to write</h3>
+              <p>Formatting is a symbol or two, so your hands never leave the keyboard: <code>**bold**</code>,
+                <code># heading</code>, <code>- list</code>, <code>[link](url)</code>.
+              </p>
+              <a class="more-link" href="/guides/markdown-cheat-sheet">See the full syntax →</a>
+            </article>
+            <article class="card reveal">
+              <h3>Readable anywhere</h3>
+              <p>A <code>.md</code> file is plain text. It opens in any editor, works with Git, and will still open in
+                twenty years — no proprietary format to get locked into.</p>
+              <a class="more-link" href="/guides/what-is-markdown">What is Markdown? →</a>
+            </article>
+            <article class="card reveal">
+              <h3>Converts to anything</h3>
+              <p>Turn the same document into a PDF, a Word or Google Docs file, a web page or an e-book — without
+                retyping or reformatting.</p>
+              <span class="more-links"><a class="more-link" href="/guides/markdown-to-pdf">Markdown to PDF →</a><a
+                  class="more-link" href="/guides/markdown-to-word">to Word &amp; Docs →</a><a class="more-link"
+                  href="/guides/markdown-to-html">to HTML →</a></span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ USE CASES ============================ -->
+      <section class="section" id="use-cases" style="padding-top:0">
+        <div class="container">
+          <div class="section-head center reveal">
+            <div class="eyebrow">Who it's for</div>
+            <h2 class="title">Made for the way <em>you write.</em></h2>
+            <p>From a project README to a research note, Quilldown handles the formatting so you can focus on the words.
+            </p>
+          </div>
+          <div class="mini-grid" style="padding-top:0">
+            <article class="mini reveal">
+              <div class="card-ico"><svg class="i">
+                  <use href="#i-code" />
+                </svg></div>
+              <h3>Developers</h3>
+              <p>Write READMEs, docs and changelogs with syntax-highlighted code, tables and task lists.</p><a
+                class="more-link" href="/guides/readme-template">README template →</a>
+            </article>
+            <article class="mini reveal">
+              <div class="card-ico"><svg class="i">
+                  <use href="#i-file" />
+                </svg></div>
+              <h3>Writers &amp; bloggers</h3>
+              <p>Draft distraction-free, then copy clean HTML or export a finished page.</p><a class="more-link"
+                href="/guides/markdown-to-html">Markdown to HTML →</a>
+            </article>
+            <article class="mini reveal">
+              <div class="card-ico"><svg class="i">
+                  <use href="#i-math" />
+                </svg></div>
+              <h3>Students &amp; researchers</h3>
+              <p>Take notes with LaTeX equations, footnotes and diagrams, and export to PDF.</p><a class="more-link"
+                href="/guides/latex-math-in-markdown">Math in Markdown →</a>
+            </article>
+            <article class="mini reveal">
+              <div class="card-ico"><svg class="i">
+                  <use href="#i-docs" />
+                </svg></div>
+              <h3>Teams &amp; professionals</h3>
+              <p>Meeting notes, reports and résumés — paste into Google Docs or export to Word.</p><a class="more-link"
+                href="/guides/markdown-to-word">Markdown to Word →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================ FEATURES ============================ -->
+      <section class="section" id="features">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="eyebrow">Features</div>
+            <h2 class="title">Everything you need to write. <em>Nothing you don’t.</em></h2>
+            <p>Quilldown keeps the interface out of the way and puts the details right where a writer would look for
+              them.</p>
+          </div>
+
+          <div class="bento">
+            <article class="card span2 reveal">
+              <div class="card-ico"><svg class="i i-lg">
+                  <use href="#i-eye" />
+                </svg></div>
+              <h3>Live preview, exactly as it will read</h3>
+              <p>Every heading, list, table and code block renders as you type — with clean, readable typography and
+                syntax-highlighted code.</p>
+              <div class="card-visual">
+                <div class="mock" aria-hidden="true">
+                  <div class="mock-l">
+                    <div><b>#</b> Launch notes</div>
+                    <div>Ship <b>**fast**</b>, write <b>_well_</b>.</div>
+                    <div><b>-</b> Draft</div>
+                    <div><b>-</b> Review</div>
+                    <div><b>-</b> Publish</div>
+                  </div>
+                  <div class="mock-r">
+                    <h4>Launch notes</h4>
+                    <p>Ship <strong>fast</strong>, write <em>well</em>.</p>
+                    <ul>
+                      <li>Draft</li>
+                      <li>Review</li>
+                      <li>Publish</li>
+                    </ul>
                   </div>
                 </div>
-              </section>
-              <div class="gutter" id="gutter" role="separator" aria-orientation="vertical" aria-label="Resize panes" tabindex="0"></div>
-              <section class="pane pane-preview" aria-label="Preview">
-                <div class="pane-label"><span>Preview</span>
-                  <span class="pane-actions">
-                    <button type="button" class="pbtn" data-act="copy-rich" title="Copy formatted text"><svg class="i"><use href="#i-copy"/></svg>Copy</button>
-                    <button type="button" class="pbtn" data-act="copy-docs" title="Copy with Google Docs sizes: H1 23 · H2 17 · H3 14 · text 12 pt"><svg class="i"><use href="#i-docs"/></svg>Copy for Docs</button>
-                  </span>
-                </div>
-                <div class="preview-scroll" id="previewPane">
-                  <article class="md" id="preview" style="padding:28px 40px 96px;max-width:860px;margin-inline:auto"></article>
-                </div>
-              </section>
-            </div>
-            </div>
+              </div>
+            </article>
 
-            <div class="status">
-              <span><b id="stWords">0</b> words</span>
-              <span class="hide-sm"><b id="stChars">0</b> characters</span>
-              <span class="hide-sm"><b id="stRead">0</b> min read</span>
-              <span class="grow"></span>
-              <span class="ed-only hide-sm">Ln <b id="stLn">1</b>, Col <b id="stCol">1</b></span>
-              <span class="offline-pill hide-sm" id="stOffline" hidden title="Everything the editor needs is stored locally"><svg class="i"><use href="#i-zap"/></svg>Works offline</span>
-              <span class="saved" id="stSaved"><svg class="i"><use href="#i-check"/></svg>Saved locally</span>
-            </div>
+            <article class="card reveal">
+              <div class="card-ico"><svg class="i i-lg">
+                  <use href="#i-sync" />
+                </svg></div>
+              <h3>Scroll in sync</h3>
+              <p>Scroll either side and the other follows — aligned block by block, not just by percentage.</p>
+              <div class="card-visual">
+                <div class="sync-demo" aria-hidden="true">
+                  <div class="sync-col"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  <div class="sync-col"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="card reveal">
+              <div class="card-ico"><svg class="i i-lg">
+                  <use href="#i-copy" />
+                </svg></div>
+              <h3>Copy it your way</h3>
+              <p>One click on either pane: formatted text, a Google&nbsp;Docs-ready version with proper heading sizes,
+                raw Markdown, or clean HTML.</p>
+              <div class="card-visual chips"><span class="chip"><svg class="i">
+                    <use href="#i-rich" />
+                  </svg>Formatted</span><span class="chip"><svg class="i">
+                    <use href="#i-docs" />
+                  </svg>For Docs</span><span class="chip"><svg class="i">
+                    <use href="#i-md" />
+                  </svg>Markdown</span><span class="chip"><svg class="i">
+                    <use href="#i-html" />
+                  </svg>HTML</span></div>
+            </article>
+
+            <article class="card reveal">
+              <div class="card-ico"><svg class="i i-lg">
+                  <use href="#i-tabs" />
+                </svg></div>
+              <h3>Tabs for every document</h3>
+              <p>Keep several documents open like browser tabs. Reorder, rename, and pick up exactly where you left off.
+              </p>
+              <div class="card-visual">
+                <div class="tabs-demo" aria-hidden="true"><span
+                    class="on">notes.md</span><span>readme.md</span><span>draft.md</span><span class="plus">+</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="card reveal">
+              <div class="card-ico"><svg class="i i-lg">
+                  <use href="#i-download" />
+                </svg></div>
+              <h3>Export anywhere</h3>
+              <p>Save a polished PDF, a real Word document, a PNG image, an EPUB e-book, a standalone web page, Markdown
+                or plain text — one click each.</p>
+              <div class="card-visual chips"><span class="chip"><svg class="i">
+                    <use href="#i-file" />
+                  </svg>PDF</span><span class="chip"><svg class="i">
+                    <use href="#i-docs" />
+                  </svg>Word</span><span class="chip"><svg class="i">
+                    <use href="#i-image" />
+                  </svg>PNG</span><span class="chip"><svg class="i">
+                    <use href="#i-book" />
+                  </svg>EPUB</span><span class="chip"><svg class="i">
+                    <use href="#i-html" />
+                  </svg>HTML</span><span class="chip"><svg class="i">
+                    <use href="#i-md" />
+                  </svg>.md</span><span class="chip"><svg class="i">
+                    <use href="#i-text" />
+                  </svg>.txt</span></div>
+            </article>
+
+            <article class="card reveal">
+              <div class="card-ico"><svg class="i i-lg">
+                  <use href="#i-open" />
+                </svg></div>
+              <h3>Open &amp; drop files</h3>
+              <p>Open .md or .txt files from your computer, or drag several onto the page at once — each lands in its
+                own tab.</p>
+              <div class="card-visual">
+                <div class="drop" aria-hidden="true"><span class="file-chip"><svg class="i">
+                      <use href="#i-file" />
+                    </svg>README.md</span>Drop files anywhere</div>
+              </div>
+            </article>
+
+            <article class="card reveal">
+              <div class="card-ico"><svg class="i i-lg">
+                  <use href="#i-math" />
+                </svg></div>
+              <h3>Math &amp; diagrams</h3>
+              <p>Beautiful equations with KaTeX. Flowcharts, sequences, Gantt charts and more with Mermaid.</p>
+              <div class="card-visual">
+                <div class="math-demo"><span class="math" data-display="1" data-tex="e%5E%7Bi%5Cpi%7D%2B1%3D0"></span>
+                </div>
+              </div>
+            </article>
+
+            <article class="card reveal">
+              <div class="card-ico"><svg class="i i-lg">
+                  <use href="#i-plus" />
+                </svg></div>
+              <h3>45+ one-click snippets</h3>
+              <p>Text styles, headings, lists, tables, math, diagrams and callouts — all in one toolbar that stays out
+                of your way.</p>
+              <div class="card-visual snip-row" aria-hidden="true">
+                <span><svg class="i">
+                    <use href="#i-bold" />
+                  </svg></span><span><svg class="i">
+                    <use href="#i-italic" />
+                  </svg></span><span><svg class="i">
+                    <use href="#i-heading" />
+                  </svg></span><span><svg class="i">
+                    <use href="#i-quote" />
+                  </svg></span><span><svg class="i">
+                    <use href="#i-codeblock" />
+                  </svg></span><span><svg class="i">
+                    <use href="#i-task" />
+                  </svg></span><span><svg class="i">
+                    <use href="#i-table" />
+                  </svg></span><span><svg class="i">
+                    <use href="#i-diagram" />
+                  </svg></span>
+              </div>
+            </article>
           </div>
-          <!-- ============================================================ -->
 
-        </div>
-        <p class="hero-after">Want more room? <button data-act="full">Go full screen</button> · press <kbd>Esc</kbd> to come back here.</p>
-      </div>
-    </section>
-
-    <!-- ============================ TRUST STRIP ============================ -->
-    <section class="trust" aria-label="Highlights">
-      <div class="container trust-in">
-        <div class="trust-item"><svg class="i i-lg"><use href="#i-lock"/></svg>Private &amp; works offline</div>
-        <div class="trust-item"><svg class="i i-lg"><use href="#i-zap"/></svg>Instant live preview</div>
-        <div class="trust-item"><svg class="i i-lg"><use href="#i-md"/></svg>GitHub-flavored Markdown</div>
-        <div class="trust-item"><svg class="i i-lg"><use href="#i-math"/></svg>Math &amp; diagrams built in</div>
-      </div>
-    </section>
-
-    <!-- ============================ FEATURES ============================ -->
-    <section class="section" id="features">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="eyebrow">Features</div>
-          <h2 class="title">Everything you need to write. <em>Nothing you don’t.</em></h2>
-          <p>Quilldown keeps the interface out of the way and puts the details right where a writer would look for them.</p>
-        </div>
-
-        <div class="bento">
-          <article class="card span2 reveal">
-            <div class="card-ico"><svg class="i i-lg"><use href="#i-eye"/></svg></div>
-            <h3>Live preview, exactly as it will read</h3>
-            <p>Every heading, list, table and code block renders as you type — with clean, readable typography and syntax-highlighted code.</p>
-            <div class="card-visual">
-              <div class="mock" aria-hidden="true">
-                <div class="mock-l"><div><b>#</b> Launch notes</div><div>Ship <b>**fast**</b>, write <b>_well_</b>.</div><div><b>-</b> Draft</div><div><b>-</b> Review</div><div><b>-</b> Publish</div></div>
-                <div class="mock-r"><h4>Launch notes</h4><p>Ship <strong>fast</strong>, write <em>well</em>.</p><ul><li>Draft</li><li>Review</li><li>Publish</li></ul></div>
+          <!-- Everything else, one click away -->
+          <div class="more-wrap reveal">
+            <button type="button" class="more-toggle" data-expand aria-controls="moreFeatures" aria-expanded="false"
+              data-more="Show all features" data-less="Show fewer features">
+              <span class="ex-t">Show all features</span><span class="ex-count">+19</span><svg class="i ex-chev">
+                <use href="#i-chev" />
+              </svg>
+            </button>
+          </div>
+          <div class="expander" id="moreFeatures">
+            <div class="expander-in">
+              <div class="mini-grid">
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-docs" />
+                    </svg></div>
+                  <h3>Copy for Docs</h3>
+                  <p>Pastes with H1 at 23&nbsp;pt, H2 at 17&nbsp;pt, H3 at 14&nbsp;pt and body text at 12&nbsp;pt — so
+                    Google Docs looks right first time.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-kbd" />
+                    </svg></div>
+                  <h3>Keyboard-first</h3>
+                  <p><span class="kbd">Ctrl</span> <span class="kbd">B</span> bold, <span class="kbd">K</span> link,
+                    <span class="kbd">S</span> save, <span class="kbd">O</span> open. Enter continues lists and Tab
+                    indents them.
+                  </p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-note" />
+                    </svg></div>
+                  <h3>Callouts</h3>
+                  <p>Note, Tip, Important, Warning and Caution boxes in GitHub style — one dropdown away.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-diagram" />
+                    </svg></div>
+                  <h3>Eight diagram types</h3>
+                  <p>Flowchart, sequence, class, state, ER, Gantt, pie and mind map — each with a ready-made template.
+                  </p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-code" />
+                    </svg></div>
+                  <h3>Code that reads well</h3>
+                  <p>Fenced blocks are syntax-highlighted for dozens of languages, each with a one-click copy button.
+                  </p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-cols" />
+                    </svg></div>
+                  <h3>Your layout</h3>
+                  <p>Split, editor-only or preview-only. Drag the divider to resize; it stacks neatly on small screens.
+                  </p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-check" />
+                    </svg></div>
+                  <h3>Autosave, always</h3>
+                  <p>Every tab is saved in your browser as you type. Closed one by mistake? Undo brings it back.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-search" />
+                    </svg></div>
+                  <h3>Find &amp; replace</h3>
+                  <p>Every match highlighted as you type, with match case, whole word and regex — plus replace one or
+                    replace all in a single undo step.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-outline" />
+                    </svg></div>
+                  <h3>Outline sidebar</h3>
+                  <p>All your headings in a clickable list that follows your scroll position — jump around long
+                    documents in a click.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-note" />
+                    </svg></div>
+                  <h3>Footnotes</h3>
+                  <p>Write <code>[^1]</code> and Quilldown numbers them, collects them at the bottom and links both
+                    ways. They become real footnotes in Word.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-image" />
+                    </svg></div>
+                  <h3>Paste or drop images</h3>
+                  <p>Paste a screenshot or drop a picture into the editor. It’s resized, kept inside the document and
+                    embedded when you export.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-newfile" />
+                    </svg></div>
+                  <h3>Eight templates</h3>
+                  <p>Start from a README, meeting notes, résumé, blog post, email, tables, to-do list or notes — each
+                    opens in its own tab.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-share" />
+                    </svg></div>
+                  <h3>Share as a link</h3>
+                  <p>Your document is packed into the link itself — no upload, no account. Optionally open it in
+                    preview-only mode.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-zap" />
+                    </svg></div>
+                  <h3>Works offline</h3>
+                  <p>Every library and font is bundled, so nothing loads from third parties. Host it once and it
+                    installs as an app that runs with no connection.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-table" />
+                    </svg></div>
+                  <h3>Visual table editor</h3>
+                  <p>Edit any table in a grid — add rows and columns, set alignment, paste from a spreadsheet — and get
+                    tidy, aligned Markdown back.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-smile" />
+                    </svg></div>
+                  <h3>Emoji picker</h3>
+                  <p>Search by name, browse categories, pick a skin tone, and jump back to the emoji you use most.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-smile" />
+                    </svg></div>
+                  <h3>Emoji shortcodes</h3>
+                  <p>Type a colon and a few letters — <code>:roc</code> — and pick 🚀 from the suggestions. A finished
+                    <code>:tada:</code> becomes 🎉, and shortcodes in imported READMEs render too.
+                  </p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-open" />
+                    </svg></div>
+                  <h3>Open with Quilldown</h3>
+                  <p>Installed as an app, Quilldown can be picked in your system’s “Open with” menu for .md files — and
+                    Save writes straight back to the file.</p>
+                </article>
+                <article class="mini">
+                  <div class="card-ico"><svg class="i">
+                      <use href="#i-moon" />
+                    </svg></div>
+                  <h3>Light &amp; dark</h3>
+                  <p>A calm theme for day and night. Exports always come out in clean, print-friendly light.</p>
+                </article>
               </div>
             </div>
-          </article>
+          </div>
+        </div>
+      </section>
 
-          <article class="card reveal">
-            <div class="card-ico"><svg class="i i-lg"><use href="#i-sync"/></svg></div>
-            <h3>Scroll in sync</h3>
-            <p>Scroll either side and the other follows — aligned block by block, not just by percentage.</p>
-            <div class="card-visual"><div class="sync-demo" aria-hidden="true"><div class="sync-col"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="sync-col"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
-          </article>
-
-          <article class="card reveal">
-            <div class="card-ico"><svg class="i i-lg"><use href="#i-copy"/></svg></div>
-            <h3>Copy it your way</h3>
-            <p>One click on either pane: formatted text, a Google&nbsp;Docs-ready version with proper heading sizes, raw Markdown, or clean HTML.</p>
-            <div class="card-visual chips"><span class="chip"><svg class="i"><use href="#i-rich"/></svg>Formatted</span><span class="chip"><svg class="i"><use href="#i-docs"/></svg>For Docs</span><span class="chip"><svg class="i"><use href="#i-md"/></svg>Markdown</span><span class="chip"><svg class="i"><use href="#i-html"/></svg>HTML</span></div>
-          </article>
-
-          <article class="card reveal">
-            <div class="card-ico"><svg class="i i-lg"><use href="#i-tabs"/></svg></div>
-            <h3>Tabs for every document</h3>
-            <p>Keep several documents open like browser tabs. Reorder, rename, and pick up exactly where you left off.</p>
-            <div class="card-visual"><div class="tabs-demo" aria-hidden="true"><span class="on">notes.md</span><span>readme.md</span><span>draft.md</span><span class="plus">+</span></div></div>
-          </article>
-
-          <article class="card reveal">
-            <div class="card-ico"><svg class="i i-lg"><use href="#i-download"/></svg></div>
-            <h3>Export anywhere</h3>
-            <p>Save a polished PDF, a real Word document, a PNG image, an EPUB e-book, a standalone web page, Markdown or plain text — one click each.</p>
-            <div class="card-visual chips"><span class="chip"><svg class="i"><use href="#i-file"/></svg>PDF</span><span class="chip"><svg class="i"><use href="#i-docs"/></svg>Word</span><span class="chip"><svg class="i"><use href="#i-image"/></svg>PNG</span><span class="chip"><svg class="i"><use href="#i-book"/></svg>EPUB</span><span class="chip"><svg class="i"><use href="#i-html"/></svg>HTML</span><span class="chip"><svg class="i"><use href="#i-md"/></svg>.md</span><span class="chip"><svg class="i"><use href="#i-text"/></svg>.txt</span></div>
-          </article>
-
-          <article class="card reveal">
-            <div class="card-ico"><svg class="i i-lg"><use href="#i-open"/></svg></div>
-            <h3>Open &amp; drop files</h3>
-            <p>Open .md or .txt files from your computer, or drag several onto the page at once — each lands in its own tab.</p>
-            <div class="card-visual"><div class="drop" aria-hidden="true"><span class="file-chip"><svg class="i"><use href="#i-file"/></svg>README.md</span>Drop files anywhere</div></div>
-          </article>
-
-          <article class="card reveal">
-            <div class="card-ico"><svg class="i i-lg"><use href="#i-math"/></svg></div>
-            <h3>Math &amp; diagrams</h3>
-            <p>Beautiful equations with KaTeX. Flowcharts, sequences, Gantt charts and more with Mermaid.</p>
-            <div class="card-visual"><div class="math-demo"><span class="math" data-display="1" data-tex="e%5E%7Bi%5Cpi%7D%2B1%3D0"></span></div></div>
-          </article>
-
-          <article class="card reveal">
-            <div class="card-ico"><svg class="i i-lg"><use href="#i-plus"/></svg></div>
-            <h3>45+ one-click snippets</h3>
-            <p>Text styles, headings, lists, tables, math, diagrams and callouts — all in one toolbar that stays out of your way.</p>
-            <div class="card-visual snip-row" aria-hidden="true">
-              <span><svg class="i"><use href="#i-bold"/></svg></span><span><svg class="i"><use href="#i-italic"/></svg></span><span><svg class="i"><use href="#i-heading"/></svg></span><span><svg class="i"><use href="#i-quote"/></svg></span><span><svg class="i"><use href="#i-codeblock"/></svg></span><span><svg class="i"><use href="#i-task"/></svg></span><span><svg class="i"><use href="#i-table"/></svg></span><span><svg class="i"><use href="#i-diagram"/></svg></span>
+      <!-- ============================ SYNTAX ============================ -->
+      <section class="section" id="syntax" style="background:var(--surface-2);border-block:1px solid var(--line)">
+        <div class="container">
+          <div class="section-head center reveal">
+            <div class="eyebrow">Syntax</div>
+            <h2 class="title">Markdown, <em>at a glance.</em></h2>
+            <p>The essentials on the left, the result on the right. Hit “Try it” to drop any example straight into the
+              editor — or open the <a href="/guides/markdown-cheat-sheet">complete Markdown cheat sheet</a>.</p>
+          </div>
+          <div class="cheats" id="cheats"></div>
+          <div class="more-wrap">
+            <button type="button" class="more-toggle" data-expand aria-controls="cheatsPanel" aria-expanded="false"
+              data-more="Show all syntax" data-less="Show less">
+              <span class="ex-t">Show all syntax</span><span class="ex-count" id="syntaxCount">+6</span><svg
+                class="i ex-chev">
+                <use href="#i-chev" />
+              </svg>
+            </button>
+          </div>
+          <div class="expander" id="cheatsPanel">
+            <div class="expander-in">
+              <div class="cheats" id="cheatsMore" style="padding-top:16px"></div>
             </div>
-          </article>
-        </div>
-
-        <!-- Everything else, one click away -->
-        <div class="more-wrap reveal">
-          <button type="button" class="more-toggle" data-expand aria-controls="moreFeatures" aria-expanded="false" data-more="Show all features" data-less="Show fewer features">
-            <span class="ex-t">Show all features</span><span class="ex-count">+19</span><svg class="i ex-chev"><use href="#i-chev"/></svg>
-          </button>
-        </div>
-        <div class="expander" id="moreFeatures"><div class="expander-in">
-          <div class="mini-grid">
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-docs"/></svg></div><h3>Copy for Docs</h3><p>Pastes with H1 at 23&nbsp;pt, H2 at 17&nbsp;pt, H3 at 14&nbsp;pt and body text at 12&nbsp;pt — so Google Docs looks right first time.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-kbd"/></svg></div><h3>Keyboard-first</h3><p><span class="kbd">Ctrl</span> <span class="kbd">B</span> bold, <span class="kbd">K</span> link, <span class="kbd">S</span> save, <span class="kbd">O</span> open. Enter continues lists and Tab indents them.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-note"/></svg></div><h3>Callouts</h3><p>Note, Tip, Important, Warning and Caution boxes in GitHub style — one dropdown away.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-diagram"/></svg></div><h3>Eight diagram types</h3><p>Flowchart, sequence, class, state, ER, Gantt, pie and mind map — each with a ready-made template.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-code"/></svg></div><h3>Code that reads well</h3><p>Fenced blocks are syntax-highlighted for dozens of languages, each with a one-click copy button.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-cols"/></svg></div><h3>Your layout</h3><p>Split, editor-only or preview-only. Drag the divider to resize; it stacks neatly on small screens.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-check"/></svg></div><h3>Autosave, always</h3><p>Every tab is saved in your browser as you type. Closed one by mistake? Undo brings it back.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-search"/></svg></div><h3>Find &amp; replace</h3><p>Every match highlighted as you type, with match case, whole word and regex — plus replace one or replace all in a single undo step.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-outline"/></svg></div><h3>Outline sidebar</h3><p>All your headings in a clickable list that follows your scroll position — jump around long documents in a click.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-note"/></svg></div><h3>Footnotes</h3><p>Write <code>[^1]</code> and Quilldown numbers them, collects them at the bottom and links both ways. They become real footnotes in Word.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-image"/></svg></div><h3>Paste or drop images</h3><p>Paste a screenshot or drop a picture into the editor. It’s resized, kept inside the document and embedded when you export.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-newfile"/></svg></div><h3>Eight templates</h3><p>Start from a README, meeting notes, résumé, blog post, email, tables, to-do list or notes — each opens in its own tab.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-share"/></svg></div><h3>Share as a link</h3><p>Your document is packed into the link itself — no upload, no account. Optionally open it in preview-only mode.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-zap"/></svg></div><h3>Works offline</h3><p>Every library and font is bundled, so nothing loads from third parties. Host it once and it installs as an app that runs with no connection.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-table"/></svg></div><h3>Visual table editor</h3><p>Edit any table in a grid — add rows and columns, set alignment, paste from a spreadsheet — and get tidy, aligned Markdown back.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-smile"/></svg></div><h3>Emoji picker</h3><p>Search by name, browse categories, pick a skin tone, and jump back to the emoji you use most.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-smile"/></svg></div><h3>Emoji shortcodes</h3><p>Type a colon and a few letters — <code>:roc</code> — and pick 🚀 from the suggestions. A finished <code>:tada:</code> becomes 🎉, and shortcodes in imported READMEs render too.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-open"/></svg></div><h3>Open with Quilldown</h3><p>Installed as an app, Quilldown can be picked in your system’s “Open with” menu for .md files — and Save writes straight back to the file.</p></article>
-            <article class="mini"><div class="card-ico"><svg class="i"><use href="#i-moon"/></svg></div><h3>Light &amp; dark</h3><p>A calm theme for day and night. Exports always come out in clean, print-friendly light.</p></article>
-          </div>
-        </div></div>
-      </div>
-    </section>
-
-    <!-- ============================ SYNTAX ============================ -->
-    <section class="section" id="syntax" style="background:var(--surface-2);border-block:1px solid var(--line)">
-      <div class="container">
-        <div class="section-head center reveal">
-          <div class="eyebrow">Syntax</div>
-          <h2 class="title">Markdown, <em>at a glance.</em></h2>
-          <p>The essentials on the left, the result on the right. Hit “Try it” to drop any example straight into the editor.</p>
-        </div>
-        <div class="cheats" id="cheats"></div>
-        <div class="more-wrap">
-          <button type="button" class="more-toggle" data-expand aria-controls="cheatsPanel" aria-expanded="false" data-more="Show all syntax" data-less="Show less">
-            <span class="ex-t">Show all syntax</span><span class="ex-count" id="syntaxCount">+6</span><svg class="i ex-chev"><use href="#i-chev"/></svg>
-          </button>
-        </div>
-        <div class="expander" id="cheatsPanel"><div class="expander-in"><div class="cheats" id="cheatsMore" style="padding-top:16px"></div></div></div>
-      </div>
-    </section>
-
-    <!-- ============================ HOW IT WORKS ============================ -->
-    <section class="section" id="how">
-      <div class="container">
-        <div class="section-head center reveal">
-          <div class="eyebrow">How it works</div>
-          <h2 class="title">From messy draft to <em>finished page</em> in three steps.</h2>
-        </div>
-        <div class="steps">
-          <div class="step reveal"><h3>Paste, type or drop</h3><p>Start from scratch, paste existing Markdown, or drag in a .md file from your computer.</p></div>
-          <div class="step reveal"><h3>Watch it render</h3><p>The live preview updates as you type, with synced scrolling so you never lose your place.</p></div>
-          <div class="step reveal"><h3>Copy or export</h3><p>Copy as formatted text, for Docs, Markdown or HTML — or export a PDF, Word file, web page or plain text in a click.</p></div>
-        </div>
-        <div style="text-align:center;margin-top:48px" class="reveal"><button class="btn btn-primary" data-act="full">Start writing <svg class="i"><use href="#i-arrow"/></svg></button></div>
-      </div>
-    </section>
-
-    <!-- ============================ PRIVACY ============================ -->
-    <section class="section" id="privacy" style="padding-top:0">
-      <div class="container">
-        <div class="band reveal">
-          <div class="eyebrow">Privacy</div>
-          <h2 class="title">Your words <em>stay yours.</em></h2>
-          <p class="big">Quilldown runs entirely in your browser. What you write is never sent to a server — your draft is simply saved on your own device so it’s waiting when you return.</p>
-          <div class="band-grid">
-            <div class="band-item"><svg class="i i-lg"><use href="#i-shield"/></svg><b>No account</b><span>Open the page and start writing. No sign-up, no email.</span></div>
-            <div class="band-item"><svg class="i i-lg"><use href="#i-lock"/></svg><b>No uploads, no trackers</b><span>Rendering, copying and every export happen locally — even the libraries and fonts are bundled.</span></div>
-            <div class="band-item"><svg class="i i-lg"><use href="#i-check"/></svg><b>Autosaved locally</b><span>Drafts are kept in your browser storage between visits.</span></div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ============================ FAQ ============================ -->
-    <section class="section" id="faq" style="padding-top:24px">
+      <!-- ============================ HOW IT WORKS ============================ -->
+      <section class="section" id="how">
+        <div class="container">
+          <div class="section-head center reveal">
+            <div class="eyebrow">How it works</div>
+            <h2 class="title">From messy draft to <em>finished page</em> in three steps.</h2>
+          </div>
+          <div class="steps">
+            <div class="step reveal">
+              <h3>Paste, type or drop</h3>
+              <p>Start from scratch, paste existing Markdown, or drag in a .md file from your computer.</p>
+            </div>
+            <div class="step reveal">
+              <h3>Watch it render</h3>
+              <p>The live preview updates as you type, with synced scrolling so you never lose your place.</p>
+            </div>
+            <div class="step reveal">
+              <h3>Copy or export</h3>
+              <p>Copy as formatted text, for Docs, Markdown or HTML — or export a PDF, Word file, web page or plain text
+                in a click.</p>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:48px" class="reveal"><button class="btn btn-primary"
+              data-act="full">Start writing <svg class="i">
+                <use href="#i-arrow" />
+              </svg></button></div>
+        </div>
+      </section>
+
+      <!-- ============================ PRIVACY ============================ -->
+      <section class="section" id="privacy" style="padding-top:0">
+        <div class="container">
+          <div class="band reveal">
+            <div class="eyebrow">Privacy</div>
+            <h2 class="title">Your words <em>stay yours.</em></h2>
+            <p class="big">Quilldown runs entirely in your browser. What you write is never sent to a server — your
+              draft is simply saved on your own device so it’s waiting when you return.</p>
+            <div class="band-grid">
+              <div class="band-item"><svg class="i i-lg">
+                  <use href="#i-shield" />
+                </svg><b>No account</b><span>Open the page and start writing. No sign-up, no email.</span></div>
+              <div class="band-item"><svg class="i i-lg">
+                  <use href="#i-lock" />
+                </svg><b>No uploads, no trackers</b><span>Rendering, copying and every export happen locally — even the
+                  libraries and fonts are bundled.</span></div>
+              <div class="band-item"><svg class="i i-lg">
+                  <use href="#i-check" />
+                </svg><b>Autosaved locally</b><span>Drafts are kept in your browser storage between visits.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ============================ GUIDES ============================ -->
+      <section class="section" id="guides" style="padding-top:0">
+        <div class="container">
+          <div class="section-head center reveal">
+            <div class="eyebrow">Guides</div>
+            <h2 class="title">Learn Markdown. <em>Go further.</em></h2>
+            <p>Free tutorials, a full cheat sheet and step-by-step conversion guides — every example opens in the editor
+              with one click.</p>
+          </div>
+          <div class="cards reveal">
+            <!--GUIDES:start-->
+            <a class="gcard" href="/guides/what-is-markdown"><span class="tag">Learn Markdown</span><strong>What is
+                Markdown?</strong><span class="d">The plain-text writing format behind READMEs, docs and notes —
+                explained with examples you can try.</span></a>
+            <a class="gcard" href="/guides/markdown-cheat-sheet"><span class="tag">Learn Markdown</span><strong>Markdown
+                cheat sheet</strong><span class="d">Every piece of Markdown syntax with live examples — headings, lists,
+                tables, code, math, diagrams and more.</span></a>
+            <a class="gcard" href="/guides/markdown-to-pdf"><span class="tag">Convert &amp;
+                export</span><strong>Markdown to PDF</strong><span class="d">Turn any Markdown file into a clean PDF in
+                your browser — free, private and no upload.</span></a>
+            <a class="gcard" href="/guides/markdown-to-word"><span class="tag">Convert &amp;
+                export</span><strong>Markdown to Word &amp; Google Docs</strong><span class="d">Export a real .docx file
+                or paste formatted text into Google Docs with clean heading sizes.</span></a>
+            <a class="gcard" href="/guides/markdown-table-generator"><span class="tag">Write better
+                documents</span><strong>Markdown tables</strong><span class="d">Build Markdown tables in a visual grid,
+                paste from Excel or Sheets, and learn the syntax.</span></a>
+            <a class="gcard" href="/guides/readme-template"><span class="tag">Write better
+                documents</span><strong>README template</strong><span class="d">What to put in a README, a copy-ready
+                template and tips for a project page people actually read.</span></a>
+            <!--GUIDES:end-->
+          </div>
+          <div style="text-align:center;margin-top:32px" class="reveal"><a class="btn" href="/guides">Browse all guides
+              <svg class="i">
+                <use href="#i-arrow" />
+              </svg></a></div>
+        </div>
+      </section>
+
+
+      <!-- ============================ FAQ ============================ -->
+      <section class="section" id="faq" style="padding-top:24px">
+        <div class="container">
+          <div class="section-head center reveal">
+            <div class="eyebrow">FAQ</div>
+            <h2 class="title">Questions, <em>answered.</em></h2>
+          </div>
+          <div class="faq reveal">
+            <!--FAQ:start-->
+            <div class="faq">
+              <details>
+                <summary>What is Quilldown?</summary>
+                <p>Quilldown is a free online Markdown editor with a live preview. You write Markdown on the left, see
+                  the formatted document on the right, and then copy it into Google Docs or export it as a PDF, Word
+                  file, PNG image, EPUB e-book, HTML or plain text. It runs entirely in your browser.</p>
+              </details>
+              <details>
+                <summary>Is there a free online Markdown editor with live preview?</summary>
+                <p>Yes — Quilldown is free, needs no account, and shows the formatted preview as you type, with synced
+                  scrolling. It also has tabs, find and replace, an outline, a table editor and an emoji picker.</p>
+              </details>
+              <details>
+                <summary>Is Quilldown free? Do I need an account?</summary>
+                <p>It’s free and there is no account. Open the page and start writing.</p>
+              </details>
+              <details>
+                <summary>Where is my text stored? Is it private?</summary>
+                <p>Only in your browser. Every tab is autosaved to local storage on your device and is never uploaded.
+                  Everything the editor needs — libraries and fonts included — is bundled with the site, so it makes no
+                  third-party requests. Clearing your browser’s site data will remove saved tabs, so export anything
+                  important.</p>
+              </details>
+              <details>
+                <summary>Which Markdown flavor is supported?</summary>
+                <p>GitHub Flavored Markdown — tables, task lists, strikethrough, autolinks and fenced code with syntax
+                  highlighting — plus KaTeX math (<code>$…$</code> and <code>$$…$$</code>), Mermaid diagrams, footnotes,
+                  emoji shortcodes and GitHub-style callouts like <code>&gt; [!NOTE]</code>. See the <a
+                    href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a> for every piece of syntax.</p>
+              </details>
+              <details>
+                <summary>How do I convert Markdown to PDF?</summary>
+                <p>Write or paste your Markdown, choose <strong>Export → PDF</strong>, and pick “Save as PDF” in the
+                  print dialog that opens. It is private, free and works offline. Step-by-step: <a
+                    href="/guides/markdown-to-pdf">how to convert Markdown to PDF</a>.</p>
+              </details>
+              <details>
+                <summary>How do I convert Markdown to Word or Google Docs?</summary>
+                <p>Use <strong>Export → Word (.docx)</strong> for a real Word document, or <strong>Copy for
+                    Docs</strong> on the preview pane and paste into Google Docs. Copy for Docs uses point sizes Docs
+                  understands — H1 23&nbsp;pt, H2 17&nbsp;pt, H3 14&nbsp;pt, body 12&nbsp;pt — and sets no font, so the
+                  text takes the font of your document. See <a href="/guides/markdown-to-word">Markdown to Word and
+                    Google Docs</a>.</p>
+              </details>
+              <details>
+                <summary>Can I convert Markdown to HTML?</summary>
+                <p>Yes. <strong>Copy → HTML</strong> gives you clean markup to paste into a website or CMS, and
+                  <strong>Export → HTML</strong> saves a standalone, styled web page. Read <a
+                    href="/guides/markdown-to-html">Markdown to HTML</a>.
+                </p>
+              </details>
+              <details>
+                <summary>Which formats can I export to?</summary>
+                <p><strong>PDF</strong> (through your browser’s print dialog — choose “Save as PDF”), <strong>Word
+                    (.docx)</strong> that opens in Word, Google Docs and Pages, a <strong>PNG</strong> image of the
+                  whole document, an <strong>EPUB</strong> e-book for Apple Books, Kobo and other readers, a standalone
+                  <strong>HTML</strong> page, <strong>Markdown (.md)</strong> and <strong>plain text (.txt)</strong>. In
+                  the Word export, equations are included as text (their TeX source) and diagrams as images; very long
+                  documents are too tall for a single PNG, so use PDF for those.
+                </p>
+              </details>
+              <details>
+                <summary>Does it support LaTeX math and diagrams?</summary>
+                <p>Yes. Write math with <code>$…$</code> (inline) or <code>$$…$$</code> (block) and it renders with
+                  KaTeX. Flowcharts, sequence diagrams, Gantt charts, class, state and ER diagrams and mind maps are
+                  drawn from <code>mermaid</code> code blocks. Guides: <a href="/guides/latex-math-in-markdown">math in
+                    Markdown</a> and <a href="/guides/mermaid-diagrams-in-markdown">Mermaid diagrams</a>.</p>
+              </details>
+              <details>
+                <summary>Can I make a Markdown table without typing pipes?</summary>
+                <p>Yes. Click the <strong>Table</strong> button to build a table in a visual grid — or place your cursor
+                  inside an existing table (or select spreadsheet rows) and click it to edit or convert. You can paste
+                  rows straight from Excel or Google Sheets. See <a href="/guides/markdown-table-generator">the Markdown
+                    table guide</a>.</p>
+              </details>
+              <details>
+                <summary>Can I work on several documents at once?</summary>
+                <p>Yes. Each document opens in its own tab — add a blank one with <strong>+</strong>, open or drop
+                  several files at once, drag tabs to reorder, double-click a name to rename, and middle-click to close.
+                  Closed a tab by accident? Hit <strong>Undo</strong> in the message that appears.</p>
+              </details>
+              <details>
+                <summary>Does it work offline? Can I install it?</summary>
+                <p>Yes. All libraries, fonts and icons are bundled with Quilldown, so it never needs a third-party
+                  server. Once loaded, a service worker caches everything and an <strong>Install</strong> button appears
+                  (Chrome, Edge and other browsers) so you can run it like a desktop or phone app — with or without a
+                  connection. Your documents are stored on your device either way.</p>
+              </details>
+              <details>
+                <summary>Can I open and save .md files from my computer?</summary>
+                <p>Yes — click <strong>Open</strong> (or press Ctrl+O), or drag and drop .md, .markdown or .txt files
+                  anywhere on the page; each opens in its own tab. In Chrome and Edge the tab stays <em>linked</em> to
+                  the file (a small dot on the tab), so <strong>Ctrl+S</strong> saves your changes straight back to it —
+                  an orange dot means unsaved changes. In other browsers, Ctrl+S downloads a .md instead. Installed as
+                  an app, Quilldown also appears in your system’s <strong>Open with</strong> menu for Markdown files.
+                </p>
+              </details>
+              <details>
+                <summary>How does sharing work? Is my document uploaded?</summary>
+                <p>Click <strong>Share</strong> and Quilldown compresses your document into the link itself. Nothing is
+                  uploaded — the part of a link after the <code>#</code> is never sent to a server — so anyone who opens
+                  the link gets their own private copy in a new tab. Long documents make long links (there is a warning
+                  above ~8,000 characters and a hard stop at 64,000), and pasted images aren’t included.</p>
+              </details>
+              <details>
+                <summary>Can I add images, footnotes, emoji and templates?</summary>
+                <p>Yes. Paste, drop or upload images (they are stored with the document and included in exports); use
+                  <code>[^1]</code> for footnotes (real footnotes in Word); type <code>:roc</code> for emoji suggestions
+                  or use the emoji picker; and start from a README, meeting notes, résumé, blog post, email, tables,
+                  to-do list or notes template via <strong>New → Templates</strong>.
+                </p>
+              </details>
+              <details>
+                <summary>Where is the source code? How do I report a bug?</summary>
+                <p>Quilldown’s code is on <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank"
+                    rel="noopener noreferrer">GitHub</a>. You can browse it there, and report a problem or suggest a
+                  feature by opening an issue.</p>
+              </details>
+            </div>
+            <!--FAQ:end-->
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ FINAL CTA ============================ -->
+      <section class="cta">
+        <div class="container reveal">
+          <h2 class="title">Ready when you are.</h2>
+          <button class="btn btn-primary" data-act="full">Open the editor <svg class="i">
+              <use href="#i-max" />
+            </svg></button>
+        </div>
+      </section>
+    </main>
+
+    <!--FOOTER:start-->
+    <footer class="footer">
       <div class="container">
-        <div class="section-head center reveal">
-          <div class="eyebrow">FAQ</div>
-          <h2 class="title">Questions, <em>answered.</em></h2>
+        <div class="footer-cols">
+          <div><a class="brand" href="/"><svg class="logo">
+                <use href="#i-logo" />
+              </svg>Quilldown</a>
+            <p>A calm, private Markdown editor with live preview, tabs, math and diagrams. Works offline.</p>
+          </div>
+          <div>
+            <h3>Learn Markdown</h3>
+            <ul>
+              <li><a href="/guides/what-is-markdown">What is Markdown?</a></li>
+              <li><a href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Convert &amp; export</h3>
+            <ul>
+              <li><a href="/guides/markdown-to-pdf">Markdown to PDF</a></li>
+              <li><a href="/guides/markdown-to-word">Markdown to Word &amp; Google Docs</a></li>
+              <li><a href="/guides/markdown-to-html">Markdown to HTML</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Write better documents</h3>
+            <ul>
+              <li><a href="/guides/markdown-table-generator">Markdown tables</a></li>
+              <li><a href="/guides/latex-math-in-markdown">Math in Markdown</a></li>
+              <li><a href="/guides/mermaid-diagrams-in-markdown">Diagrams in Markdown</a></li>
+              <li><a href="/guides/markdown-emoji-shortcodes">Emoji shortcodes</a></li>
+              <li><a href="/guides/readme-template">README template</a></li>
+            </ul>
+          </div>
         </div>
-        <div class="faq reveal">
-          <details><summary>What is Markdown?</summary><p>Markdown is a lightweight way to format text using plain characters — <code>#</code> for headings, <code>**</code> for bold, <code>-</code> for lists. It’s used for documentation, READMEs, notes, blogs and more, and converts cleanly to HTML.</p></details>
-          <details><summary>Is Quilldown free? Do I need an account?</summary><p>It’s free and there is no account. Open the page and start writing.</p></details>
-          <details><summary>Where is my text stored?</summary><p>Only in your browser. Every tab is autosaved to local storage on your device and is never uploaded. Everything the editor needs — libraries and fonts included — is bundled with the site, so it makes no third-party requests. Clearing your browser’s site data will remove saved tabs, so export anything important.</p></details>
-          <details><summary>Can I work on several documents at once?</summary><p>Yes. Each document opens in its own tab — add a blank one with <strong>+</strong>, open or drop several files at once, drag tabs to reorder, double-click a name to rename, and middle-click to close. Closed a tab by accident? Hit <strong>Undo</strong> in the message that appears.</p></details>
-          <details><summary>Which Markdown flavor is supported?</summary><p>GitHub-flavored Markdown — tables, task lists, strikethrough, autolinks and fenced code with syntax highlighting — plus KaTeX math (<code>$…$</code> and <code>$$…$$</code>), Mermaid diagrams, and GitHub-style callouts like <code>&gt; [!NOTE]</code>.</p></details>
-          <details><summary>Can I paste the result into Google Docs, Word or email?</summary><p>Yes. Use <strong>Copy</strong> on the preview pane for rich text that matches the preview, or <strong>Copy for Docs</strong> for a version with explicit point sizes — H1 23&nbsp;pt, H2 17&nbsp;pt, H3 14&nbsp;pt and body text 12&nbsp;pt — with no font set, so the text adopts the font of the document you paste into and keeps the heading hierarchy intact in Google Docs and Word.</p></details>
-          <details><summary>Which formats can I export to?</summary><p><strong>PDF</strong> (through your browser’s print dialog — choose “Save as PDF”), <strong>Word (.docx)</strong> that opens in Word, Google Docs and Pages, a <strong>PNG</strong> image of the whole document, an <strong>EPUB</strong> e-book for Apple Books, Kobo and other readers, a standalone <strong>HTML</strong> page, <strong>Markdown (.md)</strong> and <strong>plain text (.txt)</strong>. In the Word export, equations are included as text (their TeX source) and diagrams as images; very long documents are too tall for a single PNG, so use PDF for those.</p></details>
-          <details><summary>Does it work offline? Can I install it?</summary><p>Yes. All libraries, fonts and icons are bundled with Quilldown, so it never needs a third-party server. When the site is hosted over https, a service worker caches everything on your first visit and an <strong>Install</strong> button appears (Chrome, Edge and other browsers) so you can run it like a desktop or phone app — with or without a connection. Your documents are stored on your device either way.</p></details>
-          <details><summary>Is there a table editor or an emoji picker?</summary><p>Both. Click the <strong>Table</strong> button to build a table in a visual grid — or place your cursor inside an existing table (or select spreadsheet rows) and click it to edit or convert. The smiley button opens the <strong>emoji picker</strong> with search, categories, skin tones and recent picks — or just type <code>:</code> and a few letters for inline suggestions (switch them off in the picker if you prefer).</p></details>
-          <details><summary>How does sharing work? Is my document uploaded?</summary><p>Click <strong>Share</strong> and Quilldown compresses your document into the link itself. Nothing is uploaded — the part of a link after the <code>#</code> is never sent to a server — so anyone who opens the link gets their own private copy in a new tab. Long documents make long links (there is a warning above ~8,000 characters and a hard stop at 64,000), and pasted images aren’t included. For bigger documents, export to PDF, Word or Markdown.</p></details>
-          <details><summary>Are there templates?</summary><p>Yes — <strong>New → Templates</strong> offers a README, meeting notes, résumé, blog post, email, tables, to-do list and notes. Each opens in a new tab so your current document is untouched.</p></details>
-          <details><summary>Can I add images to a document?</summary><p>Yes. Paste a screenshot straight into the editor, drop an image file onto it, or use <strong>Image → Upload</strong>. Quilldown shrinks large images and stores them with that document in your browser; the text shows a short <code>img:</code> reference. Exporting to HTML, PDF or Word includes the picture, and <strong>Save .md</strong> embeds it in the file. Very large images may exceed your browser’s storage — export before clearing site data.</p></details>
-          <details><summary>Does it support footnotes, search and an outline?</summary><p>Yes — footnotes with <code>[^1]</code> (real footnotes in Word), <strong>Find &amp; replace</strong> with <kbd>Ctrl</kbd>+<kbd>F</kbd> / <kbd>Ctrl</kbd>+<kbd>H</kbd> (case, whole word and regex options), and an <strong>Outline</strong> sidebar you open from the list icon in the top bar.</p></details>
-          <details><summary>Can I open files from my computer?</summary><p>Yes — click <strong>Open</strong> (or press Ctrl+O), or drag and drop .md, .markdown or .txt files anywhere on the page; each opens in its own tab. In Chrome and Edge the tab stays <em>linked</em> to the file (a small dot on the tab), so <strong>Ctrl+S</strong> saves your changes straight back to it — an orange dot means unsaved changes. In other browsers, Ctrl+S downloads a .md instead.</p></details>
-          <details><summary>Can I open .md files with Quilldown from my desktop?</summary><p>Yes, once it is installed as an app (Chrome or Edge, from the <strong>Install</strong> button on a hosted copy). Quilldown registers for Markdown files, so it appears under <strong>Open with</strong> when you right-click a .md file; double-clicking a second file opens it as another tab in the same window. If you installed it before this feature existed, uninstall and install it again so your system picks up the change.</p></details>
-        </div>
+        <div class="footer-base"><span>© 2026 Quilldown. Your Markdown never leaves your browser.</span><span><a
+              href="/">Editor</a> · <a href="/guides">All guides</a> · <a
+              href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank"
+              rel="noopener noreferrer">GitHub</a></span></div>
       </div>
-    </section>
+    </footer>
+    <!--FOOTER:end-->
+  </div>
 
-    <!-- ============================ FINAL CTA ============================ -->
-    <section class="cta">
-      <div class="container reveal">
-        <h2 class="title">Ready when you are.</h2>
-        <button class="btn btn-primary" data-act="full">Open the editor <svg class="i"><use href="#i-max"/></svg></button>
+  <!-- global bits -->
+  <input type="file" id="imageInput" accept="image/*" multiple hidden>
+  <input type="file" id="fileInput" multiple accept=".md,.markdown,.mdown,.mkd,.txt,.text,text/markdown,text/plain"
+    hidden>
+  <div class="dropzone" id="dropzone" aria-hidden="true">
+    <div><svg class="i">
+        <use href="#i-upload" />
+      </svg>Drop your Markdown file<small>.md, .markdown or .txt</small></div>
+  </div>
+  <dialog id="shareDialog" class="dialog" aria-labelledby="shareTitle">
+    <form method="dialog" class="dlg-in">
+      <div class="dlg-head">
+        <h2 id="shareTitle">Share this document</h2><button type="submit" class="icon-btn" aria-label="Close"><svg
+            class="i">
+            <use href="#i-x" />
+          </svg></button>
       </div>
-    </section>
-  </main>
+      <p class="dlg-sub">The whole document is packed into the link itself — nothing is uploaded or stored on a server.
+        Anyone with the link can open their own copy.</p>
+      <div class="dlg-link"><input id="shareUrl" readonly spellcheck="false" aria-label="Share link"><button
+          type="button" class="btn btn-primary btn-sm" id="shareCopy">Copy link</button></div>
+      <label class="dlg-check"><input type="checkbox" id="sharePreview"> Open in preview-only mode</label>
+      <ul class="dlg-notes" id="shareNotes" aria-live="polite"></ul>
+    </form>
+  </dialog>
+  <dialog id="tableDialog" class="dialog dialog-wide" aria-labelledby="teTitle">
+    <form method="dialog" class="dlg-in">
+      <div class="dlg-head">
+        <h2 id="teTitle">Insert table</h2><button type="submit" class="icon-btn" aria-label="Close"><svg class="i">
+            <use href="#i-x" />
+          </svg></button>
+      </div>
+      <p class="dlg-sub">Type in the grid, use <kbd>Tab</kbd> / <kbd>Enter</kbd> to move around, or paste rows straight
+        from a spreadsheet. The first row is the header; the icons above each column set its alignment.</p>
+      <div class="te-tools">
+        <button type="button" class="fb-txt" data-te="addrow">+ Row</button>
+        <button type="button" class="fb-txt" data-te="addcol">+ Column</button>
+        <button type="button" class="fb-txt" data-te="clear">Clear cells</button>
+        <span class="te-info" id="teInfo"></span>
+      </div>
+      <div class="te-scroll" id="teGrid"></div>
+      <details class="te-md">
+        <summary>Markdown preview</summary>
+        <pre id="teMd"></pre>
+      </details>
+      <div class="dlg-actions"><button type="button" class="btn btn-sm" id="teCancel">Cancel</button><button
+          type="button" class="btn btn-primary btn-sm" id="teOk">Insert table</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <footer class="footer">
-    <div class="container footer-in">
-      <a class="brand" href="#top"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
-      <nav aria-label="Footer"><a href="#features">Features</a><a href="#syntax">Syntax</a><a href="#privacy">Privacy</a><a href="#faq">FAQ</a></nav>
-      <span>© 2026 Quilldown. Your Markdown never leaves your browser.</span>
-    </div>
-  </footer>
-</div>
+  <!-- Default document -->
 
-<!-- global bits -->
-<input type="file" id="imageInput" accept="image/*" multiple hidden>
-<input type="file" id="fileInput" multiple accept=".md,.markdown,.mdown,.mkd,.txt,.text,text/markdown,text/plain" hidden>
-<div class="dropzone" id="dropzone" aria-hidden="true"><div><svg class="i"><use href="#i-upload"/></svg>Drop your Markdown file<small>.md, .markdown or .txt</small></div></div>
-<dialog id="shareDialog" class="dialog" aria-labelledby="shareTitle">
-  <form method="dialog" class="dlg-in">
-    <div class="dlg-head"><h2 id="shareTitle">Share this document</h2><button type="submit" class="icon-btn" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button></div>
-    <p class="dlg-sub">The whole document is packed into the link itself — nothing is uploaded or stored on a server. Anyone with the link can open their own copy.</p>
-    <div class="dlg-link"><input id="shareUrl" readonly spellcheck="false" aria-label="Share link"><button type="button" class="btn btn-primary btn-sm" id="shareCopy">Copy link</button></div>
-    <label class="dlg-check"><input type="checkbox" id="sharePreview"> Open in preview-only mode</label>
-    <ul class="dlg-notes" id="shareNotes" aria-live="polite"></ul>
-  </form>
-</dialog>
-<dialog id="tableDialog" class="dialog dialog-wide" aria-labelledby="teTitle">
-  <form method="dialog" class="dlg-in">
-    <div class="dlg-head"><h2 id="teTitle">Insert table</h2><button type="submit" class="icon-btn" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button></div>
-    <p class="dlg-sub">Type in the grid, use <kbd>Tab</kbd> / <kbd>Enter</kbd> to move around, or paste rows straight from a spreadsheet. The first row is the header; the icons above each column set its alignment.</p>
-    <div class="te-tools">
-      <button type="button" class="fb-txt" data-te="addrow">+ Row</button>
-      <button type="button" class="fb-txt" data-te="addcol">+ Column</button>
-      <button type="button" class="fb-txt" data-te="clear">Clear cells</button>
-      <span class="te-info" id="teInfo"></span>
-    </div>
-    <div class="te-scroll" id="teGrid"></div>
-    <details class="te-md"><summary>Markdown preview</summary><pre id="teMd"></pre></details>
-    <div class="dlg-actions"><button type="button" class="btn btn-sm" id="teCancel">Cancel</button><button type="button" class="btn btn-primary btn-sm" id="teOk">Insert table</button></div>
-  </form>
-</dialog>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-<!-- Default document -->
-
-<!-- ============================================================
+  <!-- ============================================================
      APP SCRIPT
      ============================================================ -->
-<script defer src="js/sample.js"></script>
-<script defer src="js/templates.js"></script>
-<script defer src="js/app.js"></script>
+  <script defer src="js/sample.js"></script>
+  <script defer src="js/templates.js"></script>
+  <script defer src="js/app.js"></script>
 </body>
+
 </html>

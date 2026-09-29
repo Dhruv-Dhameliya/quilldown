@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Markdown Table Generator and Syntax Guide</title>
+<meta name="description" content="Create Markdown tables without typing pipes. Use the visual table editor, paste from Excel or Google Sheets, set alignment — plus the full table syntax explained.">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="canonical" href="https://quilldown.vercel.app/guides/markdown-table-generator">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Quilldown">
+<meta property="og:url" content="https://quilldown.vercel.app/guides/markdown-table-generator">
+<meta property="og:title" content="Markdown Table Generator and Syntax Guide">
+<meta property="og:description" content="Create Markdown tables without typing pipes. Use the visual table editor, paste from Excel or Google Sheets, set alignment — plus the full table syntax explained.">
+<meta property="og:image" content="https://quilldown.vercel.app/social/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quilldown — Write Markdown. Watch it come alive.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Markdown Table Generator and Syntax Guide">
+<meta name="twitter:description" content="Create Markdown tables without typing pipes. Use the visual table editor, paste from Excel or Google Sheets, set alignment — plus the full table syntax explained.">
+<meta name="twitter:image" content="https://quilldown.vercel.app/social/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230f0f10'/%3E%3Cpath d='M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5' stroke='%23fff' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>
+<link rel="stylesheet" href="/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/site.css">
+<script src="/js/document-style.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Markdown table generator and syntax guide","description":"Create Markdown tables without typing pipes. Use the visual table editor, paste from Excel or Google Sheets, set alignment — plus the full table syntax explained.","image":"https://quilldown.vercel.app/social/og-image.png","datePublished":"2026-09-29","dateModified":"2026-09-29","inLanguage":"en","author":{"@type":"Organization","name":"Quilldown","url":"https://quilldown.vercel.app/"},"publisher":{"@type":"Organization","name":"Quilldown","logo":{"@type":"ImageObject","url":"https://quilldown.vercel.app/icons/icon-512.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://quilldown.vercel.app/guides/markdown-table-generator"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quilldown.vercel.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://quilldown.vercel.app/guides"},{"@type":"ListItem","position":3,"name":"Markdown table generator and syntax guide","item":"https://quilldown.vercel.app/guides/markdown-table-generator"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I make a table in Markdown?","acceptedAnswer":{"@type":"Answer","text":"Write a header row with pipes, add a separator row of dashes under it, then add body rows. Or click the Table button in Quilldown and fill in a grid — it writes the Markdown for you."}},{"@type":"Question","name":"How do I align columns in a Markdown table?","acceptedAnswer":{"@type":"Answer","text":"Add colons to the separator row: :--- for left, :---: for centre and ---: for right alignment."}},{"@type":"Question","name":"Can I paste from Excel or Google Sheets?","acceptedAnswer":{"@type":"Answer","text":"Yes. Open the table editor and paste — the cells fill the grid. You can also paste rows into the document, select them and choose Table → Convert to table."}},{"@type":"Question","name":"Do tables work on GitHub?","acceptedAnswer":{"@type":"Answer","text":"Yes. Tables are part of GitHub Flavored Markdown, so they render in READMEs, issues and pull requests. See our README guide."}},{"@type":"Question","name":"Can a Markdown table have merged cells?","acceptedAnswer":{"@type":"Answer","text":"No. Standard Markdown tables can't span rows or columns. Use an HTML table when you need that."}},{"@type":"Question","name":"Does the table editor upload my data?","acceptedAnswer":{"@type":"Answer","text":"No. It runs entirely in your browser — your data never leaves your device."}}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5" style="stroke:var(--logo-fg)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M6.34 6.34 4.93 4.93m14.14 14.14-1.41-1.41"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+<symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+</defs></svg>
+<header class="nav" id="nav"><div class="container nav-in">
+  <a class="brand" href="/" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
+  <nav class="nav-links" aria-label="Primary"><a href="/">Editor</a><a href="/guides/markdown-cheat-sheet">Cheat sheet</a><a href="/guides">Guides</a></nav>
+  <div class="nav-cta">
+    <a class="icon-btn" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill"><use href="#i-github"/></svg></a>
+    <button class="icon-btn" data-act="theme" aria-label="Toggle theme"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
+    <a class="btn btn-primary btn-sm" href="/">Open editor <svg class="i"><use href="#i-arrow"/></svg></a>
+  </div></div></header>
+<main class="doc-wrap">
+  <ol class="crumbs" aria-label="Breadcrumb"><li><a href="/">Home</a></li><li><a href="/guides">Guides</a></li><li aria-current="page">Markdown table generator and syntax guide</li></ol>
+  <header class="doc-head">
+    <p class="eyebrow">Write better documents</p>
+    <h1>Markdown table generator and syntax guide</h1>
+    <p class="lead">Build Markdown tables in a visual grid — no pipes to count — paste rows straight from Excel or Google Sheets, and get neatly aligned Markdown back. Includes the full syntax if you'd rather type it.</p>
+    <div class="doc-meta"><span>Updated September 29, 2026</span><span>4 min read</span><span>Free · No sign-up · Runs in your browser</span></div>
+    <div class="doc-actions"><a class="btn btn-primary" href="/">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a><a class="btn" href="/guides">All guides</a></div>
+  </header>
+  <div class="doc-grid">
+    <aside class="toc" aria-label="On this page"><h2>On this page</h2><a href="#make-a-markdown-table-in-the-visual-editor">Make a Markdown table in the visual editor</a><a href="#turn-excel-google-sheets-or-csv-into-a-markdown-table">Turn Excel, Google Sheets or CSV into a Markdown table</a><a href="#markdown-table-syntax">Markdown table syntax</a><a href="#limits-of-markdown-tables-and-workarounds">Limits of Markdown tables (and workarounds)</a><a href="#common-table-problems">Common table problems</a><a href="#faq">Frequently asked questions</a></aside>
+    <article class="doc-body">
+<h2 id="make-a-markdown-table-in-the-visual-editor">Make a Markdown table in the visual editor<a class="anchor" href="#make-a-markdown-table-in-the-visual-editor" aria-label="Link to this section">#</a></h2>
+<p>Typing pipes and dashes by hand gets tedious fast. Quilldown&#39;s table editor lets you fill in a grid instead, and writes the Markdown for you.</p>
+<ol class="steps">
+<li><strong>Open <a href="/">Quilldown</a></strong> and click the <strong>Table</strong> button in the toolbar.</li>
+<li><strong>Type into the grid.</strong> The first row is the header. Press <kbd>Tab</kbd> or <kbd>Enter</kbd> to move between cells — pressing Tab in the last cell adds a new row.</li>
+<li><strong>Set alignment.</strong> Click the icon above a column to cycle default, left, centre and right.</li>
+<li><strong>Add or remove</strong> rows and columns with <em>+ Row</em>, <em>+ Column</em> and the × buttons.</li>
+<li><strong>Click Insert table.</strong> Neatly padded Markdown appears in your document.</li>
+</ol>
+
+<p>The same button also <strong>edits an existing table</strong>: put your cursor inside any Markdown table and click <strong>Table</strong> to reopen it in the grid, change what you need and choose <strong>Update table</strong>.</p>
+<h2 id="turn-excel-google-sheets-or-csv-into-a-markdown-table">Turn Excel, Google Sheets or CSV into a Markdown table<a class="anchor" href="#turn-excel-google-sheets-or-csv-into-a-markdown-table" aria-label="Link to this section">#</a></h2>
+<p>You don&#39;t need to retype spreadsheet data:</p>
+<ul>
+<li><strong>Paste into the grid.</strong> Copy cells in Excel or Google Sheets, open the table editor, click the first cell and paste — the grid grows to fit.</li>
+<li><strong>Convert selected text.</strong> Paste tab-separated (or consistently comma-separated) rows into the editor, select them, and click <strong>Table</strong>. The button offers <strong>Convert to table</strong>.</li>
+</ul>
+<h2 id="markdown-table-syntax">Markdown table syntax<a class="anchor" href="#markdown-table-syntax" aria-label="Link to this section">#</a></h2>
+<p>A table is a header row, a separator row of dashes, and any number of body rows. Pipes (<code>|</code>) separate the columns.</p>
+<figure class="ex"><div class="ex-title"><span>The basic table</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c1">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJ8IE5hbWUgIHwgUm9sZSAgICAgfCBUZWFtICAgIHxcbnwgLS0tLS0gfCAtLS0tLS0tLSB8IC0tLS0tLS0gfFxufCBBZGEgICB8IEVuZ2luZWVyIHwgQ29yZSAgICB8XG58IExpbiAgIHwgRGVzaWduZXIgfCBQcm9kdWN0IHxcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c1">| Name  | Role     | Team    |
+| ----- | -------- | ------- |
+| Ada   | Engineer | Core    |
+| Lin   | Designer | Product |</pre><div class="ex-out md"><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Role</th>
+<th>Team</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ada</td>
+<td>Engineer</td>
+<td>Core</td>
+</tr>
+<tr>
+<td>Lin</td>
+<td>Designer</td>
+<td>Product</td>
+</tr>
+</tbody></table>
+</div></div></figure>
+<p>The separator row is required. The dashes don&#39;t need to line up — only the number of columns has to match — but aligning them makes the source easier to read (the table editor does this for you).</p>
+<h3 id="column-alignment">Column alignment<a class="anchor" href="#column-alignment" aria-label="Link to this section">#</a></h3>
+<p>Colons in the separator row set the alignment of each column: <code>:---</code> left, <code>:---:</code> centre and <code>---:</code> right.</p>
+<figure class="ex"><div class="ex-title"><span>Left, centre and right alignment</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c2">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJ8IFByb2R1Y3QgIHwgUXR5IHwgICBQcmljZSB8XG58IDotLS0tLS0tIHwgOi06IHwgLS0tLS0tOiB8XG58IE5vdGVib29rIHwgIDIgIHwgICAgNC41MCB8XG58IFBlbiAgICAgIHwgMTAgIHwgICAgMS4yMCB8XG58ICoqVG90YWwqKnwgICAgIHwgKio2LjcwKip8XG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c2">| Product  | Qty |   Price |
+| :------- | :-: | ------: |
+| Notebook |  2  |    4.50 |
+| Pen      | 10  |    1.20 |
+| **Total**|     | **6.70**|</pre><div class="ex-out md"><table>
+<thead>
+<tr>
+<th align="left">Product</th>
+<th align="center">Qty</th>
+<th align="right">Price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Notebook</td>
+<td align="center">2</td>
+<td align="right">4.50</td>
+</tr>
+<tr>
+<td align="left">Pen</td>
+<td align="center">10</td>
+<td align="right">1.20</td>
+</tr>
+<tr>
+<td align="left"><strong>Total</strong></td>
+<td align="center"></td>
+<td align="right"><strong>6.70</strong></td>
+</tr>
+</tbody></table>
+</div></div></figure>
+<h3 id="formatting-inside-cells">Formatting inside cells<a class="anchor" href="#formatting-inside-cells" aria-label="Link to this section">#</a></h3>
+<p>Cells can contain inline Markdown: bold, italic, code, links, images, emoji and math.</p>
+<figure class="ex"><div class="ex-title"><span>Inline formatting in cells</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c3">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJ8IEZlYXR1cmUgfCBTdGF0dXMgfCBOb3RlcyB8XG58IC0tLS0tLS0gfCA6LS0tLTogfCAtLS0tLSB8XG58ICoqU3luYyBzY3JvbGwqKiB8IDp3aGl0ZV9jaGVja19tYXJrOiB8IEZvbGxvd3MgdGhlICpibG9jayogeW91J3JlIGVkaXRpbmcgfFxufCBgQ3RybCArIEZgIHwgOndoaXRlX2NoZWNrX21hcms6IHwgW0ZpbmQgYW5kIHJlcGxhY2VdKC8pIHxcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c3">| Feature | Status | Notes |
+| ------- | :----: | ----- |
+| **Sync scroll** | :white_check_mark: | Follows the *block* you're editing |
+| `Ctrl + F` | :white_check_mark: | [Find and replace](/) |</pre><div class="ex-out md"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th align="center">Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Sync scroll</strong></td>
+<td align="center">✅️</td>
+<td>Follows the <em>block</em> you&#39;re editing</td>
+</tr>
+<tr>
+<td><code>Ctrl + F</code></td>
+<td align="center">✅️</td>
+<td><a href="/">Find and replace</a></td>
+</tr>
+</tbody></table>
+</div></div></figure>
+<h3 id="pipes-line-breaks-and-empty-cells">Pipes, line breaks and empty cells<a class="anchor" href="#pipes-line-breaks-and-empty-cells" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>A literal pipe</strong> inside a cell must be escaped as <code>\|</code>.</li>
+<li><strong>A line break</strong> inside a cell needs the HTML tag <code>&lt;br&gt;</code>.</li>
+<li><strong>An empty cell</strong> is simply two pipes with nothing (or spaces) between them.</li>
+</ul>
+<figure class="ex"><div class="ex-title"><span>Escaped pipe and line break</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c4">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJ8IENvbW1hbmQgfCBNZWFuaW5nIHxcbnwgLS0tLS0tLSB8IC0tLS0tLS0gfFxufCBgYSBcXHwgYmAgfCBFaXRoZXIgYSAqKm9yKiogYiB8XG58IFN0ZXBzIHwgRmlyc3Q8YnI-U2Vjb25kIHxcbnwgRW1wdHkgfCAgfFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c4">| Command | Meaning |
+| ------- | ------- |
+| `a \| b` | Either a **or** b |
+| Steps | First&lt;br&gt;Second |
+| Empty |  |</pre><div class="ex-out md"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>a | b</code></td>
+<td>Either a <strong>or</strong> b</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>First<br>Second</td>
+</tr>
+<tr>
+<td>Empty</td>
+<td></td>
+</tr>
+</tbody></table>
+</div></div></figure>
+<h2 id="limits-of-markdown-tables-and-workarounds">Limits of Markdown tables (and workarounds)<a class="anchor" href="#limits-of-markdown-tables-and-workarounds" aria-label="Link to this section">#</a></h2>
+<div class="tbl"><table><thead><tr>
+<th>You want…</th>
+<th>Markdown can…</th>
+<th>Workaround</th>
+</tr>
+</thead><tbody><tr>
+<td>Merged or spanning cells</td>
+<td>No</td>
+<td>Use an HTML <code>&lt;table&gt;</code> with <code>colspan</code> / <code>rowspan</code>, or merge cells in Word after export</td>
+</tr>
+<tr>
+<td>Bullet lists inside a cell</td>
+<td>No</td>
+<td>Use <code>&lt;br&gt;</code> and a bullet character, or use HTML</td>
+</tr>
+<tr>
+<td>A table with no header</td>
+<td>No</td>
+<td>Leave the header cells empty: <code>| | |</code></td>
+</tr>
+<tr>
+<td>Column widths</td>
+<td>No</td>
+<td>Keep text short, or use HTML for fixed widths</td>
+</tr>
+<tr>
+<td>Sortable or interactive tables</td>
+<td>No</td>
+<td>Markdown tables are static</td>
+</tr>
+</tbody></table></div>
+<h2 id="common-table-problems">Common table problems<a class="anchor" href="#common-table-problems" aria-label="Link to this section">#</a></h2>
+<div class="tbl"><table><thead><tr>
+<th>Problem</th>
+<th>Cause and fix</th>
+</tr>
+</thead><tbody><tr>
+<td>The table shows as plain text</td>
+<td>The separator row is missing or has fewer dashes than columns — add <code>| --- | --- |</code></td>
+</tr>
+<tr>
+<td>A row has the wrong number of cells</td>
+<td>Every row should have the same number of pipes as the header</td>
+</tr>
+<tr>
+<td>The table won&#39;t start</td>
+<td>Leave a blank line before it</td>
+</tr>
+<tr>
+<td>A pipe character splits a cell unexpectedly</td>
+<td>Put a backslash in front of the pipe to show it literally</td>
+</tr>
+<tr>
+<td>Wide table runs off the page</td>
+<td>Shorten headings, drop a column, or export in landscape from the print dialog</td>
+</tr>
+</tbody></table></div>
+<p>Need to use the table elsewhere? Read how to <a href="/guides/markdown-to-word">convert Markdown to Word or Google Docs</a> or <a href="/guides/markdown-to-html">to HTML</a>.</p>
+<h2 id="faq">Frequently asked questions<a class="anchor" href="#faq" aria-label="Link to this section">#</a></h2>
+<div class="faq"><details><summary>How do I make a table in Markdown?</summary><p>Write a header row with pipes, add a separator row of dashes under it, then add body rows. Or click the <strong>Table</strong> button in Quilldown and fill in a grid — it writes the Markdown for you.</p></details><details><summary>How do I align columns in a Markdown table?</summary><p>Add colons to the separator row: <code>:---</code> for left, <code>:---:</code> for centre and <code>---:</code> for right alignment.</p></details><details><summary>Can I paste from Excel or Google Sheets?</summary><p>Yes. Open the table editor and paste — the cells fill the grid. You can also paste rows into the document, select them and choose <strong>Table → Convert to table</strong>.</p></details><details><summary>Do tables work on GitHub?</summary><p>Yes. Tables are part of GitHub Flavored Markdown, so they render in READMEs, issues and pull requests. See our <a href="/guides/readme-template">README guide</a>.</p></details><details><summary>Can a Markdown table have merged cells?</summary><p>No. Standard Markdown tables can&#39;t span rows or columns. Use an HTML table when you need that.</p></details><details><summary>Does the table editor upload my data?</summary><p>No. It runs entirely in your browser — your data never leaves your device.</p></details></div>
+    </article>
+  </div>
+  <div class="after">
+    <h2>Related guides</h2><div class="cards"><a class="gcard" href="/guides/markdown-cheat-sheet"><span class="tag">Learn Markdown</span><strong>Markdown cheat sheet</strong><span class="d">Every piece of Markdown syntax with live examples — headings, lists, tables, code, math, diagrams and more.</span></a><a class="gcard" href="/guides/markdown-to-word"><span class="tag">Convert &amp; export</span><strong>Markdown to Word &amp; Google Docs</strong><span class="d">Export a real .docx file or paste formatted text into Google Docs with clean heading sizes.</span></a><a class="gcard" href="/guides/readme-template"><span class="tag">Write better documents</span><strong>README template</strong><span class="d">What to put in a README, a copy-ready template and tips for a project page people actually read.</span></a></div>
+    <section class="cta-band"><div><h2>Build a table in the visual editor</h2><p>Click the Table button in Quilldown, type or paste your data, and get clean Markdown. Free and private — nothing is uploaded.</p></div><a class="btn btn-primary" href="/">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a></section>
+  </div>
+</main>
+<footer class="footer"><div class="container">
+  <div class="footer-cols">
+    <div><a class="brand" href="/"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>A calm, private Markdown editor with live preview, tabs, math and diagrams. Works offline.</p></div>
+    <div><h3>Learn Markdown</h3><ul><li><a href="/guides/what-is-markdown">What is Markdown?</a></li><li><a href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a></li></ul></div>
+    <div><h3>Convert &amp; export</h3><ul><li><a href="/guides/markdown-to-pdf">Markdown to PDF</a></li><li><a href="/guides/markdown-to-word">Markdown to Word &amp; Google Docs</a></li><li><a href="/guides/markdown-to-html">Markdown to HTML</a></li></ul></div>
+    <div><h3>Write better documents</h3><ul><li><a href="/guides/markdown-table-generator">Markdown tables</a></li><li><a href="/guides/latex-math-in-markdown">Math in Markdown</a></li><li><a href="/guides/mermaid-diagrams-in-markdown">Diagrams in Markdown</a></li><li><a href="/guides/markdown-emoji-shortcodes">Emoji shortcodes</a></li><li><a href="/guides/readme-template">README template</a></li></ul></div>
+  </div>
+  <div class="footer-base"><span>© 2026 Quilldown. Your Markdown never leaves your browser.</span><span><a href="/">Editor</a> · <a href="/guides">All guides</a> · <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">GitHub</a></span></div>
+</div></footer>
+<script src="/js/site.js" defer></script>
+</body>
+</html>

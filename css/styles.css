@@ -76,6 +76,8 @@ img,svg{max-width:100%}
 .nav-links a{font-size:14px;color:var(--text-2);text-decoration:none;font-weight:500;transition:color .15s}
 .nav-links a:hover{color:var(--text)}
 .nav-cta{margin-left:auto;display:flex;align-items:center;gap:10px}
+.i-fill{fill:currentColor;stroke:none}
+a.icon-btn{text-decoration:none}
 .icon-btn{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:10px;border:1px solid transparent;background:none;color:var(--text-2);transition:background .15s,color .15s}
 .icon-btn:hover{background:var(--hover);color:var(--text)}
 .theme-icon-moon{display:none}

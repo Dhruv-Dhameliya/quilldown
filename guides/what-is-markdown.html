@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What Is Markdown? A Beginner's Guide with Examples</title>
+<meta name="description" content="Markdown is a simple way to format text using plain characters. Learn what it is, where it's used, how the syntax works and how to start writing in 5 minutes.">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="canonical" href="https://quilldown.vercel.app/guides/what-is-markdown">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Quilldown">
+<meta property="og:url" content="https://quilldown.vercel.app/guides/what-is-markdown">
+<meta property="og:title" content="What Is Markdown? A Beginner's Guide with Examples">
+<meta property="og:description" content="Markdown is a simple way to format text using plain characters. Learn what it is, where it's used, how the syntax works and how to start writing in 5 minutes.">
+<meta property="og:image" content="https://quilldown.vercel.app/social/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quilldown — Write Markdown. Watch it come alive.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What Is Markdown? A Beginner's Guide with Examples">
+<meta name="twitter:description" content="Markdown is a simple way to format text using plain characters. Learn what it is, where it's used, how the syntax works and how to start writing in 5 minutes.">
+<meta name="twitter:image" content="https://quilldown.vercel.app/social/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230f0f10'/%3E%3Cpath d='M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5' stroke='%23fff' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>
+<link rel="stylesheet" href="/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/site.css">
+<script src="/js/document-style.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"What is Markdown? A beginner's guide","description":"Markdown is a simple way to format text using plain characters. Learn what it is, where it's used, how the syntax works and how to start writing in 5 minutes.","image":"https://quilldown.vercel.app/social/og-image.png","datePublished":"2026-09-29","dateModified":"2026-09-29","inLanguage":"en","author":{"@type":"Organization","name":"Quilldown","url":"https://quilldown.vercel.app/"},"publisher":{"@type":"Organization","name":"Quilldown","logo":{"@type":"ImageObject","url":"https://quilldown.vercel.app/icons/icon-512.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://quilldown.vercel.app/guides/what-is-markdown"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quilldown.vercel.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://quilldown.vercel.app/guides"},{"@type":"ListItem","position":3,"name":"What is Markdown? A beginner's guide","item":"https://quilldown.vercel.app/guides/what-is-markdown"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Markdown a programming language?","acceptedAnswer":{"@type":"Answer","text":"No. Markdown is a markup language — a way to describe how text should be formatted. It has no logic, variables or loops. Tools read the symbols and produce formatted output such as HTML."}},{"@type":"Question","name":"What is a .md file and how do I open it?","acceptedAnswer":{"@type":"Answer","text":"A .md file is a plain-text document written in Markdown. You can open it in any text editor to see the raw text, or in a Markdown editor such as Quilldown (use Open or drag the file onto the page) to see it formatted."}},{"@type":"Question","name":"Is Markdown free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes. Markdown itself is an open, free format, and Quilldown is a free online Markdown editor with no account required."}},{"@type":"Question","name":"Do I need to install anything to write Markdown?","acceptedAnswer":{"@type":"Answer","text":"No. Any plain-text editor works, and browser-based editors like Quilldown need no installation. Quilldown can also be installed as an app and works offline."}},{"@type":"Question","name":"What is the difference between Markdown and HTML?","acceptedAnswer":{"@type":"Answer","text":"HTML describes web pages with tags such as \u003ch1> and \u003cstrong>. Markdown is a shorter, friendlier way to write the same structure — # Title instead of \u003ch1>Title\u003c/h1>. Most Markdown tools convert to HTML, and you can even mix raw HTML into a Markdown document when you need something extra."}},{"@type":"Question","name":"Can I convert Markdown to Word or PDF?","acceptedAnswer":{"@type":"Answer","text":"Yes. In Quilldown, use Export to save a PDF or a real Word (.docx) file, or Copy for Docs to paste formatted text into Google Docs. See the guides on Markdown to PDF and Markdown to Word."}}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5" style="stroke:var(--logo-fg)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M6.34 6.34 4.93 4.93m14.14 14.14-1.41-1.41"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+<symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+</defs></svg>
+<header class="nav" id="nav"><div class="container nav-in">
+  <a class="brand" href="/" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
+  <nav class="nav-links" aria-label="Primary"><a href="/">Editor</a><a href="/guides/markdown-cheat-sheet">Cheat sheet</a><a href="/guides">Guides</a></nav>
+  <div class="nav-cta">
+    <a class="icon-btn" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill"><use href="#i-github"/></svg></a>
+    <button class="icon-btn" data-act="theme" aria-label="Toggle theme"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
+    <a class="btn btn-primary btn-sm" href="/">Open editor <svg class="i"><use href="#i-arrow"/></svg></a>
+  </div></div></header>
+<main class="doc-wrap">
+  <ol class="crumbs" aria-label="Breadcrumb"><li><a href="/">Home</a></li><li><a href="/guides">Guides</a></li><li aria-current="page">What is Markdown? A beginner's guide</li></ol>
+  <header class="doc-head">
+    <p class="eyebrow">Learn Markdown</p>
+    <h1>What is Markdown? A beginner's guide</h1>
+    <p class="lead">Markdown is a simple way to format text using ordinary characters — # for headings, ** for bold, - for lists. This guide explains what it is, where it's used and how to write your first document in minutes.</p>
+    <div class="doc-meta"><span>Updated September 29, 2026</span><span>6 min read</span><span>Free · No sign-up · Runs in your browser</span></div>
+    <div class="doc-actions"><a class="btn btn-primary" href="/">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a><a class="btn" href="/guides">All guides</a></div>
+  </header>
+  <div class="doc-grid">
+    <aside class="toc" aria-label="On this page"><h2>On this page</h2><a href="#markdown-in-one-minute">Markdown in one minute</a><a href="#why-people-use-markdown">Why people use Markdown</a><a href="#where-markdown-is-used">Where Markdown is used</a><a href="#a-short-history">A short history</a><a href="#the-ten-things-to-learn-first">The ten things to learn first</a><a href="#markdown-flavors-explained">Markdown flavors explained</a><a href="#markdown-vs-word-google-docs-and-html">Markdown vs Word, Google Docs and HTML</a><a href="#how-to-start-writing-markdown-in-five-minutes">How to start writing Markdown in five minutes</a><a href="#common-beginner-mistakes">Common beginner mistakes</a><a href="#faq">Frequently asked questions</a></aside>
+    <article class="doc-body">
+<h2 id="markdown-in-one-minute">Markdown in one minute<a class="anchor" href="#markdown-in-one-minute" aria-label="Link to this section">#</a></h2>
+<p><strong>Markdown is a lightweight markup language for writing formatted text in a plain-text file.</strong> Instead of clicking toolbar buttons, you type a few simple symbols next to your words. A Markdown <em>editor</em> or <em>converter</em> turns those symbols into headings, bold text, lists, links, tables and more.</p>
+<p>The result is a document that is readable even before it is converted — and that can be turned into HTML, PDF, Word, an e-book or a web page whenever you need.</p>
+<figure class="ex"><div class="ex-title"><span>Plain text in, formatted text out</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c1">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiIjIE15IGZpcnN0IGRvY3VtZW50XG5cbk1hcmtkb3duIGlzICoqZWFzeSoqIHRvIGxlYXJuIGFuZCAqcXVpY2sqIHRvIHdyaXRlLlxuXG4tIFR5cGUgYSBzeW1ib2xcbi0gU2VlIHRoZSBmb3JtYXR0aW5nXG4tIE1vdmUgb24gd2l0aCB5b3VyIGRheVxuXG5SZWFkIG1vcmUgb24gdGhlIFtRdWlsbGRvd24gY2hlYXQgc2hlZXRdKGh0dHBzOi8vcXVpbGxkb3duLnZlcmNlbC5hcHAvZ3VpZGVzL21hcmtkb3duLWNoZWF0LXNoZWV0KS5cbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c1"># My first document
+
+Markdown is **easy** to learn and *quick* to write.
+
+- Type a symbol
+- See the formatting
+- Move on with your day
+
+Read more on the [Quilldown cheat sheet](https://quilldown.vercel.app/guides/markdown-cheat-sheet).</pre><div class="ex-out md"><p class="md-h md-h1">My first document</p>
+<p>Markdown is <strong>easy</strong> to learn and <em>quick</em> to write.</p>
+<ul>
+<li>Type a symbol</li>
+<li>See the formatting</li>
+<li>Move on with your day</li>
+</ul>
+<p>Read more on the <a href="https://quilldown.vercel.app/guides/markdown-cheat-sheet">Quilldown cheat sheet</a>.</p>
+</div></div></figure>
+<p>Files written in Markdown usually end in <strong><code>.md</code></strong> or <strong><code>.markdown</code></strong>. Any text editor can open them, and any Markdown editor — such as <a href="/">Quilldown</a> — can show them formatted.</p>
+<h2 id="why-people-use-markdown">Why people use Markdown<a class="anchor" href="#why-people-use-markdown" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>It is fast.</strong> Your hands never leave the keyboard. Formatting is a symbol or two, not a menu.</li>
+<li><strong>It is portable.</strong> A <code>.md</code> file is just text, so it opens everywhere and will still open in twenty years.</li>
+<li><strong>It is readable as-is.</strong> Even unconverted, a Markdown document is easy to read.</li>
+<li><strong>It works with version control.</strong> Because it is plain text, tools like Git can show exactly what changed between versions.</li>
+<li><strong>It separates writing from styling.</strong> You focus on the words; the look is applied when you export.</li>
+<li><strong>It converts to almost anything.</strong> HTML, PDF, Word, EPUB, slides and more.</li>
+</ul>
+<h2 id="where-markdown-is-used">Where Markdown is used<a class="anchor" href="#where-markdown-is-used" aria-label="Link to this section">#</a></h2>
+<div class="tbl"><table><thead><tr>
+<th>Where</th>
+<th>What it&#39;s used for</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>GitHub and GitLab</strong></td>
+<td><code>README.md</code> files, issues, pull requests and wikis</td>
+</tr>
+<tr>
+<td><strong>Documentation sites</strong></td>
+<td>Static-site generators and docs tools build web pages from Markdown files</td>
+</tr>
+<tr>
+<td><strong>Note-taking apps</strong></td>
+<td>Many notes apps let you write or export notes in Markdown</td>
+</tr>
+<tr>
+<td><strong>Blogs and websites</strong></td>
+<td>Posts are written in Markdown and published as HTML</td>
+</tr>
+<tr>
+<td><strong>Chat and forums</strong></td>
+<td>Communities such as Reddit and Discord support a subset of Markdown formatting</td>
+</tr>
+<tr>
+<td><strong>Books and papers</strong></td>
+<td>Authors write manuscripts in Markdown and export to PDF, Word or EPUB</td>
+</tr>
+</tbody></table></div>
+<p>If you are writing a project description, see our guide to <a href="/guides/readme-template">writing a great README</a>.</p>
+<h2 id="a-short-history">A short history<a class="anchor" href="#a-short-history" aria-label="Link to this section">#</a></h2>
+<p>Markdown was created by <strong>John Gruber</strong>, with contributions from Aaron Swartz, and released in <strong>2004</strong>. The goal was a format that reads naturally as plain text and converts cleanly to HTML.</p>
+<p>The original description left some details open, so different tools handled edge cases differently. In 2014 the <strong>CommonMark</strong> project published a precise specification to remove the ambiguity. <strong>GitHub Flavored Markdown (GFM)</strong>, later formalised as a strict superset of CommonMark, added tables, task lists, strikethrough and automatic links — and is now what most people mean by &quot;Markdown&quot;.</p>
+<h2 id="the-ten-things-to-learn-first">The ten things to learn first<a class="anchor" href="#the-ten-things-to-learn-first" aria-label="Link to this section">#</a></h2>
+<p>You can write useful documents knowing only these. Our <a href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a> has the complete list.</p>
+<figure class="ex"><div class="ex-title"><span>Headings, emphasis and lists</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c2">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiIjIEhlYWRpbmcgMVxuIyMgSGVhZGluZyAyXG5cbioqQm9sZCoqLCAqaXRhbGljKiBhbmQgfn5zdHJpa2V0aHJvdWdofn5cblxuMS4gRmlyc3RcbjIuIFNlY29uZFxuXG4tIEJ1bGxldFxuLSBCdWxsZXRcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c2"># Heading 1
+## Heading 2
+
+**Bold**, *italic* and ~~strikethrough~~
+
+1. First
+2. Second
+
+- Bullet
+- Bullet</pre><div class="ex-out md"><p class="md-h md-h1">Heading 1</p>
+<p class="md-h md-h2">Heading 2</p>
+<p><strong>Bold</strong>, <em>italic</em> and <del>strikethrough</del></p>
+<ol>
+<li>First</li>
+<li>Second</li>
+</ol>
+<ul>
+<li>Bullet</li>
+<li>Bullet</li>
+</ul>
+</div></div></figure>
+<figure class="ex"><div class="ex-title"><span>Links, images, quotes and code</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c3">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJbQSBsaW5rXShodHRwczovL2NvbW1vbm1hcmsub3JnKVxuXG4hW0FsdCB0ZXh0IGZvciBhbiBpbWFnZV0ocGhvdG8uanBnKVxuXG4-IEEgcXVvdGF0aW9uXG5cbklubGluZSBgY29kZWAgYW5kIGEgZGl2aWRlcjpcblxuLS0tXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c3">[A link](https://commonmark.org)
+
+![Alt text for an image](photo.jpg)
+
+&gt; A quotation
+
+Inline `code` and a divider:
+
+---</pre><div class="ex-out md"><p><a href="https://commonmark.org">A link</a></p>
+<p><span class="img-ph" role="img" aria-label="Alt text for an image">🖼 Alt text for an image</span></p>
+<blockquote>
+<p>A quotation</p>
+</blockquote>
+<p>Inline <code>code</code> and a divider:</p>
+<hr>
+</div></div></figure>
+<figure class="ex"><div class="ex-title"><span>Tables and task lists</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c4">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJ8IE5hbWUgfCBSb2xlIHxcbnwgLS0tIHwgLS0tIHxcbnwgQWRhIHwgRW5naW5lZXIgfFxuXG4tIFt4XSBMZWFybiB0aGUgYmFzaWNzXG4tIFsgXSBXcml0ZSBzb21ldGhpbmcgZ3JlYXRcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c4">| Name | Role |
+| --- | --- |
+| Ada | Engineer |
+
+- [x] Learn the basics
+- [ ] Write something great</pre><div class="ex-out md"><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ada</td>
+<td>Engineer</td>
+</tr>
+</tbody></table>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Learn the basics</li>
+<li><input disabled="" type="checkbox"> Write something great</li>
+</ul>
+</div></div></figure>
+<h2 id="markdown-flavors-explained">Markdown flavors explained<a class="anchor" href="#markdown-flavors-explained" aria-label="Link to this section">#</a></h2>
+<p>&quot;Markdown&quot; is a family of closely related dialects:</p>
+<div class="tbl"><table><thead><tr>
+<th>Flavor</th>
+<th>What it adds</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>Original Markdown</strong></td>
+<td>The 2004 baseline: headings, emphasis, lists, links, images, code, quotes</td>
+</tr>
+<tr>
+<td><strong>CommonMark</strong></td>
+<td>A strict, unambiguous specification of the baseline</td>
+</tr>
+<tr>
+<td><strong>GitHub Flavored Markdown</strong></td>
+<td>Tables, task lists, strikethrough, autolinks, fenced code</td>
+</tr>
+<tr>
+<td><strong>Extended flavors</strong></td>
+<td>Footnotes, math, diagrams and callouts, depending on the tool</td>
+</tr>
+</tbody></table></div>
+<p>Quilldown supports GitHub Flavored Markdown plus footnotes, <a href="/guides/latex-math-in-markdown">LaTeX math</a>, <a href="/guides/mermaid-diagrams-in-markdown">Mermaid diagrams</a>, GitHub-style callouts and <a href="/guides/markdown-emoji-shortcodes">emoji shortcodes</a>.</p>
+<h2 id="markdown-vs-word-google-docs-and-html">Markdown vs Word, Google Docs and HTML<a class="anchor" href="#markdown-vs-word-google-docs-and-html" aria-label="Link to this section">#</a></h2>
+<div class="tbl"><table><thead><tr>
+<th></th>
+<th>Markdown</th>
+<th>Word / Google Docs</th>
+<th>HTML</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>Learning curve</strong></td>
+<td>A few symbols</td>
+<td>Familiar toolbar</td>
+<td>Tags and attributes</td>
+</tr>
+<tr>
+<td><strong>File type</strong></td>
+<td>Plain text (<code>.md</code>)</td>
+<td>Binary or zipped XML</td>
+<td>Plain text (<code>.html</code>)</td>
+</tr>
+<tr>
+<td><strong>Readable unrendered</strong></td>
+<td>Yes</td>
+<td>No</td>
+<td>Hard</td>
+</tr>
+<tr>
+<td><strong>Works with Git</strong></td>
+<td>Excellent</td>
+<td>Poor</td>
+<td>Good</td>
+</tr>
+<tr>
+<td><strong>Page layout control</strong></td>
+<td>Limited (by design)</td>
+<td>Excellent</td>
+<td>Excellent</td>
+</tr>
+<tr>
+<td><strong>Best for</strong></td>
+<td>Writing, docs, notes, READMEs</td>
+<td>Formatted, shared documents</td>
+<td>Web pages</td>
+</tr>
+</tbody></table></div>
+<p>You do not have to choose. Write in Markdown, then <a href="/guides/markdown-to-word">convert it to Word or Google Docs</a>, <a href="/guides/markdown-to-pdf">to PDF</a> or <a href="/guides/markdown-to-html">to HTML</a> when you need a finished document.</p>
+<h2 id="how-to-start-writing-markdown-in-five-minutes">How to start writing Markdown in five minutes<a class="anchor" href="#how-to-start-writing-markdown-in-five-minutes" aria-label="Link to this section">#</a></h2>
+<ol class="steps">
+<li><strong>Open an editor.</strong> Use <a href="/">Quilldown</a> — it runs in your browser, so there is nothing to install or sign up for.</li>
+<li><strong>Type on the left.</strong> Start a line with <code>#</code> and a space to make a heading, wrap a word in <code>**</code> to make it bold, start lines with <code>-</code> for a bullet list.</li>
+<li><strong>Watch the preview.</strong> The formatted document updates as you type on the right.</li>
+<li><strong>Use the toolbar if you forget a symbol.</strong> One click inserts the right Markdown and shows you the syntax.</li>
+<li><strong>Copy or export.</strong> Copy the formatted text into Google Docs, or export to PDF, Word, HTML, EPUB or an image.</li>
+</ol>
+
+<h2 id="common-beginner-mistakes">Common beginner mistakes<a class="anchor" href="#common-beginner-mistakes" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>No space after the symbol.</strong> <code>#Heading</code> is plain text; <code># Heading</code> is a heading.</li>
+<li><strong>No blank line before a list.</strong> Leave an empty line between a paragraph and the list that follows.</li>
+<li><strong>Line breaks vanish.</strong> A single new line joins into the same paragraph. End the line with two spaces, or leave a blank line, to start a new one.</li>
+<li><strong>Lists that will not nest.</strong> Indent nested items by two or four spaces.</li>
+<li><strong>Special characters turning into formatting.</strong> Put a backslash before a symbol to show it literally, for example <code>\*not italic\*</code>.</li>
+</ul>
+<h2 id="faq">Frequently asked questions<a class="anchor" href="#faq" aria-label="Link to this section">#</a></h2>
+<div class="faq"><details><summary>Is Markdown a programming language?</summary><p>No. Markdown is a markup language — a way to describe how text should be formatted. It has no logic, variables or loops. Tools read the symbols and produce formatted output such as HTML.</p></details><details><summary>What is a .md file and how do I open it?</summary><p>A <code>.md</code> file is a plain-text document written in Markdown. You can open it in any text editor to see the raw text, or in a Markdown editor such as Quilldown (use <strong>Open</strong> or drag the file onto the page) to see it formatted.</p></details><details><summary>Is Markdown free to use?</summary><p>Yes. Markdown itself is an open, free format, and Quilldown is a free online Markdown editor with no account required.</p></details><details><summary>Do I need to install anything to write Markdown?</summary><p>No. Any plain-text editor works, and browser-based editors like Quilldown need no installation. Quilldown can also be installed as an app and works offline.</p></details><details><summary>What is the difference between Markdown and HTML?</summary><p>HTML describes web pages with tags such as <code>&lt;h1&gt;</code> and <code>&lt;strong&gt;</code>. Markdown is a shorter, friendlier way to write the same structure — <code># Title</code> instead of <code>&lt;h1&gt;Title&lt;/h1&gt;</code>. Most Markdown tools convert to HTML, and you can even mix raw HTML into a Markdown document when you need something extra.</p></details><details><summary>Can I convert Markdown to Word or PDF?</summary><p>Yes. In Quilldown, use Export to save a PDF or a real Word (.docx) file, or Copy for Docs to paste formatted text into Google Docs. See the guides on <a href="/guides/markdown-to-pdf">Markdown to PDF</a> and <a href="/guides/markdown-to-word">Markdown to Word</a>.</p></details></div>
+    </article>
+  </div>
+  <div class="after">
+    <h2>Related guides</h2><div class="cards"><a class="gcard" href="/guides/markdown-cheat-sheet"><span class="tag">Learn Markdown</span><strong>Markdown cheat sheet</strong><span class="d">Every piece of Markdown syntax with live examples — headings, lists, tables, code, math, diagrams and more.</span></a><a class="gcard" href="/guides/markdown-to-word"><span class="tag">Convert &amp; export</span><strong>Markdown to Word &amp; Google Docs</strong><span class="d">Export a real .docx file or paste formatted text into Google Docs with clean heading sizes.</span></a><a class="gcard" href="/guides/readme-template"><span class="tag">Write better documents</span><strong>README template</strong><span class="d">What to put in a README, a copy-ready template and tips for a project page people actually read.</span></a></div>
+    <section class="cta-band"><div><h2>Write your first Markdown document</h2><p>Open the free editor and type on the left — the formatted result appears on the right instantly. No sign-up, nothing to install.</p></div><a class="btn btn-primary" href="/">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a></section>
+  </div>
+</main>
+<footer class="footer"><div class="container">
+  <div class="footer-cols">
+    <div><a class="brand" href="/"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>A calm, private Markdown editor with live preview, tabs, math and diagrams. Works offline.</p></div>
+    <div><h3>Learn Markdown</h3><ul><li><a href="/guides/what-is-markdown">What is Markdown?</a></li><li><a href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a></li></ul></div>
+    <div><h3>Convert &amp; export</h3><ul><li><a href="/guides/markdown-to-pdf">Markdown to PDF</a></li><li><a href="/guides/markdown-to-word">Markdown to Word &amp; Google Docs</a></li><li><a href="/guides/markdown-to-html">Markdown to HTML</a></li></ul></div>
+    <div><h3>Write better documents</h3><ul><li><a href="/guides/markdown-table-generator">Markdown tables</a></li><li><a href="/guides/latex-math-in-markdown">Math in Markdown</a></li><li><a href="/guides/mermaid-diagrams-in-markdown">Diagrams in Markdown</a></li><li><a href="/guides/markdown-emoji-shortcodes">Emoji shortcodes</a></li><li><a href="/guides/readme-template">README template</a></li></ul></div>
+  </div>
+  <div class="footer-base"><span>© 2026 Quilldown. Your Markdown never leaves your browser.</span><span><a href="/">Editor</a> · <a href="/guides">All guides</a> · <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">GitHub</a></span></div>
+</div></footer>
+<script src="/js/site.js" defer></script>
+</body>
+</html>

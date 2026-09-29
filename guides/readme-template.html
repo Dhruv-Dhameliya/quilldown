@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How to Write a Great README.md — With a Free Template</title>
+<meta name="description" content="Learn how to write a README.md: the sections to include, a free copy-ready Markdown template, formatting tips and common mistakes — with a live editor to try it.">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="canonical" href="https://quilldown.vercel.app/guides/readme-template">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Quilldown">
+<meta property="og:url" content="https://quilldown.vercel.app/guides/readme-template">
+<meta property="og:title" content="How to Write a Great README.md — With a Free Template">
+<meta property="og:description" content="Learn how to write a README.md: the sections to include, a free copy-ready Markdown template, formatting tips and common mistakes — with a live editor to try it.">
+<meta property="og:image" content="https://quilldown.vercel.app/social/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quilldown — Write Markdown. Watch it come alive.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Write a Great README.md — With a Free Template">
+<meta name="twitter:description" content="Learn how to write a README.md: the sections to include, a free copy-ready Markdown template, formatting tips and common mistakes — with a live editor to try it.">
+<meta name="twitter:image" content="https://quilldown.vercel.app/social/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230f0f10'/%3E%3Cpath d='M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5' stroke='%23fff' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>
+<link rel="stylesheet" href="/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/site.css">
+<script src="/js/document-style.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to write a great README.md (with a free template)","description":"Learn how to write a README.md: the sections to include, a free copy-ready Markdown template, formatting tips and common mistakes — with a live editor to try it.","image":"https://quilldown.vercel.app/social/og-image.png","datePublished":"2026-09-29","dateModified":"2026-09-29","inLanguage":"en","author":{"@type":"Organization","name":"Quilldown","url":"https://quilldown.vercel.app/"},"publisher":{"@type":"Organization","name":"Quilldown","logo":{"@type":"ImageObject","url":"https://quilldown.vercel.app/icons/icon-512.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://quilldown.vercel.app/guides/readme-template"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quilldown.vercel.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://quilldown.vercel.app/guides"},{"@type":"ListItem","position":3,"name":"How to write a great README.md (with a free template)","item":"https://quilldown.vercel.app/guides/readme-template"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What should a README.md contain?","acceptedAnswer":{"@type":"Answer","text":"At minimum: the project name and a one-line description, how to install and use it, and the license. Add features, a screenshot, configuration options and contribution guidelines as the project grows."}},{"@type":"Question","name":"Where do I put the README file?","acceptedAnswer":{"@type":"Answer","text":"In the root folder of your repository, named README.md. GitHub, GitLab and Bitbucket show it automatically on the project page."}},{"@type":"Question","name":"Is README.md written in Markdown?","acceptedAnswer":{"@type":"Answer","text":"Yes — the .md extension stands for Markdown, so you can use headings, lists, links, images, tables and code blocks."}},{"@type":"Question","name":"How long should a README be?","acceptedAnswer":{"@type":"Answer","text":"As long as needed and no longer. Cover the essentials near the top, and link to separate documentation for details."}},{"@type":"Question","name":"Can I preview my README before pushing it?","acceptedAnswer":{"@type":"Answer","text":"Yes. Paste it into Quilldown to see the formatted result as you type, then copy the Markdown back. It uses GitHub-style Markdown, so tables, task lists and fenced code render as they will on GitHub."}},{"@type":"Question","name":"Do I need a README for a private project?","acceptedAnswer":{"@type":"Answer","text":"It's still worthwhile. A README helps teammates (and future you) understand and run the project."}}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5" style="stroke:var(--logo-fg)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M6.34 6.34 4.93 4.93m14.14 14.14-1.41-1.41"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+<symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+</defs></svg>
+<header class="nav" id="nav"><div class="container nav-in">
+  <a class="brand" href="/" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
+  <nav class="nav-links" aria-label="Primary"><a href="/">Editor</a><a href="/guides/markdown-cheat-sheet">Cheat sheet</a><a href="/guides">Guides</a></nav>
+  <div class="nav-cta">
+    <a class="icon-btn" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill"><use href="#i-github"/></svg></a>
+    <button class="icon-btn" data-act="theme" aria-label="Toggle theme"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
+    <a class="btn btn-primary btn-sm" href="/">Open editor <svg class="i"><use href="#i-arrow"/></svg></a>
+  </div></div></header>
+<main class="doc-wrap">
+  <ol class="crumbs" aria-label="Breadcrumb"><li><a href="/">Home</a></li><li><a href="/guides">Guides</a></li><li aria-current="page">How to write a great README.md (with a free template)</li></ol>
+  <header class="doc-head">
+    <p class="eyebrow">Write better documents</p>
+    <h1>How to write a great README.md (with a free template)</h1>
+    <p class="lead">A README is your project's front door. This guide shows what to include, how to format it in Markdown, and gives you a template you can copy or open in the editor in one click.</p>
+    <div class="doc-meta"><span>Updated September 29, 2026</span><span>4 min read</span><span>Free · No sign-up · Runs in your browser</span></div>
+    <div class="doc-actions"><a class="btn btn-primary" href="/">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a><a class="btn" href="/guides">All guides</a></div>
+  </header>
+  <div class="doc-grid">
+    <aside class="toc" aria-label="On this page"><h2>On this page</h2><a href="#what-is-a-readmemd">What is a README.md?</a><a href="#what-to-include">What to include</a><a href="#a-copy-ready-readme-template">A copy-ready README template</a><a href="#formatting-tips-that-make-a-readme-easier-to-read">Formatting tips that make a README easier to read</a><a href="#optional-extras">Optional extras</a><a href="#common-readme-mistakes">Common README mistakes</a><a href="#faq">Frequently asked questions</a></aside>
+    <article class="doc-body">
+<h2 id="what-is-a-readmemd">What is a README.md?<a class="anchor" href="#what-is-a-readmemd" aria-label="Link to this section">#</a></h2>
+<p>A <strong>README</strong> is the first file people read in a project. On GitHub, GitLab and most code hosts, a file called <code>README.md</code> in the root of your repository is displayed automatically on the project&#39;s front page. The <code>.md</code> means it is written in <a href="/guides/what-is-markdown">Markdown</a>, so it can include headings, lists, code blocks, tables and images.</p>
+<p>A good README answers four questions in seconds: <strong>What is this? Why should I care? How do I use it? How can I help?</strong></p>
+<h2 id="what-to-include">What to include<a class="anchor" href="#what-to-include" aria-label="Link to this section">#</a></h2>
+<div class="tbl"><table><thead><tr>
+<th>Section</th>
+<th>What it covers</th>
+<th>Priority</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>Title and tagline</strong></td>
+<td>The project name and one sentence about what it does</td>
+<td>Essential</td>
+</tr>
+<tr>
+<td><strong>Features</strong></td>
+<td>A short bulleted list of what it offers</td>
+<td>Recommended</td>
+</tr>
+<tr>
+<td><strong>Screenshot or demo</strong></td>
+<td>Shows the result before anyone reads the details</td>
+<td>Recommended</td>
+</tr>
+<tr>
+<td><strong>Getting started</strong></td>
+<td>Requirements, installation and a first example</td>
+<td>Essential</td>
+</tr>
+<tr>
+<td><strong>Usage</strong></td>
+<td>Common tasks with copy-ready code</td>
+<td>Essential</td>
+</tr>
+<tr>
+<td><strong>Configuration</strong></td>
+<td>Options in a table</td>
+<td>If relevant</td>
+</tr>
+<tr>
+<td><strong>Contributing</strong></td>
+<td>How to report issues and send changes</td>
+<td>For open source</td>
+</tr>
+<tr>
+<td><strong>License</strong></td>
+<td>Which terms the code is shared under</td>
+<td>Essential</td>
+</tr>
+<tr>
+<td><strong>Contact or links</strong></td>
+<td>Docs, website, support</td>
+<td>Optional</td>
+</tr>
+</tbody></table></div>
+<h2 id="a-copy-ready-readme-template">A copy-ready README template<a class="anchor" href="#a-copy-ready-readme-template" aria-label="Link to this section">#</a></h2>
+<p>Copy this into your project, or open it in the editor and fill in the blanks. The right-hand side shows how GitHub-style Markdown will render it.</p>
+<figure class="ex"><div class="ex-title"><span>README.md template</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c1">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiUkVBRE1FLm1kIiwidCI6IiMgUHJvamVjdCBuYW1lXG5cbj4gT25lIHNlbnRlbmNlIHRoYXQgZXhwbGFpbnMgd2hhdCB0aGlzIHByb2plY3QgZG9lcyBhbmQgd2hvIGl0IGlzIGZvci5cblxuIyMgRmVhdHVyZXNcblxuLSDinIUgRmVhdHVyZSBvbmUg4oCUIHdoYXQgaXQgZ2l2ZXMgeW91XG4tIOKchSBGZWF0dXJlIHR3byDigJQgd2h5IGl0IG1hdHRlcnNcbi0g8J-apyBGZWF0dXJlIHRocmVlIOKAlCBjb21pbmcgc29vblxuXG4jIyBHZXR0aW5nIHN0YXJ0ZWRcblxuIyMjIEluc3RhbGxhdGlvblxuXG5gYGBiYXNoXG5naXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL3lvdXItbmFtZS9wcm9qZWN0LW5hbWUuZ2l0XG5jZCBwcm9qZWN0LW5hbWVcbm5wbSBpbnN0YWxsXG5gYGBcblxuIyMjIFVzYWdlXG5cbmBgYGpzXG5pbXBvcnQgeyBncmVldCB9IGZyb20gXCJwcm9qZWN0LW5hbWVcIjtcblxuY29uc29sZS5sb2coZ3JlZXQoXCJ3b3JsZFwiKSk7XG5gYGBcblxuIyMgQ29uZmlndXJhdGlvblxuXG58IE9wdGlvbiB8IFR5cGUgICAgICB8IERlZmF1bHQgICB8IERlc2NyaXB0aW9uICAgICAgIHxcbnwgOi0tLS0tIHwgOi0tLS0tLS0tIHwgOi0tLS0tLS0tIHwgOi0tLS0tLS0tLS0tLS0tLS0gfFxufCBgbmFtZWAgfCBgc3RyaW5nYCAgfCBgXCJ3b3JsZFwiYCB8IFdobyB0byBncmVldCAgICAgIHxcbnwgYGxvdWRgIHwgYGJvb2xlYW5gIHwgYGZhbHNlYCAgIHwgU2hvdXQgdGhlIGdyZWV0aW5nIHxcblxuIyMgQ29udHJpYnV0aW5nXG5cblB1bGwgcmVxdWVzdHMgYXJlIHdlbGNvbWUuIEZvciBtYWpvciBjaGFuZ2VzLCBwbGVhc2Ugb3BlbiBhbiBpc3N1ZSBmaXJzdCB0byBkaXNjdXNzIHdoYXQgeW91IHdvdWxkIGxpa2UgdG8gY2hhbmdlLlxuXG4jIyBMaWNlbnNlXG5cblJlbGVhc2VkIHVuZGVyIHRoZSBbTUlUIExpY2Vuc2VdKGh0dHBzOi8vb3BlbnNvdXJjZS5vcmcvbGljZW5zZXMvTUlUKS5cbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c1"># Project name
+
+&gt; One sentence that explains what this project does and who it is for.
+
+## Features
+
+- ✅ Feature one — what it gives you
+- ✅ Feature two — why it matters
+- 🚧 Feature three — coming soon
+
+## Getting started
+
+### Installation
+
+```bash
+git clone https://github.com/your-name/project-name.git
+cd project-name
+npm install
+```
+
+### Usage
+
+```js
+import { greet } from "project-name";
+
+console.log(greet("world"));
+```
+
+## Configuration
+
+| Option | Type      | Default   | Description       |
+| :----- | :-------- | :-------- | :---------------- |
+| `name` | `string`  | `"world"` | Who to greet      |
+| `loud` | `boolean` | `false`   | Shout the greeting |
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+Released under the [MIT License](https://opensource.org/licenses/MIT).</pre><div class="ex-out md"><p class="md-h md-h1">Project name</p>
+<blockquote>
+<p>One sentence that explains what this project does and who it is for.</p>
+</blockquote>
+<p class="md-h md-h2">Features</p>
+<ul>
+<li>✅ Feature one — what it gives you</li>
+<li>✅ Feature two — why it matters</li>
+<li>🚧 Feature three — coming soon</li>
+</ul>
+<p class="md-h md-h2">Getting started</p>
+<p class="md-h md-h3">Installation</p>
+<pre data-lang="bash"><code class="hljs">git <span class="hljs-built_in">clone</span> https://github.com/your-name/project-name.git
+<span class="hljs-built_in">cd</span> project-name
+npm install</code></pre>
+<p class="md-h md-h3">Usage</p>
+<pre data-lang="js"><code class="hljs"><span class="hljs-keyword">import</span> { greet } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;project-name&quot;</span>;
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">greet</span>(<span class="hljs-string">&quot;world&quot;</span>));</code></pre>
+<p class="md-h md-h2">Configuration</p>
+<table>
+<thead>
+<tr>
+<th align="left">Option</th>
+<th align="left">Type</th>
+<th align="left">Default</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>name</code></td>
+<td align="left"><code>string</code></td>
+<td align="left"><code>&quot;world&quot;</code></td>
+<td align="left">Who to greet</td>
+</tr>
+<tr>
+<td align="left"><code>loud</code></td>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>false</code></td>
+<td align="left">Shout the greeting</td>
+</tr>
+</tbody></table>
+<p class="md-h md-h2">Contributing</p>
+<p>Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.</p>
+<p class="md-h md-h2">License</p>
+<p>Released under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+</div></div></figure>
+<aside class="callout callout-tip"><p class="callout-title">Tip</p><p>Quilldown includes this template: choose <strong>New → Templates → README</strong>. It opens in a new tab so your current document is untouched.</p>
+</aside>
+<h2 id="formatting-tips-that-make-a-readme-easier-to-read">Formatting tips that make a README easier to read<a class="anchor" href="#formatting-tips-that-make-a-readme-easier-to-read" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>Lead with the value.</strong> Put what the project does in the first two lines, before install steps.</li>
+<li><strong>Use headings consistently.</strong> One <code>#</code> title, <code>##</code> sections, <code>###</code> sub-steps — GitHub builds a clickable outline from them.</li>
+<li><strong>Show code in fenced blocks with a language</strong> (<code>```bash</code>, <code>```js</code>) so it is highlighted and easy to copy.</li>
+<li><strong>Prefer tables for options and comparisons.</strong> Use the <a href="/guides/markdown-table-generator">table editor</a> instead of typing pipes.</li>
+<li><strong>Add images with alt text:</strong> <code>![Screenshot of the dashboard](docs/screenshot.png)</code>.</li>
+<li><strong>Use task lists for a roadmap:</strong> <code>- [x] Done</code> and <code>- [ ] Planned</code>.</li>
+<li><strong>Add emoji sparingly</strong> as status markers — see the <a href="/guides/markdown-emoji-shortcodes">emoji shortcode cheat sheet</a>.</li>
+<li><strong>Link to longer docs</strong> instead of putting everything in the README.</li>
+</ul>
+<h2 id="optional-extras">Optional extras<a class="anchor" href="#optional-extras" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>Badges</strong> — small status images for build status, version or license, placed under the title.</li>
+<li><strong>A table of contents</strong> — helpful once the README passes a few screens; link to headings such as <code>[Usage](#usage)</code>.</li>
+<li><strong>A demo GIF or screenshot</strong> — worth more than a paragraph of description.</li>
+<li><strong>A changelog link</strong> — keep release notes in their own file.</li>
+</ul>
+<h2 id="common-readme-mistakes">Common README mistakes<a class="anchor" href="#common-readme-mistakes" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>No description at all</strong>, only install commands.</li>
+<li><strong>Outdated instructions.</strong> Test your steps on a clean machine now and then.</li>
+<li><strong>Walls of text.</strong> Break content up with headings, lists and tables.</li>
+<li><strong>Missing license.</strong> Without one, others can&#39;t legally reuse your code.</li>
+<li><strong>Broken image links.</strong> Use paths relative to the repository root or full URLs.</li>
+</ul>
+<p>Not sure about the syntax? Keep the <a href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a> open while you write.</p>
+<h2 id="faq">Frequently asked questions<a class="anchor" href="#faq" aria-label="Link to this section">#</a></h2>
+<div class="faq"><details><summary>What should a README.md contain?</summary><p>At minimum: the project name and a one-line description, how to install and use it, and the license. Add features, a screenshot, configuration options and contribution guidelines as the project grows.</p></details><details><summary>Where do I put the README file?</summary><p>In the root folder of your repository, named <code>README.md</code>. GitHub, GitLab and Bitbucket show it automatically on the project page.</p></details><details><summary>Is README.md written in Markdown?</summary><p>Yes — the <code>.md</code> extension stands for Markdown, so you can use headings, lists, links, images, tables and code blocks.</p></details><details><summary>How long should a README be?</summary><p>As long as needed and no longer. Cover the essentials near the top, and link to separate documentation for details.</p></details><details><summary>Can I preview my README before pushing it?</summary><p>Yes. Paste it into Quilldown to see the formatted result as you type, then copy the Markdown back. It uses GitHub-style Markdown, so tables, task lists and fenced code render as they will on GitHub.</p></details><details><summary>Do I need a README for a private project?</summary><p>It&#39;s still worthwhile. A README helps teammates (and future you) understand and run the project.</p></details></div>
+    </article>
+  </div>
+  <div class="after">
+    <h2>Related guides</h2><div class="cards"><a class="gcard" href="/guides/markdown-cheat-sheet"><span class="tag">Learn Markdown</span><strong>Markdown cheat sheet</strong><span class="d">Every piece of Markdown syntax with live examples — headings, lists, tables, code, math, diagrams and more.</span></a><a class="gcard" href="/guides/markdown-table-generator"><span class="tag">Write better documents</span><strong>Markdown tables</strong><span class="d">Build Markdown tables in a visual grid, paste from Excel or Sheets, and learn the syntax.</span></a><a class="gcard" href="/guides/markdown-emoji-shortcodes"><span class="tag">Write better documents</span><strong>Emoji shortcodes</strong><span class="d">How :shortcodes: work, with a cheat sheet of the most useful emoji codes for READMEs and docs.</span></a></div>
+    <section class="cta-band"><div><h2>Start your README now</h2><p>In Quilldown choose New → Templates → README for a ready-made starting point, and see the formatted result as you type.</p></div><a class="btn btn-primary" href="/">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a></section>
+  </div>
+</main>
+<footer class="footer"><div class="container">
+  <div class="footer-cols">
+    <div><a class="brand" href="/"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>A calm, private Markdown editor with live preview, tabs, math and diagrams. Works offline.</p></div>
+    <div><h3>Learn Markdown</h3><ul><li><a href="/guides/what-is-markdown">What is Markdown?</a></li><li><a href="/guides/markdown-cheat-sheet">Markdown cheat sheet</a></li></ul></div>
+    <div><h3>Convert &amp; export</h3><ul><li><a href="/guides/markdown-to-pdf">Markdown to PDF</a></li><li><a href="/guides/markdown-to-word">Markdown to Word &amp; Google Docs</a></li><li><a href="/guides/markdown-to-html">Markdown to HTML</a></li></ul></div>
+    <div><h3>Write better documents</h3><ul><li><a href="/guides/markdown-table-generator">Markdown tables</a></li><li><a href="/guides/latex-math-in-markdown">Math in Markdown</a></li><li><a href="/guides/mermaid-diagrams-in-markdown">Diagrams in Markdown</a></li><li><a href="/guides/markdown-emoji-shortcodes">Emoji shortcodes</a></li><li><a href="/guides/readme-template">README template</a></li></ul></div>
+  </div>
+  <div class="footer-base"><span>© 2026 Quilldown. Your Markdown never leaves your browser.</span><span><a href="/">Editor</a> · <a href="/guides">All guides</a> · <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">GitHub</a></span></div>
+</div></footer>
+<script src="/js/site.js" defer></script>
+</body>
+</html>
