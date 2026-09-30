@@ -555,6 +555,23 @@ const minsOf = slug => (built.find(b => b.slug === slug) || {}).mins || 5;
   await writeFile(path.join(ROOT, 'docs', 'index.html'), html);
 }
 
+/* ---------- 404 page (Vercel serves /404.html for every unknown address, with a real 404 status) ---------- */
+{
+  const url = SITE + '/404';
+  const title = 'Page not found | Quilldown';
+  const description = 'This page could not be found. Open the Quilldown editor, browse the guides, or head back to the homepage.';
+  const cards = [['Features', '/features', 'Everything the editor can do.'], ['How it works', '/how-quilldown-works', 'From first word to finished file.'], ['Privacy', '/privacy', 'Your writing stays on your device.'], ['FAQ', '/faq', 'Answers to the common questions.'], ['Documentation', '/docs', 'Guides, cheat sheet and tutorials.'], ['About', '/about', 'Why Quilldown exists.']]
+    .map(([t, h, d]) => `      <a class="gcard" href="${h}"><strong>${t}</strong><span class="d">${d}</span>${ARROW}</a>`).join('\n');
+  const index = [['Home', '/'], ['Features', '/features'], ['How it works', '/how-quilldown-works'], ['Privacy', '/privacy'], ['FAQ', '/faq'], ['About', '/about'], ['Documentation', '/docs'], ...pages.map(p => [p.short || p.h1, '/docs/' + p.slug])].map(([t, p]) => ({ t, p }));
+  let tpl = (await readFile(path.join(ROOT, 'pages', '404.html'), 'utf8')).replace(/\r\n/g, '\n').replace(/<!--[\s\S]*?-->/g, '');
+  tpl = tpl.replace('{{cards}}', () => cards).replace('{{guides}}', () => gnavHTML(pages)).replace('{{index}}', () => escAttr(JSON.stringify(index)));
+  // a "not found" page must not be indexed and has no canonical address of its own
+  let head = headHTML({ title, description, url, type: 'website', ld: graph(baseNodes()) });
+  head = head.replace('content="index, follow, max-image-preview:large"', 'content="noindex, follow"')
+    .replace(/<link rel="(?:canonical|alternate)"[^>]*>\n/g, '').replace(/<meta property="og:url"[^>]*>\n/, '');
+  await writeFile(path.join(ROOT, '404.html'), head + navHTML('') + '\n<main class="fx nf">\n' + tpl + '\n</main>\n' + footerHTML(pages) + '\n<script src="/js/site.js" defer></script>\n<script src="/js/404.js" defer></script>\n</body>\n</html>\n');
+}
+
 /* ---------- sitemap ---------- */
 {
   const urls = [

@@ -1,0 +1,30 @@
+<!-- The "page not found" page (served by Vercel for every unknown address, with a real 404 status).
+     Edit the words here. Placeholders: {{cards}} the product-page cards, {{guides}} the guide navigator, {{index}} data for the "did you mean" hint.
+     Then run: node tools/build-pages.mjs -->
+
+<header class="hero fx-hero nf-hero">
+  <div class="container">
+    <span class="pill"><span class="dot"></span>Error 404</span>
+    <p class="nf-code" aria-hidden="true">404</p>
+    <h1 class="fx-h1">This page <em>wandered off.</em></h1>
+    <p class="fx-lede">We couldn't find <code class="nf-path" id="nfPath">that address</code>. The page may have moved, or the link has a typo. Here's where to go instead.</p>
+    <p class="nf-did" id="nfDid" data-index="{{index}}" hidden>Did you mean <a id="nfDidLink" href="/"></a>?</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-max"/></svg></a>
+      <a class="text-link" href="/">Go to the homepage <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<div class="container nf-body">
+  <section class="nf-sec" aria-labelledby="nfPlaces">
+    <h2 class="nf-h" id="nfPlaces">Popular <em>places</em></h2>
+    <div class="nf-grid">
+{{cards}}
+    </div>
+  </section>
+  <section class="nf-sec" aria-labelledby="nfGuides">
+    <h2 class="nf-h" id="nfGuides">Or read <em>a guide</em></h2>
+    {{guides}}
+  </section>
+</div>
