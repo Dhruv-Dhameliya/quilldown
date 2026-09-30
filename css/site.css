@@ -1842,7 +1842,9 @@ details.fix>summary:hover{color:var(--accent)}
 }
 
 /* ---------- 404 page ---------- */
-.nf-code{margin:22px 0 -6px;font-size:clamp(96px,20vw,210px);font-weight:800;line-height:1;letter-spacing:-.06em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.9;user-select:none}
+.nf-code{display:flex;align-items:baseline;justify-content:center;gap:.08em;margin:22px 0 0;font-size:clamp(96px,20vw,210px);line-height:1.02;user-select:none}
+.nf-code .nf-hash{font:400 1em var(--font-mono);color:var(--accent);opacity:.45;letter-spacing:0}
+.nf-code em{font-family:var(--font-serif);font-style:italic;font-weight:400;letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;padding:.04em .1em .2em .04em;margin:-.04em -.1em -.2em -.04em}
 .nf-hero .fx-h1{margin-top:6px}
 .nf-path{padding:2px 9px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);font:500 .92em var(--font-mono);color:var(--text);word-break:break-all}
 .nf-did{margin:16px 0 0;font-size:16px;color:var(--text-2)}
