@@ -1,0 +1,4 @@
+docs-md/*.md
+pages/*.md
+llms.txt
+llms-full.txt

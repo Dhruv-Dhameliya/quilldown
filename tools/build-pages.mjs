@@ -293,18 +293,30 @@ const baseNodes = () => [
       { '@type': 'ContactPoint', contactType: 'media relations', url: GITHUB_PROFILE, availableLanguage: 'English' }
     ] },
   { '@type': 'Person', '@id': ID.person, name: AUTHOR, url: GITHUB_PROFILE, sameAs: [GITHUB_PROFILE], worksFor: { '@id': ID.org } },
-  { '@type': 'WebSite', '@id': ID.site, url: SITE + '/', name: 'Quilldown', description: SITE_DESC, inLanguage: 'en', publisher: { '@id': ID.org } }
+  { '@type': 'WebSite', '@id': ID.site, url: SITE + '/', name: 'Quilldown', alternateName: ['Quilldown Markdown editor', 'Quilldown Markdown'], description: SITE_DESC, inLanguage: 'en', publisher: { '@id': ID.org } }
+];
+/** The app itself (WebApplication + its source code): on the homepage and on the pages that describe the product. */
+const appNodes = () => [
+    { '@type': 'WebApplication', '@id': ID.app, name: 'Quilldown', alternateName: 'Quilldown Markdown editor', url: SITE + '/', description: SITE_DESC,
+      applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'Markdown editor', operatingSystem: 'Any (runs in a web browser)',
+      browserRequirements: 'Requires JavaScript. Works in current Chrome, Edge, Firefox and Safari.', isAccessibleForFree: true, inLanguage: 'en',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+      featureList: ['Live Markdown preview with synced scrolling', 'Tabs for multiple documents', 'Copy for Google Docs with clean heading sizes', 'Export to PDF, Word (.docx), PNG, EPUB, HTML, Markdown and plain text', 'LaTeX math with KaTeX', 'Mermaid diagrams', 'Visual table editor and emoji picker', 'Find and replace, outline and footnotes', 'Works offline and installs as an app', 'Private: nothing is uploaded'],
+      image: OG_IMAGE, screenshot: imageNode, softwareHelp: { '@type': 'CreativeWork', name: 'Quilldown guides', url: SITE + '/docs' }, installUrl: SITE + '/',
+      datePublished: FIRST_PUBLISHED, dateModified: LAST_UPDATED, author: { '@id': ID.person }, publisher: { '@id': ID.org }, sameAs: [GITHUB], isBasedOn: { '@id': ID.code } },
+    { '@type': 'SoftwareSourceCode', '@id': ID.code, license: 'https://opensource.org/licenses/MIT', name: 'Quilldown source code', codeRepository: GITHUB, programmingLanguage: ['JavaScript', 'HTML', 'CSS'], runtimePlatform: 'Web browser', author: { '@id': ID.person }, url: GITHUB },
 ];
 const webPageNode = (url, name, description, extra = {}) => ({ '@type': 'WebPage', '@id': url + '#webpage', url, name, description, inLanguage: 'en', isPartOf: { '@id': ID.site }, primaryImageOfPage: imageNode, image: imageNode, ...extra });
-const breadcrumbNode = (url, items) => ({ '@type': 'BreadcrumbList', '@id': url + '#breadcrumb', itemListElement: items.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE + c.href })) });
+const breadcrumbNode = (url, items) => ({ '@type': 'BreadcrumbList', '@id': url + '#breadcrumb', itemListElement: items.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE + (c.href === '/#top' ? '/' : c.href) })) });
 const faqNode = (url, items) => ({ '@type': 'FAQPage', '@id': url + '#faq', url, isPartOf: { '@id': url + '#webpage' }, mainEntity: items.map(i => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: stripTags(i.html) } })) });
 const graph = nodes => ({ '@context': 'https://schema.org', '@graph': nodes });
+const PRODUCT_PAGES = new Set(['features', 'how-quilldown-works', 'privacy']);
 const CRUMB_HOME = { name: 'Home', href: '/#top' };
 
 /* ---------- head / chrome ---------- */
 const fontsCss = await readFile(path.join(ROOT, 'vendor/fonts/fonts.css'), 'utf8');
 const SANS_LATIN = (/\/\* latin \*\/\s*@font-face\s*\{[^}]*font-family:\s*'Nunito'[^}]*url\(([^)]+\.woff2)\)/.exec(fontsCss) || [])[1];
-function headHTML({ title, description, url, type = 'article', math = false, ld }) {
+function headHTML({ title, description, url, type = 'article', math = false, ld, article = null }) {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -316,12 +328,20 @@ function headHTML({ title, description, url, type = 'article', math = false, ld 
 <meta name="author" content="${AUTHOR}">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="canonical" href="${url}">
+<link rel="alternate" hreflang="en" href="${url}">
+<link rel="alternate" hreflang="x-default" href="${url}">
+${article ? `<link rel="alternate" type="text/markdown" href="${url.replace('/docs/', '/docs-md/')}.md" title="Markdown version of this guide">
+` : ''}<link rel="alternate" type="text/plain" href="/llms.txt" title="Quilldown summary for language models">
 <link rel="author" href="${GITHUB_PROFILE}">
 <link rel="me" href="${GITHUB_PROFILE}">
 <meta property="og:type" content="${type}">
 <meta property="og:site_name" content="Quilldown">
 <meta property="og:locale" content="en_US">
-<meta property="og:url" content="${url}">
+${article ? `<meta property="article:published_time" content="${article.published}">
+<meta property="article:modified_time" content="${article.modified}">
+<meta property="article:author" content="${GITHUB_PROFILE}">
+<meta property="article:section" content="${escAttr(article.section)}">
+` : ''}<meta property="og:url" content="${url}">
 <meta property="og:title" content="${escAttr(title)}">
 <meta property="og:description" content="${escAttr(description)}">
 <meta property="og:image" content="${OG_IMAGE}">
@@ -465,9 +485,10 @@ for (const p of allPages) {
   const eyebrow = p.isSite ? (p.eyebrow || 'About') : CATEGORIES.find(c => c.id === p.category).title;
 
   const nodes = [...baseNodes(),
-    webPageNode(url, p.title, p.description, { breadcrumb: { '@id': url + '#breadcrumb' }, datePublished: p.published || p.updated, dateModified: p.updated, ...(p.slug === 'about' ? { '@type': ['AboutPage', 'ContactPage'], mainEntity: { '@id': ID.org } } : p.isSite ? { about: { '@id': ID.org } } : { mainEntity: { '@id': url + '#article' } }) }),
+    webPageNode(url, p.title, p.description, { breadcrumb: { '@id': url + '#breadcrumb' }, datePublished: p.published || p.updated, dateModified: p.updated, ...(p.slug === 'about' ? { '@type': ['AboutPage', 'ContactPage'], mainEntity: { '@id': ID.org } } : p.isSite ? { about: { '@id': PRODUCT_PAGES.has(p.slug) ? ID.app : ID.org } } : { mainEntity: { '@id': url + '#article' } }) }),
     breadcrumbNode(url, crumbs)];
-  if (!p.isSite) nodes.push({ '@type': 'Article', '@id': url + '#article', headline: p.h1, description: p.description, image: imageNode, datePublished: p.published || p.updated, dateModified: p.updated, inLanguage: 'en', wordCount: wc,
+  if (PRODUCT_PAGES.has(p.slug)) nodes.push(...appNodes());
+  if (!p.isSite) nodes.push({ '@type': ['Article', 'TechArticle'], '@id': url + '#article', headline: p.h1, description: p.description, image: imageNode, datePublished: p.published || p.updated, dateModified: p.updated, inLanguage: 'en', wordCount: wc, timeRequired: 'PT' + mins + 'M', about: { '@id': ID.org }, 
     articleSection: eyebrow, isAccessibleForFree: true, author: { '@id': ID.person }, publisher: { '@id': ID.org }, mainEntityOfPage: { '@id': url + '#webpage' }, isPartOf: { '@id': url + '#webpage' } });
   if (faqItems.length) nodes.push(faqNode(url, faqItems));
 
@@ -477,7 +498,7 @@ for (const p of allPages) {
   if (!custom && /<h1[ >]/i.test(html)) warn(`${p.slug}: body contains an <h1>`);
   for (const m of html.matchAll(/href="\/docs\/([^"#]+)/g)) if (!slugs.has(m[1])) warn(`${p.slug}: broken internal link /docs/${m[1]}`);
 
-  p.html = headHTML({ title: p.title, description: p.description, url, math: p.math || /class="katex/.test(html), ld: graph(nodes) }) + navHTML(p.isSite ? ({ about: 'about', features: 'features', 'how-quilldown-works': 'how', privacy: 'privacy', faq: 'faq' }[p.slug] || 'about') : 'docs') + `
+  p.html = headHTML({ title: p.title, description: p.description, url, type: p.isSite ? 'website' : 'article', article: p.isSite ? null : { published: p.published || p.updated, modified: p.updated, section: eyebrow }, math: p.math || /class="katex/.test(html), ld: graph(nodes) }) + navHTML(p.isSite ? ({ about: 'about', features: 'features', 'how-quilldown-works': 'how', privacy: 'privacy', faq: 'faq' }[p.slug] || 'about') : 'docs') + `
 <header class="hero fx-hero guide-hero">
   <div class="container">
     ${crumbsHTML(crumbs)}
@@ -507,7 +528,7 @@ ${html}
 ${p.copymd ? `<textarea id="cheat-md" hidden readonly aria-hidden="true">${escAttr(cleanCopy(p.body))}</textarea>\n` : ''}${(p.scripts || '').split(',').map(x => x.trim()).filter(Boolean).map(x => `<script src="${x}" defer></script>\n`).join('')}</body>
 </html>
 `;
-  if (custom) p.html = headHTML({ title: p.title, description: p.description, url, math: true, ld: graph(nodes) }) + navHTML({ about: 'about', features: 'features', 'how-quilldown-works': 'how', privacy: 'privacy', faq: 'faq' }[p.slug] || 'about') + (custom.includes('<main class="ab">') ? '\n' + custom + '\n' : '\n<main class="fx">\n' + custom + '\n</main>\n') + footerHTML(pages) + '\n<script src="/js/site.js" defer></script>\n' + (p.scripts || '').split(',').map(x => x.trim()).filter(Boolean).map(x => `<script src="${x}" defer></script>\n`).join('') + '</body>\n</html>\n';
+  if (custom) p.html = headHTML({ title: p.title, description: p.description, url, type: 'website', math: true, ld: graph(nodes) }) + navHTML({ about: 'about', features: 'features', 'how-quilldown-works': 'how', privacy: 'privacy', faq: 'faq' }[p.slug] || 'about') + (custom.includes('<main class="ab">') ? '\n' + custom + '\n' : '\n<main class="fx">\n' + custom + '\n</main>\n') + footerHTML(pages) + '\n<script src="/js/site.js" defer></script>\n' + (p.scripts || '').split(',').map(x => x.trim()).filter(Boolean).map(x => `<script src="${x}" defer></script>\n`).join('') + '</body>\n</html>\n';
   await writeFile(path.join(ROOT, p.isSite ? `${p.slug}.html` : `docs/${p.slug}.html`), p.html);
   built.push({ slug: p.slug, words: wc, mins, faq: faqItems.length, title: p.title.length, desc: p.description.length });
 }
@@ -554,14 +575,7 @@ const minsOf = slug => (built.find(b => b.slug === slug) || {}).mins || 5;
   if (homeDesc.length > 160) warn(`homepage description is ${homeDesc.length} chars (aim ≤ 160)`);
   const nodes = [...baseNodes(),
     webPageNode(url, homeTitle, homeDesc, { datePublished: FIRST_PUBLISHED, dateModified: LAST_UPDATED, about: { '@id': ID.app }, mainEntity: { '@id': ID.app } }),
-    { '@type': 'WebApplication', '@id': ID.app, name: 'Quilldown', alternateName: 'Quilldown Markdown editor', url: SITE + '/', description: SITE_DESC,
-      applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'Markdown editor', operatingSystem: 'Any (runs in a web browser)',
-      browserRequirements: 'Requires JavaScript. Works in current Chrome, Edge, Firefox and Safari.', isAccessibleForFree: true, inLanguage: 'en',
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
-      featureList: ['Live Markdown preview with synced scrolling', 'Tabs for multiple documents', 'Copy for Google Docs with clean heading sizes', 'Export to PDF, Word (.docx), PNG, EPUB, HTML, Markdown and plain text', 'LaTeX math with KaTeX', 'Mermaid diagrams', 'Visual table editor and emoji picker', 'Find and replace, outline and footnotes', 'Works offline and installs as an app', 'Private: nothing is uploaded'],
-      image: OG_IMAGE, screenshot: imageNode, softwareHelp: { '@type': 'CreativeWork', name: 'Quilldown guides', url: SITE + '/docs' }, installUrl: SITE + '/',
-      datePublished: FIRST_PUBLISHED, dateModified: LAST_UPDATED, author: { '@id': ID.person }, publisher: { '@id': ID.org }, sameAs: [GITHUB], isBasedOn: { '@id': ID.code } },
-    { '@type': 'SoftwareSourceCode', '@id': ID.code, license: 'https://opensource.org/licenses/MIT', name: 'Quilldown source code', codeRepository: GITHUB, programmingLanguage: ['JavaScript', 'HTML', 'CSS'], runtimePlatform: 'Web browser', author: { '@id': ID.person }, url: GITHUB },
+    ...appNodes(),
     faqNode(url, faqItems)];
   const regions = {
     FAQ: faqFlatHTML(faqItems),
@@ -577,6 +591,65 @@ const minsOf = slug => (built.find(b => b.slug === slug) || {}).mins || 5;
     idx = idx.replace(re, (m, a, b) => `${a}\n${inner}\n${b}`);
   }
   await writeFile(path.join(ROOT, 'index.html'), idx);
+}
+
+/* ---------- AI-crawler files: /llms.txt, /llms-full.txt and a clean Markdown copy of every guide (/docs-md/<slug>.md) ---------- */
+{
+  const decode = t => t.replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&rsquo;|&lsquo;/g, "'").replace(/&ldquo;|&rdquo;/g, '"').replace(/&mdash;/g, ' - ').replace(/&amp;/g, '&');
+  const abs = h => /^https?:/.test(h) ? h : h.startsWith('#') ? '' : SITE + (h.startsWith('/') ? h : '/' + h);
+  /** A built page's <main> as readable Markdown (headings, lists, links, FAQ questions); used for the pages that are hand-built HTML. */
+  const htmlToMd = html => {
+    let m = (/<main[\s\S]*?<\/main>/.exec(html) || [''])[0];
+    // decorative blocks (aria-hidden mock-ups) and the rendered half of code examples are removed with their whole subtree
+    const dropAll = openRe => {
+      for (let guard = 0; guard < 600; guard++) {
+        const o = openRe.exec(m); if (!o) break;
+        const re = new RegExp('<(/?)' + o[1] + '\\b[^>]*>', 'g'); re.lastIndex = o.index + o[0].length;
+        let depth = 1, e; while (depth && (e = re.exec(m))) depth += e[1] ? -1 : 1;
+        m = e ? m.slice(0, o.index) + m.slice(e.index + e[0].length) : m.slice(0, o.index) + o[0].replace(/aria-hidden|ex-out|code-actions/, 'kept') + m.slice(o.index + o[0].length);   // unbalanced markup: keep it rather than cut the page short
+      }
+    };
+    dropAll(/<(div|span|ul|figure|section)[^>]*aria-hidden="true"[^>]*>/);
+    dropAll(/<(div)[^>]*class="ex-out[^"]*"[^>]*>/);
+    dropAll(/<(span)[^>]*class="code-actions"[^>]*>/);
+    m = m.replace(/<a [^>]*href="[^"]*#d=u\.[^"]*"[^>]*>[\s\S]*?<\/a>/g, '')
+      .replace(/<(script|style|svg|aside|nav|button|textarea|template)[\s\S]*?<\/\1>/g, '')
+      .replace(/<div class="(?:fx-jump|reading-bar|ab-chipsrow|ab-status)[\s\S]*?<\/div>/g, '')
+      .replace(/<ul class="(?:ab-chipsrow|pv-summary|fx-glance)[\s\S]*?<\/ul>/g, '')
+      .replace(/<summary>([\s\S]*?)<\/summary>/g, (x, t) => '\n\n### ' + stripTags(t) + '\n\n')
+      .replace(/<h([1-6])[^>]*>([\s\S]*?)<\/h\1>/g, (x, n, t) => '\n\n' + '#'.repeat(+n) + ' ' + stripTags(t).replace(/\s+/g, ' ').trim() + '\n\n')
+      .replace(/<a [^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g, (x, h, t) => { const u = abs(h), tt = stripTags(t).replace(/\s+/g, ' ').trim(); return u && tt ? '[' + tt + '](' + u + ')' : tt; })
+      .replace(/<li[^>]*>/g, '\n- ').replace(/<\/(p|div|section|article|ul|ol|details|tr|header|figure|blockquote)>/g, '\n\n').replace(/<br\s*\/?>/g, '\n').replace(/<\/t[dh]>/g, ' | ')
+      .replace(/<pre[^>]*>([\s\S]*?)<\/pre>/g, (x, t) => '\n\n' + String.fromCharCode(96).repeat(3) + '\n' + t.replace(/<span class="ln"[^>]*>/g, '\n').replace(/<[^>]+>/g, '').trim() + '\n' + String.fromCharCode(96).repeat(3) + '\n\n')
+      .replace(/<[^>]+>/g, '');
+    return decode(m).split('\n').map(l => l.replace(/^[ \t]+|[ \t]+$/g, '')).join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  };
+  /** A guide's Markdown source without the site-only widgets (jump chips, tool mounts, generated diagram/emoji fences). */
+  const guideMd = p => cleanCopy(p.body).replace(/<section class="tool"[^>]*><\/section>\n*/g, '').replace(new RegExp('^(' + String.fromCharCode(96) + '{3,})(?:diagram|emoji-table)[^\\n]*\\n[\\s\\S]*?\\n\\1\\n*', 'gm'), '').replace(/\n{3,}/g, '\n\n').trim();
+  const head = (p, url) => '# ' + p.h1 + '\n\n> ' + p.description + '\n\nSource: <' + url + '>  \nUpdated: ' + p.updated + '\n\n';
+
+  await mkdir(path.join(ROOT, 'docs-md'), { recursive: true });
+  for (const p of pages) await writeFile(path.join(ROOT, 'docs-md', p.slug + '.md'), head(p, SITE + '/docs/' + p.slug) + guideMd(p) + '\n');
+
+  const order = ['features', 'how-quilldown-works', 'privacy', 'faq', 'about'].map(sl => sitePages.find(p => p.slug === sl)).filter(Boolean);
+  const CAT_LABEL = { learn: 'Learn Markdown', convert: 'Convert and export', write: 'Write better documents' };
+  const llms = ['# Quilldown', '',
+    '> Quilldown is a free online Markdown editor with live preview, tabs, LaTeX math, Mermaid diagrams and export to PDF, Word (.docx), HTML, PNG, EPUB and plain text. It runs entirely in the browser: nothing a user writes is uploaded, no account is needed, and it works offline after the first visit.', '',
+    'Quilldown is open source (MIT license). Drafts are saved in the visitor\'s own browser storage; there is no server-side copy. The guides below are plain-language documentation about Markdown itself and about using Quilldown.', '',
+    '## Product', '',
+    '- [Editor](' + SITE + '/#editor): the Markdown editor with live preview',
+    ...order.map(p => '- [' + (p.short || p.h1) + '](' + SITE + '/' + p.slug + '): ' + p.description),
+    '', ...CATEGORIES.flatMap(c => ['## ' + CAT_LABEL[c.id], '', ...pages.filter(p => p.category === c.id).map(p => '- [' + p.h1 + '](' + SITE + '/docs-md/' + p.slug + '.md): ' + p.description), '']),
+    '## Optional', '',
+    '- [Documentation index](' + SITE + '/docs): every guide with short descriptions',
+    '- [Full text of all pages in one file](' + SITE + '/llms-full.txt)',
+    '- [Source code on GitHub](' + GITHUB + ')', '- [Sitemap](' + SITE + '/sitemap.xml)', ''].join('\n');
+  await writeFile(path.join(ROOT, 'llms.txt'), llms);
+
+  const full = ['# Quilldown: full text', '', '> The complete text of Quilldown\'s product pages and guides in one file, for language models and other automated readers. Canonical addresses are given under each title.', ''];
+  for (const p of order) full.push('---', '', htmlToMd(p.html), '', 'Source: ' + SITE + '/' + p.slug, '');
+  for (const p of pages) full.push('---', '', head(p, SITE + '/docs/' + p.slug).trimEnd(), '', guideMd(p), '');
+  await writeFile(path.join(ROOT, 'llms-full.txt'), full.join('\n').replace(/\n{3,}/g, '\n\n') + '\n');
 }
 
 /* ---------- report ---------- */

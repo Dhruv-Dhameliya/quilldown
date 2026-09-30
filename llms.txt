@@ -1,0 +1,40 @@
+# Quilldown
+
+> Quilldown is a free online Markdown editor with live preview, tabs, LaTeX math, Mermaid diagrams and export to PDF, Word (.docx), HTML, PNG, EPUB and plain text. It runs entirely in the browser: nothing a user writes is uploaded, no account is needed, and it works offline after the first visit.
+
+Quilldown is open source (MIT license). Drafts are saved in the visitor's own browser storage; there is no server-side copy. The guides below are plain-language documentation about Markdown itself and about using Quilldown.
+
+## Product
+
+- [Editor](https://quilldown.vercel.app/#editor): the Markdown editor with live preview
+- [Features](https://quilldown.vercel.app/features): See what Quilldown can do: live preview, tabs, LaTeX math, Mermaid diagrams, visual tables, find and replace, and export to PDF, Word, HTML, PNG and EPUB.
+- [How it works](https://quilldown.vercel.app/how-quilldown-works): See how Quilldown works in three steps: write or paste Markdown, watch the live preview, then copy or export to PDF, Word, HTML, PNG or EPUB, in your browser.
+- [Privacy](https://quilldown.vercel.app/privacy): Quilldown runs in your browser. Your writing is never uploaded, there's no account, and drafts stay on your device. See what's stored and how to check.
+- [FAQ](https://quilldown.vercel.app/faq): Answers about Quilldown, the free online Markdown editor: privacy, PDF and Word export, opening .md files, math, diagrams, offline use, sharing and fixes.
+- [About](https://quilldown.vercel.app/about): Quilldown is a free Markdown editor that runs in your browser, released under the MIT License. Learn why it exists, what it doesn't do, and how to get in touch.
+
+## Learn Markdown
+
+- [What is Markdown? A beginner's guide](https://quilldown.vercel.app/docs-md/what-is-markdown.md): What is Markdown? Learn who created it, why it exists, how it beats plain text, where it's used and how to write your first document in minutes.
+- [Markdown cheat sheet](https://quilldown.vercel.app/docs-md/markdown-cheat-sheet.md): A complete Markdown cheat sheet with live examples for headings, lists, links, tables, code, footnotes, math and diagrams, plus fixes for common problems.
+- [Emoji in Markdown: shortcodes and cheat sheet](https://quilldown.vercel.app/docs-md/emoji-in-markdown.md): Emoji shortcodes explained: how :rocket: works in Markdown, where it renders, shortcode vs Unicode, a cheat sheet of popular codes and common fixes.
+
+## Convert and export
+
+- [How to convert Markdown to PDF](https://quilldown.vercel.app/docs-md/markdown-to-pdf.md): Convert Markdown to PDF free in your browser. Check the preview, set the print options and save a selectable PDF. No upload, no sign-up, works offline.
+- [Convert Markdown to Word (.docx) and Google Docs](https://quilldown.vercel.app/docs-md/markdown-to-word.md): Convert Markdown to Word (.docx) or paste it into Google Docs with real headings, tables and footnotes. Free, private, nothing uploaded. Includes fixes.
+- [Convert Markdown to HTML](https://quilldown.vercel.app/docs-md/markdown-to-html.md): Convert Markdown to HTML online, free. Copy clean markup for your CMS or export a standalone page, plus the tag map, raw HTML rules and sanitizing advice.
+
+## Write better documents
+
+- [Markdown table generator and syntax guide](https://quilldown.vercel.app/docs-md/markdown-table-generator.md): Make a Markdown table without typing pipes: use the visual editor, paste from Excel or Sheets, set alignment. Full syntax, fixes and when to skip tables.
+- [How to write math (LaTeX) in Markdown](https://quilldown.vercel.app/docs-md/math-in-markdown.md): Write math in Markdown with LaTeX and KaTeX: inline and display equations, matrices, aligned steps, currency dollar-sign fixes and common errors solved.
+- [How to draw diagrams in Markdown with Mermaid](https://quilldown.vercel.app/docs-md/diagrams-in-markdown.md): Draw diagrams in Markdown with Mermaid: which type to pick, copy-ready flowcharts, sequence, Gantt, class, state, ER and mind maps, plus fixes for errors.
+- [How to write a great README.md (with a free template)](https://quilldown.vercel.app/docs-md/readme-template.md): How to write a README.md: what to include, section order, a free copy-ready Markdown template, badges, formatting tips and common mistakes to avoid.
+
+## Optional
+
+- [Documentation index](https://quilldown.vercel.app/docs): every guide with short descriptions
+- [Full text of all pages in one file](https://quilldown.vercel.app/llms-full.txt)
+- [Source code on GitHub](https://github.com/Dhruv-Dhameliya/quilldown)
+- [Sitemap](https://quilldown.vercel.app/sitemap.xml)
