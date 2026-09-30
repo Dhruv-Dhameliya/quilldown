@@ -32,7 +32,7 @@
 <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
 <link rel="icon" href="/icons/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/icons/icon-192.png">
-<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>
+<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();try{if(localStorage.getItem('quilldown:wide')==='1')document.documentElement.classList.add('wide-screen')}catch(e){}document.addEventListener('DOMContentLoaded',function(){var c=document.getElementById('wideToggle');if(!c)return;c.checked=document.documentElement.classList.contains('wide-screen');c.addEventListener('change',function(){document.documentElement.classList.toggle('wide-screen',c.checked);try{localStorage.setItem('quilldown:wide',c.checked?'1':'0')}catch(e){}})});</script>
 <link rel="preload" href="/vendor/fonts/nunito-latin-5.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="/vendor/katex/katex.min.css" media="print" onload="this.media='all'">
@@ -883,7 +883,7 @@ code
       <li><a href="/about">About</a></li>
     </ul></div>
   </div>
-  <div class="footer-base"><span>© 2026 Quilldown · Open source · Your writing never leaves your browser</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Docs</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span></div>
+  <div class="footer-base"><span>© 2026 Quilldown · Open source · Your writing never leaves your browser</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Docs</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span><label class="wide-opt" title="Let the pages use the full width of a large screen"><input type="checkbox" id="wideToggle"><span>Wide screen</span></label></div>
 </div></footer>
 <script src="/js/site.js" defer></script>
 <textarea id="cheat-md" hidden readonly aria-hidden="true">

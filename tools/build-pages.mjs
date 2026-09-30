@@ -239,7 +239,7 @@ const SPRITE = `<svg width="0" height="0" style="position:absolute" aria-hidden=
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
 <symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
 </defs></svg>`;
-const HEAD_SCRIPT = `<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>`;
+const HEAD_SCRIPT = `<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();try{if(localStorage.getItem('quilldown:wide')==='1')document.documentElement.classList.add('wide-screen')}catch(e){}document.addEventListener('DOMContentLoaded',function(){var c=document.getElementById('wideToggle');if(!c)return;c.checked=document.documentElement.classList.contains('wide-screen');c.addEventListener('change',function(){document.documentElement.classList.toggle('wide-screen',c.checked);try{localStorage.setItem('quilldown:wide',c.checked?'1':'0')}catch(e){}})});</script>`;
 /** ONE header for every page. `current` marks the Docs link; `home` uses in-page anchors (the homepage itself). Written into index.html's <!--NAV--> region too. */
 const navHTML = (current = '', home = false) => {
   const a = id => (home ? '#' : '/#') + id;
@@ -267,7 +267,7 @@ const footerHTML = guides => `<footer class="footer"><div class="container">
       <li><a href="/about">About</a></li>
     </ul></div>
   </div>
-  <div class="footer-base"><span>© 2026 Quilldown · Open source · Your writing never leaves your browser</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Docs</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span></div>
+  <div class="footer-base"><span>© 2026 Quilldown · Open source · Your writing never leaves your browser</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Docs</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span><label class="wide-opt" title="Let the pages use the full width of a large screen"><input type="checkbox" id="wideToggle"><span>Wide screen</span></label></div>
 </div></footer>`;
 const h1HTML = p => {
   const t = p.h1; let em = p.h1em;
