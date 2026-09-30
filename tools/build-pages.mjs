@@ -20,7 +20,7 @@ const SITE = 'https://quilldown.vercel.app';
 const GITHUB = 'https://github.com/Dhruv-Dhameliya/quilldown';
 const GITHUB_PROFILE = 'https://github.com/Dhruv-Dhameliya';
 const AUTHOR = 'Dhruv-Dhameliya';
-const OG_IMAGE = SITE + '/social/og-image.png';
+const OG_IMAGE = SITE + '/social/og-image.png?v=2';
 const CATEGORIES = [
   { id: 'learn', title: 'Learn Markdown', blurb: 'The basics and the reference.' },
   { id: 'convert', title: 'Convert & export', blurb: 'Turn Markdown into PDF, Word, HTML or an e-book — privately, in your browser.' },
@@ -254,10 +254,12 @@ const navHTML = (current = '', home = false) => {
     <a class="btn btn-primary btn-sm" href="${a('editor')}">Open editor <svg class="i"><use href="#i-max"/></svg></a>
   </div></div></header>`;
 };
+const FOOT_TITLES = { learn: 'Learn', convert: 'Export', write: 'Write' };
+const footLabel = p => (p.short || p.h1).replace(/Markdown/g, 'MD').replace(/ & Google Docs/, '');
 const footerHTML = guides => `<footer class="footer"><div class="container">
   <div class="footer-cols">
     <div><a class="brand" href="/#top"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>Quilldown is a free, private Markdown editor with live preview, math and diagrams. It works offline, and your writing never leaves your browser.</p></div>
-    ${CATEGORIES.map(c => `<div><h3>${esc(c.title)}</h3><ul>${guides.filter(p => p.category === c.id).map(p => `<li><a href="/docs/${p.slug}">${esc(p.short || p.h1)}</a></li>`).join('')}</ul></div>`).join('\n    ')}
+    ${CATEGORIES.map(c => `<div><h3>${esc(FOOT_TITLES[c.id] || c.title)}</h3><ul>${guides.filter(p => p.category === c.id).map(p => `<li><a href="/docs/${p.slug}">${esc(footLabel(p))}</a></li>`).join('')}</ul></div>`).join('\n    ')}
     <div><h3>Contact</h3><ul>
       <li><a href="${GITHUB_PROFILE}" target="_blank" rel="me noopener noreferrer">GitHub profile</a></li>
       <li><a href="${GITHUB}/issues" target="_blank" rel="noopener noreferrer">Report an issue</a></li>
@@ -265,7 +267,7 @@ const footerHTML = guides => `<footer class="footer"><div class="container">
       <li><a href="/about">About</a></li>
     </ul></div>
   </div>
-  <div class="footer-base"><span>© 2026 Quilldown · Built and maintained as an open-source project. Your Markdown never leaves your browser.</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Documentation</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span></div>
+  <div class="footer-base"><span>© 2026 Quilldown · Open source · Your writing never leaves your browser</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Docs</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span></div>
 </div></footer>`;
 const h1HTML = p => {
   const t = p.h1; let em = p.h1em;
@@ -400,7 +402,7 @@ for (const p of allPages) {
     const parts = src.split(/\[\[md\]\]([\s\S]*?)\[\[\/md\]\]/);
     src = '';
     for (let i = 0; i < parts.length; i++) src += i % 2 ? '<div class="doc-body fx-md">' + (await renderBody(parts[i], p.slug)).html + '</div>' : parts[i];
-    const seenH = new Set();
+    const seenH = new Set([...src.matchAll(/ id="([^"]+)"/g)].map(m => m[1]));   // ids already in the frame (sections) are reserved, so a heading can never steal a jump-link target
     src = src.replace(/<h3>([\s\S]*?)<\/h3>/g, (m, inner) => { let id = slugify(inner.replace(/<[^>]+>/g, '')) || 'item'; while (seenH.has(id)) id += '-2'; seenH.add(id); return `<h3 id="${id}">${inner}</h3>`; });
     if (src.includes('{{faq}}')) {   // the FAQ page: sections and questions come from pages/faq.md
       const body = p.body.replace(/<!--[\s\S]*?-->/g, '');

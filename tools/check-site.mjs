@@ -39,7 +39,7 @@ for (const p of pages) {
   if (canon !== wantCanon) bad(`${where}: canonical is ${canon}, expected ${wantCanon}`);
   const h1s = (h.match(/<h1[\s>]/g) || []).length;
   if (h1s !== 1) bad(`${where}: ${h1s} <h1> elements (want exactly 1)`);
-  if (!/<meta property="og:image" content="https:\/\/quilldown\.vercel\.app\/social\/og-image\.png">/.test(h)) bad(`${where}: missing og:image`);
+  if (!/<meta property="og:image" content="https:\/\/quilldown\.vercel\.app\/social\/og-image\.png\?v=2">/.test(h)) bad(`${where}: missing og:image`);
   if (!/<html lang="en"/.test(h)) bad(`${where}: missing lang`);
   // no render-blocking scripts in <head> (external scripts must be defer/async/module)
   const head = (/<head[\s\S]*?<\/head>/.exec(h) || [''])[0].replace(/<noscript>[\s\S]*?<\/noscript>/g, '');
