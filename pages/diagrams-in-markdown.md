@@ -1,18 +1,27 @@
 ---
-title: Diagrams in Markdown — Mermaid Flowcharts, Sequence and More
+title: Diagrams in Markdown: Mermaid Flowcharts, Sequence, Gantt & More
 h1: How to draw diagrams in Markdown with Mermaid
+h1em: with Mermaid
 short: Diagrams in Markdown
-card: Flowcharts, Gantt, mind maps.
+card: Flowcharts, Gantt charts and mind maps.
 description: Draw diagrams in Markdown with Mermaid: which type to pick, copy-ready flowcharts, sequence, Gantt, class, state, ER and mind maps, plus fixes for errors.
-lead: Put a few lines of Mermaid text in a code block tagged mermaid and Quilldown draws the diagram in the live preview. Pick the right diagram type, copy a working example and fix the usual syntax errors.
+lead: Put a few lines of Mermaid text in a code block tagged mermaid and Quilldown draws the diagram in the live preview. Pick the right diagram type, copy a working example and fix the usual syntax errors. Everything runs in your browser, so your diagrams are never uploaded.
 category: write
 order: 9
 published: 2026-09-29
-updated: 2026-09-29
-related: latex-math-in-markdown, markdown-cheat-sheet, markdown-to-pdf
+updated: 2026-09-30
+scripts: /js/tools.js
+related: math-in-markdown, markdown-cheat-sheet, markdown-to-pdf
 cta: Draw your first diagram
 ctaText: Use the Diagram menu in Quilldown to insert a ready-made template, then edit the text and watch the drawing update.
 ---
+
+> [!TIP]
+> **Quick answer.** Start a fenced code block with the word `mermaid` and describe the diagram inside it. The first line names the type (`flowchart TD`, `sequenceDiagram`, `gantt`, `classDiagram`, `stateDiagram-v2`, `erDiagram`, `pie` or `mindmap`), and the rest follows that type's syntax. Quilldown draws it live and matches your light or dark theme.
+
+<section class="tool" data-tool="diagram" aria-label="Mermaid diagram playground"></section>
+
+<div class="cs-jump"><a href="#flowcharts">Flowchart</a><a href="#sequence-diagrams">Sequence diagram</a><a href="#gantt-charts">Gantt chart</a><a href="#class-state-and-entity-relationship-diagrams">Class diagram</a><a href="#class-state-and-entity-relationship-diagrams">State diagram</a><a href="#class-state-and-entity-relationship-diagrams">ER diagram</a><a href="#pie-charts-and-mind-maps">Pie chart</a><a href="#pie-charts-and-mind-maps">Mind map</a><a href="#common-errors-and-how-to-fix-them">Fix an error</a></div>
 
 ## How to draw a diagram in Markdown
 
@@ -25,7 +34,7 @@ flowchart LR
 ```
 ````
 
-Quilldown draws Mermaid diagrams live in the preview and matches them to the light or dark theme. The toolbar has buttons for inserting diagrams, which is a quick way to get a working starting point. GitHub also renders `mermaid` blocks in Markdown files, so the same source works in a repository, for example in a [README](/guides/readme-template).
+Quilldown draws Mermaid diagrams live in the preview and matches them to the light or dark theme. The toolbar has buttons for inserting diagrams, which is a quick way to get a working starting point. GitHub also renders `mermaid` blocks in Markdown files, so the same source works in a repository, for example in a [README](/docs/readme-template).
 
 The first word inside the block declares the diagram type, and everything after it follows that type's own syntax. Get that first line right and most of the rest follows.
 
@@ -38,7 +47,7 @@ A diagram earns its place when the reader would otherwise have to build the pict
 - **Time and dependencies.** A schedule with tasks that wait on each other is a Gantt chart.
 - **Structure.** Types, states and data relationships each have a diagram made for them.
 
-Skip the diagram when a numbered list says the same thing, when you need exact figures (use a [table](/guides/markdown-table-generator)), or when the picture would need more than about a dozen boxes. Split big diagrams into two smaller ones rather than shrinking one.
+Skip the diagram when a numbered list says the same thing, when you need exact figures (use a [table](/docs/markdown-table-generator)), or when the picture would need more than about a dozen boxes. Split big diagrams into two smaller ones rather than shrinking one.
 
 ## Which diagram type should you use?
 
@@ -80,9 +89,9 @@ The shape is set by the brackets around the label:
 | `A((Text))` | Circle |
 | `A[(Text)]` | Cylinder, for a database |
 
-Links come in a few styles: `-->` an arrow, `---` a plain line, `-.->` a dotted arrow and `==>` a thick arrow. This example uses several shapes and labelled branches:
+Links come in a few styles: `-->` an arrow, `---` a plain line, `-.->` a dotted arrow and `==>` a thick arrow. This example uses several shapes and labeled branches:
 
-````example title="Flowchart with shapes and labelled branches"
+````example title="Flowchart with shapes and labeled branches"
 ```mermaid
 flowchart TD
   A([Start]) --> B[Process step]
@@ -95,7 +104,7 @@ flowchart TD
 
 ### Subgraphs and styling
 
-Group related nodes with `subgraph … end`. Give a group of nodes a look with `classDef`, then attach it with `class`. Set the text colour as well as the fill so the diagram stays readable in both light and dark themes.
+Group related nodes with `subgraph … end`. Give a group of nodes a look with `classDef`, then attach it with `class`. Set the text color as well as the fill so the diagram stays readable in both light and dark themes.
 
 ````example title="Subgraphs and a highlighted node"
 ```mermaid
@@ -114,7 +123,7 @@ flowchart LR
 ```
 ````
 
-Use styling sparingly. One highlighted node to mark the path that matters says more than a rainbow, and colour alone should never carry meaning that the labels don't.
+Use styling sparingly. One highlighted node to mark the path that matters says more than a rainbow, and color alone should never carry meaning that the labels don't.
 
 ## Labels and special characters
 
@@ -245,6 +254,14 @@ A **mind map** uses indentation for each level of the hierarchy. The first line 
 - **Describe the diagram in the sentence above it.** It helps readers who skim, use screen readers or can't see the image.
 - **Use consistent wording.** If one step says "Send" and the next says "Dispatch" for the same action, readers will look for a difference.
 
+## Five common jobs, fastest route for each
+
+- **Explain a process or workflow in a README or doc.** Use a flowchart. Choose `TD` for a portrait page and `LR` for a wide one, label the decision branches (Yes, No) and leave the obvious arrows bare. GitHub renders the same block, so it works in your repository unchanged. See the [README guide](/docs/readme-template).
+- **Show how systems talk to each other.** Use a sequence diagram. Declare the participants first to control their order, use dashed arrows for replies, and wrap a failure path in an `alt` block.
+- **Add a schedule to a proposal you'll send as a PDF.** Use a Gantt chart with `after` links so the schedule stays correct when one date moves, and set `excludes weekends` for working-day plans. Export to PDF and check the diagram in the print preview. See [Markdown to PDF](/docs/markdown-to-pdf).
+- **Document a database or a design.** Use an ER diagram for tables and their relationships, or a class diagram for types and inheritance. Add attributes with `PK` and `FK` markers where they help.
+- **Turn Mermaid code from an AI chat into a working diagram.** Paste the code into a fence tagged `mermaid`, and check that the first line names a valid type. If you see a Diagram error, compare the line the message names with the examples on this page. The usual culprits are parentheses in an unquoted label and the lowercase word `end`.
+
 ## Common errors and how to fix them
 
 When Mermaid can't parse a diagram, the preview shows an error message that usually names the offending line. Match it against the table.
@@ -265,12 +282,25 @@ When Mermaid can't parse a diagram, the preview shows an error message that usua
 
 ## Diagrams in exports and other tools
 
-- **PDF.** Choose Export, then PDF. The browser's print dialog opens and you pick Save as PDF; diagrams appear as they do in the preview. The [Markdown to PDF guide](/guides/markdown-to-pdf) has page-setup tips.
-- **Word (.docx).** Diagrams are exported as images, so they look right but can't be edited in Word. Keep the Mermaid source in your `.md` file. See [Markdown to Word](/guides/markdown-to-word).
+- **PDF.** Choose Export, then PDF. The browser's print dialog opens and you pick Save as PDF; diagrams appear as they do in the preview. The [Markdown to PDF guide](/docs/markdown-to-pdf) has page-setup tips.
+- **Word (.docx).** Diagrams are exported as images, so they look right but can't be edited in Word. Keep the Mermaid source in your `.md` file. See [Markdown to Word](/docs/markdown-to-word).
 - **GitHub.** `mermaid` blocks render in Markdown files, issues and pull requests, so the same source works there.
 - **Other platforms.** Support varies, so check before you publish. When it is missing, the block appears as ordinary code.
 
-For everything else you can put in a document, see the [Markdown cheat sheet](/guides/markdown-cheat-sheet). To add formulas beside your diagrams, read [how to write math in Markdown](/guides/latex-math-in-markdown).
+For everything else you can put in a document, see the [Markdown cheat sheet](/docs/markdown-cheat-sheet). To add formulas beside your diagrams, read [how to write math in Markdown](/docs/math-in-markdown).
+
+## Other ways to add a diagram to a document
+
+| Where | Good for | Trade-offs |
+| --- | --- | --- |
+| **Quilldown with Mermaid** | Diagrams that live in your text, with a live preview that works offline | Layout is automatic, so you can't drag boxes around |
+| **GitHub and other platforms that render Mermaid** | Diagrams inside READMEs, issues and pull requests | Support varies by platform, and an unsupported one shows the block as plain code |
+| **Drag-and-drop diagram apps** | Polished, hand-placed visuals | The diagram lives outside your text, so version control and editing take more effort |
+| **A screenshot or picture** | Quick one-off sharing | Can't be edited, searched or diffed |
+
+## What diagrams in Quilldown can't do
+
+<div class="fx-limits dia-limits"><p class="fx-limits-intro">Knowing the limits saves time.</p><ul><li><b>Layout is automatic.</b> Mermaid works out where boxes go, so you can't position them by hand.</li><li><b>Colors follow your theme.</b> You can highlight nodes with <code>classDef</code>, but keep the labels carrying the meaning.</li><li><b>Word exports contain diagrams as images,</b> so they can't be edited in Word. Keep the Mermaid source in your Markdown.</li><li><b>Other platforms may not render Mermaid at all,</b> in which case the block appears as ordinary code.</li><li><b>Very large diagrams get cramped.</b> Aim for about a dozen nodes and split anything bigger.</li><li><b>A syntax mistake anywhere can break the whole diagram,</b> and later lines may look wrong because of one early error.</li></ul></div>
 
 ## Frequently asked questions
 
@@ -284,7 +314,7 @@ Use a flowchart for steps and decisions, a sequence diagram for messages between
 
 ### Can I export Markdown diagrams to PDF or Word?
 
-Yes. In a [PDF export](/guides/markdown-to-pdf) the diagrams appear as they do in the preview, and a [Word export](/guides/markdown-to-word) contains them as images. The images can't be edited in Word, so keep the Mermaid source in your Markdown file.
+Yes. In a [PDF export](/docs/markdown-to-pdf) the diagrams appear as they do in the preview, and a [Word export](/docs/markdown-to-word) contains them as images. The images can't be edited in Word, so keep the Mermaid source in your Markdown file.
 
 ### Do Mermaid diagrams work on GitHub?
 
@@ -297,3 +327,35 @@ Mermaid couldn't parse the text. Common causes are a misspelled diagram type on 
 ### Do diagrams work offline?
 
 Yes. Quilldown works offline after your first visit, so diagrams keep drawing without a connection.
+
+### How do I make a flowchart in Markdown?
+
+Add a code fence tagged `mermaid`, start with `flowchart TD` (top to bottom) or `flowchart LR` (left to right), then connect nodes with arrows, for example `A[Start] --> B[Next step]`. Put decision labels on arrows with pipes, such as `C -->|Yes| D`.
+
+### How do I make a Gantt chart in Markdown?
+
+Use a `mermaid` fence that starts with `gantt`, add `dateFormat YYYY-MM-DD`, group tasks under `section` lines, and write each task as a name, a colon, an optional status, an id, a start and a duration. Start a task with `after a1` to chain it to another task by id.
+
+### How do I make a sequence diagram in Markdown?
+
+Start a `mermaid` fence with `sequenceDiagram`, declare your participants, then write messages as `A->>B: text`. Use `-->>` for replies, and `alt`, `loop` and `opt` blocks for branches and repetition.
+
+### How do I add a diagram to a GitHub README?
+
+Put the diagram in a code fence tagged `mermaid` in your README. GitHub renders it, and you can draft and preview it in Quilldown first. See the [README guide](/docs/readme-template).
+
+### How do I paste a Mermaid diagram from an AI chat into Markdown?
+
+Wrap the code in a fence tagged `mermaid`, make sure the first line is a valid diagram type, and check the preview. If it shows a Diagram error, quote any label that contains parentheses, avoid the lowercase word `end`, and check the indentation on mind maps.
+
+### How do I save a diagram as an image?
+
+Export as PNG saves the whole document as one image, so put the diagram in its own document to get only the diagram. Copy as HTML, or Export as HTML, includes the diagram as inline SVG if you need the vector version.
+
+### Can I use parentheses, slashes or colons in a label?
+
+Yes, if you wrap the label in double quotes, for example `A["Costs (USD)"]`. Without quotes, characters that have a meaning in Mermaid can break the diagram.
+
+### What's the difference between a flowchart and a sequence diagram?
+
+A flowchart shows steps and decisions in a process, without a time axis. A sequence diagram shows messages between people or systems in the order they happen, top to bottom.

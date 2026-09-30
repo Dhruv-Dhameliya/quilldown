@@ -1,23 +1,32 @@
 ---
-title: How to Write a Great README.md — With a Free Template
+title: README Template: Write a Great README.md (Free, Copy-Ready)
 h1: How to write a great README.md (with a free template)
+h1em: (with a free template)
 short: README template
-card: A copy-ready README.
+card: A copy-ready starting point.
 description: How to write a README.md: what to include, section order, a free copy-ready Markdown template, badges, formatting tips and common mistakes to avoid.
-lead: A README is your project's front door. This guide shows what to put in it and in what order, gives you a complete template to copy, and covers badges, screenshots and the mistakes that cost you users.
+lead: A README is your project's front door. This guide shows what to put in it and in what order, gives you a complete template to copy, and covers badges, screenshots and the mistakes that cost you users. You can draft and preview it in your browser, and nothing is uploaded.
 category: write
 order: 10
 home: true
 published: 2026-09-29
-updated: 2026-09-29
-related: markdown-cheat-sheet, markdown-table-generator, markdown-emoji-shortcodes
+updated: 2026-09-30
+scripts: /js/tools.js
+related: markdown-cheat-sheet, markdown-table-generator, emoji-in-markdown
 cta: Start your README now
 ctaText: In Quilldown choose New → Templates → README for a ready-made starting point, and see the formatted result as you type.
 ---
 
+> [!TIP]
+> **Quick answer.** A good README answers four questions in order: what is this, why should I care, how do I use it, and how can I help or get help. Put the project name and a one-sentence description at the top, then a screenshot or short example, install steps, usage, and finish with contributing and the license. Save it as `README.md` in the root of your repository, and GitHub shows it on the project page automatically.
+
+<section class="tool" data-tool="readme" aria-label="README generator"></section>
+
+<div class="cs-jump"><a href="#a-copy-ready-readme-template">Copy the template</a><a href="#a-minimal-readme-for-small-projects">Minimal README</a><a href="#a-starter-for-your-github-profile-readme">Profile README</a><a href="#badges-which-ones-are-worth-adding">Badges</a><a href="#screenshots-gifs-and-diagrams">Screenshots</a><a href="#common-readme-mistakes-and-how-to-fix-them">Fix common mistakes</a><a href="#a-quick-checklist-before-you-commit">Checklist</a></div>
+
 ## What is a README.md, and what should it do?
 
-A **README** is the first file people read in a project. On GitHub, GitLab, Bitbucket and most code hosts, a file called `README.md` in the root of your repository is displayed automatically on the project's front page. GitHub also looks in a `.github` folder and a `docs` folder if there is none in the root. The `.md` means it is written in [Markdown](/guides/what-is-markdown), so it can hold headings, lists, code blocks, tables and images.
+A **README** is the first file people read in a project. On GitHub, GitLab, Bitbucket and most code hosts, a file called `README.md` in the root of your repository is displayed automatically on the project's front page. GitHub also looks in a `.github` folder and a `docs` folder. If there is more than one, it shows the `.github` one first, then the root, then `docs`. The `.md` means it is written in [Markdown](/docs/what-is-markdown), so it can hold headings, lists, code blocks, tables and images.
 
 A README has one job: help a stranger decide, within about thirty seconds, whether your project is for them, and then get them to a working result. It should answer four questions in this order:
 
@@ -144,6 +153,47 @@ Released under the [MIT License](LICENSE).
 > [!TIP]
 > Quilldown includes a README template: choose **New → Templates → README**. It opens in a new tab so your current document is untouched.
 
+## A minimal README for small projects
+
+Not every project needs twelve sections. If yours is small, or you just want a solid start, these five are enough.
+
+1. **A title (H1)** with your project name, followed by one sentence saying what it does and who it's for.
+2. **H2 Install:** the command a reader pastes to get started.
+3. **H2 Usage:** the smallest working example, with the expected output.
+4. **H2 Contributing:** one sentence and a link to your issues page.
+5. **H2 License:** one line naming the license, linked to your LICENSE file.
+
+Grow it later. Add a screenshot, a features list and a configuration table when the project needs them, not before.
+
+````example title="A minimal README" file=README.md
+# Project name
+
+One sentence that says what this does and who it is for.
+
+## Install
+
+```bash
+npm install project-name
+```
+
+## Usage
+
+```js
+import { greet } from 'project-name';
+
+console.log(greet('Ada'));
+// Hello, Ada!
+```
+
+## Contributing
+
+Bug reports and ideas are welcome on the [issues page](https://github.com/your-name/project-name/issues).
+
+## License
+
+[MIT](LICENSE)
+````
+
 ## Write the top of your README for scanning
 
 The first screen decides whether people keep reading, so spend most of your effort there.
@@ -169,7 +219,7 @@ Badges are small images, usually served live from a service, that report build s
 | **Coverage** | You track it and keep it healthy | Skip it if the number is embarrassing |
 | **Downloads or stars** | Rarely | Vanity metrics; they add little |
 
-A badge is a linked image: `[![Alt text](image-url)](link-url)`. Always write meaningful alt text, since screen readers and broken images fall back to it. Prefer live badges over static ones for anything that changes, and read the [Markdown cheat sheet](/guides/markdown-cheat-sheet) if the nesting of brackets looks odd.
+A badge is a linked image: `[![Alt text](image-url)](link-url)`. Always write meaningful alt text, since screen readers and broken images fall back to it. Prefer live badges over static ones for anything that changes, and read the [Markdown cheat sheet](/docs/markdown-cheat-sheet) if the nesting of brackets looks odd.
 
 ## Screenshots, GIFs and diagrams
 
@@ -180,7 +230,7 @@ A single good image tells a visitor more than a paragraph. A few rules keep it u
 - **Keep GIFs short and small.** Under ten seconds and a few megabytes; long recordings slow the page and look worse than a still with a caption.
 - **Control the size** when the image is huge: use HTML, such as `<img src="docs/dashboard.png" width="600" alt="Dashboard with three charts">`.
 - **Offer a dark-mode version** if the screenshot has a white background. GitHub supports a `<picture>` element with a `prefers-color-scheme` source, so one image shows in light mode and another in dark.
-- **Draw architecture, do not describe it.** A [Mermaid diagram](/guides/mermaid-diagrams-in-markdown) in a fenced block renders on GitHub and stays editable as text.
+- **Draw architecture, do not describe it.** A [Mermaid diagram](/docs/diagrams-in-markdown) in a fenced block renders on GitHub and stays editable as text.
 
 Package pages on registries such as npm and PyPI display your README away from the repository. Relative image paths often break there, so use full URLs for images if the README doubles as a package page.
 
@@ -197,7 +247,7 @@ project-name greet "Ada" --loud
 # HELLO, ADA!
 ```
 
-**Configuration.** Use a table with one row per option and columns for the name, type, default and description. Tables scan far better than paragraphs, and the [table editor and generator guide](/guides/markdown-table-generator) shows how to build one without typing pipes by hand. Document the default of every option; people read this section when something behaves unexpectedly.
+**Configuration.** Use a table with one row per option and columns for the name, type, default and description. Tables scan far better than paragraphs, and the [table editor and generator guide](/docs/markdown-table-generator) shows how to build one without typing pipes by hand. Document the default of every option; people read this section when something behaves unexpectedly.
 
 ## README structure by project type
 
@@ -209,6 +259,18 @@ The template above is a starting point. Different projects lead with different t
 | **Web or desktop app** | Screenshot and what it is for | Install or hosting steps, environment variables, how to run locally | Missing setup for secrets and databases |
 | **Command-line tool** | A copy-paste command and its output | Every flag in a table, exit codes, install methods | Help text and README that disagree |
 | **Data or research project** | What the data is, its source and its license | Column descriptions, collection dates, how to reproduce results, citation | No license for the data, no note on limitations |
+
+## A starter for your GitHub profile README
+
+A profile README is a special README that appears at the top of your GitHub profile. Create a public repository named exactly like your username, add a `README.md`, and GitHub shows it. Keep it short and personal.
+
+- **A greeting** with your name and a single line about what you do.
+- **What I'm working on now,** with two or three linked bullets.
+- **Tools I use,** as a short list (a wall of badges slows the page and hides the point).
+- **Find me,** with links to your site, social profiles and email.
+- **Optionally,** a note pointing to one pinned project you're proud of.
+
+Tips: write meaningful alt text for any image, keep GIFs small, and avoid loading many third-party widgets, since each one slows the page and can break.
 
 ## Formatting that makes a README easier to read
 
@@ -239,14 +301,14 @@ Jump to [Configuration](#configuration) or read the [contributing guide](CONTRIB
 - [ ] Export to JSON
 ````
 
-Leave a blank line after `<summary>` and before `</details>`, otherwise the Markdown inside will not render. Emoji work well as small status markers in feature lists; the [emoji shortcode cheat sheet](/guides/markdown-emoji-shortcodes) has the codes and the pitfalls.
+Leave a blank line after `<summary>` and before `</details>`, otherwise the Markdown inside will not render. Emoji work well as small status markers in feature lists; the [emoji shortcode cheat sheet](/docs/emoji-in-markdown) has the codes and the pitfalls.
 
 ## Versions, changelogs and keeping the README current
 
 A README describes one moment in time, so decide what belongs in it and what does not.
 
 - **Keep release history out of the README.** Put it in `CHANGELOG.md` and link to it. The README should describe how the current version works.
-- **Use a changelog format people recognise.** The Keep a Changelog convention groups entries under Added, Changed, Deprecated, Removed, Fixed and Security, with newest first.
+- **Use a changelog format people recognize.** The Keep a Changelog convention groups entries under Added, Changed, Deprecated, Removed, Fixed and Security, with newest first.
 - **Follow semantic versioning if you publish releases:** `MAJOR.MINOR.PATCH`, where a major bump signals a breaking change.
 - **Let a badge carry the version number** instead of writing it in text that goes stale.
 - **Say which versions the instructions apply to** whenever they depend on one.
@@ -266,7 +328,7 @@ A README describes one moment in time, so decide what belongs in it and what doe
 - Default greeting is now "Hello"
 ````
 
-Treat the README as code. Follow your own install steps on a clean machine (a fresh container works) before each release, and update the README in the same pull request that changes the behaviour.
+Treat the README as code. Follow your own install steps on a clean machine (a fresh container works) before each release, and update the README in the same pull request that changes the behavior.
 
 ## Common README mistakes and how to fix them
 
@@ -284,6 +346,24 @@ Treat the README as code. Follow your own install steps on a clean machine (a fr
 
 On choosing a license: MIT and Apache-2.0 are permissive, so others can reuse your code with few conditions, while the GPL family requires derivative work to stay open. Pick one deliberately, and if the project belongs to an employer, check with them first.
 
+## A real example: Quilldown's own README
+
+Quilldown is a hosted app, so its README leads a little differently from a code library. It's a good example of the ideas in this guide.
+
+- **A tagline first.** It opens with a short line and one paragraph saying what the app is, with links to the live app and the source.
+- **Highlights instead of an install step.** Because you use the app in a browser, it leads with a short bulleted list of what it offers.
+- **Tables for reference.** The toolbar groups, export formats, templates and keyboard shortcuts are all in tables, which scan far faster than paragraphs.
+- **Limits are stated plainly.** A "Good to know" section lists the file size, tab and storage limits.
+- **A "Built with" section.** It lists the libraries and a map of the folders, which helps contributors find their way.
+
+[See Quilldown's README on GitHub](https://github.com/Dhruv-Dhameliya/quilldown#readme)
+
+A README isn't finished until it names its license. Once your repository has a LICENSE file, add a License section that names it and links to the file, as the template above does.
+
+## A quick checklist before you commit
+
+<ul class="checklist"><li>A one-sentence description at the very top</li><li>A screenshot, GIF or short code sample near the top</li><li>Requirements with versions, and install commands you've tested on a clean machine</li><li>The smallest working usage example, with the expected output</li><li>A configuration table, with defaults, if there are options</li><li>Links to fuller documentation instead of everything on one page</li><li>Alt text on every image, and relative paths for images stored in the repository</li><li>No more than four or five badges</li><li>A Contributing section</li><li>A LICENSE file, named in the README</li><li>Placeholders such as <code>your-name</code> replaced or clearly marked</li></ul>
+
 ## Draft and preview your README in Quilldown
 
 You can write a README without installing anything. In Quilldown, choose **New → Templates → README**, then use the live preview with synced scrolling to see the formatted result as you type. Some features help specifically here:
@@ -294,7 +374,16 @@ You can write a README without installing anything. In Quilldown, choose **New �
 - **Tabs** keep the README open next to `CONTRIBUTING.md` and notes.
 - **Export** as `.md` when you are ready to commit, or use a **Share link** to send a draft for review. Nothing is uploaded either way.
 
-If you paste, drop or upload an image while drafting, check the image link in your Markdown before committing and replace it with a relative path such as `docs/screenshot.png`. Then confirm the layout once on the host, since GitHub, GitLab and package registries differ slightly. Not sure about the syntax? Keep the [Markdown cheat sheet](/guides/markdown-cheat-sheet) open while you write.
+If you paste, drop or upload an image while drafting, check the image link in your Markdown before committing and replace it with a relative path such as `docs/screenshot.png`. Then confirm the layout once on the host, since GitHub, GitLab and package registries differ slightly. Not sure about the syntax? Keep the [Markdown cheat sheet](/docs/markdown-cheat-sheet) open while you write.
+
+## Other ways to start a README
+
+| Method | Good for | Trade-offs |
+| --- | --- | --- |
+| **Quilldown's README template** | Drafting and previewing in your browser, with the table editor for configuration | You copy the file into your repository yourself |
+| **Creating the file on your code host** | A quick start when you create a new repository | You edit in a plain text box with a limited preview |
+| **README generator websites** | Filling in a form to get a first draft | Check that they run in your browser before you enter private details |
+| **Copying a well-loved project's README** | Seeing what good looks like | You still have to adapt it, and never copy text you don't have permission to reuse |
 
 ## Frequently asked questions
 
@@ -304,11 +393,11 @@ At minimum: the project name and a one-line description, how to install and use 
 
 ### Where do I put the README file?
 
-Put it in the root folder of your repository and name it `README.md`. GitHub, GitLab and Bitbucket show it automatically on the project page. GitHub will also find a README in a `.github` or `docs` folder if the root has none.
+Put it in the root folder of your repository and name it `README.md`. GitHub, GitLab and Bitbucket show it automatically on the project page. GitHub will also find a README in a `.github` or `docs` folder. If there is more than one, it shows the `.github` one first, then the root, then `docs`.
 
 ### Is README.md written in Markdown?
 
-Yes. The `.md` extension stands for Markdown, so you can use headings, lists, links, images, tables, task lists and fenced code blocks. Code hosts use GitHub Flavored Markdown or a close variant. If you are new to it, read [What is Markdown?](/guides/what-is-markdown) first.
+Yes. The `.md` extension stands for Markdown, so you can use headings, lists, links, images, tables, task lists and fenced code blocks. Code hosts use GitHub Flavored Markdown or a close variant. If you are new to it, read [What is Markdown?](/docs/what-is-markdown) first.
 
 ### How long should a README be?
 
@@ -325,3 +414,35 @@ It is still worthwhile. A README helps teammates and your future self remember w
 ### What is a profile README on GitHub?
 
 It is a special README that appears at the top of your GitHub profile page. Create a public repository whose name matches your username exactly, add a `README.md`, and GitHub shows it on your profile. Use it for a short introduction, current projects and links, written in the same Markdown as any other README.
+
+### How do I make a README file?
+
+Create a file named `README.md` in the root folder of your repository, write it in Markdown, and commit it. On most code hosts you can also create it from the repository page. In Quilldown, choose New, then Templates, then README, edit it, and export it as a .md file.
+
+### What is a README template?
+
+A README template is a ready-made structure with the usual sections filled with placeholders, such as a title, description, install steps, usage, license and contributing. You replace the placeholders with your own details and delete the sections you don't need.
+
+### How do I add a table of contents to a README?
+
+GitHub builds a clickable outline from your headings automatically. If you want a written one, add a list of links to your headings, using each heading's lowercase, hyphenated anchor, for example `[Usage](#usage)`. It helps once the file is longer than a couple of screens.
+
+### How do I add badges to a README?
+
+A badge is a linked image: `[![Alt text](image-url)](link-url)`. Use live badges for anything that changes, such as build status and version, and keep to four or five. Always write alt text, since it's shown when the image doesn't load.
+
+### How do I add an image to a README?
+
+Store the image in your repository, such as in a `docs` folder, and link it with a relative path: `![Dashboard with three charts](docs/dashboard.png)`. Use full URLs instead if the README will also appear on a package registry page, where relative paths often break.
+
+### How do I add a license to my README?
+
+Add a LICENSE file to the repository, then add a License section to the README that names the license and links to the file. Pick one deliberately. MIT and Apache-2.0 are permissive, and the GPL family requires derivative work to stay open.
+
+### How do I center text or an image in a README?
+
+Markdown has no centering syntax, so use HTML, such as a `div` with `align="center"`. GitHub honors it, but check how other platforms treat HTML.
+
+### Should I put the changelog in the README?
+
+No. Keep release history in a `CHANGELOG.md` file and link to it from the README. The README should describe how the current version works.

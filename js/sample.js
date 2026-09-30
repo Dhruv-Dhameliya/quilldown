@@ -43,8 +43,8 @@ so this sits on its own line. A backslash escapes characters: \*not italic\*.
    2. Work too
 3. Nice and tidy
 
-- [x] Write the draft
-- [x] Add a table of contents
+- [ ] Write the draft
+- [ ] Add a table of contents
 - [ ] Proofread
 - [ ] Publish
 
@@ -123,7 +123,7 @@ git commit -m "Write the docs" && git push
 | ` + '`Inline code`' + String.raw`      | Ctrl + E   | Backticks             |
 | [Link](https://commonmark.org) | Ctrl + K | Wraps your selection |
 
-Left, centre and right alignment come from the colons in the header divider. Click inside a table and press the **Table** button to edit it in a visual grid — or paste rows straight from a spreadsheet. 📋
+Left, center and right alignment come from the colons in the header divider. Click inside a table and press the **Table** button to edit it in a visual grid — or paste rows straight from a spreadsheet. 📋
 
 ## 8. Math
 
@@ -185,7 +185,7 @@ Class, state, ER and mind-map diagrams are in the **Diagram** menu too.
 
 <div align="center">
 
-**A centred block** — handy for titles, badges and sign-offs.
+**A centered block** — handy for titles, badges and sign-offs.
 
 </div>
 

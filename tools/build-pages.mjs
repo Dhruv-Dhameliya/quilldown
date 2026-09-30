@@ -1,9 +1,10 @@
 /* Quilldown — builds the guide pages.
    Sources:  pages/*.md (front matter + Markdown), pages/diagrams.json, pages/faq.json
-   Output:   guides/*.html, sitemap.xml, and the generated regions of index.html (FAQ, guide cards, footer links, FAQ structured data)
+   Output:   docs/*.html, sitemap.xml, and the generated regions of index.html (FAQ, guide cards, footer links, FAQ structured data)
    Run from the project root:   node tools/build-pages.mjs
    No dependencies: it reuses the bundled marked / KaTeX / highlight.js / emoji data from ./vendor. */
 import { readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -46,7 +47,10 @@ for (const e of emojiCtx.window.QUILLDOWN_EMOJI) for (const c of (e[4] || '').sp
 const diagrams = JSON.parse(await readFile(path.join(ROOT, 'pages/diagrams.json'), 'utf8'));
 const faqHome = JSON.parse(await readFile(path.join(ROOT, 'pages/faq.json'), 'utf8'));
 const indexHtml = await readFile(path.join(ROOT, 'index.html'), 'utf8');
-const FAVICON = /<link rel="icon"\s+href="(data:[^"]+)"\s*\/?>/.exec(indexHtml)[1];   // tolerant of editors that re-wrap the tag
+const FAVICON_LINKS = `<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">`;
 
 /* ---------- Markdown engine (mirrors the app: math, footnotes, emoji shortcodes, callouts) ---------- */
 function extensions(st) {
@@ -87,6 +91,7 @@ const ALERT_TITLES = { NOTE: 'Note', TIP: 'Tip', IMPORTANT: 'Important', WARNING
 function renderExample(src) {
   const st = { order: [], defs: {} };
   const m = new Marked({ gfm: true, extensions: extensions(st), renderer: {
+    checkbox(checked) { return `<span class="tk${checked ? ' on' : ''}" role="img" aria-label="${checked ? 'Done' : 'Not done'}"></span> `; },
     image(href, title, text) { return `<span class="img-ph" role="img" aria-label="${escAttr(text)}">🖼 ${esc(text)}</span>`; },   // examples show a placeholder, not a broken image
     code(code, info) { const lang = (info || '').match(/^[\w+#.-]*/)[0].toLowerCase(); return `<pre${lang ? ` data-lang="${escAttr(lang)}"` : ''}><code class="hljs">${lang === 'mermaid' ? esc(code) : highlight(code, lang)}</code></pre>\n`; }
   } });
@@ -124,24 +129,55 @@ function emojiTableHTML(list) {
   return `<div class="emoji-grid">${cells.join('')}</div>\n`;
 }
 
-async function renderBody(md, pageSlug) {
+/** the whole page as portable Markdown for the "Copy the whole cheat sheet" button: widgets removed, examples and fixes turned into plain fenced blocks */
+function cleanCopy(body) {
+  const F = '```';
+  return body.replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/^<div class="(?:cs-|group-bar)[^\n]*\n/gm, '')
+    .replace(/<span class="[^"]*">([^<]*)<\/span>/g, '$1')
+    .replace(/^(`{4,})example title="([^"]*)"[^\n]*\n([\s\S]*?)\n\1$/gm, (m, f, t, code) => '**' + t + '**\n\n' + f + 'markdown\n' + code + '\n' + f)
+    .replace(/^(`{4,})fix title="([^"]*)" fix="([^"]*)"\n([\s\S]*?)\n\1$/gm, (m, f, t, fx, code) => { const [bad, good] = code.split('\n---fixed---\n'); return '### ' + t + '\n\n' + fx + '\n\nBefore:\n\n' + F + 'markdown\n' + bad + '\n' + F + '\n\nAfter:\n\n' + F + 'markdown\n' + (good || '') + '\n' + F; })
+    .replace(/\n{3,}/g, '\n\n');
+}
+function fixHTML(src, args) {
+  const title = (/title="([^"]*)"/.exec(args) || [])[1] || 'Problem', fix = (/fix="([^"]*)"/.exec(args) || [])[1] || '';
+  const [bad, good] = src.split('\n---fixed---\n');
+  const render = t => inlineHtml(t).replace(/<h([1-6])([^>]*)>/g, '<div class="fix-h">').replace(/<\/h[1-6]>/g, '</div>').replace(/ id="[^"]*"/g, '').replace(/href="#[^"]*"/g, 'href="#"').replace(/<a class="anchor"[^>]*>#<\/a>/g, '');
+  const col = (cls, label, t) => `<div class="fix-col ${cls}"><p class="fix-label">${label}</p><pre>${esc(t)}</pre><div class="fix-out md">${render(t)}</div></div>`;
+  return `<details class="fix"><summary><span>${esc(title)}</span></summary><div class="fix-in"><p class="fix-note">${esc(fix)}</p><div class="fix-cols">${col('bad', 'Before', bad)}${col('good', 'After', good || '')}</div></div></details>\n`;
+}
+async function renderBody(md, pageSlug, accent = false) {
   const toc = [], seen = new Map(), st = { order: [], defs: {} };
   // custom fenced blocks need async work (diagram sizes) → pre-resolve them into placeholders
   const stash = [];
   const marked = new Marked({ gfm: true, extensions: extensions(st), renderer: {
+    checkbox(checked) { return `<span class="tk${checked ? ' on' : ''}" role="img" aria-label="${checked ? 'Done' : 'Not done'}"></span> `; },
     heading(text, level, raw) {
       let id = slugify(raw) || 'section'; const n = seen.get(id) || 0; seen.set(id, n + 1); if (n) id += '-' + n;
       if (level === 2) toc.push({ id, text: raw.replace(/[*_`]/g, '') });
-      return `<h${level} id="${id}">${text}<a class="anchor" href="#${id}" aria-label="Link to this section">#</a></h${level}>\n`;
+      if (accent && level === 2 && !/[<&]/.test(text)) { const w = text.split(' '); if (w.length >= 2) { const n = w.length >= 3 ? 2 : 1; text = w.slice(0, -n).join(' ') + (w.length > n ? ' ' : '') + '<em>' + w.slice(-n).join(' ') + '</em>'; } }
+      return `<h${level} id="${id}">${text}</h${level}>\n`;
+    },
+    html(text) {
+      const m = /class="group-bar"[^>]*id="([^"]+)"[^>]*data-title="([^"]+)"/.exec(text) || /class="group-bar"[^>]*data-title="([^"]+)"[^>]*id="([^"]+)"/.exec(text);
+      if (m && /^[a-z-]+$/.test(m[1])) toc.push({ id: m[1], text: m[2], group: true });
+      return text;
+    },
+    list(body, ordered, start) {
+      const items = (body.match(/<li>/g) || []).length, lead = (body.match(/<li>(?:<p>)?<strong>/g) || []).length;
+      const cls = accent && items >= 2 && lead === items ? ` class="cardlist${ordered ? ' cl-ol' : ''}"` : '';
+      const tag = ordered ? 'ol' : 'ul';
+      return `<${tag}${cls}${ordered && start !== 1 ? ` start="${start}"` : ''}>\n${body}</${tag}>\n`;
     },
     code(code, info) {
       const [lang, ...rest] = (info || '').trim().split(/\s+/), args = rest.join(' ');
       if (lang === 'example') return exampleHTML(code, args, pageSlug);
+      if (lang === 'fix') return fixHTML(code, args);
       if (lang === 'diagram') { stash.push(diagramHTML(args.trim())); return `<!--diagram:${stash.length - 1}-->`; }
       if (lang === 'emoji-table') return emojiTableHTML(code);
       return codeHTML(code, lang.toLowerCase());
     },
-    table(header, body) { return `<div class="tbl"><table><thead>${header}</thead><tbody>${body}</tbody></table></div>\n`; },
+    table(header, body) { return `<div class="tbl${header.includes('>Emoji</th>') ? ' emoji-tbl' : ''}"><table><thead>${header}</thead><tbody>${body}</tbody></table></div>\n`; },
     link(href, title, text) { const ext = /^https?:/.test(href); return `<a href="${escAttr(href)}"${title ? ` title="${escAttr(title)}"` : ''}${ext ? ' rel="noopener noreferrer" target="_blank"' : ''}>${text}</a>`; },
     blockquote(quote) {
       const m = /^<p>\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(?:<br\s*\/?>)?\s*/i.exec(quote);
@@ -176,8 +212,19 @@ function faqGroupsHTML(items) {
   const panels = groups.map((g, gi) => `<div class="faq-panel" role="tabpanel" id="faq-panel-${gi}" aria-labelledby="faq-tab-${gi}"><h3 class="faq-group">${esc(g.name)}</h3><div class="faq">${g.items.map((i, n) => `<details name="faq-${gi}"${gi === 0 && n === 0 ? ' open' : ''}><summary>${esc(i.q)}</summary><div class="ans">${i.a}</div></details>`).join('')}</div></div>`).join('');
   return `<div class="faq-tabs" role="tablist" aria-label="FAQ topics">${tabs}</div>${panels}`;
 }
+/** Homepage FAQ: a short, flat list (single-open accordion). */
+function faqFlatHTML(items) {
+  return `<div class="faq-panel"><div class="faq">${items.map((i, n) => `<details name="faq-home"${n === 0 ? ' open' : ''}><summary>${esc(i.q)}</summary><div class="ans">${i.a}</div></details>`).join('')}</div></div>`;
+}
+/** /faq page: every group as an h2 with its questions. */
+function faqPageHTML(items) {
+  const groups = [];
+  for (const i of items) { let g = groups.find(x => x.name === i.group); if (!g) groups.push(g = { name: i.group, id: slugify(i.group), items: [] }); g.items.push(i); }
+  const html = groups.map(g => `<h2 id="${g.id}">${esc(g.name)}</h2>\n<div class="faq">${g.items.map(i => `<details><summary>${esc(i.q)}</summary><div class="ans">${i.a}</div></details>`).join('')}</div>`).join('\n');
+  return { html, toc: groups.map(g => ({ id: g.id, text: g.name })) };
+}
 function faqHTML(items, asMarkdown) {
-  return `<div class="faq">${items.map(i => `<details><summary>${esc(i.q)}</summary>${asMarkdown ? inlineHtml(i.a) : i.a}</details>`).join('')}</div>`;
+  return `<div class="faq-panel"><div class="faq">${items.map(i => `<details name="gfaq"><summary>${esc(i.q)}</summary><div class="ans">${asMarkdown ? inlineHtml(i.a) : i.a}</div></details>`).join('')}</div></div>`;
 }
 const stripTags = h => h.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\s+/g, ' ').trim();
 
@@ -188,6 +235,7 @@ const SPRITE = `<svg width="0" height="0" style="position:absolute" aria-hidden=
 <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
 <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
 <symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
 <symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
 </defs></svg>`;
@@ -197,9 +245,9 @@ const navHTML = (current = '', home = false) => {
   const a = id => (home ? '#' : '/#') + id;
   return `<header class="nav" id="nav"><div class="container nav-in">
   <a class="brand" href="${a('top')}" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
-  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="${a('features')}">Features</a><a href="${a('how')}">How it works</a><a href="/guides"${current === 'docs' ? ' aria-current="page"' : ''}>Docs</a><a href="/about"${current === 'about' ? ' aria-current="page"' : ''}>About</a><a href="${a('privacy')}">Privacy</a><a href="${a('faq')}">FAQ</a><label class="m-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label><a class="m-only" href="${a('editor')}">Open editor</a></nav>
+  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="/features"${current === 'features' ? ' aria-current="page"' : ''}>Features</a><a href="/how-quilldown-works"${current === 'how' ? ' aria-current="page"' : ''}>How it works</a><a href="/privacy"${current === 'privacy' ? ' aria-current="page"' : ''}>Privacy</a><a href="/docs"${current === 'docs' ? ' aria-current="page"' : ''}>Docs</a><a href="/about"${current === 'about' ? ' aria-current="page"' : ''}>About</a><a href="/faq"${current === 'faq' ? ' aria-current="page"' : ''}>FAQ</a><button type="button" class="m-switch" role="switch" aria-checked="false" data-starteditor title="What opens first: the homepage (off) or the full-screen editor (on)"><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></button><a class="m-only" href="${a('editor')}">Open editor</a></nav>
   <div class="nav-cta">
-    <label class="nav-switch" title="What opens first: the homepage (off) or the full-screen editor (on)"><input type="checkbox" data-starteditor><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></label>
+    <button type="button" class="nav-switch" role="switch" aria-checked="false" data-starteditor title="What opens first: the homepage (off) or the full-screen editor (on)"><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></button>
     <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     <a class="icon-btn" href="${GITHUB}" target="_blank" rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill"><use href="#i-github"/></svg></a>
     <button class="icon-btn" data-act="theme" aria-label="Toggle theme"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
@@ -208,26 +256,32 @@ const navHTML = (current = '', home = false) => {
 };
 const footerHTML = guides => `<footer class="footer"><div class="container">
   <div class="footer-cols">
-    <div><a class="brand" href="/#top"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>A calm, private Markdown editor with live preview, tabs, math and diagrams. Works offline.</p></div>
-    ${CATEGORIES.map(c => `<div><h3>${esc(c.title)}</h3><ul>${guides.filter(p => p.category === c.id).map(p => `<li><a href="/guides/${p.slug}">${esc(p.short || p.h1)}</a></li>`).join('')}</ul></div>`).join('\n    ')}
+    <div><a class="brand" href="/#top"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>Quilldown is a free, private Markdown editor with live preview, math and diagrams. It works offline, and your writing never leaves your browser.</p></div>
+    ${CATEGORIES.map(c => `<div><h3>${esc(c.title)}</h3><ul>${guides.filter(p => p.category === c.id).map(p => `<li><a href="/docs/${p.slug}">${esc(p.short || p.h1)}</a></li>`).join('')}</ul></div>`).join('\n    ')}
     <div><h3>Contact</h3><ul>
       <li><a href="${GITHUB_PROFILE}" target="_blank" rel="me noopener noreferrer">GitHub profile</a></li>
       <li><a href="${GITHUB}/issues" target="_blank" rel="noopener noreferrer">Report an issue</a></li>
       <li><a href="${GITHUB}" target="_blank" rel="noopener noreferrer">Source code</a></li>
-      <li><a href="/about">About &amp; press</a></li>
+      <li><a href="/about">About</a></li>
     </ul></div>
   </div>
-  <div class="footer-base"><span>© 2026 Quilldown · built by <a href="${GITHUB_PROFILE}" target="_blank" rel="me noopener noreferrer">${AUTHOR}</a>. Your Markdown never leaves your browser.</span><span><a href="/#editor">Editor</a> · <a href="/guides">Docs</a> · <a href="/about">About</a></span></div>
+  <div class="footer-base"><span>© 2026 Quilldown · Built and maintained as an open-source project. Your Markdown never leaves your browser.</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Documentation</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span></div>
 </div></footer>`;
+const h1HTML = p => {
+  const t = p.h1; let em = p.h1em;
+  if (!em) { const w = t.split(' '); em = w.length > 3 ? w.slice(-2).join(' ') : ''; }
+  if (em && t.endsWith(em)) return esc(t.slice(0, t.length - em.length)) + '<em>' + esc(em) + '</em>';
+  return esc(t);
+};
 const ARROW = '<svg class="i"><use href="#i-arrow"/></svg>';
-const cardHTML = p => `<a class="gcard" href="/guides/${p.slug}"><strong>${esc(p.short || p.h1)}</strong><span class="d">${esc(p.card || '')}</span>${ARROW}</a>`;
+const cardHTML = p => `<a class="gcard" href="/docs/${p.slug}"><strong>${esc(p.short || p.h1)}</strong><span class="d">${esc(p.card || '')}</span>${ARROW}</a>`;
 /** Guide navigator: one column per category, one line per guide (homepage + hub). */
-const gnavHTML = (guides, lvl = 3) => `<div class="gnav">${CATEGORIES.map((c, ci) => { const list = guides.filter(p => p.category === c.id); return `<section class="gcol" id="cat-${c.id}"><header><span class="gcol-n">0${ci + 1}</span><h${lvl}>${esc(c.title)}</h${lvl}><span class="gcol-c">${list.length} guides</span></header><ul>${list.map(p => `<li><a class="grow" href="/guides/${p.slug}"><span class="gt">${esc(p.short || p.h1)}</span><span class="gd">${esc(p.card || '')}</span>${ARROW}</a></li>`).join('')}</ul></section>`; }).join('')}</div>`;
+const gnavHTML = (guides, lvl = 3) => `<div class="gnav">${CATEGORIES.map((c, ci) => { const list = guides.filter(p => p.category === c.id); return `<section class="gcol" id="cat-${c.id}"><header><span class="gcol-n">0${ci + 1}</span><h${lvl}>${esc(c.title)}</h${lvl}><span class="gcol-c">${list.length} guides</span></header><ul>${list.map(p => `<li><a class="grow" href="/docs/${p.slug}"><span class="gt">${esc(p.short || p.h1)}</span><span class="gd">${esc(p.card || '')}</span>${ARROW}</a></li>`).join('')}</ul></section>`; }).join('')}</div>`;
 
 /* ---------- structured data: ONE linked @graph per page ---------- */
 const ID = { org: SITE + '/#organization', person: SITE + '/#person', site: SITE + '/#website', logo: SITE + '/#logo', app: SITE + '/#app', code: GITHUB + '#source' };
-const SITE_DESC = 'Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, PNG and EPUB. It runs in your browser and works offline.';
-const imageNode = { '@type': 'ImageObject', url: OG_IMAGE, contentUrl: OG_IMAGE, width: 1200, height: 630, caption: 'Quilldown — Write Markdown. Watch it come alive.' };
+const SITE_DESC = 'Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, HTML and EPUB. It runs in your browser and works offline.';
+const imageNode = { '@type': 'ImageObject', url: OG_IMAGE, contentUrl: OG_IMAGE, width: 1200, height: 630, caption: 'Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML.' };
 const baseNodes = () => [
   { '@type': 'ImageObject', '@id': ID.logo, url: SITE + '/icons/icon-512.png', contentUrl: SITE + '/icons/icon-512.png', width: 512, height: 512, caption: 'Quilldown logo' },
   { '@type': 'Organization', '@id': ID.org, name: 'Quilldown', url: SITE + '/', description: SITE_DESC,
@@ -247,7 +301,7 @@ const CRUMB_HOME = { name: 'Home', href: '/#top' };
 
 /* ---------- head / chrome ---------- */
 const fontsCss = await readFile(path.join(ROOT, 'vendor/fonts/fonts.css'), 'utf8');
-const INTER_LATIN = (/\/\* latin \*\/\s*@font-face\s*\{[^}]*font-family:\s*'Inter'[^}]*url\(([^)]+\.woff2)\)/.exec(fontsCss) || [])[1];
+const SANS_LATIN = (/\/\* latin \*\/\s*@font-face\s*\{[^}]*font-family:\s*'Nunito'[^}]*url\(([^)]+\.woff2)\)/.exec(fontsCss) || [])[1];
 function headHTML({ title, description, url, type = 'article', math = false, ld }) {
   return `<!doctype html>
 <html lang="en">
@@ -273,15 +327,15 @@ function headHTML({ title, description, url, type = 'article', math = false, ld 
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Quilldown — Write Markdown. Watch it come alive.">
+<meta property="og:image:alt" content="Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${escAttr(title)}">
 <meta name="twitter:description" content="${escAttr(description)}">
 <meta name="twitter:image" content="${OG_IMAGE}">
-<meta name="twitter:image:alt" content="Quilldown — Write Markdown. Watch it come alive.">
-<link rel="icon" href="${FAVICON}">
+<meta name="twitter:image:alt" content="Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML.">
+${FAVICON_LINKS}
 ${HEAD_SCRIPT}
-${INTER_LATIN ? `<link rel="preload" href="/vendor/fonts/${INTER_LATIN}" as="font" type="font/woff2" crossorigin>\n` : ''}<link rel="stylesheet" href="/vendor/fonts/fonts.css">
+${SANS_LATIN ? `<link rel="preload" href="/vendor/fonts/${SANS_LATIN}" as="font" type="font/woff2" crossorigin>\n` : ''}<link rel="stylesheet" href="/vendor/fonts/fonts.css">
 ${math ? '<link rel="stylesheet" href="/vendor/katex/katex.min.css" media="print" onload="this.media=\'all\'">\n<noscript><link rel="stylesheet" href="/vendor/katex/katex.min.css"></noscript>\n' : ''}<link rel="stylesheet" href="/css/styles.css">
 <link rel="stylesheet" href="/css/document.css">
 <link rel="stylesheet" href="/css/site.css">
@@ -322,26 +376,94 @@ const slugs = new Set(pages.map(p => p.slug)), siteSlugs = new Set(sitePages.map
 const LAST_UPDATED = allPages.map(p => p.updated).sort().pop();
 const FIRST_PUBLISHED = allPages.map(p => p.published || p.updated).sort()[0];
 
-const pnHTML = p => { const i = pages.indexOf(p), a = pages[i - 1], b = pages[i + 1]; return `<nav class="pn" aria-label="More guides">${a ? `<a class="pn-prev" href="/guides/${a.slug}"><span>Previous</span><strong>${esc(a.short || a.h1)}</strong></a>` : '<span></span>'}${b ? `<a class="pn-next" href="/guides/${b.slug}"><span>Next</span><strong>${esc(b.short || b.h1)}</strong></a>` : '<span></span>'}</nav>`; };
+const pnHTML = p => { const i = pages.indexOf(p), a = pages[i - 1], b = pages[i + 1]; return `<nav class="pn" aria-label="More guides">${a ? `<a class="pn-prev" href="/docs/${a.slug}"><span>Previous</span><strong>${esc(a.short || a.h1)}</strong></a>` : '<span></span>'}${b ? `<a class="pn-next" href="/docs/${b.slug}"><span>Next</span><strong>${esc(b.short || b.h1)}</strong></a>` : '<span></span>'}</nav>`; };
 
 /* ---------- build each page ---------- */
-await mkdir(path.join(ROOT, 'guides'), { recursive: true });
+await mkdir(path.join(ROOT, 'docs'), { recursive: true });
 const built = [];
 for (const p of allPages) {
-  const urlPath = p.isSite ? `/${p.slug}` : `/guides/${p.slug}`, url = SITE + urlPath;
+  const urlPath = p.isSite ? `/${p.slug}` : `/docs/${p.slug}`, url = SITE + urlPath;
   codeSeq = 0;
-  const { md, faq } = splitFaq(p.body);
-  const { html: bodyHtml, toc } = await renderBody(md, p.slug);
+  const { md, faq } = p.slug === 'about' ? { md: p.body, faq: [] } : p.slug === 'faq' ? { md: '', faq: [] } : splitFaq(p.body);   // About keeps its FAQ inside the document
+  const { html: bodyHtml, toc } = await renderBody(md, p.slug, !p.isSite);
   let html = bodyHtml;
-  const faqItems = faq.map(i => ({ q: i.q, a: i.a, html: inlineHtml(i.a) }));
-  if (faqItems.length) { toc.push({ id: 'faq', text: 'Frequently asked questions' }); html += `<h2 id="faq">Frequently asked questions<a class="anchor" href="#faq" aria-label="Link to this section">#</a></h2>\n${faqHTML(faqItems, true)}`; }
+  let faqItems = faq.map(i => ({ q: i.q, a: i.a, html: inlineHtml(i.a) }));
+  let faqPage = false;
+  if (p.slug === 'faq') {
+    const fp = faqPageHTML(faqHome); html = bodyHtml.replace('<p>FAQ_LIST</p>', () => fp.html); toc.length = 0; toc.push(...fp.toc);
+    faqItems = faqHome.map(i => ({ q: i.q, a: i.a, html: i.a })); faqPage = true;
+  }
+  if (faqItems.length && !faqPage) { toc.push({ id: 'faq', text: 'Frequently asked questions' }); html += `<h2 id="faq">Frequently asked questions</h2>\n${faqHTML(faqItems, true)}`; }
+  let custom = null;
+  if (existsSync(path.join(ROOT, 'pages', p.slug + '.html'))) {
+    let src = (await readFile(path.join(ROOT, 'pages', p.slug + '.html'), 'utf8')).replace(/\r\n/g, '\n').replace(/<!--[\s\S]*?-->/g, '');
+    const parts = src.split(/\[\[md\]\]([\s\S]*?)\[\[\/md\]\]/);
+    src = '';
+    for (let i = 0; i < parts.length; i++) src += i % 2 ? '<div class="doc-body fx-md">' + (await renderBody(parts[i], p.slug)).html + '</div>' : parts[i];
+    const seenH = new Set();
+    src = src.replace(/<h3>([\s\S]*?)<\/h3>/g, (m, inner) => { let id = slugify(inner.replace(/<[^>]+>/g, '')) || 'item'; while (seenH.has(id)) id += '-2'; seenH.add(id); return `<h3 id="${id}">${inner}</h3>`; });
+    if (src.includes('{{faq}}')) {   // the FAQ page: sections and questions come from pages/faq.md
+      const body = p.body.replace(/<!--[\s\S]*?-->/g, '');
+      const usedIds = new Set();
+      const sections = body.split(/^## /m).slice(1).map(chunk => {
+        const nl = chunk.indexOf('\n'), name = chunk.slice(0, nl).trim();
+        const qs = chunk.slice(nl + 1).split(/^### /m).slice(1).map(q => {
+          const n2 = q.indexOf('\n'); let head = q.slice(0, n2).trim();
+          let id = (/\{#([\w-]+)\}\s*$/.exec(head) || [])[1]; head = head.replace(/\s*\{#[\w-]+\}\s*$/, '');
+          if (!id) id = slugify(head).slice(0, 64).replace(/-+$/, '');
+          while (usedIds.has(id)) id += '-2'; usedIds.add(id);
+          return { q: head, id, a: q.slice(n2 + 1).trim() };
+        });
+        return { name, id: slugify(name), qs };
+      });
+      const tries = [];
+      const items = [];
+      let html2 = '';
+      for (const sec of sections) {
+        let inner = '';
+        for (const it of sec.qs) {
+          const md2 = it.a.replace(/(`{3,})try (\S+)\n([\s\S]*?)\n\1/g, (m, f, name, code) => { tries.push({ name, code }); return '@@TRY' + (tries.length - 1) + '@@'; });
+          let ah = (await renderBody(md2, 'faq')).html;
+          ah = ah.replace(/<p>@@TRY(\d+)@@<\/p>/g, (m, i) => { const t = tries[+i]; return `<div class="faq-try"><pre>${esc(t.code)}</pre><a class="btn btn-sm" href="${openInEditor(t.code + '\n', t.name)}" rel="nofollow">Try it in the editor</a></div>`; });
+          items.push({ q: it.q, a: ah, html: ah });
+          inner += `<details id="${it.id}"><summary>${esc(it.q)}</summary><div class="ans">${ah}</div></details>\n`;
+        }
+        const title = esc(sec.name).replace(/(\S+)$/, '<em>$1</em>');
+        html2 += `<section class="section fx-sec faq-sec" id="${sec.id}"><div class="section-head"><div class="eyebrow">${sec.qs.length} questions</div><h2 class="title">${title}</h2></div><div class="faq-panel"><div class="faq">\n${inner}</div></div></section>\n`;
+      }
+      const total = sections.reduce((n, s) => n + s.qs.length, 0);
+      src = src.replace('{{faq}}', () => html2)
+        .replace('{{sidebar}}', () => sections.map(s => `<a href="#${s.id}">${esc(s.name)}</a>`).join('\n    '))
+        .replace('{{jump}}', () => sections.map(s => `<a href="#${s.id}">${esc(s.name)}</a>`).join(''))
+        .split('{{count}}').join(String(total));
+      faqItems = items;
+      if (total < 1) warn('faq: no questions found');
+    }
+    if (src.includes('{{doc}}')) {   // a page that is one Markdown document shown in a frame (the About page)
+      const dwc = words(bodyHtml), dmins = Math.max(1, Math.round(dwc / 220));
+      const doc = bodyHtml
+        .replace(/<input[^>]*type="checkbox"[^>]*>\s?/g, '<span class="ab-tick" aria-hidden="true"></span>')
+        .replace(/<a href="([^"]*)"([^>]*)>Read more<\/a>/g, (m, h, rest) => `<a class="ab-more" href="${h}"${rest}>Read more</a>`)
+        .replace('callout-warning"><p class="callout-title">Warning', 'callout-warning"><p class="callout-title">Good to know');
+      const raw = '# ' + p.h1 + '\n\n' + p.lead + '\n\n' + p.body.trim() + '\n';
+      const sourceHtml = raw.split('\n').map((line, i) => {
+        const t = esc(line).replace(/(^#{1,6}\s)|(\*\*)|(\|)|(^- \[[ x]\]\s)|(^&gt;\s)|(\[\^?[^\]]*\]\()/g, m => `<span class="m">${m}</span>`);
+        return `<span class="ln" data-n="${i + 1}">${t || ' '}</span>`;
+      }).join('');
+      src = src.replace('{{doc}}', () => doc).replace('{{source}}', () => sourceHtml).split('{{words}}').join(String(dwc)).split('{{mins}}').join(String(dmins));
+    }
+    src = src.split('{{updated}}').join(fmtDate(p.updated));
+    custom = src; html = src;
+    const qa = [...src.matchAll(/<summary>([\s\S]*?)<\/summary><div class="ans">([\s\S]*?)<\/div><\/details>/g)].map(m => ({ q: stripTags(m[1]), a: m[2], html: m[2] }));
+    if (qa.length && p.slug !== 'faq') faqItems = qa;
+  }
   const wc = words(html), mins = Math.max(1, Math.round(wc / 220));
   const related = p.related.filter(s => { if (!slugs.has(s)) { warn(`${p.slug}: unknown related page "${s}"`); return false; } return true; }).map(s => pages.find(x => x.slug === s));
-  const crumbs = p.isSite ? [CRUMB_HOME, { name: p.short || p.h1, href: urlPath }] : [CRUMB_HOME, { name: 'Docs', href: '/guides' }, { name: p.h1, href: urlPath }];
+  const crumbs = p.isSite ? [CRUMB_HOME, { name: p.short || p.h1, href: urlPath }] : [CRUMB_HOME, { name: 'Documentation', href: '/docs' }, { name: p.h1, href: urlPath }];
   const eyebrow = p.isSite ? (p.eyebrow || 'About') : CATEGORIES.find(c => c.id === p.category).title;
 
   const nodes = [...baseNodes(),
-    webPageNode(url, p.title, p.description, { breadcrumb: { '@id': url + '#breadcrumb' }, datePublished: p.published || p.updated, dateModified: p.updated, ...(p.isSite ? { '@type': ['AboutPage', 'ContactPage'], mainEntity: { '@id': ID.org } } : { mainEntity: { '@id': url + '#article' } }) }),
+    webPageNode(url, p.title, p.description, { breadcrumb: { '@id': url + '#breadcrumb' }, datePublished: p.published || p.updated, dateModified: p.updated, ...(p.slug === 'about' ? { '@type': ['AboutPage', 'ContactPage'], mainEntity: { '@id': ID.org } } : p.isSite ? { about: { '@id': ID.org } } : { mainEntity: { '@id': url + '#article' } }) }),
     breadcrumbNode(url, crumbs)];
   if (!p.isSite) nodes.push({ '@type': 'Article', '@id': url + '#article', headline: p.h1, description: p.description, image: imageNode, datePublished: p.published || p.updated, dateModified: p.updated, inLanguage: 'en', wordCount: wc,
     articleSection: eyebrow, isAccessibleForFree: true, author: { '@id': ID.person }, publisher: { '@id': ID.org }, mainEntityOfPage: { '@id': url + '#webpage' }, isPartOf: { '@id': url + '#webpage' } });
@@ -350,93 +472,73 @@ for (const p of allPages) {
   // validation
   if (p.title.length > 65) warn(`${p.slug}: title is ${p.title.length} chars (aim ≤ 65)`);
   if (p.description.length < 110 || p.description.length > 160) warn(`${p.slug}: description is ${p.description.length} chars (aim 110–160)`);
-  if (/<h1[ >]/i.test(html)) warn(`${p.slug}: body contains an <h1>`);
-  for (const m of html.matchAll(/href="\/guides\/([^"#]+)/g)) if (!slugs.has(m[1])) warn(`${p.slug}: broken internal link /guides/${m[1]}`);
+  if (!custom && /<h1[ >]/i.test(html)) warn(`${p.slug}: body contains an <h1>`);
+  for (const m of html.matchAll(/href="\/docs\/([^"#]+)/g)) if (!slugs.has(m[1])) warn(`${p.slug}: broken internal link /docs/${m[1]}`);
 
-  p.html = headHTML({ title: p.title, description: p.description, url, math: p.math || /class="katex/.test(html), ld: graph(nodes) }) + navHTML(p.isSite ? 'about' : 'docs') + `
+  p.html = headHTML({ title: p.title, description: p.description, url, math: p.math || /class="katex/.test(html), ld: graph(nodes) }) + navHTML(p.isSite ? ({ about: 'about', features: 'features', 'how-quilldown-works': 'how', privacy: 'privacy', faq: 'faq' }[p.slug] || 'about') : 'docs') + `
+<header class="hero fx-hero guide-hero">
+  <div class="container">
+    ${crumbsHTML(crumbs)}
+    <span class="pill"><span class="dot"></span>${esc(eyebrow)}</span>
+    <h1 class="fx-h1">${h1HTML(p)}</h1>
+    <p class="fx-lede">${esc(p.lead)}</p>
+    <ul class="ab-chipsrow" aria-label="Page details"><li>${mins} min read</li><li>Free</li><li>No sign-up</li><li>Runs in your browser</li></ul>
+    <div class="hero-actions"><a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-max"/></svg></a>${p.isSite ? `<a class="text-link" href="${GITHUB_PROFILE}" target="_blank" rel="me noopener noreferrer">GitHub profile <svg class="i"><use href="#i-arrow"/></svg></a>` : '<a class="text-link" href="/docs">All documentation <svg class="i"><use href="#i-arrow"/></svg></a>'}</div>
+  </div>
+</header>
+<div class="reading-bar" aria-hidden="true"><i></i></div>
 <main class="doc-wrap">
-  ${crumbsHTML(crumbs)}
-  <header class="doc-head">
-    <p class="eyebrow">${esc(eyebrow)}</p>
-    <h1>${esc(p.h1)}</h1>
-    <p class="lead">${esc(p.lead)}</p>
-    <div class="doc-meta"><span>Updated ${fmtDate(p.updated)}</span><span>${mins} min read</span><span>Free · No sign-up · Runs in your browser</span></div>
-    <div class="doc-actions"><a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a>${p.isSite ? `<a class="btn" href="${GITHUB_PROFILE}" target="_blank" rel="me noopener noreferrer">GitHub profile</a>` : '<a class="btn" href="/guides">All docs</a>'}</div>
-  </header>
   <div class="doc-grid">
-    <aside class="toc" aria-label="On this page"><h2>On this page</h2>${toc.map(t => `<a href="#${t.id}">${esc(t.text)}</a>`).join('')}</aside>
+    <aside class="toc" aria-label="On this page"><h2>On this page</h2>${toc.map(t => `<a href="#${t.id}"${t.group ? ' class="toc-group"' : ''}>${esc(t.text)}</a>`).join('')}</aside>
     <article class="doc-body">
 ${html}
     </article>
   </div>
   ${p.isSite ? '' : pnHTML(p)}
   <div class="after">
-    ${related.length ? `<h2>Related guides</h2><div class="cards">${related.map(cardHTML).join('')}</div>` : ''}
+    ${related.length ? `<div class="rel-head"><div class="eyebrow">Keep reading</div><h2>Related <em>guides</em></h2></div><div class="cards rel-cards">${related.map(cardHTML).join('')}</div>` : ''}
     ${ctaBand(p.cta || 'Try it in Quilldown', p.ctaText || 'A free Markdown editor with live preview. Nothing to install and nothing uploaded — your writing stays in your browser.')}
   </div>
 </main>
 ` + footerHTML(pages) + `
 <script src="/js/site.js" defer></script>
-</body>
+${p.copymd ? `<textarea id="cheat-md" hidden readonly aria-hidden="true">${escAttr(cleanCopy(p.body))}</textarea>\n` : ''}${(p.scripts || '').split(',').map(x => x.trim()).filter(Boolean).map(x => `<script src="${x}" defer></script>\n`).join('')}</body>
 </html>
 `;
-  await writeFile(path.join(ROOT, p.isSite ? `${p.slug}.html` : `guides/${p.slug}.html`), p.html);
+  if (custom) p.html = headHTML({ title: p.title, description: p.description, url, math: true, ld: graph(nodes) }) + navHTML({ about: 'about', features: 'features', 'how-quilldown-works': 'how', privacy: 'privacy', faq: 'faq' }[p.slug] || 'about') + (custom.includes('<main class="ab">') ? '\n' + custom + '\n' : '\n<main class="fx">\n' + custom + '\n</main>\n') + footerHTML(pages) + '\n<script src="/js/site.js" defer></script>\n' + (p.scripts || '').split(',').map(x => x.trim()).filter(Boolean).map(x => `<script src="${x}" defer></script>\n`).join('') + '</body>\n</html>\n';
+  await writeFile(path.join(ROOT, p.isSite ? `${p.slug}.html` : `docs/${p.slug}.html`), p.html);
   built.push({ slug: p.slug, words: wc, mins, faq: faqItems.length, title: p.title.length, desc: p.description.length });
 }
 
-/* ---------- guides hub ---------- */
+/* ---------- documentation hub (/docs) ---------- */
 const minsOf = slug => (built.find(b => b.slug === slug) || {}).mins || 5;
-const START_HERE = [{ slug: 'what-is-markdown', k: 'New to Markdown?' }, { slug: 'markdown-cheat-sheet', k: 'Keep it open' }, { slug: 'markdown-to-pdf', k: 'Most popular task' }];
-const fcardHTML = (s, i) => { const p = pages.find(x => x.slug === s.slug); return `<a class="fcard" href="/guides/${p.slug}"><span class="fcard-n">0${i + 1}</span><span class="fcard-k">${esc(s.k)}</span><strong>${esc(p.short || p.h1)}</strong><span class="fcard-d">${esc(p.card || '')}</span><span class="fcard-f"><span>${minsOf(p.slug)} min read</span>${ARROW}</span></a>`; };
-const dcardHTML = p => `<a class="dcard" href="/guides/${p.slug}" data-cat="${p.category}" data-text="${escAttr((p.short + ' ' + (p.card || '') + ' ' + p.description).toLowerCase())}"><span class="dcard-top"><span class="dcard-cat">${esc(CATEGORIES.find(c => c.id === p.category).title)}</span><span>${minsOf(p.slug)} min</span></span><strong>${esc(p.short || p.h1)}</strong><span class="dcard-d">${esc(p.card || '')}</span>${ARROW}</a>`;
 {
-  const url = `${SITE}/guides`, crumbs = [CRUMB_HOME, { name: 'Docs', href: '/guides' }];
-  const title = 'Quilldown Docs: Markdown Guides & Cheat Sheet';
-  const description = 'Free Markdown guides: a complete cheat sheet, how to convert Markdown to PDF, Word and HTML, plus tables, math, diagrams, emoji and README templates.';
+  const url = `${SITE}/docs`, crumbs = [CRUMB_HOME, { name: 'Documentation', href: '/docs' }];
+  const title = 'Quilldown Documentation: Markdown Guides, Cheat Sheet and Tutorials';
+  const description = 'Learn Markdown and export it anywhere: a cheat sheet plus guides for PDF, Word, HTML, tables, math, diagrams and READMEs. Every example opens in the editor.';
   if (title.length > 75) warn(`hub title is ${title.length} chars`);
   if (description.length > 160) warn(`hub description is ${description.length} chars`);
   const nodes = [...baseNodes(),
     webPageNode(url, title, description, { '@type': 'CollectionPage', breadcrumb: { '@id': url + '#breadcrumb' }, datePublished: FIRST_PUBLISHED, dateModified: LAST_UPDATED, mainEntity: { '@id': url + '#list' } }),
     breadcrumbNode(url, crumbs),
-    { '@type': 'ItemList', '@id': url + '#list', name: 'Quilldown docs: Markdown guides & cheat sheet', numberOfItems: pages.length, itemListElement: pages.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}/guides/${p.slug}`, name: p.h1 })) }];
-  const html = headHTML({ title, description, url, type: 'website', ld: graph(nodes) }) + navHTML('docs') + `
-<main class="doc-wrap docs-hub">
-  ${crumbsHTML(crumbs)}
-  <header class="doc-head docs-hero">
-    <p class="eyebrow">Docs</p>
-    <h1>Quilldown docs</h1>
-    <p class="lead">Guides and a cheat sheet for writing, formatting and exporting Markdown. Every example opens in the editor.</p>
-    <label class="docs-search"><svg class="i"><use href="#i-search"/></svg><input type="search" id="docsSearch" placeholder="Search the docs" aria-label="Search the docs" autocomplete="off"><kbd>/</kbd></label>
-  </header>
-  <section class="docs-block" aria-labelledby="docsStart">
-    <h2 class="docs-h" id="docsStart">Start here</h2>
-    <div class="docs-feat">${START_HERE.map((s, i) => fcardHTML(s, i)).join('')}</div>
-  </section>
-  <section class="docs-block" aria-labelledby="docsAll">
-    <div class="docs-bar">
-      <h2 class="docs-h" id="docsAll">All guides <span id="docsCount">${pages.length}</span></h2>
-      <div class="docs-chips" role="group" aria-label="Filter by topic"><button type="button" aria-pressed="true" data-cat="all">All</button>${CATEGORIES.map(c => `<button type="button" aria-pressed="false" data-cat="${c.id}">${esc(c.title)}</button>`).join('')}</div>
-    </div>
-    <div class="docs-grid" id="docsGrid">${pages.map(dcardHTML).join('')}</div>
-    <p class="docs-empty" id="docsEmpty" hidden>No guides match that search. Try “PDF”, “table” or “math”.</p>
-  </section>
-  <div class="after">${ctaBand('Start writing', 'Open Quilldown and try any example from these guides — it takes one click and nothing leaves your browser.')}</div>
-</main>
-` + footerHTML(pages) + `
-<script src="/js/site.js" defer></script>
-</body>
-</html>
-`;
-  await writeFile(path.join(ROOT, 'guides', 'index.html'), html);
+    { '@type': 'ItemList', '@id': url + '#list', name: 'Quilldown documentation: Markdown guides and cheat sheet', numberOfItems: pages.length, itemListElement: pages.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}/docs/${p.slug}`, name: p.h1 })) }];
+  let tpl = (await readFile(path.join(ROOT, 'pages', 'docs.html'), 'utf8')).replace(/\r\n/g, '\n').replace(/<!--[\s\S]*?-->/g, '');
+  tpl = tpl.replace(/\{\{mins:([\w-]+)\}\}/g, (m, slug) => { if (!slugs.has(slug)) warn(`docs.html: unknown guide "${slug}"`); return String(minsOf(slug)); })
+    .split('{{updated}}').join(fmtDate(LAST_UPDATED)).split('{{count}}').join(String(pages.length));
+  for (const m of tpl.matchAll(/href="\/docs\/([^"#]+)/g)) if (!slugs.has(m[1])) warn(`docs.html: broken link /docs/${m[1]}`);
+  const qa = [...tpl.matchAll(/<summary>([\s\S]*?)<\/summary><div class="ans">([\s\S]*?)<\/div><\/details>/g)].map(m => ({ q: stripTags(m[1]), a: m[2], html: m[2] }));
+  if (qa.length) nodes.push(faqNode(url, qa));
+  const html = headHTML({ title, description, url, type: 'website', ld: graph(nodes) }) + navHTML('docs') + '\n<main class="fx dx">\n' + tpl + '\n</main>\n' + footerHTML(pages) + '\n<script src="/js/site.js" defer></script>\n<script src="/js/docs.js" defer></script>\n</body>\n</html>\n';
+  await writeFile(path.join(ROOT, 'docs', 'index.html'), html);
 }
 
 /* ---------- sitemap ---------- */
 {
   const urls = [
     { loc: SITE + '/', lastmod: LAST_UPDATED, priority: '1.0', freq: 'weekly' },
-    { loc: SITE + '/guides', lastmod: LAST_UPDATED, priority: '0.8', freq: 'weekly' },
-    ...pages.map(p => ({ loc: `${SITE}/guides/${p.slug}`, lastmod: p.updated, priority: p.slug === 'markdown-cheat-sheet' || p.slug === 'what-is-markdown' ? '0.9' : '0.7', freq: 'monthly' })),
-    ...sitePages.map(p => ({ loc: `${SITE}/${p.slug}`, lastmod: p.updated, priority: '0.5', freq: 'yearly' }))
+    { loc: SITE + '/docs', lastmod: LAST_UPDATED, priority: '0.8', freq: 'weekly' },
+    ...pages.map(p => ({ loc: `${SITE}/docs/${p.slug}`, lastmod: p.updated, priority: p.slug === 'markdown-cheat-sheet' || p.slug === 'what-is-markdown' ? '0.9' : '0.7', freq: 'monthly' })),
+    ...sitePages.map(p => ({ loc: `${SITE}/${p.slug}`, lastmod: p.updated, priority: p.slug === 'about' ? '0.5' : '0.8', freq: p.slug === 'about' ? 'yearly' : 'monthly' }))
   ];
   await writeFile(path.join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${u.lastmod}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.priority}</priority>\n  </url>`).join('\n')}\n</urlset>\n`);
 }
@@ -444,7 +546,7 @@ const dcardHTML = p => `<a class="dcard" href="/guides/${p.slug}" data-cat="${p.
 /* ---------- generated regions of the homepage ---------- */
 {
   const url = SITE + '/';
-  const faqItems = faqHome.map(i => ({ group: i.group, q: i.q, a: i.a, html: i.a }));
+  const faqItems = faqHome.filter(i => i.home).sort((x, y) => x.home - y.home).map(i => ({ group: i.group, q: i.q, a: i.a, html: i.a }));
   const homeTitle = (/<title>([^<]*)<\/title>/.exec(indexHtml) || [])[1] || 'Quilldown';
   const homeDesc = (/<meta name="description"\s+content="([^"]*)"/.exec(indexHtml) || [])[1] || SITE_DESC;
   if (homeDesc.length > 160) warn(`homepage description is ${homeDesc.length} chars (aim ≤ 160)`);
@@ -455,12 +557,12 @@ const dcardHTML = p => `<a class="dcard" href="/guides/${p.slug}" data-cat="${p.
       browserRequirements: 'Requires JavaScript. Works in current Chrome, Edge, Firefox and Safari.', isAccessibleForFree: true, inLanguage: 'en',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
       featureList: ['Live Markdown preview with synced scrolling', 'Tabs for multiple documents', 'Copy for Google Docs with clean heading sizes', 'Export to PDF, Word (.docx), PNG, EPUB, HTML, Markdown and plain text', 'LaTeX math with KaTeX', 'Mermaid diagrams', 'Visual table editor and emoji picker', 'Find and replace, outline and footnotes', 'Works offline and installs as an app', 'Private: nothing is uploaded'],
-      image: OG_IMAGE, screenshot: imageNode, softwareHelp: { '@type': 'CreativeWork', name: 'Quilldown guides', url: SITE + '/guides' }, installUrl: SITE + '/',
+      image: OG_IMAGE, screenshot: imageNode, softwareHelp: { '@type': 'CreativeWork', name: 'Quilldown guides', url: SITE + '/docs' }, installUrl: SITE + '/',
       datePublished: FIRST_PUBLISHED, dateModified: LAST_UPDATED, author: { '@id': ID.person }, publisher: { '@id': ID.org }, sameAs: [GITHUB], isBasedOn: { '@id': ID.code } },
-    { '@type': 'SoftwareSourceCode', '@id': ID.code, name: 'Quilldown source code', codeRepository: GITHUB, programmingLanguage: ['JavaScript', 'HTML', 'CSS'], runtimePlatform: 'Web browser', author: { '@id': ID.person }, url: GITHUB },
+    { '@type': 'SoftwareSourceCode', '@id': ID.code, license: 'https://opensource.org/licenses/MIT', name: 'Quilldown source code', codeRepository: GITHUB, programmingLanguage: ['JavaScript', 'HTML', 'CSS'], runtimePlatform: 'Web browser', author: { '@id': ID.person }, url: GITHUB },
     faqNode(url, faqItems)];
   const regions = {
-    FAQ: faqGroupsHTML(faqItems),
+    FAQ: faqFlatHTML(faqItems),
     GUIDES: gnavHTML(pages),
     NAV: navHTML('', true),
     FOOTER: footerHTML(pages),

@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Emoji in Markdown: Shortcodes, Cheat Sheet and GitHub List</title>
+<meta name="description" content="Emoji shortcodes explained: how :rocket: works in Markdown, where it renders, shortcode vs Unicode, a cheat sheet of popular codes and common fixes.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Dhruv-Dhameliya">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="canonical" href="https://quilldown.vercel.app/docs/emoji-in-markdown">
+<link rel="author" href="https://github.com/Dhruv-Dhameliya">
+<link rel="me" href="https://github.com/Dhruv-Dhameliya">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Quilldown">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://quilldown.vercel.app/docs/emoji-in-markdown">
+<meta property="og:title" content="Emoji in Markdown: Shortcodes, Cheat Sheet and GitHub List">
+<meta property="og:description" content="Emoji shortcodes explained: how :rocket: works in Markdown, where it renders, shortcode vs Unicode, a cheat sheet of popular codes and common fixes.">
+<meta property="og:image" content="https://quilldown.vercel.app/social/og-image.png">
+<meta property="og:image:secure_url" content="https://quilldown.vercel.app/social/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Emoji in Markdown: Shortcodes, Cheat Sheet and GitHub List">
+<meta name="twitter:description" content="Emoji shortcodes explained: how :rocket: works in Markdown, where it renders, shortcode vs Unicode, a cheat sheet of popular codes and common fixes.">
+<meta name="twitter:image" content="https://quilldown.vercel.app/social/og-image.png">
+<meta name="twitter:image:alt" content="Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>
+<link rel="preload" href="/vendor/fonts/nunito-latin-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/document.css">
+<link rel="stylesheet" href="/css/site.css">
+<script type="application/ld+json" id="ld-graph">{"@context":"https://schema.org","@graph":[{"@type":"ImageObject","@id":"https://quilldown.vercel.app/#logo","url":"https://quilldown.vercel.app/icons/icon-512.png","contentUrl":"https://quilldown.vercel.app/icons/icon-512.png","width":512,"height":512,"caption":"Quilldown logo"},{"@type":"Organization","@id":"https://quilldown.vercel.app/#organization","name":"Quilldown","url":"https://quilldown.vercel.app/","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, HTML and EPUB. It runs in your browser and works offline.","logo":{"@id":"https://quilldown.vercel.app/#logo"},"image":{"@id":"https://quilldown.vercel.app/#logo"},"founder":{"@id":"https://quilldown.vercel.app/#person"},"sameAs":["https://github.com/Dhruv-Dhameliya/quilldown","https://github.com/Dhruv-Dhameliya"],"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","url":"https://github.com/Dhruv-Dhameliya/quilldown/issues","availableLanguage":"English"},{"@type":"ContactPoint","contactType":"media relations","url":"https://github.com/Dhruv-Dhameliya","availableLanguage":"English"}]},{"@type":"Person","@id":"https://quilldown.vercel.app/#person","name":"Dhruv-Dhameliya","url":"https://github.com/Dhruv-Dhameliya","sameAs":["https://github.com/Dhruv-Dhameliya"],"worksFor":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebSite","@id":"https://quilldown.vercel.app/#website","url":"https://quilldown.vercel.app/","name":"Quilldown","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, HTML and EPUB. It runs in your browser and works offline.","inLanguage":"en","publisher":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebPage","@id":"https://quilldown.vercel.app/docs/emoji-in-markdown#webpage","url":"https://quilldown.vercel.app/docs/emoji-in-markdown","name":"Emoji in Markdown: Shortcodes, Cheat Sheet and GitHub List","description":"Emoji shortcodes explained: how :rocket: works in Markdown, where it renders, shortcode vs Unicode, a cheat sheet of popular codes and common fixes.","inLanguage":"en","isPartOf":{"@id":"https://quilldown.vercel.app/#website"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML."},"image":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML."},"breadcrumb":{"@id":"https://quilldown.vercel.app/docs/emoji-in-markdown#breadcrumb"},"datePublished":"2026-09-29","dateModified":"2026-09-30","mainEntity":{"@id":"https://quilldown.vercel.app/docs/emoji-in-markdown#article"}},{"@type":"BreadcrumbList","@id":"https://quilldown.vercel.app/docs/emoji-in-markdown#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quilldown.vercel.app/#top"},{"@type":"ListItem","position":2,"name":"Documentation","item":"https://quilldown.vercel.app/docs"},{"@type":"ListItem","position":3,"name":"Emoji in Markdown: shortcodes and cheat sheet","item":"https://quilldown.vercel.app/docs/emoji-in-markdown"}]},{"@type":"Article","@id":"https://quilldown.vercel.app/docs/emoji-in-markdown#article","headline":"Emoji in Markdown: shortcodes and cheat sheet","description":"Emoji shortcodes explained: how :rocket: works in Markdown, where it renders, shortcode vs Unicode, a cheat sheet of popular codes and common fixes.","image":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML."},"datePublished":"2026-09-29","dateModified":"2026-09-30","inLanguage":"en","wordCount":3378,"articleSection":"Learn Markdown","isAccessibleForFree":true,"author":{"@id":"https://quilldown.vercel.app/#person"},"publisher":{"@id":"https://quilldown.vercel.app/#organization"},"mainEntityOfPage":{"@id":"https://quilldown.vercel.app/docs/emoji-in-markdown#webpage"},"isPartOf":{"@id":"https://quilldown.vercel.app/docs/emoji-in-markdown#webpage"}},{"@type":"FAQPage","@id":"https://quilldown.vercel.app/docs/emoji-in-markdown#faq","url":"https://quilldown.vercel.app/docs/emoji-in-markdown","isPartOf":{"@id":"https://quilldown.vercel.app/docs/emoji-in-markdown#webpage"},"mainEntity":[{"@type":"Question","name":"How do I add emoji to Markdown?","acceptedAnswer":{"@type":"Answer","text":"Type an emoji shortcode such as :smile:, paste the emoji character itself, or use an emoji picker. Shortcodes work only where the renderer converts them (GitHub, GitLab, Slack and Discord do), while the character works almost anywhere. In Quilldown you can also type a colon and a few letters, such as :roc, and choose from the suggestions."}},{"@type":"Question","name":"What is the shortcode for a checkmark?","acceptedAnswer":{"@type":"Answer","text":":white_check_mark: gives ✅ (a white check on a green square) and :heavy_check_mark: gives ✔️ (a plain black check). :ballot_box_with_check: gives ☑️. For a cross, use :x: (❌). Names such as :checkmark: are not standard and stay as text."}},{"@type":"Question","name":"Do emoji shortcodes work on GitHub?","acceptedAnswer":{"@type":"Answer","text":"Yes. GitHub renders shortcodes such as :rocket: in README files, issues, pull requests and comments. It also has a few custom names, like :shipit:, that are images rather than Unicode characters, so they will not appear in other tools."}},{"@type":"Question","name":"Why isn't my shortcode turning into an emoji?","acceptedAnswer":{"@type":"Answer","text":"Usually the name is wrong or the platform does not convert shortcodes. Names must match exactly and contain no spaces: use :+1: or :thumbsup:; :thumbs_up: isn't a valid name here. Unknown names are left as typed. If the name is right, the site's Markdown engine probably needs an emoji plugin, or you can paste the emoji character instead."}},{"@type":"Question","name":"Can I change the skin tone of an emoji?","acceptedAnswer":{"@type":"Answer","text":"Yes, but not with a standard shortcode, which names only the default tone. Choose a tone in Quilldown's emoji picker or paste the character with the tone you want. Slack and Discord have their own syntax for tones inside shortcodes, and it is different in each."}},{"@type":"Question","name":"Are emoji accessible to screen readers?","acceptedAnswer":{"@type":"Answer","text":"Screen readers read each emoji by its Unicode name, for example \"rocket\" or \"check mark button\", so a few are fine and many become noisy. Never use emoji as the only carrier of meaning, especially color-coded ones like 🟢 and 🔴, and write the word next to the symbol."}},{"@type":"Question","name":"Do emoji work in PDF and Word exports?","acceptedAnswer":{"@type":"Answer","text":"Emoji are ordinary characters, so they appear in an export as long as the device or font that opens the file has an emoji font. If you plan to export, the character is a safer choice than a shortcode that a converter may not understand. See the guides to Markdown to PDF and Markdown to Word."}},{"@type":"Question","name":"How do I type an emoji on Windows or Mac?","acceptedAnswer":{"@type":"Answer","text":"On Windows, press the Windows key and the period key to open the emoji panel. On a Mac, press Control, Command and Space. The exact shortcut can vary by system version. In Quilldown you can also type a colon and a few letters, or use the emoji picker."}},{"@type":"Question","name":"How do I show a shortcode without it turning into an emoji?","acceptedAnswer":{"@type":"Answer","text":"Wrap it in backticks, as in `:rocket:`. Code spans show text literally, so the colons and the name stay as you typed them."}},{"@type":"Question","name":"What's the difference between :+1: and :thumbsup:?","acceptedAnswer":{"@type":"Answer","text":"Both give 👍. :+1: and :-1: are real names, plus and minus signs included, so use whichever you prefer, and stay consistent within a document."}},{"@type":"Question","name":"Can I use emoji in headings?","acceptedAnswer":{"@type":"Answer","text":"Yes, but keep them out of headings you link to. GitHub builds heading anchors from the text and drops the emoji, so a heading like \"🚀 Usage\" typically becomes #-usage, which is easy to mistype."}},{"@type":"Question","name":"How many emoji should I use in a README?","acceptedAnswer":{"@type":"Answer","text":"Few. Use them as signals with a fixed meaning, not decoration, and never a run of the same one, since screen readers read each one aloud. When you're unsure, write the sentence without the emoji first, then add one only if it makes the meaning quicker to scan."}},{"@type":"Question","name":"Do emoji shortcodes work in Slack and Discord?","acceptedAnswer":{"@type":"Answer","text":"Yes, in messages. Each app keeps its own name list, so a few names differ from GitHub's, and skin tones use each app's own syntax."}},{"@type":"Question","name":"Where can I find the full list of emoji shortcodes?","acceptedAnswer":{"@type":"Answer","text":"In Quilldown, type a colon and a few letters, or search in the emoji picker. Lists differ slightly between platforms, so for GitHub, search for its list. The cheat sheet above covers the codes people use most."}},{"@type":"Question","name":"Why do emoji look different on different devices?","acceptedAnswer":{"@type":"Answer","text":"Each platform, including Apple, Google, Microsoft and GitHub, draws its own design for the same emoji. Very new emoji may appear as a box or two separate symbols on older systems, so don't rely on a fine detail of one design."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5" style="stroke:var(--logo-fg)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M6.34 6.34 4.93 4.93m14.14 14.14-1.41-1.41"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+<symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+<symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+</defs></svg>
+<header class="nav" id="nav"><div class="container nav-in">
+  <a class="brand" href="/#top" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
+  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="/features">Features</a><a href="/how-quilldown-works">How it works</a><a href="/privacy">Privacy</a><a href="/docs" aria-current="page">Docs</a><a href="/about">About</a><a href="/faq">FAQ</a><button type="button" class="m-switch" role="switch" aria-checked="false" data-starteditor title="What opens first: the homepage (off) or the full-screen editor (on)"><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></button><a class="m-only" href="/#editor">Open editor</a></nav>
+  <div class="nav-cta">
+    <button type="button" class="nav-switch" role="switch" aria-checked="false" data-starteditor title="What opens first: the homepage (off) or the full-screen editor (on)"><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></button>
+    <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="icon-btn" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill"><use href="#i-github"/></svg></a>
+    <button class="icon-btn" data-act="theme" aria-label="Toggle theme"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
+    <a class="btn btn-primary btn-sm" href="/#editor">Open editor <svg class="i"><use href="#i-max"/></svg></a>
+  </div></div></header>
+<header class="hero fx-hero guide-hero">
+  <div class="container">
+    <ol class="crumbs" aria-label="Breadcrumb"><li><a href="/#top">Home</a></li><li><a href="/docs">Documentation</a></li><li aria-current="page">Emoji in Markdown: shortcodes and cheat sheet</li></ol>
+    <span class="pill"><span class="dot"></span>Learn Markdown</span>
+    <h1 class="fx-h1">Emoji in Markdown: <em>shortcodes and cheat sheet</em></h1>
+    <p class="fx-lede">An emoji shortcode is a name between two colons, like :rocket:, that turns into 🚀. Here is how shortcodes work, where they don't, and a cheat sheet of the codes worth knowing. Everything runs in your browser, so nothing you write is uploaded.</p>
+    <ul class="ab-chipsrow" aria-label="Page details"><li>15 min read</li><li>Free</li><li>No sign-up</li><li>Runs in your browser</li></ul>
+    <div class="hero-actions"><a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-max"/></svg></a><a class="text-link" href="/docs">All documentation <svg class="i"><use href="#i-arrow"/></svg></a></div>
+  </div>
+</header>
+<div class="reading-bar" aria-hidden="true"><i></i></div>
+<main class="doc-wrap">
+  <div class="doc-grid">
+    <aside class="toc" aria-label="On this page"><h2>On this page</h2><a href="#how-do-emoji-shortcodes-work-in-markdown">How do emoji shortcodes work in Markdown?</a><a href="#where-emoji-shortcodes-work-and-where-they-dont">Where emoji shortcodes work (and where they don't)</a><a href="#using-emoji-in-quilldown">Using emoji in Quilldown</a><a href="#shortcode-or-emoji-character-which-should-you-use">Shortcode or emoji character: which should you use?</a><a href="#other-ways-to-add-an-emoji">Other ways to add an emoji</a><a href="#emoji-shortcode-cheat-sheet">Emoji shortcode cheat sheet</a><a href="#four-common-jobs-fastest-route-for-each">Four common jobs, fastest route for each</a><a href="#emoji-conventions-for-readmes-and-changelogs">Emoji conventions for READMEs and changelogs</a><a href="#skin-tones-zwj-sequences-and-other-unicode-quirks">Skin tones, ZWJ sequences and other Unicode quirks</a><a href="#accessibility-making-emoji-work-for-everyone">Accessibility: making emoji work for everyone</a><a href="#what-emoji-shortcodes-cant-do">What emoji shortcodes can't do</a><a href="#common-emoji-shortcode-problems-and-fixes">Common emoji shortcode problems and fixes</a><a href="#emoji-in-moderation">Emoji, in moderation</a><a href="#faq">Frequently asked questions</a></aside>
+    <article class="doc-body">
+<aside class="callout callout-tip"><p class="callout-title">Tip</p><p><strong>Quick answer.</strong> Type the emoji&#39;s name between two colons, such as <code>:tada:</code>, and a tool that supports shortcodes turns it into 🎉. In Quilldown, type a colon and a few letters (<code>:roc</code>) to get suggestions. Shortcodes work on GitHub, GitLab, Slack and Discord, but not everywhere, so if your document is bound for Word, PDF or email, paste the emoji character instead.</p>
+</aside>
+<div class="cs-jump"><a href="#emoji-shortcode-cheat-sheet">Cheat sheet</a><a href="#status-and-symbols">Status and symbols</a><a href="#development-and-docs">Development and docs</a><a href="#where-emoji-shortcodes-work-and-where-they-dont">GitHub</a><a href="#where-emoji-shortcodes-work-and-where-they-dont">Slack and Discord</a><a href="#emoji-conventions-for-readmes-and-changelogs">README conventions</a><a href="#skin-tones-zwj-sequences-and-other-unicode-quirks">Skin tones</a><a href="#accessibility-making-emoji-work-for-everyone">Accessibility</a><a href="#common-emoji-shortcode-problems-and-fixes">Fix a shortcode</a></div>
+
+<h2 id="how-do-emoji-shortcodes-work-in-markdown">How do emoji shortcodes work <em>in Markdown?</em></h2>
+<p>An <strong>emoji shortcode</strong> is a lowercase name wrapped in colons: <code>:rocket:</code> stands for 🚀, <code>:tada:</code> for 🎉. The shortcode is not part of the Markdown standard. It is a convention that a tool applies <em>after</em> it reads your text: the renderer spots <code>:name:</code>, looks the name up in a table, and swaps in the emoji character. If the name is not in the table, the text stays exactly as you typed it.</p>
+<p>That is why shortcodes are popular in READMEs and chat. They are easy to type on any keyboard, they read sensibly in the raw file (<code>:warning:</code> still says &quot;warning&quot; if the emoji never appears), and they are easy to search for.</p>
+<figure class="ex"><div class="ex-title"><span>Shortcodes in Markdown</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c1">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJTaGlwIGl0IDpyb2NrZXQ6IGFuZCBjZWxlYnJhdGUgOnRhZGE6XG5cbi0gOndoaXRlX2NoZWNrX21hcms6IFRlc3RzIHBhc3Ncbi0gOndhcm5pbmc6IE9uZSBkZXByZWNhdGlvblxuLSA6YnVnOiBGaXhlZCB0aGUgY3Jhc2hcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c1">Ship it :rocket: and celebrate :tada:
+
+- :white_check_mark: Tests pass
+- :warning: One deprecation
+- :bug: Fixed the crash</pre><div class="ex-out md"><p>Ship it 🚀 and celebrate 🎉</p>
+<ul>
+<li>✅️ Tests pass</li>
+<li>⚠️ One deprecation</li>
+<li>🐛 Fixed the crash</li>
+</ul>
+</div></div></figure>
+<p>The catch is the same reason they are convenient: they only work where something converts them. The next sections cover where that is, and when to paste the real character instead.</p>
+<h2 id="where-emoji-shortcodes-work-and-where-they-dont">Where emoji shortcodes work (and where they don&#39;t)</h2>
+<div class="tbl"><table><thead><tr>
+<th>Where</th>
+<th>Shortcodes render?</th>
+<th>What to know</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>GitHub</strong> (READMEs, issues, pull requests, comments)</td>
+<td>Yes</td>
+<td>Also has a few GitHub-only names, such as <code>:shipit:</code>, that are custom images with no Unicode equivalent</td>
+</tr>
+<tr>
+<td><strong>GitLab</strong></td>
+<td>Yes</td>
+<td>Uses the same familiar names for standard emoji</td>
+</tr>
+<tr>
+<td><strong>Slack and Discord</strong></td>
+<td>Yes, in messages</td>
+<td>Each app keeps its own name list, so a few names differ from GitHub&#39;s</td>
+</tr>
+<tr>
+<td><strong>Static site generators</strong> (Jekyll, Hugo, MkDocs, Docusaurus)</td>
+<td>Only when enabled</td>
+<td>Usually a config option or plugin; without it the colons show literally</td>
+</tr>
+<tr>
+<td><strong>Plain CommonMark converters, email, Word and PDF converters</strong></td>
+<td>No</td>
+<td>The text stays as <code>:rocket:</code> unless the tool adds emoji support</td>
+</tr>
+</tbody></table></div>
+<p>If your document leaves the place where it was written, the real character is the safer choice. Quilldown converts valid shortcodes in the preview, so what you see there is what an emoji-aware renderer will show. Before publishing anywhere else, check that platform once.</p>
+<h2 id="using-emoji-in-quilldown">Using emoji <em>in Quilldown</em></h2>
+<p>Quilldown gives you three ways to add emoji:</p>
+<ol class="steps">
+<li><strong>Type a shortcode.</strong> Enter a colon and a few letters — for example <code>:roc</code> — and suggestions appear. Use <kbd>↑</kbd> <kbd>↓</kbd> and <kbd>Enter</kbd> (or click) to insert one. Autocomplete can be switched off if you would rather type freely.</li>
+<li><strong>Use the picker.</strong> The emoji picker lets you search by name, choose a skin tone and reuse your recently used emoji.</li>
+<li><strong>Write shortcodes in your text.</strong> Any valid <code>:name:</code> shows as the emoji in the preview, so documents copied from GitHub look right straight away.</li>
+</ol>
+
+<p>Everything happens in your browser, and your text is autosaved locally. Nothing is uploaded, so you can draft a README full of emoji and never create an account.</p>
+<h2 id="shortcode-or-emoji-character-which-should-you-use">Shortcode or emoji character: which should <em>you use?</em></h2>
+<div class="tbl"><table><thead><tr>
+<th></th>
+<th><strong>Shortcode</strong> (<code>:tada:</code>)</th>
+<th><strong>Emoji character</strong> (🎉)</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>Portability</strong></td>
+<td>Only where a tool converts it</td>
+<td>Works in any text field, file or app that has an emoji font</td>
+</tr>
+<tr>
+<td><strong>Readable in the raw file</strong></td>
+<td>Yes, even without an emoji font</td>
+<td>Only if the editor displays emoji</td>
+</tr>
+<tr>
+<td><strong>Search and diffs</strong></td>
+<td>Easy to search by name</td>
+<td>Hard to type and search for</td>
+</tr>
+<tr>
+<td><strong>Consistent appearance</strong></td>
+<td>Depends on the site&#39;s emoji set</td>
+<td>Depends on the viewer&#39;s device and font</td>
+</tr>
+<tr>
+<td><strong>Custom platform emoji</strong></td>
+<td>Yes (<code>:shipit:</code>)</td>
+<td>No</td>
+</tr>
+</tbody></table></div>
+<p>A practical rule:</p>
+<ul class="cardlist">
+<li><strong>Use shortcodes</strong> in files that live on GitHub or GitLab, in commit-style changelogs, and anywhere a teammate may grep for <code>:bug:</code>.</li>
+<li><strong>Use the character</strong> when the document is bound for Word, Google Docs, PDF, email or a site that does not convert shortcodes. See the guides on <a href="/docs/markdown-to-pdf">Markdown to PDF</a> and <a href="/docs/markdown-to-word">Markdown to Word</a> for how exports behave.</li>
+<li><strong>Never mix styles randomly</strong> inside one document. Pick one and stick with it so a search finds everything.</li>
+</ul>
+<h2 id="other-ways-to-add-an-emoji">Other ways to add <em>an emoji</em></h2>
+<div class="tbl"><table><thead><tr>
+<th>Method</th>
+<th>Good for</th>
+<th>Trade-offs</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>Type a shortcode in Quilldown</strong></td>
+<td>Fast typing without leaving the keyboard, with autocomplete after a colon</td>
+<td>Only converts where a tool supports shortcodes</td>
+</tr>
+<tr>
+<td><strong>Quilldown&#39;s emoji picker</strong></td>
+<td>Browsing by category, picking a skin tone and reusing recent emoji</td>
+<td>A few extra clicks</td>
+</tr>
+<tr>
+<td><strong>Your system&#39;s emoji keyboard</strong></td>
+<td>Pasting the real character anywhere</td>
+<td>Press the Windows key and the period key on Windows, or Control, Command and Space on a Mac (the exact shortcut can vary by version)</td>
+</tr>
+<tr>
+<td><strong>Copying the character from another place</strong></td>
+<td>One-off use</td>
+<td>You can&#39;t search for it by name later</td>
+</tr>
+</tbody></table></div>
+<h2 id="emoji-shortcode-cheat-sheet">Emoji shortcode <em>cheat sheet</em></h2>
+<p>Every code below is valid in Quilldown. Type it between two colons, or start typing and let autocomplete finish it.</p>
+<h3 id="hands-reactions-and-people">Hands, reactions and people</h3>
+<p>The most-used codes in reviews and comments. Note that <code>+1</code> and <code>-1</code> are real names, plus signs and all.</p>
+<div class="emoji-grid"><div><span class="e">👍️</span><code>:+1:</code></div><div><span class="e">👎️</span><code>:-1:</code></div><div><span class="e">👍️</span><code>:thumbsup:</code></div><div><span class="e">👎️</span><code>:thumbsdown:</code></div><div><span class="e">👏</span><code>:clap:</code></div><div><span class="e">🙏</span><code>:pray:</code></div><div><span class="e">🙌</span><code>:raised_hands:</code></div><div><span class="e">👌</span><code>:ok_hand:</code></div><div><span class="e">💪</span><code>:muscle:</code></div><div><span class="e">👋</span><code>:wave:</code></div><div><span class="e">👉️</span><code>:point_right:</code></div><div><span class="e">🤝</span><code>:handshake:</code></div><div><span class="e">✊️</span><code>:fist:</code></div><div><span class="e">✌️</span><code>:v:</code></div><div><span class="e">👀</span><code>:eyes:</code></div><div><span class="e">🤔</span><code>:thinking:</code></div><div><span class="e">🧑‍💻</span><code>:technologist:</code></div></div>
+<h3 id="status-and-symbols">Status and symbols</h3>
+<p>Best for checklists, feature tables and callouts. Pair each one with a word.</p>
+<div class="tbl emoji-tbl"><table><thead><tr>
+<th>Emoji</th>
+<th>Shortcode</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody><tr>
+<td>✅️</td>
+<td><code>:white_check_mark:</code></td>
+<td>Check mark button</td>
+</tr>
+<tr>
+<td>✔️</td>
+<td><code>:heavy_check_mark:</code></td>
+<td>Check mark</td>
+</tr>
+<tr>
+<td>☑️</td>
+<td><code>:ballot_box_with_check:</code></td>
+<td>Check box with check</td>
+</tr>
+<tr>
+<td>❌️</td>
+<td><code>:x:</code></td>
+<td>Cross mark</td>
+</tr>
+<tr>
+<td>🚫</td>
+<td><code>:no_entry_sign:</code></td>
+<td>Prohibited</td>
+</tr>
+<tr>
+<td>⛔️</td>
+<td><code>:no_entry:</code></td>
+<td>No entry</td>
+</tr>
+<tr>
+<td>⚠️</td>
+<td><code>:warning:</code></td>
+<td>Warning</td>
+</tr>
+<tr>
+<td>🚨</td>
+<td><code>:rotating_light:</code></td>
+<td>Police car light</td>
+</tr>
+<tr>
+<td>❓️</td>
+<td><code>:question:</code></td>
+<td>Red question mark</td>
+</tr>
+<tr>
+<td>❗️</td>
+<td><code>:exclamation:</code></td>
+<td>Red exclamation mark</td>
+</tr>
+<tr>
+<td>ℹ️</td>
+<td><code>:information_source:</code></td>
+<td>Information</td>
+</tr>
+<tr>
+<td>💡</td>
+<td><code>:bulb:</code></td>
+<td>Light bulb</td>
+</tr>
+<tr>
+<td>🔥</td>
+<td><code>:fire:</code></td>
+<td>Fire</td>
+</tr>
+<tr>
+<td>✨️</td>
+<td><code>:sparkles:</code></td>
+<td>Sparkles</td>
+</tr>
+<tr>
+<td>⭐️</td>
+<td><code>:star:</code></td>
+<td>Star</td>
+</tr>
+<tr>
+<td>⚡️</td>
+<td><code>:zap:</code></td>
+<td>High voltage</td>
+</tr>
+<tr>
+<td>⌛️</td>
+<td><code>:hourglass:</code></td>
+<td>Hourglass done</td>
+</tr>
+<tr>
+<td>⏰️</td>
+<td><code>:alarm_clock:</code></td>
+<td>Alarm clock</td>
+</tr>
+<tr>
+<td>🔴</td>
+<td><code>:red_circle:</code></td>
+<td>Red circle</td>
+</tr>
+<tr>
+<td>🟢</td>
+<td><code>:green_circle:</code></td>
+<td>Green circle</td>
+</tr>
+<tr>
+<td>🆕</td>
+<td><code>:new:</code></td>
+<td>NEW button</td>
+</tr>
+<tr>
+<td>🔜</td>
+<td><code>:soon:</code></td>
+<td>SOON arrow</td>
+</tr>
+<tr>
+<td>🆘</td>
+<td><code>:sos:</code></td>
+<td>SOS button</td>
+</tr>
+</tbody></table></div>
+<h3 id="development-and-docs">Development and docs</h3>
+<p>The vocabulary of changelogs, pull requests and project boards.</p>
+<div class="tbl emoji-tbl"><table><thead><tr>
+<th>Emoji</th>
+<th>Shortcode</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody><tr>
+<td>🚀</td>
+<td><code>:rocket:</code></td>
+<td>Rocket</td>
+</tr>
+<tr>
+<td>🐛</td>
+<td><code>:bug:</code></td>
+<td>Bug</td>
+</tr>
+<tr>
+<td>🚧</td>
+<td><code>:construction:</code></td>
+<td>Construction</td>
+</tr>
+<tr>
+<td>🔧</td>
+<td><code>:wrench:</code></td>
+<td>Wrench</td>
+</tr>
+<tr>
+<td>🛠️</td>
+<td><code>:hammer_and_wrench:</code></td>
+<td>Hammer and wrench</td>
+</tr>
+<tr>
+<td>⚙️</td>
+<td><code>:gear:</code></td>
+<td>Gear</td>
+</tr>
+<tr>
+<td>📦️</td>
+<td><code>:package:</code></td>
+<td>Package</td>
+</tr>
+<tr>
+<td>📝</td>
+<td><code>:memo:</code></td>
+<td>Memo</td>
+</tr>
+<tr>
+<td>📚️</td>
+<td><code>:books:</code></td>
+<td>Books</td>
+</tr>
+<tr>
+<td>📖</td>
+<td><code>:book:</code></td>
+<td>Open book</td>
+</tr>
+<tr>
+<td>💻️</td>
+<td><code>:computer:</code></td>
+<td>Laptop</td>
+</tr>
+<tr>
+<td>🧪</td>
+<td><code>:test_tube:</code></td>
+<td>Test tube</td>
+</tr>
+<tr>
+<td>🔒️</td>
+<td><code>:lock:</code></td>
+<td>Locked</td>
+</tr>
+<tr>
+<td>🔑</td>
+<td><code>:key:</code></td>
+<td>Key</td>
+</tr>
+<tr>
+<td>🛡️</td>
+<td><code>:shield:</code></td>
+<td>Shield</td>
+</tr>
+<tr>
+<td>♻️</td>
+<td><code>:recycle:</code></td>
+<td>Recycling symbol</td>
+</tr>
+<tr>
+<td>🗑️</td>
+<td><code>:wastebasket:</code></td>
+<td>Wastebasket</td>
+</tr>
+<tr>
+<td>🚚</td>
+<td><code>:truck:</code></td>
+<td>Delivery truck</td>
+</tr>
+<tr>
+<td>🏷️</td>
+<td><code>:label:</code></td>
+<td>Label</td>
+</tr>
+<tr>
+<td>📈</td>
+<td><code>:chart_with_upwards_trend:</code></td>
+<td>Chart increasing</td>
+</tr>
+<tr>
+<td>📊</td>
+<td><code>:bar_chart:</code></td>
+<td>Bar chart</td>
+</tr>
+<tr>
+<td>🤖</td>
+<td><code>:robot:</code></td>
+<td>Robot</td>
+</tr>
+<tr>
+<td>🎨</td>
+<td><code>:art:</code></td>
+<td>Artist palette</td>
+</tr>
+<tr>
+<td>💄</td>
+<td><code>:lipstick:</code></td>
+<td>Lipstick</td>
+</tr>
+</tbody></table></div>
+<h3 id="objects-and-everyday-things">Objects and everyday things</h3>
+<div class="emoji-grid"><div><span class="e">☕️</span><code>:coffee:</code></div><div><span class="e">📆</span><code>:calendar:</code></div><div><span class="e">📋️</span><code>:clipboard:</code></div><div><span class="e">📌</span><code>:pushpin:</code></div><div><span class="e">📎</span><code>:paperclip:</code></div><div><span class="e">🔖</span><code>:bookmark:</code></div><div><span class="e">🔗</span><code>:link:</code></div><div><span class="e">🔍️</span><code>:mag:</code></div><div><span class="e">🔔</span><code>:bell:</code></div><div><span class="e">✉️</span><code>:envelope:</code></div><div><span class="e">📷️</span><code>:camera:</code></div><div><span class="e">💾</span><code>:floppy_disk:</code></div><div><span class="e">📁</span><code>:file_folder:</code></div><div><span class="e">📄</span><code>:page_facing_up:</code></div><div><span class="e">🌐</span><code>:globe_with_meridians:</code></div><div><span class="e">💬</span><code>:speech_balloon:</code></div><div><span class="e">📢</span><code>:loudspeaker:</code></div><div><span class="e">🎁</span><code>:gift:</code></div><div><span class="e">🏆️</span><code>:trophy:</code></div><div><span class="e">💎</span><code>:gem:</code></div></div>
+<h3 id="faces-and-feelings">Faces and feelings</h3>
+<div class="emoji-grid"><div><span class="e">😄</span><code>:smile:</code></div><div><span class="e">😀</span><code>:grinning:</code></div><div><span class="e">😂</span><code>:joy:</code></div><div><span class="e">😅</span><code>:sweat_smile:</code></div><div><span class="e">😉</span><code>:wink:</code></div><div><span class="e">😊</span><code>:blush:</code></div><div><span class="e">😍</span><code>:heart_eyes:</code></div><div><span class="e">😎</span><code>:sunglasses:</code></div><div><span class="e">🤩</span><code>:star_struck:</code></div><div><span class="e">🥳</span><code>:partying_face:</code></div><div><span class="e">🙂</span><code>:slightly_smiling_face:</code></div><div><span class="e">🙃</span><code>:upside_down_face:</code></div><div><span class="e">😌</span><code>:relieved:</code></div><div><span class="e">😭</span><code>:sob:</code></div><div><span class="e">😠</span><code>:angry:</code></div><div><span class="e">😱</span><code>:scream:</code></div><div><span class="e">🤓</span><code>:nerd_face:</code></div><div><span class="e">🤗</span><code>:hugs:</code></div></div>
+<h3 id="celebration-and-hearts">Celebration and hearts</h3>
+<div class="emoji-grid"><div><span class="e">🎉</span><code>:tada:</code></div><div><span class="e">🎊</span><code>:confetti_ball:</code></div><div><span class="e">🎈</span><code>:balloon:</code></div><div><span class="e">🎂</span><code>:birthday:</code></div><div><span class="e">🍾</span><code>:champagne:</code></div><div><span class="e">🥂</span><code>:clinking_glasses:</code></div><div><span class="e">💯</span><code>:100:</code></div><div><span class="e">❤️</span><code>:heart:</code></div><div><span class="e">🧡</span><code>:orange_heart:</code></div><div><span class="e">💛</span><code>:yellow_heart:</code></div><div><span class="e">💚</span><code>:green_heart:</code></div><div><span class="e">💙</span><code>:blue_heart:</code></div><div><span class="e">💜</span><code>:purple_heart:</code></div><div><span class="e">🖤</span><code>:black_heart:</code></div><div><span class="e">💔</span><code>:broken_heart:</code></div><div><span class="e">💖</span><code>:sparkling_heart:</code></div></div>
+<p>Forgotten the name? In Quilldown type a colon and a few letters, or search in the picker. Elsewhere, search for &quot;emoji shortcodes&quot; plus the platform name, since lists differ slightly.</p>
+<h2 id="four-common-jobs-fastest-route-for-each">Four common jobs, fastest route <em>for each</em></h2>
+<ul class="cardlist">
+<li><strong>A status checklist in a README.</strong> Use <code>:white_check_mark:</code> for done, <code>:construction:</code> for in progress and <code>:x:</code> for not planned, with a word beside each one so the meaning doesn&#39;t rely on the symbol. Use a live badge for build status, since an emoji won&#39;t change when a build breaks. See the <a href="/docs/readme-template">README guide</a>.</li>
+<li><strong>A changelog with a fixed meaning per emoji.</strong> Pick one set and stick with it, for example the sparkles, bug, memo, zap, lock and boom set from the conventions table below, and put it in a release note. It makes entries easy to scan and easy to search.</li>
+<li><strong>A document bound for Word, PDF or email.</strong> Paste the emoji character instead of the shortcode, since a converter that doesn&#39;t understand shortcodes leaves the colons in your text. Check the result on the device where it will be read.</li>
+<li><strong>A friendly team update in Slack or Discord.</strong> Shortcodes work in messages, but each app keeps its own name list, so a few names differ from GitHub&#39;s. Use the app&#39;s own emoji picker if a name doesn&#39;t work.</li>
+</ul>
+<h2 id="emoji-conventions-for-readmes-and-changelogs">Emoji conventions for READMEs <em>and changelogs</em></h2>
+<p>Emoji earn their place as <strong>status markers with a fixed meaning</strong>. A widely copied convention (the gitmoji project popularized it for commit messages) assigns one emoji per kind of change:</p>
+<div class="tbl"><table><thead><tr>
+<th>Meaning</th>
+<th>Shortcode</th>
+<th>Renders as</th>
+</tr>
+</thead><tbody><tr>
+<td>New feature</td>
+<td><code>:sparkles:</code></td>
+<td>✨</td>
+</tr>
+<tr>
+<td>Bug fix</td>
+<td><code>:bug:</code></td>
+<td>🐛</td>
+</tr>
+<tr>
+<td>Documentation</td>
+<td><code>:memo:</code></td>
+<td>📝</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td><code>:zap:</code></td>
+<td>⚡</td>
+</tr>
+<tr>
+<td>Security fix</td>
+<td><code>:lock:</code></td>
+<td>🔒</td>
+</tr>
+<tr>
+<td>Refactor</td>
+<td><code>:recycle:</code></td>
+<td>♻️</td>
+</tr>
+<tr>
+<td>Work in progress</td>
+<td><code>:construction:</code></td>
+<td>🚧</td>
+</tr>
+<tr>
+<td>Tests</td>
+<td><code>:white_check_mark:</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Breaking change</td>
+<td><code>:boom:</code></td>
+<td>💥</td>
+</tr>
+</tbody></table></div>
+<p>Use them like this in a release note:</p>
+<figure class="ex"><div class="ex-title"><span>A changelog entry with status emoji</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c2">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiItIDpzcGFya2xlczogQWRkZWQgZGFyayBtb2RlIHRvIHRoZSBzZXR0aW5ncyBwYWdlXG4tIDpidWc6IEZpeGVkIGEgY3Jhc2ggd2hlbiB0aGUgZmlsZSBuYW1lIGNvbnRhaW5zIGEgc3BhY2Vcbi0gOmJvb206IFJlbW92ZWQgdGhlIGRlcHJlY2F0ZWQgYC0tbGVnYWN5YCBmbGFnXG4tIDptZW1vOiBEb2N1bWVudGVkIGFsbCBlbnZpcm9ubWVudCB2YXJpYWJsZXNcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c2">- :sparkles: Added dark mode to the settings page
+- :bug: Fixed a crash when the file name contains a space
+- :boom: Removed the deprecated `--legacy` flag
+- :memo: Documented all environment variables</pre><div class="ex-out md"><ul>
+<li>✨️ Added dark mode to the settings page</li>
+<li>🐛 Fixed a crash when the file name contains a space</li>
+<li>💥 Removed the deprecated <code>--legacy</code> flag</li>
+<li>📝 Documented all environment variables</li>
+</ul>
+</div></div></figure>
+<p>Two cautions for README files. First, <strong>emoji do not replace badges.</strong> An emoji is static, so a ✅ next to &quot;build&quot; will still be there after the build breaks. Use a live badge for build status, version and coverage, and emoji for things that are true when you write them. Second, keep emoji out of headings you link to: GitHub builds heading anchors from the text and drops the emoji, so <code>## 🚀 Usage</code> typically becomes <code>#-usage</code>, which is easy to mistype. For the full picture see the <a href="/docs/readme-template">README template guide</a>.</p>
+<h2 id="skin-tones-zwj-sequences-and-other-unicode-quirks">Skin tones, ZWJ sequences and other <em>Unicode quirks</em></h2>
+<p>Behind every emoji is one or more Unicode code points, and that explains most of the odd behavior.</p>
+<ul class="cardlist">
+<li><strong>Skin tones are modifiers.</strong> A hand emoji such as 👋 followed by one of five modifier characters becomes 👋🏽 and so on. Standard shortcodes, including those on GitHub, name only the default yellow version. To get another tone, pick it from the emoji picker or paste the character. Slack and Discord each have their own tone syntax for shortcodes; Slack, for example, uses <code>:wave::skin-tone-3:</code>.</li>
+<li><strong>ZWJ sequences glue emoji together.</strong> 🧑‍💻 is a person, an invisible zero-width joiner and a laptop. A platform that does not know the sequence shows the parts side by side (🧑💻). Newer emoji reach devices at different times, so an emoji you see may appear as a box or two separate symbols elsewhere.</li>
+<li><strong>Some symbols have two forms.</strong> Characters such as ✔ and ⚠ can show as plain text symbols or as colored emoji, depending on an invisible variation selector after them. Shortcodes such as <code>:heavy_check_mark:</code> and <code>:warning:</code> use the emoji form, which is why they look consistent.</li>
+<li><strong>Flags are letters in disguise.</strong> A flag is two regional-indicator letters, so <code>:us:</code> gives 🇺🇸. Windows does not draw country flags in most fonts and shows two letters instead. If flags matter, say the country name in text too.</li>
+<li><strong>Appearance varies by platform.</strong> The same emoji looks different on Apple, Google, Microsoft and GitHub. Do not rely on a fine detail of one design.</li>
+</ul>
+<h2 id="accessibility-making-emoji-work-for-everyone">Accessibility: making emoji work <em>for everyone</em></h2>
+<p>Screen readers announce emoji by their official Unicode name. That is helpful in small doses and noisy in large ones.</p>
+<ul class="cardlist">
+<li><strong>✅ is spoken as &quot;check mark button&quot;</strong>, and ❌ as &quot;cross mark&quot;. Fine on its own, wordy when it opens every row of a 20-line list.</li>
+<li><strong>A run of five 🎉 is read five times.</strong> Use one.</li>
+<li><strong>Color is not a message.</strong> 🟢 and 🔴 alone tell color-blind readers nothing, and screen-reader users hear only &quot;green circle&quot;. Write &quot;Passing&quot; or &quot;Failing&quot; next to them.</li>
+<li><strong>Put the emoji after the meaning, or between words,</strong> rather than replacing a word: &quot;Fixed 🐛 login crash&quot; is fine; &quot;Fixed the 🐛 in the 🔑 flow&quot; is not.</li>
+<li><strong>Give image-based icons alt text.</strong> Real emoji characters do not need it, but badge or logo images do: <code>![Build passing](badge.svg)</code>.</li>
+<li><strong>Keep them out of formal documents,</strong> such as contracts, papers and anything a translation tool or a text-to-speech pipeline will process.</li>
+</ul>
+<h2 id="what-emoji-shortcodes-cant-do">What emoji shortcodes can&#39;t do</h2>
+<div class="fx-limits emo-limits"><p class="fx-limits-intro">Knowing the limits saves time.</p><ul><li><b>They only convert where a tool supports them.</b> Plain converters, email, Word and PDF tools leave the colons in place.</li><li><b>Names differ by platform.</b> GitHub, Slack and Discord each keep their own list, so a few names differ.</li><li><b>Custom platform emoji don't travel.</b> Names such as <code>:shipit:</code> are images on GitHub with no Unicode character, so other tools can't show them.</li><li><b>Standard shortcodes name only the default skin tone.</b> Pick another tone in the picker or paste the character.</li><li><b>Shortcodes inside code spans aren't converted,</b> which is correct, since code shows text literally.</li><li><b>Appearance depends on the viewer's device,</b> and a very new emoji may show as an empty box on older systems.</li></ul></div>
+
+<h2 id="common-emoji-shortcode-problems-and-fixes">Common emoji shortcode problems <em>and fixes</em></h2>
+<div class="tbl"><table><thead><tr>
+<th>Symptom</th>
+<th>Likely cause</th>
+<th>Fix</th>
+</tr>
+</thead><tbody><tr>
+<td><code>:thumbs_up:</code> stays as text</td>
+<td>That isn&#39;t a valid name in Quilldown; the standard names are <code>:+1:</code> and <code>:thumbsup:</code></td>
+<td>Type <code>:thu</code> and pick from the suggestions</td>
+</tr>
+<tr>
+<td><code>:check_mark:</code> or <code>:checkmark:</code> stays as text</td>
+<td>Not a standard name</td>
+<td>Use <code>:white_check_mark:</code> (✅) or <code>:heavy_check_mark:</code> (✔️)</td>
+</tr>
+<tr>
+<td>Colons show instead of an emoji on a website</td>
+<td>The site&#39;s Markdown engine does not convert shortcodes</td>
+<td>Enable the emoji plugin or paste the real character</td>
+</tr>
+<tr>
+<td>A shortcode inside a code span is not converted</td>
+<td>Code spans are meant to show text literally</td>
+<td>This is correct; write it outside backticks if you want the emoji</td>
+</tr>
+<tr>
+<td>You want to show a shortcode without converting it</td>
+<td>The renderer converts every valid name</td>
+<td>Wrap it in backticks, as in <code>:rocket:</code></td>
+</tr>
+<tr>
+<td>A time like <code>10:30</code> looks fine, but <code>1:100:5</code> changes</td>
+<td><code>:100:</code> is a real shortcode (💯); a shortcode needs a valid name between two colons</td>
+<td>Put the text in a code span, or add spaces around the colons</td>
+</tr>
+<tr>
+<td>A space breaks the code</td>
+<td><code>: rocket :</code> is not <code>:rocket:</code></td>
+<td>Remove the spaces; names never contain them</td>
+</tr>
+<tr>
+<td>An emoji shows as an empty box</td>
+<td>The viewer&#39;s font has no glyph for it (often a very new emoji)</td>
+<td>Use an older, widely supported emoji or add a word for the meaning</td>
+</tr>
+<tr>
+<td>Emoji vanish from a PDF or Word file</td>
+<td>The device or font used to open the file has no emoji font</td>
+<td>Check the export on the device where it will be read</td>
+</tr>
+</tbody></table></div>
+<p>Colons in ordinary prose are safe: a shortcode needs a valid name between two colons, with nothing else inside, so <code>Note: see below</code> or <code>10:30</code> is never converted.</p>
+<h2 id="emoji-in-moderation">Emoji, <em>in moderation</em></h2>
+<p>Use emoji as signals, not decoration, choose one emoji per meaning across a project, and think about the reader. A README for a friendly open-source tool can carry a few; a report to a client rarely should. When you are unsure, write the sentence without the emoji first, then add one only if it makes the meaning quicker to scan.</p>
+<p>Ready to write more? The <a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a> covers the rest of the syntax, and <a href="/docs/what-is-markdown">What is Markdown?</a> explains the format from the beginning. If you publish to the web, the <a href="/docs/markdown-to-html">Markdown to HTML guide</a> shows how the output looks as a page.</p>
+<h2 id="faq">Frequently asked questions</h2>
+<div class="faq-panel"><div class="faq"><details name="gfaq"><summary>How do I add emoji to Markdown?</summary><div class="ans"><p>Type an emoji shortcode such as <code>:smile:</code>, paste the emoji character itself, or use an emoji picker. Shortcodes work only where the renderer converts them (GitHub, GitLab, Slack and Discord do), while the character works almost anywhere. In Quilldown you can also type a colon and a few letters, such as <code>:roc</code>, and choose from the suggestions.</p></div></details><details name="gfaq"><summary>What is the shortcode for a checkmark?</summary><div class="ans"><p><code>:white_check_mark:</code> gives ✅ (a white check on a green square) and <code>:heavy_check_mark:</code> gives ✔️ (a plain black check). <code>:ballot_box_with_check:</code> gives ☑️. For a cross, use <code>:x:</code> (❌). Names such as <code>:checkmark:</code> are not standard and stay as text.</p></div></details><details name="gfaq"><summary>Do emoji shortcodes work on GitHub?</summary><div class="ans"><p>Yes. GitHub renders shortcodes such as <code>:rocket:</code> in README files, issues, pull requests and comments. It also has a few custom names, like <code>:shipit:</code>, that are images rather than Unicode characters, so they will not appear in other tools.</p></div></details><details name="gfaq"><summary>Why isn't my shortcode turning into an emoji?</summary><div class="ans"><p>Usually the name is wrong or the platform does not convert shortcodes. Names must match exactly and contain no spaces: use <code>:+1:</code> or <code>:thumbsup:</code>; <code>:thumbs_up:</code> isn&#39;t a valid name here. Unknown names are left as typed. If the name is right, the site&#39;s Markdown engine probably needs an emoji plugin, or you can paste the emoji character instead.</p></div></details><details name="gfaq"><summary>Can I change the skin tone of an emoji?</summary><div class="ans"><p>Yes, but not with a standard shortcode, which names only the default tone. Choose a tone in Quilldown&#39;s emoji picker or paste the character with the tone you want. Slack and Discord have their own syntax for tones inside shortcodes, and it is different in each.</p></div></details><details name="gfaq"><summary>Are emoji accessible to screen readers?</summary><div class="ans"><p>Screen readers read each emoji by its Unicode name, for example &quot;rocket&quot; or &quot;check mark button&quot;, so a few are fine and many become noisy. Never use emoji as the only carrier of meaning, especially color-coded ones like 🟢 and 🔴, and write the word next to the symbol.</p></div></details><details name="gfaq"><summary>Do emoji work in PDF and Word exports?</summary><div class="ans"><p>Emoji are ordinary characters, so they appear in an export as long as the device or font that opens the file has an emoji font. If you plan to export, the character is a safer choice than a shortcode that a converter may not understand. See the guides to <a href="/docs/markdown-to-pdf">Markdown to PDF</a> and <a href="/docs/markdown-to-word">Markdown to Word</a>.</p></div></details><details name="gfaq"><summary>How do I type an emoji on Windows or Mac?</summary><div class="ans"><p>On Windows, press the Windows key and the period key to open the emoji panel. On a Mac, press Control, Command and Space. The exact shortcut can vary by system version. In Quilldown you can also type a colon and a few letters, or use the emoji picker.</p></div></details><details name="gfaq"><summary>How do I show a shortcode without it turning into an emoji?</summary><div class="ans"><p>Wrap it in backticks, as in <code>`:rocket:`</code>. Code spans show text literally, so the colons and the name stay as you typed them.</p></div></details><details name="gfaq"><summary>What's the difference between :+1: and :thumbsup:?</summary><div class="ans"><p>Both give 👍. <code>:+1:</code> and <code>:-1:</code> are real names, plus and minus signs included, so use whichever you prefer, and stay consistent within a document.</p></div></details><details name="gfaq"><summary>Can I use emoji in headings?</summary><div class="ans"><p>Yes, but keep them out of headings you link to. GitHub builds heading anchors from the text and drops the emoji, so a heading like &quot;🚀 Usage&quot; typically becomes <code>#-usage</code>, which is easy to mistype.</p></div></details><details name="gfaq"><summary>How many emoji should I use in a README?</summary><div class="ans"><p>Few. Use them as signals with a fixed meaning, not decoration, and never a run of the same one, since screen readers read each one aloud. When you&#39;re unsure, write the sentence without the emoji first, then add one only if it makes the meaning quicker to scan.</p></div></details><details name="gfaq"><summary>Do emoji shortcodes work in Slack and Discord?</summary><div class="ans"><p>Yes, in messages. Each app keeps its own name list, so a few names differ from GitHub&#39;s, and skin tones use each app&#39;s own syntax.</p></div></details><details name="gfaq"><summary>Where can I find the full list of emoji shortcodes?</summary><div class="ans"><p>In Quilldown, type a colon and a few letters, or search in the emoji picker. Lists differ slightly between platforms, so for GitHub, search for its list. The cheat sheet above covers the codes people use most.</p></div></details><details name="gfaq"><summary>Why do emoji look different on different devices?</summary><div class="ans"><p>Each platform, including Apple, Google, Microsoft and GitHub, draws its own design for the same emoji. Very new emoji may appear as a box or two separate symbols on older systems, so don&#39;t rely on a fine detail of one design.</p></div></details></div></div>
+    </article>
+  </div>
+  <nav class="pn" aria-label="More guides"><a class="pn-prev" href="/docs/markdown-cheat-sheet"><span>Previous</span><strong>Markdown cheat sheet</strong></a><a class="pn-next" href="/docs/markdown-to-pdf"><span>Next</span><strong>Markdown to PDF</strong></a></nav>
+  <div class="after">
+    <div class="rel-head"><div class="eyebrow">Keep reading</div><h2>Related <em>guides</em></h2></div><div class="cards rel-cards"><a class="gcard" href="/docs/markdown-cheat-sheet"><strong>Markdown cheat sheet</strong><span class="d">Every syntax, with live examples.</span><svg class="i"><use href="#i-arrow"/></svg></a><a class="gcard" href="/docs/readme-template"><strong>README template</strong><span class="d">A copy-ready starting point.</span><svg class="i"><use href="#i-arrow"/></svg></a><a class="gcard" href="/docs/what-is-markdown"><strong>What is Markdown?</strong><span class="d">Plain-text formatting, explained simply.</span><svg class="i"><use href="#i-arrow"/></svg></a></div>
+    <section class="cta-band"><div><h2>Try emoji shortcodes in the editor</h2><p>Type a colon and a few letters — like :roc — in Quilldown and pick from the suggestions. A finished :tada: turns into 🎉 as you type.</p></div><a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a></section>
+  </div>
+</main>
+<footer class="footer"><div class="container">
+  <div class="footer-cols">
+    <div><a class="brand" href="/#top"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>Quilldown is a free, private Markdown editor with live preview, math and diagrams. It works offline, and your writing never leaves your browser.</p></div>
+    <div><h3>Learn Markdown</h3><ul><li><a href="/docs/what-is-markdown">What is Markdown?</a></li><li><a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a></li><li><a href="/docs/emoji-in-markdown">Emoji shortcodes</a></li></ul></div>
+    <div><h3>Convert &amp; export</h3><ul><li><a href="/docs/markdown-to-pdf">Markdown to PDF</a></li><li><a href="/docs/markdown-to-word">Markdown to Word &amp; Google Docs</a></li><li><a href="/docs/markdown-to-html">Markdown to HTML</a></li></ul></div>
+    <div><h3>Write better documents</h3><ul><li><a href="/docs/markdown-table-generator">Markdown tables</a></li><li><a href="/docs/math-in-markdown">Math in Markdown</a></li><li><a href="/docs/diagrams-in-markdown">Diagrams in Markdown</a></li><li><a href="/docs/readme-template">README template</a></li></ul></div>
+    <div><h3>Contact</h3><ul>
+      <li><a href="https://github.com/Dhruv-Dhameliya" target="_blank" rel="me noopener noreferrer">GitHub profile</a></li>
+      <li><a href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">Report an issue</a></li>
+      <li><a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">Source code</a></li>
+      <li><a href="/about">About</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-base"><span>© 2026 Quilldown · Built and maintained as an open-source project. Your Markdown never leaves your browser.</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Documentation</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span></div>
+</div></footer>
+<script src="/js/site.js" defer></script>
+</body>
+</html>

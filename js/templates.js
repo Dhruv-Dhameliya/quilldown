@@ -151,7 +151,7 @@ Results-driven professional with X years of experience in ____. Known for ____, 
 ## Education
 
 ### Degree, Subject — University Name
-*Year – Year* · Grade / honours
+*Year – Year* · Grade / honors
 
 ## Skills
 
@@ -253,7 +253,7 @@ you@example.com · +00 000 000 000
       id: 'tables', name: 'Tables', desc: 'Comparison, schedule, budget and status tables', icon: 'table', file: 'tables.md',
       text: function () { return String.raw`# Tables
 
-Copy the layout you need, then edit the cells. Colons in the divider row set alignment: ` + '`:---`' + String.raw` left, ` + '`:---:`' + String.raw` centre, ` + '`---:`' + String.raw` right.
+Copy the layout you need, then edit the cells. Colons in the divider row set alignment: ` + '`:---`' + String.raw` left, ` + '`:---:`' + String.raw` center, ` + '`---:`' + String.raw` right.
 
 ## Comparison
 

@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy: Quilldown Never Sees Your Markdown</title>
+<meta name="description" content="Quilldown runs in your browser. Your writing is never uploaded, there's no account, and drafts stay on your device. See what's stored and how to check.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Dhruv-Dhameliya">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="canonical" href="https://quilldown.vercel.app/privacy">
+<link rel="author" href="https://github.com/Dhruv-Dhameliya">
+<link rel="me" href="https://github.com/Dhruv-Dhameliya">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Quilldown">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://quilldown.vercel.app/privacy">
+<meta property="og:title" content="Privacy: Quilldown Never Sees Your Markdown">
+<meta property="og:description" content="Quilldown runs in your browser. Your writing is never uploaded, there's no account, and drafts stay on your device. See what's stored and how to check.">
+<meta property="og:image" content="https://quilldown.vercel.app/social/og-image.png">
+<meta property="og:image:secure_url" content="https://quilldown.vercel.app/social/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy: Quilldown Never Sees Your Markdown">
+<meta name="twitter:description" content="Quilldown runs in your browser. Your writing is never uploaded, there's no account, and drafts stay on your device. See what's stored and how to check.">
+<meta name="twitter:image" content="https://quilldown.vercel.app/social/og-image.png">
+<meta name="twitter:image:alt" content="Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>
+<link rel="preload" href="/vendor/fonts/nunito-latin-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="/vendor/katex/katex.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="/vendor/katex/katex.min.css"></noscript>
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/document.css">
+<link rel="stylesheet" href="/css/site.css">
+<script type="application/ld+json" id="ld-graph">{"@context":"https://schema.org","@graph":[{"@type":"ImageObject","@id":"https://quilldown.vercel.app/#logo","url":"https://quilldown.vercel.app/icons/icon-512.png","contentUrl":"https://quilldown.vercel.app/icons/icon-512.png","width":512,"height":512,"caption":"Quilldown logo"},{"@type":"Organization","@id":"https://quilldown.vercel.app/#organization","name":"Quilldown","url":"https://quilldown.vercel.app/","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, HTML and EPUB. It runs in your browser and works offline.","logo":{"@id":"https://quilldown.vercel.app/#logo"},"image":{"@id":"https://quilldown.vercel.app/#logo"},"founder":{"@id":"https://quilldown.vercel.app/#person"},"sameAs":["https://github.com/Dhruv-Dhameliya/quilldown","https://github.com/Dhruv-Dhameliya"],"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","url":"https://github.com/Dhruv-Dhameliya/quilldown/issues","availableLanguage":"English"},{"@type":"ContactPoint","contactType":"media relations","url":"https://github.com/Dhruv-Dhameliya","availableLanguage":"English"}]},{"@type":"Person","@id":"https://quilldown.vercel.app/#person","name":"Dhruv-Dhameliya","url":"https://github.com/Dhruv-Dhameliya","sameAs":["https://github.com/Dhruv-Dhameliya"],"worksFor":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebSite","@id":"https://quilldown.vercel.app/#website","url":"https://quilldown.vercel.app/","name":"Quilldown","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, HTML and EPUB. It runs in your browser and works offline.","inLanguage":"en","publisher":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebPage","@id":"https://quilldown.vercel.app/privacy#webpage","url":"https://quilldown.vercel.app/privacy","name":"Privacy: Quilldown Never Sees Your Markdown","description":"Quilldown runs in your browser. Your writing is never uploaded, there's no account, and drafts stay on your device. See what's stored and how to check.","inLanguage":"en","isPartOf":{"@id":"https://quilldown.vercel.app/#website"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML."},"image":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML."},"breadcrumb":{"@id":"https://quilldown.vercel.app/privacy#breadcrumb"},"datePublished":"2026-09-30","dateModified":"2026-09-30","about":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"BreadcrumbList","@id":"https://quilldown.vercel.app/privacy#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quilldown.vercel.app/#top"},{"@type":"ListItem","position":2,"name":"Privacy","item":"https://quilldown.vercel.app/privacy"}]},{"@type":"FAQPage","@id":"https://quilldown.vercel.app/privacy#faq","url":"https://quilldown.vercel.app/privacy","isPartOf":{"@id":"https://quilldown.vercel.app/privacy#webpage"},"mainEntity":[{"@type":"Question","name":"Can you see what I write?","acceptedAnswer":{"@type":"Answer","text":"No. Your text stays in your browser and is never sent to us, so we can't see it."}},{"@type":"Question","name":"Do you store my documents on a server?","acceptedAnswer":{"@type":"Answer","text":"No. Drafts are saved in your browser's storage on your device. There's no server copy and no account."}},{"@type":"Question","name":"Can you recover a document I lost?","acceptedAnswer":{"@type":"Answer","text":"No. Because nothing is stored on our side, there's nothing to recover. That's the trade-off for real privacy, so export important documents as .md files."}},{"@type":"Question","name":"Is a shared link private?","acceptedAnswer":{"@type":"Answer","text":"The document isn't stored on a server, but anyone with the link can read it, and any app you paste the link into can see it. For sensitive documents, send a file instead."}},{"@type":"Question","name":"Does Quilldown use cookies?","acceptedAnswer":{"@type":"Answer","text":"It doesn't use cookies on your writing. It keeps your drafts and a few preferences, like your theme, in your browser's storage on your device."}},{"@type":"Question","name":"Does exporting to PDF or Word upload my document?","acceptedAnswer":{"@type":"Answer","text":"No. Every export is created in your browser and saved straight to your device."}},{"@type":"Question","name":"Can I use it offline to be extra sure?","acceptedAnswer":{"@type":"Answer","text":"Yes. After your first visit, Quilldown works without a connection."}},{"@type":"Question","name":"How do I delete everything?","acceptedAnswer":{"@type":"Answer","text":"Close your tabs, or clear this site's data in your browser settings to remove all drafts and preferences."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5" style="stroke:var(--logo-fg)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M6.34 6.34 4.93 4.93m14.14 14.14-1.41-1.41"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+<symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+<symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+</defs></svg>
+<header class="nav" id="nav"><div class="container nav-in">
+  <a class="brand" href="/#top" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
+  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="/features">Features</a><a href="/how-quilldown-works">How it works</a><a href="/privacy" aria-current="page">Privacy</a><a href="/docs">Docs</a><a href="/about">About</a><a href="/faq">FAQ</a><button type="button" class="m-switch" role="switch" aria-checked="false" data-starteditor title="What opens first: the homepage (off) or the full-screen editor (on)"><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></button><a class="m-only" href="/#editor">Open editor</a></nav>
+  <div class="nav-cta">
+    <button type="button" class="nav-switch" role="switch" aria-checked="false" data-starteditor title="What opens first: the homepage (off) or the full-screen editor (on)"><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></button>
+    <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="icon-btn" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill"><use href="#i-github"/></svg></a>
+    <button class="icon-btn" data-act="theme" aria-label="Toggle theme"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
+    <a class="btn btn-primary btn-sm" href="/#editor">Open editor <svg class="i"><use href="#i-max"/></svg></a>
+  </div></div></header>
+<main class="fx">
+
+
+<header class="hero fx-hero">
+  <div class="container">
+    <span class="pill"><span class="dot"></span>Privacy</span>
+    <h1 class="fx-h1">Your writing <em>stays on your device</em></h1>
+    <p class="fx-lede">Quilldown is a Markdown editor that runs entirely in your browser. What you write is never sent to a server, there's no account to create, and no cloud copy exists. This page explains what that means, what it doesn't cover, and how you can check it yourself.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-max"/></svg></a>
+      <a class="text-link" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">View the source on GitHub <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <ul class="pv-summary" aria-label="Privacy in one line"><li>No upload</li><li>No account</li><li>Saved on your device</li><li>Open source</li></ul>
+    <nav class="fx-jump" aria-label="Jump to a section">
+      <a href="#short-version">The short version</a><a href="#whats-stored">What's stored</a><a href="#what-we-dont-do">What we don't do</a><a href="#sharing">Sharing</a><a href="#check-it-yourself">Check it yourself</a><a href="#honest-limits">Honest limits</a><a href="#questions">Questions</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container fx-layout">
+  <aside class="toc fx-toc" aria-label="On this page">
+    <h2>On this page</h2>
+    <a href="#short-version">The short version</a>
+    <a href="#whats-stored">What's stored</a>
+    <a href="#what-we-dont-do">What we don't do</a>
+    <a href="#exporting">Exporting</a>
+    <a href="#sharing">Sharing</a>
+    <a href="#offline">Offline</a>
+    <a href="#check-it-yourself">Check it yourself</a>
+    <a href="#honest-limits">Honest limits</a>
+    <a href="#cookies-analytics">Cookies and analytics</a>
+    <a href="#open-source">Open source</a>
+    <a href="#tips">Tips</a>
+    <a href="#questions">Questions</a>
+    <a href="#contact">Contact</a>
+  </aside>
+
+  <div class="fx-main">
+
+    
+    <section class="section fx-sec" id="short-version">
+      <div class="section-head">
+        <div class="eyebrow">At a glance</div>
+        <h2 class="title">The short <em>version</em></h2>
+      </div>
+      <figure class="hw-flow pv-flow">
+        <svg viewBox="0 0 760 300" role="img" aria-labelledby="pvFlowT pvFlowD">
+          <title id="pvFlowT">Where your writing goes</title>
+          <desc id="pvFlowD">Your text, the live preview, saved drafts and exports all stay inside your browser. Nothing is sent to a server.</desc>
+          <rect class="f-browser" x="10" y="14" width="500" height="272" rx="22"/>
+          <text class="f-label" x="34" y="46">Your browser</text>
+          <g class="f-node"><rect x="40" y="70" width="190" height="72" rx="14"/><text x="135" y="112" text-anchor="middle">Your text</text></g>
+          <g class="f-node"><rect x="290" y="70" width="190" height="72" rx="14"/><text x="385" y="112" text-anchor="middle">Live preview</text></g>
+          <g class="f-node"><rect x="40" y="180" width="190" height="72" rx="14"/><text x="135" y="222" text-anchor="middle">Saved drafts</text></g>
+          <g class="f-node"><rect x="290" y="180" width="190" height="72" rx="14"/><text x="385" y="222" text-anchor="middle">Exports</text></g>
+          <path class="f-arrow" d="M232 106 H288 M135 144 V178 M232 216 H288" />
+          <path class="f-dash" d="M512 150 H584" />
+          <g class="f-x"><circle cx="548" cy="150" r="15"/><path d="M541 143 L555 157 M555 143 L541 157"/></g>
+          <g class="f-server"><rect x="590" y="100" width="160" height="100" rx="16"/><text x="670" y="144" text-anchor="middle">A server</text><text class="f-sub" x="670" y="168" text-anchor="middle">nothing is sent</text></g>
+        </svg>
+        <figcaption>Everything happens inside the box on the left.</figcaption>
+      </figure>
+      <div class="fx-grid">
+        <article class="fx-item"><h3 id="nothing-is-uploaded">Nothing is uploaded</h3><p>Typing, previewing, copying and exporting all happen on your device. Your text isn't sent anywhere.</p></article>
+        <article class="fx-item"><h3 id="no-account">No account</h3><p>There's no sign-up, no email address and no login, so there's nothing to link your writing to.</p></article>
+        <article class="fx-item"><h3 id="saved-on-your-device-only">Saved on your device only</h3><p>Your drafts autosave in your browser so they're there when you return. That's the only copy.</p></article>
+        <article class="fx-item"><h3 id="open-source">Open source</h3><p>The code is public on <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">GitHub</a>, so anyone can read what Quilldown does.</p></article>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="whats-stored">
+      <div class="section-head">
+        <div class="eyebrow">What's stored, and where</div>
+        <h2 class="title">What Quilldown keeps, <em>and where it lives</em></h2>
+        <p>Quilldown keeps two kinds of information, and both stay in your browser's storage on your own device.</p>
+      </div>
+      <div class="fx-grid">
+        <article class="fx-item"><h3 id="your-documents">Your documents</h3><p>Every open tab is autosaved to your browser's local storage as you type. Pasted images are stored with the document. These drafts exist only on your device. Nothing is copied to a server, so we can't see them, recover them or hand them to anyone.</p></article>
+        <article class="fx-item"><h3 id="your-preferences">Your preferences</h3><p>Quilldown remembers a few settings, such as your theme (light or dark) and whether you chose "Start in editor". These are stored the same way, in your browser, on your device.</p></article>
+        <article class="fx-item fx-item-quiet"><h3 id="thats-the-full-list">That's the full list</h3><p>There's no profile, no history of what you've written and no record of which documents you've opened.</p></article>
+        <article class="fx-item"><h3 id="how-to-remove-it">How to remove it</h3><p>To delete a draft, close its tab. To remove everything Quilldown has stored, including your preferences, clear this site's data in your browser settings. Once it's deleted, it's gone, because there's no other copy.</p></article>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="what-we-dont-do">
+      <div class="section-head">
+        <div class="eyebrow">What Quilldown doesn't do</div>
+        <h2 class="title">What <em>we don't do</em></h2>
+      </div>
+      <div class="pv-split">
+        <div class="pv-col pv-keeps">
+          <h3 id="kept-on-your-device">Kept on your device</h3>
+          <ul>
+            <li>Your open tabs and drafts</li>
+            <li>Images you pasted into a document</li>
+            <li>Your theme, light or dark</li>
+            <li>Your "Start in editor" choice</li>
+          </ul>
+        </div>
+        <div class="pv-col pv-never">
+          <h3 id="never-happens">Never happens</h3>
+          <ul>
+            <li>We don't upload your text, at any point, for any reason.</li>
+            <li>We don't ask you to make an account or give an email address.</li>
+            <li>We don't measure or record what you write.</li>
+            <li>We don't load third-party scripts, fonts or icons while you work. Everything the editor needs ships with the site.</li>
+            <li>We don't send your documents to any AI service, converter or export server. Every export is created in your browser.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="exporting">
+      <div class="section-head">
+        <div class="eyebrow">Exporting and converting</div>
+        <h2 class="title">Converting a document <em>doesn't send it anywhere</em></h2>
+      </div>
+      <div class="fx-item fx-item-lg pv-prose">
+        <p>Many online converters upload your file to their servers to process it. Quilldown doesn't. PDF, Word, PNG, EPUB, HTML, Markdown and plain text files are all generated inside your browser and saved straight to your device.</p>
+        <p>The PDF export uses your browser's own print dialog, so it works the same way: your document is turned into a file on your computer, not on ours.</p>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="sharing">
+      <div class="section-head">
+        <div class="eyebrow">Sharing</div>
+        <h2 class="title">How sharing works <em>without storing your document</em></h2>
+      </div>
+      <div class="fx-item fx-item-lg pv-prose">
+        <p>When you click Share, Quilldown compresses your document and packs it into the link itself. Nothing is uploaded and nothing is saved on a server.</p>
+        <p>This works because of how web addresses are built. The part of a link after the <code>#</code> symbol stays in the browser and isn't sent to the website's server when someone opens it. Whoever opens your link gets their own private copy in a new tab.</p>
+        <div class="pv-url" role="img" aria-label="A shared link: the part before the hash is sent to the server, the part after the hash stays in the browser">
+          <span class="pv-seg pv-sent"><em>Sent to the server</em><code>quilldown.vercel.app/</code></span>
+          <span class="pv-seg pv-stay"><em>Stays in the browser</em><code>#d=z.eJxLz3Mo…</code></span>
+        </div>
+      </div>
+      <div class="fx-lead"><h3 id="what-to-know-before-you-share">What to know before you share</h3></div>
+      <ul class="pv-list">
+        <li>Anyone who has the link can read the document. There's no password or expiry, because there's no account or server to enforce one.</li>
+        <li>The link contains your content. If you paste it into a chat app, email or social post, that service can see the link, and so the document inside it.</li>
+        <li>Pasted images aren't included in shared links.</li>
+        <li>Long documents make long links. You'll see a warning above 8,000 characters and a hard stop at 64,000.</li>
+        <li>Once you've sent a link, you can't take it back.</li>
+      </ul>
+      <div class="fx-note"><h3 id="if-a-document-is-sensitive">If a document is sensitive</h3><p>Don't share it as a link. Export it and send the file through a channel you trust.</p></div>
+    </section>
+
+    
+    <section class="section fx-sec" id="offline">
+      <div class="section-head">
+        <div class="eyebrow">Offline and third parties</div>
+        <h2 class="title">Built to work <em>without the outside world</em></h2>
+      </div>
+      <div class="fx-grid">
+        <article class="fx-item"><h3 id="nothing-loads-from-outside">Nothing loads from outside</h3><p>Every library, font and icon Quilldown uses is bundled with the site. Nothing loads from third-party servers while you work, so there's no outside company that can see that you're using it.</p></article>
+        <article class="fx-item"><h3 id="cached-after-your-first-visit">Cached after your first visit</h3><p>A service worker caches the site on your device. From then on, Quilldown loads and exports without a connection. In browsers that support it, you can also install it as an app.</p></article>
+        <article class="fx-item fx-item-wide fx-item-quiet"><h3 id="offline-is-a-privacy-option-too">Offline is a privacy option too</h3><p>If you want to be sure, turn off your connection and keep writing. Everything still works.</p></article>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="check-it-yourself">
+      <div class="section-head">
+        <div class="eyebrow">Check it yourself</div>
+        <h2 class="title">Don't take <em>our word for it</em></h2>
+        <p>You can verify all of this in a couple of minutes.</p>
+      </div>
+      <div class="pv-check">
+        <div class="fx-item fx-item-lg">
+          <ol class="pv-steps">
+            <li>Open Quilldown and press <kbd>F12</kbd> (or right-click and choose Inspect) to open your browser's developer tools.</li>
+            <li>Go to the <b>Network</b> tab.</li>
+            <li>Type a few lines in the editor, switch tabs, and try an export.</li>
+            <li>Watch the list. You won't see requests carrying your text.</li>
+          </ol>
+          <p class="pv-more">For a stronger test, load the page once, switch off your Wi-Fi and keep writing. Everything continues to work.</p>
+          <p class="pv-more">You can also read the source code on GitHub and see exactly how Quilldown stores, renders and exports your writing.</p>
+          <a class="btn" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer"><svg class="i i-fill"><use href="#i-github"/></svg> View the source on GitHub</a>
+        </div>
+        <div class="fx-item fx-item-lg pv-lab">
+          <h3 id="what-the-network-tab-shows-while-you-write">What the Network tab shows while you write</h3>
+          <p>An illustration: type below and watch the list.</p>
+          <label class="pv-lab-in"><span class="sr">Type something private</span><textarea id="pvText" rows="4" spellcheck="false" placeholder="Type something private here…"></textarea></label>
+          <div class="pv-net" aria-live="polite">
+            <div class="pv-net-bar"><span>Network</span><span class="pv-net-tag">illustration</span></div>
+            <div class="pv-net-head"><span>Name</span><span>Status</span><span>Type</span></div>
+            <div class="pv-net-empty">No requests while you type</div>
+            <div class="pv-net-foot"><span>Characters typed: <b id="pvChars">0</b></span><span>Requests carrying your text: <b>0</b></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="honest-limits">
+      <div class="fx-limits">
+        <div class="eyebrow">What this doesn't protect against</div>
+        <h2 class="title">The honest limits</h2>
+        <p class="fx-limits-intro">"Nothing is uploaded" is a strong promise, but it isn't the same as "nothing can go wrong". These are the things worth knowing.</p>
+        <ul>
+          <li><b>Other people using your browser.</b> Drafts are stored in your browser profile. If someone else uses your device and your browser profile, they can open Quilldown and see them. On a shared or public computer, clear the site's data when you finish, or use a private window.</li>
+          <li><b>Browser extensions.</b> Extensions you've installed can sometimes read the pages you visit. If you write sensitive material, check which extensions you trust.</li>
+          <li><b>Clearing browser data.</b> Deleting your browser data deletes your drafts. Nothing is stored elsewhere, so they can't be recovered. Export important documents as .md files.</li>
+          <li><b>Shared links.</b> As explained above, a link is your document. Treat it like the document itself.</li>
+          <li><b>Copying and pasting.</b> When you copy text and paste it into another app, that app's privacy rules apply from then on.</li>
+          <li><b>Images linked from the web.</b> If you add an image by its web address, your browser fetches it from that address, as it would on any web page. Images you paste or upload stay inside the document.</li>
+          <li><b>Your device and network.</b> Quilldown can't protect a device that's been compromised. It also doesn't change what your internet provider or workplace network can see about which sites you visit.</li>
+          <li><b>The hosting of the website itself.</b> Quilldown is served as static files by a hosting provider (Vercel). Like any website host, it receives the standard details of a page request, such as your IP address and which page you loaded, and it may keep ordinary server logs. Those requests never contain your writing.</li>
+        </ul>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="cookies-analytics">
+      <div class="section-head">
+        <div class="eyebrow">Cookies and analytics</div>
+        <h2 class="title">Cookies, trackers <em>and analytics</em></h2>
+      </div>
+      <div class="fx-item fx-item-lg pv-prose">
+        <p>Quilldown doesn't use cookies or trackers on your writing, and nothing about what you write is measured or sent anywhere. The only things it keeps are your own drafts and a few preferences, all in your browser's storage on your device.</p>
+        <p>Quilldown doesn't run analytics on its pages.</p>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="open-source">
+      <div class="section-head">
+        <div class="eyebrow">Open source</div>
+        <h2 class="title">Open source, <em>so it can be checked</em></h2>
+      </div>
+      <div class="fx-item fx-item-lg pv-source">
+        <div>
+          <p>Quilldown's code is public. That means developers can read how it works, security-minded people can check the claims on this page, and anyone can report a problem.</p>
+        </div>
+        <div class="pv-source-links">
+          <a class="btn btn-primary" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer"><svg class="i i-fill"><use href="#i-github"/></svg> Source code on GitHub</a>
+          <a class="text-link" href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">Report an issue <svg class="i"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="tips">
+      <div class="section-head">
+        <div class="eyebrow">Tips</div>
+        <h2 class="title">Simple ways to keep <em>your documents private</em></h2>
+      </div>
+      <div class="hw-tips">
+        <article class="hw-tip"><h3 id="keep-a-backup">Keep a backup</h3><p>Export a .md backup of anything important, and store it somewhere you control.</p></article>
+        <article class="hw-tip"><h3 id="shared-computers">Shared computers</h3><p>On a shared computer, use a private window or clear the site's data afterward.</p></article>
+        <article class="hw-tip"><h3 id="sensitive-documents">Sensitive documents</h3><p>Share sensitive documents as files, not links.</p></article>
+        <article class="hw-tip"><h3 id="want-to-be-certain">Want to be certain?</h3><p>Load Quilldown once and then work offline.</p></article>
+        <article class="hw-tip"><h3 id="update-your-browser">Update your browser</h3><p>Keep your browser up to date, since browser security matters as much as the editor's.</p></article>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="questions">
+      <div class="section-head">
+        <div class="eyebrow">Privacy questions</div>
+        <h2 class="title">Privacy <em>questions</em></h2>
+      </div>
+      <div class="faq-panel"><div class="faq">
+        <details name="pv-faq" open><summary>Can you see what I write?</summary><div class="ans"><p>No. Your text stays in your browser and is never sent to us, so we can't see it.</p></div></details>
+        <details name="pv-faq"><summary>Do you store my documents on a server?</summary><div class="ans"><p>No. Drafts are saved in your browser's storage on your device. There's no server copy and no account.</p></div></details>
+        <details name="pv-faq"><summary>Can you recover a document I lost?</summary><div class="ans"><p>No. Because nothing is stored on our side, there's nothing to recover. That's the trade-off for real privacy, so export important documents as .md files.</p></div></details>
+        <details name="pv-faq"><summary>Is a shared link private?</summary><div class="ans"><p>The document isn't stored on a server, but anyone with the link can read it, and any app you paste the link into can see it. For sensitive documents, send a file instead.</p></div></details>
+        <details name="pv-faq"><summary>Does Quilldown use cookies?</summary><div class="ans"><p>It doesn't use cookies on your writing. It keeps your drafts and a few preferences, like your theme, in your browser's storage on your device.</p></div></details>
+        <details name="pv-faq"><summary>Does exporting to PDF or Word upload my document?</summary><div class="ans"><p>No. Every export is created in your browser and saved straight to your device.</p></div></details>
+        <details name="pv-faq"><summary>Can I use it offline to be extra sure?</summary><div class="ans"><p>Yes. After your first visit, Quilldown works without a connection.</p></div></details>
+        <details name="pv-faq"><summary>How do I delete everything?</summary><div class="ans"><p>Close your tabs, or clear this site's data in your browser settings to remove all drafts and preferences.</p></div></details>
+      </div></div>
+      <p class="hw-more"><a class="text-link" href="/faq">See the full FAQ <svg class="i"><use href="#i-arrow"/></svg></a></p>
+    </section>
+
+    
+    <section class="section fx-sec" id="contact">
+      <div class="section-head">
+        <div class="eyebrow">Contact</div>
+        <h2 class="title">Questions <em>or concerns?</em></h2>
+      </div>
+      <div class="fx-item fx-item-lg pv-source">
+        <div><p>If something here is unclear, or you spot something that doesn't match how Quilldown behaves, please tell us. Open an issue on GitHub and include your browser and what you saw.</p></div>
+        <div class="pv-source-links">
+          <a class="btn" href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">Report an issue on GitHub</a>
+          <a class="text-link" href="/about">About Quilldown <svg class="i"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<section class="cta fx-cta">
+  <div class="container">
+    <h2 class="title">Write <em>without worrying</em></h2>
+    <p class="cta-lead">Open the editor and start typing. No account, no upload, no one watching.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-max"/></svg></a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="footer"><div class="container">
+  <div class="footer-cols">
+    <div><a class="brand" href="/#top"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>Quilldown is a free, private Markdown editor with live preview, math and diagrams. It works offline, and your writing never leaves your browser.</p></div>
+    <div><h3>Learn Markdown</h3><ul><li><a href="/docs/what-is-markdown">What is Markdown?</a></li><li><a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a></li><li><a href="/docs/emoji-in-markdown">Emoji shortcodes</a></li></ul></div>
+    <div><h3>Convert &amp; export</h3><ul><li><a href="/docs/markdown-to-pdf">Markdown to PDF</a></li><li><a href="/docs/markdown-to-word">Markdown to Word &amp; Google Docs</a></li><li><a href="/docs/markdown-to-html">Markdown to HTML</a></li></ul></div>
+    <div><h3>Write better documents</h3><ul><li><a href="/docs/markdown-table-generator">Markdown tables</a></li><li><a href="/docs/math-in-markdown">Math in Markdown</a></li><li><a href="/docs/diagrams-in-markdown">Diagrams in Markdown</a></li><li><a href="/docs/readme-template">README template</a></li></ul></div>
+    <div><h3>Contact</h3><ul>
+      <li><a href="https://github.com/Dhruv-Dhameliya" target="_blank" rel="me noopener noreferrer">GitHub profile</a></li>
+      <li><a href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">Report an issue</a></li>
+      <li><a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">Source code</a></li>
+      <li><a href="/about">About</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-base"><span>© 2026 Quilldown · Built and maintained as an open-source project. Your Markdown never leaves your browser.</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Documentation</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span></div>
+</div></footer>
+<script src="/js/site.js" defer></script>
+<script src="/js/privacy.js" defer></script>
+</body>
+</html>

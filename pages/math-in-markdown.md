@@ -1,23 +1,32 @@
 ---
-title: Math in Markdown — Write LaTeX Equations with KaTeX
+title: Math in Markdown: Write LaTeX Equations with KaTeX (Free, Live)
 h1: How to write math (LaTeX) in Markdown
+h1em: (LaTeX) in Markdown
 short: Math in Markdown
 card: Equations with KaTeX.
 description: Write math in Markdown with LaTeX and KaTeX: inline and display equations, matrices, aligned steps, currency dollar-sign fixes and common errors solved.
-lead: Wrap LaTeX in single dollar signs for a formula inside a sentence, or double dollar signs for a centred equation, and Quilldown typesets it live with KaTeX. Here is the syntax, the traps and the fixes.
+lead: Wrap LaTeX in single dollar signs for a formula inside a sentence, or double dollar signs for a centered equation, and Quilldown typesets it live with KaTeX. Here is the syntax, the traps and the fixes. Everything runs in your browser, so your notes are never uploaded.
 category: write
 order: 8
 math: true
 published: 2026-09-29
-updated: 2026-09-29
-related: markdown-cheat-sheet, mermaid-diagrams-in-markdown, markdown-to-pdf
+updated: 2026-09-30
+scripts: /js/tools.js
+related: markdown-cheat-sheet, diagrams-in-markdown, markdown-to-pdf
 cta: Try an equation in the editor
 ctaText: Type LaTeX between dollar signs and see it typeset live. The Math and ƒx toolbar buttons insert formulas for you.
 ---
 
+> [!TIP]
+> **Quick answer.** Put LaTeX between dollar signs. A single pair makes an inline formula that sits inside a sentence, and a double pair on its own lines makes a centered display equation. Use a backslash before a command (`\frac`, `\sum`, `\alpha`), braces around anything longer than one character in a power or subscript (`x^{10}`), and `\$` for a literal dollar sign. Quilldown renders it live as you type.
+
+<section class="tool" data-tool="math" aria-label="LaTeX math playground"></section>
+
+<div class="cs-jump"><a href="#fractions-roots-and-binomials">Fractions</a><a href="#sums-products-limits-and-integrals">Sums and integrals</a><a href="#matrices-vectors-and-piecewise-functions">Matrices</a><a href="#aligned-multi-line-equations">Aligned steps</a><a href="#powers-indices-and-greek-letters">Greek and symbols</a><a href="#dollar-signs-and-currency">Currency and dollar signs</a><a href="#common-errors-and-how-to-fix-them">Fix an error</a></div>
+
 ## How to write math in Markdown
 
-**Put LaTeX between dollar signs.** `$…$` makes an inline formula that sits inside a sentence. `$$…$$` on its own lines makes a centred display equation. Markdown has no built-in math syntax, so editors add it as an extension; Quilldown uses **KaTeX**, which typesets the formula as you type. GitHub and many other tools use the same dollar-sign convention, though the details differ (more on that below).
+**Put LaTeX between dollar signs.** `$…$` makes an inline formula that sits inside a sentence. `$$…$$` on its own lines makes a centered display equation. Markdown has no built-in math syntax, so editors add it as an extension; Quilldown uses **KaTeX**, which typesets the formula as you type. GitHub and many other tools use the same dollar-sign convention, though the details differ (more on that below).
 
 ````example title="Inline and display math"
 Einstein's equation is $E = mc^2$, and the quadratic formula is:
@@ -30,7 +39,7 @@ $$
 > [!TIP]
 > The toolbar has buttons for inserting math, which is handy when you can't remember how a command is spelled. Everything they insert is ordinary text you can edit afterwards.
 
-New to the format itself? Start with [what Markdown is](/guides/what-is-markdown), then come back here.
+New to the format itself? Start with [what Markdown is](/docs/what-is-markdown), then come back here.
 
 ## Inline or display: which should you use?
 
@@ -38,7 +47,7 @@ The two forms use the same LaTeX. The difference is layout.
 
 | | Inline `$…$` | Display `$$…$$` |
 | --- | --- | --- |
-| **Where it sits** | Inside the sentence, on the text baseline | On its own line, centred |
+| **Where it sits** | Inside the sentence, on the text baseline | On its own line, centered |
 | **Best for** | Variables, short expressions, units: "let $n$ be the sample size" | The key equation, anything long, anything the reader should study |
 | **Sums, integrals, fractions** | Compressed to fit the line height, with limits beside the symbol | Full size, with limits above and below |
 | **Line breaks** | None; a long formula overflows the line | Multi-line layouts with `aligned` |
@@ -87,7 +96,7 @@ $\alpha, \beta, \gamma, \theta, \lambda, \mu, \pi, \sigma, \omega$
 $\Gamma, \Delta, \Sigma, \Omega$
 ````
 
-Greek letters are spelled out after a backslash. A lowercase name gives the lowercase letter and a capitalised name gives the capital (`\sigma` and `\Sigma`). A few capitals, such as Alpha and Beta, look identical to Latin letters, so LaTeX has no command for them; just type `A` and `B`.
+Greek letters are spelled out after a backslash. A lowercase name gives the lowercase letter and a capitalized name gives the capital (`\sigma` and `\Sigma`). A few capitals, such as Alpha and Beta, look identical to Latin letters, so LaTeX has no command for them; just type `A` and `B`.
 
 ## Fractions, roots and binomials
 
@@ -139,7 +148,7 @@ A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix},
 $$
 ````
 
-If you are building a grid of plain data rather than numbers in a matrix, a Markdown table is the better tool; see the [table generator guide](/guides/markdown-table-generator).
+If you are building a grid of plain data rather than numbers in a matrix, a Markdown table is the better tool; see the [table generator guide](/docs/markdown-table-generator).
 
 ## Aligned, multi-line equations
 
@@ -232,6 +241,13 @@ $$
 $$
 ````
 
+## Four common jobs, fastest route for each
+
+- **Lecture notes to hand in as a PDF.** Write your notes with headings, put key equations in display math, and check the preview. Export to PDF and choose Save as PDF, where the equations render exactly as in the preview. Read the [Markdown to PDF guide](/docs/markdown-to-pdf) for page-setup tips.
+- **A problem set with worked steps.** Use `aligned` and put `&` before each `=` so the steps line up, ending every line except the last with `\\`. Put `$$` on its own lines, with a blank line before and after and none inside the block.
+- **A README or technical doc with formulas.** Use inline math for variables and short expressions, and display math for the equations the reader should study. Escape every price as `\$5` and never leave spaces just inside the dollar signs, so the document behaves the same on other platforms. See the [README guide](/docs/readme-template).
+- **LaTeX copied from an AI chat.** Paste the text into Quilldown and check the preview. If equations show as plain text, the chat probably used a different delimiter style. Switch it to dollar signs (see the FAQ), then export to PDF, since equations become editable text only, not native equations, in a Word export.
+
 ## Common errors and how to fix them
 
 If KaTeX can't parse a formula, Quilldown shows the source text in red instead of a rendered equation. Match the symptom below.
@@ -265,18 +281,31 @@ All three read the same core syntax for everyday equations, so what you write he
 
 Because a preview must update as you type, KaTeX's speed is the right trade for a Markdown editor. When you outgrow it, formulas usually paste into a LaTeX document inside `\[ … \]` or an `equation` environment, with only the occasional command to adjust.
 
+## Other ways to write math
+
+| Where | Good for | Trade-offs |
+| --- | --- | --- |
+| **Quilldown (KaTeX, live)** | Notes, homework, READMEs and quick documents with a live preview | Covers core math commands only, not LaTeX packages |
+| **Other Markdown tools with dollar-sign math** | Publishing on platforms that support it | Support and details vary by tool, so test where you publish |
+| **A full LaTeX editor** | Papers, theses, books with citations and figures | Needs a compile step and more setup |
+| **Word's equation editor** | Equations a colleague must edit in Word | Typed differently from LaTeX, and it doesn't sync back to Markdown |
+
 ## Math in exports
 
-- **PDF.** Choose Export, then PDF. The browser's print dialog opens and you pick Save as PDF. Equations render as they do in the preview. See the [Markdown to PDF guide](/guides/markdown-to-pdf) for page-setup tips.
-- **Word (.docx).** Equations are kept as the TeX source text, not as native Word equations. If a Word reader must edit an equation, retype it with Word's equation tool; if they only need to read it, send the PDF. The [Markdown to Word guide](/guides/markdown-to-word) covers the rest of that export.
+- **PDF.** Choose Export, then PDF. The browser's print dialog opens and you pick Save as PDF. Equations render as they do in the preview. See the [Markdown to PDF guide](/docs/markdown-to-pdf) for page-setup tips.
+- **Word (.docx).** Equations are kept as the TeX source text, not as native Word equations. If a Word reader must edit an equation, retype it with Word's equation tool; if they only need to read it, send the PDF. The [Markdown to Word guide](/docs/markdown-to-word) covers the rest of that export.
 
-For the full list of syntax you can mix with math, see the [Markdown cheat sheet](/guides/markdown-cheat-sheet). To add flowcharts and other pictures beside your equations, read the [Mermaid diagrams guide](/guides/mermaid-diagrams-in-markdown).
+For the full list of syntax you can mix with math, see the [Markdown cheat sheet](/docs/markdown-cheat-sheet). To add flowcharts and other pictures beside your equations, read the [Mermaid diagrams guide](/docs/diagrams-in-markdown).
+
+## What Quilldown math can't do
+
+<div class="fx-limits math-limits"><p class="fx-limits-intro">Knowing the limits saves time.</p><ul><li>It implements core math commands through KaTeX, not the LaTeX package ecosystem. Commands from packages will show as red source text.</li><li>It has no chemistry extension such as <code>\ce{}</code>. Simple formulas work with subscripts.</li><li>Equations aren't automatically numbered or cross-referenced.</li><li>Word exports keep equations as TeX source text, not native Word equations.</li><li>An equation that overflows the line can't wrap on its own. Break long ones into an aligned block.</li><li>Math isn't rendered inside code blocks or inline code, which is correct, since they show source text.</li></ul></div>
 
 ## Frequently asked questions
 
 ### How do I write math in Markdown?
 
-Put LaTeX between dollar signs: `$x^2$` for an inline formula, or `$$ … $$` on separate lines for a centred display equation. In Quilldown the result is typeset live with KaTeX as you type. The same convention works in many other Markdown tools, although support varies.
+Put LaTeX between dollar signs: `$x^2$` for an inline formula, or `$$ … $$` on separate lines for a centered display equation. In Quilldown the result is typeset live with KaTeX as you type. The same convention works in many other Markdown tools, although support varies.
 
 ### How do I show a dollar sign without starting math?
 
@@ -292,8 +321,40 @@ The usual causes are unbalanced braces, a misspelled command, a stray `&` outsid
 
 ### Do equations survive export to PDF and Word?
 
-Equations render in a [PDF export](/guides/markdown-to-pdf) just as they appear in the preview. In a [Word export](/guides/markdown-to-word) they are kept as TeX source text rather than native Word equations, so retype any equation that a colleague needs to edit.
+Equations render in a [PDF export](/docs/markdown-to-pdf) just as they appear in the preview. In a [Word export](/docs/markdown-to-word) they are kept as TeX source text rather than native Word equations, so retype any equation that a colleague needs to edit.
 
 ### Can I write chemistry formulas?
 
-Simple formulas work with subscripts, for example `$H_2O$`. Use `\text{}` or `\mathrm{}` for element symbols if you want them upright. The specialised `\ce{}` chemistry extension isn't included.
+Simple formulas work with subscripts, for example `$H_2O$`. Use `\text{}` or `\mathrm{}` for element symbols if you want them upright. The specialized `\ce{}` chemistry extension isn't included.
+
+### How do I write a fraction in Markdown?
+
+Inside dollar signs, write `\frac{numerator}{denominator}`, for example $\frac{a}{b}$. Inline fractions shrink to fit the line, and `\dfrac` forces the full-size version. Use display math when the fraction is the point.
+
+### How do I write superscripts and subscripts in math?
+
+Use `^` for a superscript and `_` for a subscript, and wrap anything longer than one character in braces, such as `x^{10}` and `a_{ij}`. Without braces, only the first character is affected.
+
+### How do I write a matrix?
+
+Use a matrix environment inside display math. Inside it, `&` separates columns and `\\` ends a row. The environment name sets the brackets, such as `pmatrix` for round brackets, `bmatrix` for square and `vmatrix` for vertical bars.
+
+### How do I line up the steps of a derivation?
+
+Use `aligned` inside `$$`, and put `&` right before the character each line should line up on, usually the equals sign. End every line except the last with `\\`.
+
+### How do I put words inside an equation?
+
+Wrap them in `\text{…}`, for example `\text{when } r = 3`. Otherwise letters are treated as italic variables and spaces disappear.
+
+### How do I type Greek letters?
+
+Write a backslash and the name, such as `\alpha`, `\beta` and `\pi`. A capitalized name gives the capital letter, as in `\Sigma`. A few capitals that look like Latin letters, such as Alpha, have no command, so just type A.
+
+### Can I use math inside a table cell?
+
+Yes. Table cells can hold inline Markdown, and inline math is included. See the [Markdown table guide](/docs/markdown-table-generator) for the rules.
+
+### Does Quilldown understand math written with backslash-parenthesis or backslash-bracket delimiters?
+
+No. Quilldown reads dollar-sign delimiters only. Some tools, including AI chat assistants, write inline math as `\( … \)` and display math as `\[ … \]`. Replace those with `$ … $` for inline math and `$$ … $$` on their own lines for display math, and the equations will render.

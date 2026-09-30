@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quilldown Features: Live Preview, Math, Diagrams, Export</title>
+<meta name="description" content="See what Quilldown can do: live preview, tabs, LaTeX math, Mermaid diagrams, visual tables, find and replace, and export to PDF, Word, HTML, PNG and EPUB.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Dhruv-Dhameliya">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="canonical" href="https://quilldown.vercel.app/features">
+<link rel="author" href="https://github.com/Dhruv-Dhameliya">
+<link rel="me" href="https://github.com/Dhruv-Dhameliya">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Quilldown">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://quilldown.vercel.app/features">
+<meta property="og:title" content="Quilldown Features: Live Preview, Math, Diagrams, Export">
+<meta property="og:description" content="See what Quilldown can do: live preview, tabs, LaTeX math, Mermaid diagrams, visual tables, find and replace, and export to PDF, Word, HTML, PNG and EPUB.">
+<meta property="og:image" content="https://quilldown.vercel.app/social/og-image.png">
+<meta property="og:image:secure_url" content="https://quilldown.vercel.app/social/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quilldown Features: Live Preview, Math, Diagrams, Export">
+<meta name="twitter:description" content="See what Quilldown can do: live preview, tabs, LaTeX math, Mermaid diagrams, visual tables, find and replace, and export to PDF, Word, HTML, PNG and EPUB.">
+<meta name="twitter:image" content="https://quilldown.vercel.app/social/og-image.png">
+<meta name="twitter:image:alt" content="Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>
+<link rel="preload" href="/vendor/fonts/nunito-latin-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="/vendor/katex/katex.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="/vendor/katex/katex.min.css"></noscript>
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/document.css">
+<link rel="stylesheet" href="/css/site.css">
+<script type="application/ld+json" id="ld-graph">{"@context":"https://schema.org","@graph":[{"@type":"ImageObject","@id":"https://quilldown.vercel.app/#logo","url":"https://quilldown.vercel.app/icons/icon-512.png","contentUrl":"https://quilldown.vercel.app/icons/icon-512.png","width":512,"height":512,"caption":"Quilldown logo"},{"@type":"Organization","@id":"https://quilldown.vercel.app/#organization","name":"Quilldown","url":"https://quilldown.vercel.app/","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, HTML and EPUB. It runs in your browser and works offline.","logo":{"@id":"https://quilldown.vercel.app/#logo"},"image":{"@id":"https://quilldown.vercel.app/#logo"},"founder":{"@id":"https://quilldown.vercel.app/#person"},"sameAs":["https://github.com/Dhruv-Dhameliya/quilldown","https://github.com/Dhruv-Dhameliya"],"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","url":"https://github.com/Dhruv-Dhameliya/quilldown/issues","availableLanguage":"English"},{"@type":"ContactPoint","contactType":"media relations","url":"https://github.com/Dhruv-Dhameliya","availableLanguage":"English"}]},{"@type":"Person","@id":"https://quilldown.vercel.app/#person","name":"Dhruv-Dhameliya","url":"https://github.com/Dhruv-Dhameliya","sameAs":["https://github.com/Dhruv-Dhameliya"],"worksFor":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebSite","@id":"https://quilldown.vercel.app/#website","url":"https://quilldown.vercel.app/","name":"Quilldown","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, HTML and EPUB. It runs in your browser and works offline.","inLanguage":"en","publisher":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebPage","@id":"https://quilldown.vercel.app/features#webpage","url":"https://quilldown.vercel.app/features","name":"Quilldown Features: Live Preview, Math, Diagrams, Export","description":"See what Quilldown can do: live preview, tabs, LaTeX math, Mermaid diagrams, visual tables, find and replace, and export to PDF, Word, HTML, PNG and EPUB.","inLanguage":"en","isPartOf":{"@id":"https://quilldown.vercel.app/#website"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML."},"image":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML."},"breadcrumb":{"@id":"https://quilldown.vercel.app/features#breadcrumb"},"datePublished":"2026-09-30","dateModified":"2026-09-30","about":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"BreadcrumbList","@id":"https://quilldown.vercel.app/features#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quilldown.vercel.app/#top"},{"@type":"ListItem","position":2,"name":"Features","item":"https://quilldown.vercel.app/features"}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5" style="stroke:var(--logo-fg)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M6.34 6.34 4.93 4.93m14.14 14.14-1.41-1.41"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+<symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+<symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+</defs></svg>
+<header class="nav" id="nav"><div class="container nav-in">
+  <a class="brand" href="/#top" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
+  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="/features" aria-current="page">Features</a><a href="/how-quilldown-works">How it works</a><a href="/privacy">Privacy</a><a href="/docs">Docs</a><a href="/about">About</a><a href="/faq">FAQ</a><button type="button" class="m-switch" role="switch" aria-checked="false" data-starteditor title="What opens first: the homepage (off) or the full-screen editor (on)"><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></button><a class="m-only" href="/#editor">Open editor</a></nav>
+  <div class="nav-cta">
+    <button type="button" class="nav-switch" role="switch" aria-checked="false" data-starteditor title="What opens first: the homepage (off) or the full-screen editor (on)"><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></button>
+    <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="icon-btn" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill"><use href="#i-github"/></svg></a>
+    <button class="icon-btn" data-act="theme" aria-label="Toggle theme"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
+    <a class="btn btn-primary btn-sm" href="/#editor">Open editor <svg class="i"><use href="#i-max"/></svg></a>
+  </div></div></header>
+<main class="fx">
+
+
+<header class="hero fx-hero">
+  <div class="container">
+    <span class="pill"><span class="dot"></span>Features</span>
+    <h1 class="fx-h1">Everything Quilldown does, <em>explained plainly</em></h1>
+    <p class="fx-lede">Quilldown is a free online Markdown editor that runs in your browser. Here's a complete look at what it can do, from live preview and tables to math, diagrams and export, along with the few things it can't.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-max"/></svg></a>
+      <a class="text-link" href="/docs">Read the docs <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <ul class="fx-glance" aria-label="Quilldown at a glance">
+      <li><b>7</b><span>export formats</span></li>
+      <li><b>8</b><span>diagram types</span></li>
+      <li><b>45+</b><span>one-click snippets</span></li>
+      <li><b>0</b><span>uploads</span></li>
+    </ul>
+    <nav class="fx-jump" aria-label="Jump to a section">
+      <a href="#writing">Writing</a><a href="#formatting">Formatting tools</a><a href="#math-diagrams-tables">Math, diagrams and tables</a><a href="#documents-files">Documents and files</a><a href="#copy-export">Copy and export</a><a href="#privacy-offline">Privacy and offline</a><a href="#sharing">Sharing</a><a href="#limits">Limits</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container fx-layout">
+  <aside class="toc fx-toc" aria-label="On this page">
+    <h2>On this page</h2>
+    <a href="#writing">Writing</a>
+    <a href="#formatting">Formatting tools</a>
+    <a href="#math-diagrams-tables">Math, diagrams and tables</a>
+    <a href="#documents-files">Documents and files</a>
+    <a href="#copy-export">Copy and export</a>
+    <a href="#privacy-offline">Privacy and offline</a>
+    <a href="#sharing">Sharing</a>
+    <a href="#appearance">Appearance</a>
+    <a href="#limits">Limits</a>
+  </aside>
+
+  <div class="fx-main">
+
+    
+    <section class="section fx-sec" id="writing">
+      <div class="section-head">
+        <div class="eyebrow">Writing and live preview</div>
+        <h2 class="title">Write on one side, <em>see the result on the other</em></h2>
+      </div>
+      <div class="fx-lead">
+        <h3 id="live-preview">Live preview</h3>
+        <p>Every heading, list, table and code block renders as you type. You see the finished page while you write, so mistakes show up straight away instead of after you export.</p>
+      </div>
+      <div class="fx-demo">
+<div class="doc-body fx-md"><figure class="ex"><div class="ex-title"><span>Markdown on the left, the finished page on the right</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c1">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoibGl2ZS1wcmV2aWV3Lm1kIiwidCI6IiMgTGF1bmNoIG5vdGVzXG5cblNoaXAgKipmYXN0KiosIHdyaXRlIF93ZWxsXy5cblxuLSBbIF0gRHJhZnQgdGhlIGFubm91bmNlbWVudFxuLSBbIF0gUmV2aWV3IHdpdGggdGhlIHRlYW1cblxufCBQbGFuICAgfCBQcmljZSB8XG58IC0tLS0tLSB8IC0tLS0tIHxcbnwgRWRpdG9yIHwgRnJlZSAgfFxuXG5gbnBtIHJ1biBidWlsZGBcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c1"># Launch notes
+
+Ship **fast**, write _well_.
+
+- [ ] Draft the announcement
+- [ ] Review with the team
+
+| Plan   | Price |
+| ------ | ----- |
+| Editor | Free  |
+
+`npm run build`</pre><div class="ex-out md"><p class="md-h md-h1">Launch notes</p>
+<p>Ship <strong>fast</strong>, write <em>well</em>.</p>
+<ul>
+<li><span class="tk" role="img" aria-label="Not done"></span>  Draft the announcement</li>
+<li><span class="tk" role="img" aria-label="Not done"></span>  Review with the team</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Editor</td>
+<td>Free</td>
+</tr>
+</tbody></table>
+<p><code>npm run build</code></p>
+</div></div></figure>
+</div>
+      </div>
+      <div class="fx-grid">
+        <article class="fx-item">
+          <h3 id="scroll-that-stays-in-sync">Scroll that stays in sync</h3>
+          <p>Scroll the editor and the preview follows, and the other way around. Quilldown lines the two panes up block by block, so a long table or code block doesn't throw them out of step.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="code-thats-easy-to-read">Code that's easy to read</h3>
+          <p>Fenced code blocks are syntax-highlighted for dozens of languages. Each block has a one-click copy button in the preview.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="github-flavored-markdown">GitHub Flavored Markdown</h3>
+          <p>You get everything in standard Markdown plus tables, task lists, strikethrough, autolinks and fenced code. It's the same flavor GitHub, GitLab and most documentation tools use, so what you write here behaves the same there.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="choose-your-layout">Choose your layout</h3>
+          <p>Use split view, editor only or preview only, and drag the divider to change the balance. On a phone the editor shows one pane at a time, and you switch between writing and preview from the top bar.</p>
+        </article>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="formatting">
+      <div class="section-head">
+        <div class="eyebrow">Formatting tools</div>
+        <h2 class="title">Tools that keep <em>your hands on the keyboard</em></h2>
+      </div>
+      <div class="fx-split">
+        <article class="fx-item fx-item-lg">
+          <h3 id="45-one-click-snippets">45+ one-click snippets</h3>
+          <p>One toolbar covers text styles, headings, lists, tables, math, diagrams and callouts. If you'd rather not memorize syntax, click. If you know it, just type.</p>
+          <div class="chips fx-chips"><span class="chip">Bold and italic</span><span class="chip">Headings</span><span class="chip">Lists</span><span class="chip">Task lists</span><span class="chip">Links and images</span><span class="chip">Tables</span><span class="chip">Code blocks</span><span class="chip">Math</span><span class="chip">Diagrams</span><span class="chip">Callouts</span></div>
+        </article>
+        <article class="fx-item fx-item-lg">
+          <h3 id="keyboard-shortcuts">Keyboard shortcuts</h3>
+          <p>Hover any toolbar button to see its shortcut. On a Mac, use <span class="kbd">⌘</span> instead of <span class="kbd">Ctrl</span>. Press <span class="kbd">Enter</span> to continue a list and <span class="kbd">Tab</span> to indent it.</p>
+          <ul class="fx-keys">
+            <li><span>Bold</span><span><kbd>Ctrl</kbd><kbd>B</kbd></span></li>
+            <li><span>Italic</span><span><kbd>Ctrl</kbd><kbd>I</kbd></span></li>
+            <li><span>Link</span><span><kbd>Ctrl</kbd><kbd>K</kbd></span></li>
+            <li><span>Inline code</span><span><kbd>Ctrl</kbd><kbd>E</kbd></span></li>
+            <li><span>Find</span><span><kbd>Ctrl</kbd><kbd>F</kbd></span></li>
+            <li><span>Replace</span><span><kbd>Ctrl</kbd><kbd>H</kbd></span></li>
+            <li><span>Open</span><span><kbd>Ctrl</kbd><kbd>O</kbd></span></li>
+            <li><span>Save</span><span><kbd>Ctrl</kbd><kbd>S</kbd></span></li>
+          </ul>
+        </article>
+      </div>
+      <div class="fx-grid">
+        <article class="fx-item">
+          <h3 id="find-and-replace">Find and replace</h3>
+          <p>Matches are highlighted as you type. You can match case, match whole words or use regular expressions, then replace one match or all of them. "Replace all" counts as a single undo step, so you can reverse it in one go.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="outline-sidebar">Outline sidebar</h3>
+          <p>All your headings appear in a clickable list that follows your scroll position. In a long document, you can jump to any section in one click.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="callouts">Callouts</h3>
+          <p>Add Note, Tip, Important, Warning and Caution boxes in GitHub's style from a single dropdown.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="emoji-picker-and-shortcodes">Emoji picker and shortcodes</h3>
+          <p>Search by name, browse categories, pick a skin tone and return to your recent choices. You can also type a colon and a few letters, like <code>:roc</code>, and pick from the suggestions. A finished <code>:tada:</code> turns into 🎉.</p>
+        </article>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="math-diagrams-tables">
+      <div class="section-head">
+        <div class="eyebrow">Math, diagrams and tables</div>
+        <h2 class="title">More than <em>plain text</em></h2>
+      </div>
+      <div class="fx-lead">
+        <h3 id="latex-math">LaTeX math</h3>
+        <p>Write inline math between single dollar signs and display math between double dollar signs. It renders with KaTeX, including fractions, sums, integrals, matrices and aligned equations. Useful for lecture notes, problem sets and technical writing.</p>
+      </div>
+      <div class="fx-demo">
+<div class="doc-body fx-md"><figure class="ex"><div class="ex-title"><span>Inline and display math</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c2">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoibWF0aC5tZCIsInQiOiJFdWxlcidzIGlkZW50aXR5LCAkZV57aVxccGl9ICsgMSA9IDAkLCBsaW5rcyBmaXZlIGNvbnN0YW50cy5cblxuJCRcbnggPSBcXGZyYWN7LWIgXFxwbSBcXHNxcnR7Yl4yIC0gNGFjfX17MmF9XG4kJFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c2">Euler's identity, $e^{i\pi} + 1 = 0$, links five constants.
+
+$$
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$</pre><div class="ex-out md"><p>Euler&#39;s identity, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>e</mi><mrow><mi>i</mi><mi>π</mi></mrow></msup><mo>+</mo><mn>1</mn><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">e^{i\pi} + 1 = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.908em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8247em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">iπ</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>, links five constants.</p>
+<div class="math-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mo>−</mo><mi>b</mi><mo>±</mo><msqrt><mrow><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>a</mi><mi>c</mi></mrow></msqrt></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2764em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5904em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathnormal">a</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">±</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9134em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">4</span><span class="mord mathnormal">a</span><span class="mord mathnormal">c</span></span></span><span style="top:-2.8734em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1266em;"><span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></div></div></div></figure>
+</div>
+      </div>
+      <div class="fx-lead">
+        <h3 id="mermaid-diagrams">Mermaid diagrams</h3>
+        <p>Draw diagrams from plain text: flowcharts, sequence diagrams, class diagrams, state diagrams, ER diagrams, Gantt charts, pie charts and mind maps. Each type has a ready-made template to start from, and diagrams follow your light or dark theme.</p>
+      </div>
+      <div class="fx-demo">
+<div class="doc-body fx-md"><figure class="diagram"><div class="code"><div class="code-h"><span>mermaid · Flowchart</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c3">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZmxvd2NoYXJ0LWRpYWdyYW0ubWQiLCJ0IjoiYGBgbWVybWFpZFxuZmxvd2NoYXJ0IExSXG4gIEFbV3JpdGUgTWFya2Rvd25dIC0tPiBCe0xvb2tzIHJpZ2h0P31cbiAgQiAtLSBZZXMgLS0-IENbRXhwb3J0IG9yIHNoYXJlXVxuICBCIC0tIE5vIC0tPiBBXG5gYGBcbiJ9" rel="nofollow">Open in editor</a></span></div><pre id="c3"><code>flowchart LR
+  A[Write Markdown] --&gt; B{Looks right?}
+  B -- Yes --&gt; C[Export or share]
+  B -- No --&gt; A</code></pre></div><div class="diagram-img"><img class="only-light" src="/assets/diagrams/flowchart-light.svg" width="654" height="156" alt="Flowchart: Write Markdown, then a decision 'Looks right?'. Yes leads to Export or share, No loops back to Write Markdown." loading="lazy" decoding="async"><img class="only-dark" src="/assets/diagrams/flowchart-dark.svg" width="654" height="156" alt="Flowchart: Write Markdown, then a decision 'Looks right?'. Yes leads to Export or share, No loops back to Write Markdown." loading="lazy" decoding="async"></div></figure>
+</div>
+      </div>
+      <div class="fx-grid">
+        <article class="fx-item fx-item-wide">
+          <h3 id="a-visual-table-editor">A visual table editor</h3>
+          <p>Building tables by typing pipes is tedious. Instead, edit in a grid: add rows and columns, set alignment for each column and paste rows straight from Excel or Google Sheets. You get tidy, aligned Markdown back.</p>
+          <div class="mock" aria-hidden="true"><div class="mock-l"><div>| Plan | Price |</div><div>| :--- | ---: |</div><div>| Editor | Free |</div><div>| Exports | Free |</div></div><div class="mock-r"><table class="mini-table"><thead><tr><th>Plan</th><th>Price</th></tr></thead><tbody><tr><td>Editor</td><td>Free</td></tr><tr><td>Exports</td><td>Free</td></tr></tbody></table></div></div>
+        </article>
+        <article class="fx-item">
+          <h3 id="footnotes">Footnotes</h3>
+          <p>Write <code>[^1]</code> where a note belongs and Quilldown numbers it, collects the notes at the bottom and links both ways. In a Word export they become real footnotes.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="images">Images</h3>
+          <p>Paste a screenshot or drop a picture into the editor. It's resized, stored inside the document and embedded when you export. Since images are stored in your browser along with the document, a document with many large images can reach the browser's storage limit sooner than a text-only one.</p>
+        </article>
+        <article class="fx-item fx-item-wide">
+          <h3 id="templates">Templates</h3>
+          <p>Start from a README, meeting notes, résumé, blog post, email, tables, to-do list or general notes. Each template opens in its own tab.</p>
+        </article>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="documents-files">
+      <div class="section-head">
+        <div class="eyebrow">Documents and files</div>
+        <h2 class="title">Keep several documents open, <em>and never lose your place</em></h2>
+      </div>
+      <div class="fx-grid">
+        <article class="fx-item fx-item-wide">
+          <h3 id="tabs">Tabs</h3>
+          <p>Open multiple documents like browser tabs. Drag to reorder, double-click to rename and middle-click to close. If you close a tab by accident, the Undo button in the message that appears brings it back.</p>
+          <div class="tabs-demo" aria-hidden="true"><span class="on">notes.md</span><span>readme.md</span><span>draft.md</span><span class="plus">+</span></div>
+        </article>
+        <article class="fx-item">
+          <h3 id="open-and-drop-files">Open and drop files</h3>
+          <p>Open .md, .markdown or .txt files from your computer, or drag several onto the page at once. Each one lands in its own tab.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="save-back-to-the-original-file">Save back to the original file</h3>
+          <p>In Chrome and Edge, a tab can stay linked to a file on your computer. A small dot shows the link, and an orange dot means you have unsaved changes. Ctrl+S then saves straight back to the file. In other browsers, Ctrl+S downloads a .md file instead.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="autosave">Autosave</h3>
+          <p>Every tab is saved in your browser as you type, so your draft is there when you return.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="open-with-quilldown">Open with Quilldown</h3>
+          <p>Once you've installed Quilldown as an app, it can appear in your system's "Open with" menu for .md files.</p>
+        </article>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="copy-export">
+      <div class="section-head">
+        <div class="eyebrow">Copy and export</div>
+        <h2 class="title">Send your writing <em>wherever it needs to go</em></h2>
+        <p>You choose the format at the end. Everything is created in your browser, so nothing is uploaded to produce a file.</p>
+      </div>
+      <div class="fx-grid">
+        <article class="fx-item fx-item-wide">
+          <h3 id="copy-it-four-ways">Copy it four ways</h3>
+          <p>From either pane you can copy formatted text, Markdown, clean HTML, or a version made for pasting into Google Docs. That last one uses heading sizes Docs understands (23 pt for H1, 17 pt for H2, 14 pt for H3 and 12 pt for body text) and sets no font, so the text takes on your document's own font.</p>
+          <div class="chips fx-chips"><span class="chip">Formatted text</span><span class="chip">Copy for Docs</span><span class="chip">Markdown</span><span class="chip">HTML</span></div>
+        </article>
+      </div>
+      <div class="fx-lead">
+        <h3 id="seven-export-formats">Seven export formats</h3>
+        <p>Pick a format, and Quilldown builds the file on your device.</p>
+      </div>
+      <div class="fx-demo fx-table">
+<div class="doc-body fx-md"><div class="tbl"><table><thead><tr>
+<th>Format</th>
+<th>Best for</th>
+<th>One thing to know</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>PDF</strong></td>
+<td>Print-ready files. Best for equations, since they render exactly as they do in the preview.</td>
+<td>Made through your browser&#39;s print dialog by choosing &quot;Save as PDF&quot;. If code blocks or tables look flat, turn on &quot;Background graphics&quot; in the print options.</td>
+</tr>
+<tr>
+<td><strong>Word (.docx)</strong></td>
+<td>A real Word document that also opens in Google Docs and Pages.</td>
+<td>Equations stay as their TeX source text and diagrams are inserted as images.</td>
+</tr>
+<tr>
+<td><strong>PNG</strong></td>
+<td>An image of the whole document.</td>
+<td>Very long documents are too tall for one image, so use PDF for those.</td>
+</tr>
+<tr>
+<td><strong>EPUB</strong></td>
+<td>An e-book for Apple Books, Kobo and other readers.</td>
+<td>Nothing to watch for.</td>
+</tr>
+<tr>
+<td><strong>HTML</strong></td>
+<td>A standalone, styled web page you can host or send.</td>
+<td>Nothing to watch for.</td>
+</tr>
+<tr>
+<td><strong>Markdown (.md)</strong></td>
+<td>Your plain source file.</td>
+<td>Nothing to watch for.</td>
+</tr>
+<tr>
+<td><strong>Plain text (.txt)</strong></td>
+<td>The same content with no markup.</td>
+<td>The formatting is dropped, by design.</td>
+</tr>
+</tbody></table></div>
+</div>
+      </div>
+      <div class="fx-grid">
+        <article class="fx-item">
+          <h3 id="exports-are-always-light">Exports are always light</h3>
+          <p>Even if you write in dark mode, exports come out in a clean, print-friendly light style.</p>
+        </article>
+        <article class="fx-item fx-item-quiet">
+          <h3 id="generated-in-your-browser">Generated in your browser</h3>
+          <p>Copying and every export happen on your device. Nothing is sent to a server. <a href="/privacy">Read the privacy details</a>.</p>
+        </article>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="privacy-offline">
+      <div class="section-head">
+        <div class="eyebrow">Privacy and offline</div>
+        <h2 class="title">Private by design, <em>useful without a connection</em></h2>
+      </div>
+      <div class="fx-grid">
+        <article class="fx-item">
+          <h3 id="nothing-is-uploaded">Nothing is uploaded</h3>
+          <p>Quilldown runs entirely in your browser. What you write is never sent to a server, and there's no account, so there's no cloud copy either. Your drafts are saved on your own device.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="no-third-party-requests-while-you-write">No third-party requests while you write</h3>
+          <p>Every library, font and icon ships with the site. You can check this yourself in your browser's network panel.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="works-offline">Works offline</h3>
+          <p>After your first visit, a service worker caches the site, so Quilldown loads and exports without a connection.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="install-it-as-an-app">Install it as an app</h3>
+          <p>In Chrome, Edge and other browsers that support it, an Install button lets you run Quilldown like a desktop or phone app.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="open-source">Open source</h3>
+          <p>The code is public on <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">GitHub</a>, so anyone can read exactly what it does.</p>
+        </article>
+        <article class="fx-item fx-item-quiet">
+          <h3 id="want-the-details">Want the details?</h3>
+          <p>The <a href="/privacy">privacy page</a> explains what is stored, where, and how to check it yourself.</p>
+        </article>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="sharing">
+      <div class="section-head">
+        <div class="eyebrow">Sharing</div>
+        <h2 class="title">Share a document <em>without uploading it</em></h2>
+      </div>
+      <article class="fx-item fx-item-lg fx-share">
+        <p>Click <strong>Share</strong> and Quilldown compresses your document into the link itself. The part of a link after the <code>#</code> symbol is never sent to a server, so the document isn't stored anywhere. Whoever opens the link gets their own private copy in a new tab. You can also choose a preview-only link, so the person sees the finished page instead of the editor.</p>
+        <div class="share-demo" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>quilldown.vercel.app/#d=z.eJxLz…</span></div>
+      </article>
+      <div class="fx-note">
+        <h3 id="two-things-to-know">Two things to know</h3>
+        <p>Long documents make long links, with a warning above about 8,000 characters and a hard stop at 64,000. And pasted images aren't included in shared links.</p>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="appearance">
+      <div class="section-head">
+        <div class="eyebrow">Appearance</div>
+        <h2 class="title">Comfortable to look at, <em>day or night</em></h2>
+      </div>
+      <div class="fx-grid">
+        <article class="fx-item">
+          <h3 id="light-and-dark-themes">Light and dark themes</h3>
+          <p>A calm theme for daytime and one for night. Your exports always stay light.</p>
+        </article>
+        <article class="fx-item">
+          <h3 id="layouts-that-adapt">Layouts that adapt</h3>
+          <p>Resize the panes on a large screen, or use the single-pane view on a small one.</p>
+        </article>
+      </div>
+    </section>
+
+    
+    <section class="section fx-sec" id="limits">
+      <div class="fx-limits">
+        <div class="eyebrow">What Quilldown doesn't do</div>
+        <h2 class="title">The honest limits</h2>
+        <p class="fx-limits-intro">No editor does everything. These are the things worth knowing before you rely on Quilldown.</p>
+        <ul>
+          <li>Your drafts live only in your browser. Clearing browser data deletes them and they can't be recovered, so export important documents as .md files.</li>
+          <li>Browsers typically allow around 5 MB of local storage per site. Text uses very little, but pasted images count toward it.</li>
+          <li>There's no real-time collaboration and no cloud sync between devices. Sharing works through links to a copy of the document.</li>
+          <li>Word exports keep equations as TeX source and turn diagrams into images.</li>
+          <li>PNG export isn't suited to very long documents.</li>
+          <li>Saving straight back to a file on your computer works in Chrome and Edge only.</li>
+        </ul>
+        <p class="fx-limits-close">If something you need isn't here, <a href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">open an issue on GitHub</a> and tell us what's missing.</p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<section class="cta fx-cta">
+  <div class="container">
+    <h2 class="title">See it <em>for yourself</em></h2>
+    <p class="cta-lead">Open the editor and try any of this in a few seconds. No account, no setup, nothing to upload.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-max"/></svg></a>
+      <a class="text-link" href="/docs">Browse the guides <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="footer"><div class="container">
+  <div class="footer-cols">
+    <div><a class="brand" href="/#top"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>Quilldown is a free, private Markdown editor with live preview, math and diagrams. It works offline, and your writing never leaves your browser.</p></div>
+    <div><h3>Learn Markdown</h3><ul><li><a href="/docs/what-is-markdown">What is Markdown?</a></li><li><a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a></li><li><a href="/docs/emoji-in-markdown">Emoji shortcodes</a></li></ul></div>
+    <div><h3>Convert &amp; export</h3><ul><li><a href="/docs/markdown-to-pdf">Markdown to PDF</a></li><li><a href="/docs/markdown-to-word">Markdown to Word &amp; Google Docs</a></li><li><a href="/docs/markdown-to-html">Markdown to HTML</a></li></ul></div>
+    <div><h3>Write better documents</h3><ul><li><a href="/docs/markdown-table-generator">Markdown tables</a></li><li><a href="/docs/math-in-markdown">Math in Markdown</a></li><li><a href="/docs/diagrams-in-markdown">Diagrams in Markdown</a></li><li><a href="/docs/readme-template">README template</a></li></ul></div>
+    <div><h3>Contact</h3><ul>
+      <li><a href="https://github.com/Dhruv-Dhameliya" target="_blank" rel="me noopener noreferrer">GitHub profile</a></li>
+      <li><a href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">Report an issue</a></li>
+      <li><a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">Source code</a></li>
+      <li><a href="/about">About</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-base"><span>© 2026 Quilldown · Built and maintained as an open-source project. Your Markdown never leaves your browser.</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Documentation</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span></div>
+</div></footer>
+<script src="/js/site.js" defer></script>
+</body>
+</html>

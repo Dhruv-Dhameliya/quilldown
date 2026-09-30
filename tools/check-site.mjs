@@ -11,10 +11,10 @@ const bad = m => problems.push(m);
 
 const exists = async p => { try { return (await stat(p)).isFile(); } catch { return false; } };
 const pages = [{ file: 'index.html', url: '/' }];
-for (const f of ['about']) if (await exists(path.join(ROOT, f + '.html'))) pages.push({ file: f + '.html', url: '/' + f });
-for (const f of (await readdir(path.join(ROOT, 'guides'))).sort()) {
+for (const f of ['about', 'features', 'how-quilldown-works', 'privacy', 'faq']) if (await exists(path.join(ROOT, f + '.html'))) pages.push({ file: f + '.html', url: '/' + f });
+for (const f of (await readdir(path.join(ROOT, 'docs'))).sort()) {
   if (!f.endsWith('.html')) continue;
-  pages.push({ file: 'guides/' + f, url: f === 'index.html' ? '/guides' : '/guides/' + f.replace(/\.html$/, '') });
+  pages.push({ file: 'docs/' + f, url: f === 'index.html' ? '/docs' : '/docs/' + f.replace(/\.html$/, '') });
 }
 const html = {};
 for (const p of pages) html[p.url] = await readFile(path.join(ROOT, p.file), 'utf8');
@@ -64,7 +64,7 @@ for (const p of pages) {
       const faq = g.find(n => n['@type'] === 'FAQPage');
       if (faq && !faq.mainEntity.length) bad(`${where}: empty FAQPage`);
       if (p.url === '/' && !types.includes('WebApplication')) bad(`${where}: homepage graph lacks WebApplication`);
-      if (p.url.startsWith('/guides/') && !types.includes('Article')) bad(`${where}: guide graph lacks Article`);
+      if (p.url.startsWith('/docs/') && !types.includes('Article')) bad(`${where}: guide graph lacks Article`);
       if (p.url !== '/' && !types.includes('BreadcrumbList')) bad(`${where}: graph lacks BreadcrumbList`);
     } catch (e) { bad(`${where}: invalid JSON-LD (${e.message})`); }
   }
@@ -106,7 +106,7 @@ if (!robots.includes('Sitemap: ' + SITE + '/sitemap.xml')) bad('robots.txt does 
 // every guide should be reachable from the hub and from at least two other pages (internal linking)
 const inbound = Object.fromEntries(pages.map(p => [p.url, new Set()]));
 for (const p of pages) for (const m of html[p.url].matchAll(/href="(\/[^"#]*)"/g)) { const u = m[1].replace(/\/$/, '') || '/'; if (inbound[u] && u !== p.url) inbound[u].add(p.url); }
-for (const p of pages.filter(x => x.url.startsWith('/guides/'))) if (inbound[p.url].size < 3) bad(`${p.url}: only ${inbound[p.url].size} internal pages link to it (want ≥ 3)`);
+for (const p of pages.filter(x => x.url.startsWith('/docs/'))) if (inbound[p.url].size < 3) bad(`${p.url}: only ${inbound[p.url].size} internal pages link to it (want ≥ 3)`);
 
 console.log(`Checked ${pages.length} pages, ${linkCount} internal links/assets.`);
 notes.push(...pages.map(p => `${p.url.padEnd(34)} inbound links: ${inbound[p.url].size}`));

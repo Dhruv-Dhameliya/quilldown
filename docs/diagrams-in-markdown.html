@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diagrams in Markdown: Mermaid Flowcharts, Sequence, Gantt &amp; More</title>
+<meta name="description" content="Draw diagrams in Markdown with Mermaid: which type to pick, copy-ready flowcharts, sequence, Gantt, class, state, ER and mind maps, plus fixes for errors.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Dhruv-Dhameliya">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="canonical" href="https://quilldown.vercel.app/docs/diagrams-in-markdown">
+<link rel="author" href="https://github.com/Dhruv-Dhameliya">
+<link rel="me" href="https://github.com/Dhruv-Dhameliya">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Quilldown">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://quilldown.vercel.app/docs/diagrams-in-markdown">
+<meta property="og:title" content="Diagrams in Markdown: Mermaid Flowcharts, Sequence, Gantt &amp; More">
+<meta property="og:description" content="Draw diagrams in Markdown with Mermaid: which type to pick, copy-ready flowcharts, sequence, Gantt, class, state, ER and mind maps, plus fixes for errors.">
+<meta property="og:image" content="https://quilldown.vercel.app/social/og-image.png">
+<meta property="og:image:secure_url" content="https://quilldown.vercel.app/social/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Diagrams in Markdown: Mermaid Flowcharts, Sequence, Gantt &amp; More">
+<meta name="twitter:description" content="Draw diagrams in Markdown with Mermaid: which type to pick, copy-ready flowcharts, sequence, Gantt, class, state, ER and mind maps, plus fixes for errors.">
+<meta name="twitter:image" content="https://quilldown.vercel.app/social/og-image.png">
+<meta name="twitter:image:alt" content="Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<script>(function(){var t=null;try{t=localStorage.getItem('quilldown:theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>
+<link rel="preload" href="/vendor/fonts/nunito-latin-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/document.css">
+<link rel="stylesheet" href="/css/site.css">
+<script type="application/ld+json" id="ld-graph">{"@context":"https://schema.org","@graph":[{"@type":"ImageObject","@id":"https://quilldown.vercel.app/#logo","url":"https://quilldown.vercel.app/icons/icon-512.png","contentUrl":"https://quilldown.vercel.app/icons/icon-512.png","width":512,"height":512,"caption":"Quilldown logo"},{"@type":"Organization","@id":"https://quilldown.vercel.app/#organization","name":"Quilldown","url":"https://quilldown.vercel.app/","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, HTML and EPUB. It runs in your browser and works offline.","logo":{"@id":"https://quilldown.vercel.app/#logo"},"image":{"@id":"https://quilldown.vercel.app/#logo"},"founder":{"@id":"https://quilldown.vercel.app/#person"},"sameAs":["https://github.com/Dhruv-Dhameliya/quilldown","https://github.com/Dhruv-Dhameliya"],"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","url":"https://github.com/Dhruv-Dhameliya/quilldown/issues","availableLanguage":"English"},{"@type":"ContactPoint","contactType":"media relations","url":"https://github.com/Dhruv-Dhameliya","availableLanguage":"English"}]},{"@type":"Person","@id":"https://quilldown.vercel.app/#person","name":"Dhruv-Dhameliya","url":"https://github.com/Dhruv-Dhameliya","sameAs":["https://github.com/Dhruv-Dhameliya"],"worksFor":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebSite","@id":"https://quilldown.vercel.app/#website","url":"https://quilldown.vercel.app/","name":"Quilldown","description":"Quilldown is a free online Markdown editor with live preview, tabs, math, diagrams and export to PDF, Word, HTML and EPUB. It runs in your browser and works offline.","inLanguage":"en","publisher":{"@id":"https://quilldown.vercel.app/#organization"}},{"@type":"WebPage","@id":"https://quilldown.vercel.app/docs/diagrams-in-markdown#webpage","url":"https://quilldown.vercel.app/docs/diagrams-in-markdown","name":"Diagrams in Markdown: Mermaid Flowcharts, Sequence, Gantt & More","description":"Draw diagrams in Markdown with Mermaid: which type to pick, copy-ready flowcharts, sequence, Gantt, class, state, ER and mind maps, plus fixes for errors.","inLanguage":"en","isPartOf":{"@id":"https://quilldown.vercel.app/#website"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML."},"image":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML."},"breadcrumb":{"@id":"https://quilldown.vercel.app/docs/diagrams-in-markdown#breadcrumb"},"datePublished":"2026-09-29","dateModified":"2026-09-30","mainEntity":{"@id":"https://quilldown.vercel.app/docs/diagrams-in-markdown#article"}},{"@type":"BreadcrumbList","@id":"https://quilldown.vercel.app/docs/diagrams-in-markdown#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://quilldown.vercel.app/#top"},{"@type":"ListItem","position":2,"name":"Documentation","item":"https://quilldown.vercel.app/docs"},{"@type":"ListItem","position":3,"name":"How to draw diagrams in Markdown with Mermaid","item":"https://quilldown.vercel.app/docs/diagrams-in-markdown"}]},{"@type":"Article","@id":"https://quilldown.vercel.app/docs/diagrams-in-markdown#article","headline":"How to draw diagrams in Markdown with Mermaid","description":"Draw diagrams in Markdown with Mermaid: which type to pick, copy-ready flowcharts, sequence, Gantt, class, state, ER and mind maps, plus fixes for errors.","image":{"@type":"ImageObject","url":"https://quilldown.vercel.app/social/og-image.png","contentUrl":"https://quilldown.vercel.app/social/og-image.png","width":1200,"height":630,"caption":"Quilldown, a free online Markdown editor with live preview, math, diagrams and export to PDF, Word and HTML."},"datePublished":"2026-09-29","dateModified":"2026-09-30","inLanguage":"en","wordCount":3371,"articleSection":"Write better documents","isAccessibleForFree":true,"author":{"@id":"https://quilldown.vercel.app/#person"},"publisher":{"@id":"https://quilldown.vercel.app/#organization"},"mainEntityOfPage":{"@id":"https://quilldown.vercel.app/docs/diagrams-in-markdown#webpage"},"isPartOf":{"@id":"https://quilldown.vercel.app/docs/diagrams-in-markdown#webpage"}},{"@type":"FAQPage","@id":"https://quilldown.vercel.app/docs/diagrams-in-markdown#faq","url":"https://quilldown.vercel.app/docs/diagrams-in-markdown","isPartOf":{"@id":"https://quilldown.vercel.app/docs/diagrams-in-markdown#webpage"},"mainEntity":[{"@type":"Question","name":"How do I add a diagram to Markdown?","acceptedAnswer":{"@type":"Answer","text":"Add a fenced code block whose language is mermaid and write the diagram description inside it, starting with the diagram type such as flowchart TD. An editor that supports Mermaid, like Quilldown, draws it live in the preview."}},{"@type":"Question","name":"Which diagram type should I choose?","acceptedAnswer":{"@type":"Answer","text":"Use a flowchart for steps and decisions, a sequence diagram for messages between systems over time, a Gantt chart for schedules, a class or ER diagram for structure, a state diagram for a lifecycle, a pie chart for parts of a whole and a mind map for brainstorming. The chooser table on this page lists the first line for each type."}},{"@type":"Question","name":"Can I export Markdown diagrams to PDF or Word?","acceptedAnswer":{"@type":"Answer","text":"Yes. In a PDF export the diagrams appear as they do in the preview, and a Word export contains them as images. The images can't be edited in Word, so keep the Mermaid source in your Markdown file."}},{"@type":"Question","name":"Do Mermaid diagrams work on GitHub?","acceptedAnswer":{"@type":"Answer","text":"Yes. GitHub renders mermaid code blocks in Markdown files, issues and pull requests, so a diagram you draft in Quilldown can be pasted into a repository unchanged. Other sites vary, and a platform without Mermaid support will show the block as plain code."}},{"@type":"Question","name":"Why do I see \"Diagram error\" instead of my diagram?","acceptedAnswer":{"@type":"Answer","text":"Mermaid couldn't parse the text. Common causes are a misspelled diagram type on the first line, parentheses inside an unquoted label, the lowercase word end used as a label, or inconsistent indentation in a mind map. Read the line number in the message and compare that line with the examples above."}},{"@type":"Question","name":"Do diagrams work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. Quilldown works offline after your first visit, so diagrams keep drawing without a connection."}},{"@type":"Question","name":"How do I make a flowchart in Markdown?","acceptedAnswer":{"@type":"Answer","text":"Add a code fence tagged mermaid, start with flowchart TD (top to bottom) or flowchart LR (left to right), then connect nodes with arrows, for example A[Start] --> B[Next step]. Put decision labels on arrows with pipes, such as C -->|Yes| D."}},{"@type":"Question","name":"How do I make a Gantt chart in Markdown?","acceptedAnswer":{"@type":"Answer","text":"Use a mermaid fence that starts with gantt, add dateFormat YYYY-MM-DD, group tasks under section lines, and write each task as a name, a colon, an optional status, an id, a start and a duration. Start a task with after a1 to chain it to another task by id."}},{"@type":"Question","name":"How do I make a sequence diagram in Markdown?","acceptedAnswer":{"@type":"Answer","text":"Start a mermaid fence with sequenceDiagram, declare your participants, then write messages as A->>B: text. Use -->> for replies, and alt, loop and opt blocks for branches and repetition."}},{"@type":"Question","name":"How do I add a diagram to a GitHub README?","acceptedAnswer":{"@type":"Answer","text":"Put the diagram in a code fence tagged mermaid in your README. GitHub renders it, and you can draft and preview it in Quilldown first. See the README guide."}},{"@type":"Question","name":"How do I paste a Mermaid diagram from an AI chat into Markdown?","acceptedAnswer":{"@type":"Answer","text":"Wrap the code in a fence tagged mermaid, make sure the first line is a valid diagram type, and check the preview. If it shows a Diagram error, quote any label that contains parentheses, avoid the lowercase word end, and check the indentation on mind maps."}},{"@type":"Question","name":"How do I save a diagram as an image?","acceptedAnswer":{"@type":"Answer","text":"Export as PNG saves the whole document as one image, so put the diagram in its own document to get only the diagram. Copy as HTML, or Export as HTML, includes the diagram as inline SVG if you need the vector version."}},{"@type":"Question","name":"Can I use parentheses, slashes or colons in a label?","acceptedAnswer":{"@type":"Answer","text":"Yes, if you wrap the label in double quotes, for example A[\"Costs (USD)\"]. Without quotes, characters that have a meaning in Mermaid can break the diagram."}},{"@type":"Question","name":"What's the difference between a flowchart and a sequence diagram?","acceptedAnswer":{"@type":"Answer","text":"A flowchart shows steps and decisions in a process, without a time axis. A sequence diagram shows messages between people or systems in the order they happen, top to bottom."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M6 22V10l5 6 5-6v12M23 11v10m-3.5-3.5L23 21l3.5-3.5" style="stroke:var(--logo-fg)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2m16 0h2M6.34 6.34 4.93 4.93m14.14 14.14-1.41-1.41"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+<symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+<symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+</defs></svg>
+<header class="nav" id="nav"><div class="container nav-in">
+  <a class="brand" href="/#top" aria-label="Quilldown home"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a>
+  <nav class="nav-links" aria-label="Primary" id="navMenu"><a href="/features">Features</a><a href="/how-quilldown-works">How it works</a><a href="/privacy">Privacy</a><a href="/docs" aria-current="page">Docs</a><a href="/about">About</a><a href="/faq">FAQ</a><button type="button" class="m-switch" role="switch" aria-checked="false" data-starteditor title="What opens first: the homepage (off) or the full-screen editor (on)"><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></button><a class="m-only" href="/#editor">Open editor</a></nav>
+  <div class="nav-cta">
+    <button type="button" class="nav-switch" role="switch" aria-checked="false" data-starteditor title="What opens first: the homepage (off) or the full-screen editor (on)"><span class="switch-ui" aria-hidden="true"></span><span>Start in editor</span></button>
+    <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Menu"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="icon-btn" href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer" aria-label="Quilldown on GitHub" title="View on GitHub"><svg class="i i-fill"><use href="#i-github"/></svg></a>
+    <button class="icon-btn" data-act="theme" aria-label="Toggle theme"><svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg></button>
+    <a class="btn btn-primary btn-sm" href="/#editor">Open editor <svg class="i"><use href="#i-max"/></svg></a>
+  </div></div></header>
+<header class="hero fx-hero guide-hero">
+  <div class="container">
+    <ol class="crumbs" aria-label="Breadcrumb"><li><a href="/#top">Home</a></li><li><a href="/docs">Documentation</a></li><li aria-current="page">How to draw diagrams in Markdown with Mermaid</li></ol>
+    <span class="pill"><span class="dot"></span>Write better documents</span>
+    <h1 class="fx-h1">How to draw diagrams in Markdown <em>with Mermaid</em></h1>
+    <p class="fx-lede">Put a few lines of Mermaid text in a code block tagged mermaid and Quilldown draws the diagram in the live preview. Pick the right diagram type, copy a working example and fix the usual syntax errors. Everything runs in your browser, so your diagrams are never uploaded.</p>
+    <ul class="ab-chipsrow" aria-label="Page details"><li>15 min read</li><li>Free</li><li>No sign-up</li><li>Runs in your browser</li></ul>
+    <div class="hero-actions"><a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-max"/></svg></a><a class="text-link" href="/docs">All documentation <svg class="i"><use href="#i-arrow"/></svg></a></div>
+  </div>
+</header>
+<div class="reading-bar" aria-hidden="true"><i></i></div>
+<main class="doc-wrap">
+  <div class="doc-grid">
+    <aside class="toc" aria-label="On this page"><h2>On this page</h2><a href="#how-to-draw-a-diagram-in-markdown">How to draw a diagram in Markdown</a><a href="#when-a-diagram-beats-prose">When a diagram beats prose</a><a href="#which-diagram-type-should-you-use">Which diagram type should you use?</a><a href="#flowcharts">Flowcharts</a><a href="#labels-and-special-characters">Labels and special characters</a><a href="#sequence-diagrams">Sequence diagrams</a><a href="#gantt-charts">Gantt charts</a><a href="#class-state-and-entity-relationship-diagrams">Class, state and entity-relationship diagrams</a><a href="#pie-charts-and-mind-maps">Pie charts and mind maps</a><a href="#keeping-diagrams-readable">Keeping diagrams readable</a><a href="#five-common-jobs-fastest-route-for-each">Five common jobs, fastest route for each</a><a href="#common-errors-and-how-to-fix-them">Common errors and how to fix them</a><a href="#diagrams-in-exports-and-other-tools">Diagrams in exports and other tools</a><a href="#other-ways-to-add-a-diagram-to-a-document">Other ways to add a diagram to a document</a><a href="#what-diagrams-in-quilldown-cant-do">What diagrams in Quilldown can't do</a><a href="#faq">Frequently asked questions</a></aside>
+    <article class="doc-body">
+<aside class="callout callout-tip"><p class="callout-title">Tip</p><p><strong>Quick answer.</strong> Start a fenced code block with the word <code>mermaid</code> and describe the diagram inside it. The first line names the type (<code>flowchart TD</code>, <code>sequenceDiagram</code>, <code>gantt</code>, <code>classDiagram</code>, <code>stateDiagram-v2</code>, <code>erDiagram</code>, <code>pie</code> or <code>mindmap</code>), and the rest follows that type&#39;s syntax. Quilldown draws it live and matches your light or dark theme.</p>
+</aside>
+<section class="tool" data-tool="diagram" aria-label="Mermaid diagram playground"></section>
+
+<div class="cs-jump"><a href="#flowcharts">Flowchart</a><a href="#sequence-diagrams">Sequence diagram</a><a href="#gantt-charts">Gantt chart</a><a href="#class-state-and-entity-relationship-diagrams">Class diagram</a><a href="#class-state-and-entity-relationship-diagrams">State diagram</a><a href="#class-state-and-entity-relationship-diagrams">ER diagram</a><a href="#pie-charts-and-mind-maps">Pie chart</a><a href="#pie-charts-and-mind-maps">Mind map</a><a href="#common-errors-and-how-to-fix-them">Fix an error</a></div>
+
+<h2 id="how-to-draw-a-diagram-in-markdown">How to draw a diagram <em>in Markdown</em></h2>
+<p><strong>Start a fenced code block with the word <code>mermaid</code> and describe the diagram inside it.</strong> Mermaid is a text-based diagramming language: you write the relationships, and the layout is worked out for you. Because the source is plain text, the diagram lives in your Markdown file, shows up cleanly in version-control diffs and is easy to edit later.</p>
+<figure class="ex"><div class="ex-title"><span>Your first diagram</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c1">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJgYGBtZXJtYWlkXG5mbG93Y2hhcnQgTFJcbiAgQVtJZGVhXSAtLT4gQltEcmFmdF0gLS0-IENbUHVibGlzaF1cbmBgYFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c1">```mermaid
+flowchart LR
+  A[Idea] --&gt; B[Draft] --&gt; C[Publish]
+```</pre><div class="ex-out md"><pre data-lang="mermaid"><code class="hljs">flowchart LR
+  A[Idea] --&gt; B[Draft] --&gt; C[Publish]</code></pre>
+</div></div></figure>
+<p>Quilldown draws Mermaid diagrams live in the preview and matches them to the light or dark theme. The toolbar has buttons for inserting diagrams, which is a quick way to get a working starting point. GitHub also renders <code>mermaid</code> blocks in Markdown files, so the same source works in a repository, for example in a <a href="/docs/readme-template">README</a>.</p>
+<p>The first word inside the block declares the diagram type, and everything after it follows that type&#39;s own syntax. Get that first line right and most of the rest follows.</p>
+<h2 id="when-a-diagram-beats-prose">When a diagram <em>beats prose</em></h2>
+<p>A diagram earns its place when the reader would otherwise have to build the picture in their head.</p>
+<ul class="cardlist">
+<li><strong>Branching steps.</strong> A process with decisions and loops is clearer as a flowchart than as nested bullets.</li>
+<li><strong>Conversations between parts.</strong> Who calls whom, in what order, is the whole point of a sequence diagram.</li>
+<li><strong>Time and dependencies.</strong> A schedule with tasks that wait on each other is a Gantt chart.</li>
+<li><strong>Structure.</strong> Types, states and data relationships each have a diagram made for them.</li>
+</ul>
+<p>Skip the diagram when a numbered list says the same thing, when you need exact figures (use a <a href="/docs/markdown-table-generator">table</a>), or when the picture would need more than about a dozen boxes. Split big diagrams into two smaller ones rather than shrinking one.</p>
+<h2 id="which-diagram-type-should-you-use">Which diagram type should <em>you use?</em></h2>
+<div class="tbl"><table><thead><tr>
+<th>You want to show</th>
+<th>Use</th>
+<th>First line</th>
+</tr>
+</thead><tbody><tr>
+<td>Steps, decisions, workflows</td>
+<td>Flowchart</td>
+<td><code>flowchart TD</code> or <code>flowchart LR</code></td>
+</tr>
+<tr>
+<td>Messages between people or systems over time</td>
+<td>Sequence diagram</td>
+<td><code>sequenceDiagram</code></td>
+</tr>
+<tr>
+<td>A schedule with durations and dependencies</td>
+<td>Gantt chart</td>
+<td><code>gantt</code></td>
+</tr>
+<tr>
+<td>Types, fields, methods and inheritance</td>
+<td>Class diagram</td>
+<td><code>classDiagram</code></td>
+</tr>
+<tr>
+<td>Lifecycle of one thing (draft, review, published)</td>
+<td>State diagram</td>
+<td><code>stateDiagram-v2</code></td>
+</tr>
+<tr>
+<td>Tables in a database and how they relate</td>
+<td>Entity-relationship diagram</td>
+<td><code>erDiagram</code></td>
+</tr>
+<tr>
+<td>Parts of a whole</td>
+<td>Pie chart</td>
+<td><code>pie</code></td>
+</tr>
+<tr>
+<td>Ideas branching from one topic</td>
+<td>Mind map</td>
+<td><code>mindmap</code></td>
+</tr>
+</tbody></table></div>
+<h2 id="flowcharts">Flowcharts</h2>
+<p>Flowcharts are the workhorse, so they get the most detail. After <code>flowchart</code>, give a direction:</p>
+<div class="tbl"><table><thead><tr>
+<th>Direction</th>
+<th>Flows</th>
+<th>Suits</th>
+</tr>
+</thead><tbody><tr>
+<td><code>TD</code> (or <code>TB</code>)</td>
+<td>Top to bottom</td>
+<td>Portrait pages, long processes</td>
+</tr>
+<tr>
+<td><code>LR</code></td>
+<td>Left to right</td>
+<td>Wide layouts, short pipelines</td>
+</tr>
+<tr>
+<td><code>BT</code></td>
+<td>Bottom to top</td>
+<td>Hierarchies that grow upward</td>
+</tr>
+<tr>
+<td><code>RL</code></td>
+<td>Right to left</td>
+<td>Rarely needed</td>
+</tr>
+</tbody></table></div>
+<p>Each node has an id (<code>A</code>) and an optional label and shape. Arrows connect ids, and the text on an arrow goes between pipes:</p>
+<figure class="diagram"><div class="code"><div class="code-h"><span>mermaid · Flowchart</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c8">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZmxvd2NoYXJ0LWRpYWdyYW0ubWQiLCJ0IjoiYGBgbWVybWFpZFxuZmxvd2NoYXJ0IExSXG4gIEFbV3JpdGUgTWFya2Rvd25dIC0tPiBCe0xvb2tzIHJpZ2h0P31cbiAgQiAtLSBZZXMgLS0-IENbRXhwb3J0IG9yIHNoYXJlXVxuICBCIC0tIE5vIC0tPiBBXG5gYGBcbiJ9" rel="nofollow">Open in editor</a></span></div><pre id="c8"><code>flowchart LR
+  A[Write Markdown] --&gt; B{Looks right?}
+  B -- Yes --&gt; C[Export or share]
+  B -- No --&gt; A</code></pre></div><div class="diagram-img"><img class="only-light" src="/assets/diagrams/flowchart-light.svg" width="654" height="156" alt="Flowchart: Write Markdown, then a decision 'Looks right?'. Yes leads to Export or share, No loops back to Write Markdown." loading="lazy" decoding="async"><img class="only-dark" src="/assets/diagrams/flowchart-dark.svg" width="654" height="156" alt="Flowchart: Write Markdown, then a decision 'Looks right?'. Yes leads to Export or share, No loops back to Write Markdown." loading="lazy" decoding="async"></div></figure>
+<p>The shape is set by the brackets around the label:</p>
+<div class="tbl"><table><thead><tr>
+<th>Syntax</th>
+<th>Shape</th>
+</tr>
+</thead><tbody><tr>
+<td><code>A[Text]</code></td>
+<td>Rectangle</td>
+</tr>
+<tr>
+<td><code>A(Text)</code></td>
+<td>Rounded rectangle</td>
+</tr>
+<tr>
+<td><code>A([Text])</code></td>
+<td>Stadium, often used for start and end</td>
+</tr>
+<tr>
+<td><code>A{Text}</code></td>
+<td>Diamond, for a decision</td>
+</tr>
+<tr>
+<td><code>A((Text))</code></td>
+<td>Circle</td>
+</tr>
+<tr>
+<td><code>A[(Text)]</code></td>
+<td>Cylinder, for a database</td>
+</tr>
+</tbody></table></div>
+<p>Links come in a few styles: <code>--&gt;</code> an arrow, <code>---</code> a plain line, <code>-.-&gt;</code> a dotted arrow and <code>==&gt;</code> a thick arrow. This example uses several shapes and labeled branches:</p>
+<figure class="ex"><div class="ex-title"><span>Flowchart with shapes and labeled branches</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c2">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJgYGBtZXJtYWlkXG5mbG93Y2hhcnQgVERcbiAgQShbU3RhcnRdKSAtLT4gQltQcm9jZXNzIHN0ZXBdXG4gIEIgLS0-IEN7RGVjaXNpb24_fVxuICBDIC0tPnxZZXN8IERbKFNhdmUgdG8gZGF0YWJhc2UpXVxuICBDIC0tPnxOb3wgRSgoU3RvcCkpXG4gIEQgLS0-IEVcbmBgYFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c2">```mermaid
+flowchart TD
+  A([Start]) --&gt; B[Process step]
+  B --&gt; C{Decision?}
+  C --&gt;|Yes| D[(Save to database)]
+  C --&gt;|No| E((Stop))
+  D --&gt; E
+```</pre><div class="ex-out md"><pre data-lang="mermaid"><code class="hljs">flowchart TD
+  A([Start]) --&gt; B[Process step]
+  B --&gt; C{Decision?}
+  C --&gt;|Yes| D[(Save to database)]
+  C --&gt;|No| E((Stop))
+  D --&gt; E</code></pre>
+</div></div></figure>
+<h3 id="subgraphs-and-styling">Subgraphs and styling</h3>
+<p>Group related nodes with <code>subgraph … end</code>. Give a group of nodes a look with <code>classDef</code>, then attach it with <code>class</code>. Set the text color as well as the fill so the diagram stays readable in both light and dark themes.</p>
+<figure class="ex"><div class="ex-title"><span>Subgraphs and a highlighted node</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c3">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJgYGBtZXJtYWlkXG5mbG93Y2hhcnQgTFJcbiAgc3ViZ3JhcGggV3JpdGVcbiAgICBBW0RyYWZ0IC5tZF0gLS0-IEJbUHJldmlld11cbiAgZW5kXG4gIHN1YmdyYXBoIFNoYXJlXG4gICAgQ1tQREZdXG4gICAgRFtXb3JkIGZpbGVdXG4gIGVuZFxuICBCIC0tPiBDXG4gIEIgLS0-IERcbiAgY2xhc3NEZWYga2V5IGZpbGw6I2UwZjJmZSxzdHJva2U6IzAzNjlhMSxzdHJva2Utd2lkdGg6MnB4LGNvbG9yOiMwYzRhNmVcbiAgY2xhc3MgQiBrZXlcbmBgYFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c3">```mermaid
+flowchart LR
+  subgraph Write
+    A[Draft .md] --&gt; B[Preview]
+  end
+  subgraph Share
+    C[PDF]
+    D[Word file]
+  end
+  B --&gt; C
+  B --&gt; D
+  classDef key fill:#e0f2fe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+  class B key
+```</pre><div class="ex-out md"><pre data-lang="mermaid"><code class="hljs">flowchart LR
+  subgraph Write
+    A[Draft .md] --&gt; B[Preview]
+  end
+  subgraph Share
+    C[PDF]
+    D[Word file]
+  end
+  B --&gt; C
+  B --&gt; D
+  classDef key fill:#e0f2fe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+  class B key</code></pre>
+</div></div></figure>
+<p>Use styling sparingly. One highlighted node to mark the path that matters says more than a rainbow, and color alone should never carry meaning that the labels don&#39;t.</p>
+<h2 id="labels-and-special-characters">Labels and <em>special characters</em></h2>
+<p>Most Mermaid errors come from characters that have a meaning in the syntax. Wrap the label in double quotes and it is safe:</p>
+<figure class="ex"><div class="ex-title"><span>Quoting labels</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c4">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJgYGBtZXJtYWlkXG5mbG93Y2hhcnQgTFJcbiAgQVtcIkNvc3RzIChVU0QpXCJdIC0tPiBCW1wiU3RlcCAxOiBwbGFuXCJdXG4gIEIgLS0-IENbXCJZZXMgLyBObz9cIl1cbmBgYFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c4">```mermaid
+flowchart LR
+  A["Costs (USD)"] --&gt; B["Step 1: plan"]
+  B --&gt; C["Yes / No?"]
+```</pre><div class="ex-out md"><pre data-lang="mermaid"><code class="hljs">flowchart LR
+  A["Costs (USD)"] --&gt; B["Step 1: plan"]
+  B --&gt; C["Yes / No?"]</code></pre>
+</div></div></figure>
+<p>Three more habits save time. Start a comment line with <code>%%</code>; it never appears in the drawing. Never use the lowercase word <code>end</code> as a label or id in a flowchart, because it closes a subgraph; write <code>End</code> or quote it. And keep ids short and labels descriptive, so arrows stay readable in the source.</p>
+<h2 id="sequence-diagrams">Sequence <em>diagrams</em></h2>
+<p>Sequence diagrams draw participants as columns and messages as arrows going down the page in time order. Declare participants first to control their order, and use <code>as</code> to give one a friendlier name.</p>
+<figure class="diagram"><div class="code"><div class="code-h"><span>mermaid · Sequence diagram</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c15">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoic2VxdWVuY2UtZGlhZ3JhbS5tZCIsInQiOiJgYGBtZXJtYWlkXG5zZXF1ZW5jZURpYWdyYW1cbiAgcGFydGljaXBhbnQgWW91XG4gIHBhcnRpY2lwYW50IEVkaXRvclxuICBwYXJ0aWNpcGFudCBEb2NzIGFzIEdvb2dsZSBEb2NzXG4gIFlvdS0-PkVkaXRvcjogVHlwZSBNYXJrZG93blxuICBFZGl0b3ItLT4-WW91OiBMaXZlIHByZXZpZXdcbiAgWW91LT4-RWRpdG9yOiBDb3B5IGZvciBEb2NzXG4gIEVkaXRvci0-PkRvY3M6IFBhc3RlIHdpdGggZm9ybWF0dGluZ1xuYGBgXG4ifQ" rel="nofollow">Open in editor</a></span></div><pre id="c15"><code>sequenceDiagram
+  participant You
+  participant Editor
+  participant Docs as Google Docs
+  You-&gt;&gt;Editor: Type Markdown
+  Editor--&gt;&gt;You: Live preview
+  You-&gt;&gt;Editor: Copy for Docs
+  Editor-&gt;&gt;Docs: Paste with formatting</code></pre></div><div class="diagram-img"><img class="only-light" src="/assets/diagrams/sequence-light.svg" width="671" height="379" alt="Sequence diagram: You type Markdown in the editor, get a live preview, choose Copy for Docs, and the formatted text is pasted into Google Docs." loading="lazy" decoding="async"><img class="only-dark" src="/assets/diagrams/sequence-dark.svg" width="671" height="379" alt="Sequence diagram: You type Markdown in the editor, get a live preview, choose Copy for Docs, and the formatted text is pasted into Google Docs." loading="lazy" decoding="async"></div></figure>
+<p>The arrow you choose says what kind of message it is:</p>
+<div class="tbl"><table><thead><tr>
+<th>Arrow</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody><tr>
+<td><code>-&gt;&gt;</code></td>
+<td>Solid line with an arrowhead: a request or call</td>
+</tr>
+<tr>
+<td><code>--&gt;&gt;</code></td>
+<td>Dashed line with an arrowhead: a reply</td>
+</tr>
+<tr>
+<td><code>-&gt;</code> and <code>--&gt;</code></td>
+<td>Solid or dashed line with no arrowhead</td>
+</tr>
+<tr>
+<td><code>-x</code></td>
+<td>Solid line ending in a cross: a lost or failed message</td>
+</tr>
+<tr>
+<td><code>-)</code></td>
+<td>Open arrow: an asynchronous message</td>
+</tr>
+</tbody></table></div>
+<p>Blocks such as <code>alt … else … end</code>, <code>loop … end</code> and <code>opt … end</code> show branches and repetition, and <code>Note over A,B: text</code> adds an annotation.</p>
+<figure class="ex"><div class="ex-title"><span>Sequence diagram with a branch and a note</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c5">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJgYGBtZXJtYWlkXG5zZXF1ZW5jZURpYWdyYW1cbiAgYWN0b3IgVXNlclxuICBwYXJ0aWNpcGFudCBBcHBcbiAgcGFydGljaXBhbnQgQVBJXG4gIFVzZXItPj5BcHA6IENsaWNrIFNhdmVcbiAgQXBwLT4-QVBJOiBTZW5kIG5vdGVcbiAgYWx0IHNhdmVkXG4gICAgQVBJLS0-PkFwcDogT0tcbiAgICBBcHAtLT4-VXNlcjogU2hvdyBjb25maXJtYXRpb25cbiAgZWxzZSBmYWlsZWRcbiAgICBBUEktLT4-QXBwOiBFcnJvclxuICAgIEFwcC0tPj5Vc2VyOiBTaG93IHJldHJ5IGJ1dHRvblxuICBlbmRcbiAgTm90ZSBvdmVyIEFwcCxBUEk6IFJldHJpZXMgd2FpdCBhIG1vbWVudFxuYGBgXG4ifQ" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c5">```mermaid
+sequenceDiagram
+  actor User
+  participant App
+  participant API
+  User-&gt;&gt;App: Click Save
+  App-&gt;&gt;API: Send note
+  alt saved
+    API--&gt;&gt;App: OK
+    App--&gt;&gt;User: Show confirmation
+  else failed
+    API--&gt;&gt;App: Error
+    App--&gt;&gt;User: Show retry button
+  end
+  Note over App,API: Retries wait a moment
+```</pre><div class="ex-out md"><pre data-lang="mermaid"><code class="hljs">sequenceDiagram
+  actor User
+  participant App
+  participant API
+  User-&gt;&gt;App: Click Save
+  App-&gt;&gt;API: Send note
+  alt saved
+    API--&gt;&gt;App: OK
+    App--&gt;&gt;User: Show confirmation
+  else failed
+    API--&gt;&gt;App: Error
+    App--&gt;&gt;User: Show retry button
+  end
+  Note over App,API: Retries wait a moment</code></pre>
+</div></div></figure>
+<h2 id="gantt-charts">Gantt <em>charts</em></h2>
+<p>A Gantt chart needs a <code>dateFormat</code>, one or more <code>section</code> lines and tasks in the form <code>Name :status, id, start, duration</code>. The status (<code>done</code>, <code>active</code>, <code>crit</code>, <code>milestone</code>) is optional. A start of <code>after a1</code> chains a task to another by id, which keeps the schedule correct when a date moves.</p>
+<figure class="diagram"><div class="code"><div class="code-h"><span>mermaid · Gantt chart</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c9">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZ2FudHQtZGlhZ3JhbS5tZCIsInQiOiJgYGBtZXJtYWlkXG5nYW50dFxuICB0aXRsZSBXcml0aW5nIHBsYW5cbiAgZGF0ZUZvcm1hdCBZWVlZLU1NLUREXG4gIHNlY3Rpb24gRHJhZnRcbiAgT3V0bGluZSAgICAgIDpkb25lLCAgIGExLCAyMDI2LTAxLTA1LCAzZFxuICBGaXJzdCBkcmFmdCAgOmFjdGl2ZSwgYTIsIGFmdGVyIGExLCA1ZFxuICBzZWN0aW9uIFB1Ymxpc2hcbiAgUmV2aWV3ICAgICAgIDogICAgICAgIGEzLCBhZnRlciBhMiwgM2RcbiAgUHVibGlzaCAgICAgIDogICAgICAgIGE0LCBhZnRlciBhMywgMWRcbmBgYFxuIn0" rel="nofollow">Open in editor</a></span></div><pre id="c9"><code>gantt
+  title Writing plan
+  dateFormat YYYY-MM-DD
+  section Draft
+  Outline      :done,   a1, 2026-01-05, 3d
+  First draft  :active, a2, after a1, 5d
+  section Publish
+  Review       :        a3, after a2, 3d
+  Publish      :        a4, after a3, 1d</code></pre></div><div class="diagram-img"><img class="only-light" src="/assets/diagrams/gantt-light.svg" width="1424" height="196" alt="Gantt chart of a writing plan: an outline and first draft under Draft, then review and publish under Publish." loading="lazy" decoding="async"><img class="only-dark" src="/assets/diagrams/gantt-dark.svg" width="1424" height="196" alt="Gantt chart of a writing plan: an outline and first draft under Draft, then review and publish under Publish." loading="lazy" decoding="async"></div></figure>
+<figure class="ex"><div class="ex-title"><span>Gantt chart with weekends excluded and a milestone</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c6">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJgYGBtZXJtYWlkXG5nYW50dFxuICB0aXRsZSBSZWxlYXNlIHBsYW5cbiAgZGF0ZUZvcm1hdCBZWVlZLU1NLUREXG4gIGV4Y2x1ZGVzIHdlZWtlbmRzXG4gIHNlY3Rpb24gQnVpbGRcbiAgRGVzaWduICAgICAgIDpkb25lLCAgIGQxLCAyMDI2LTAzLTAyLCA1ZFxuICBJbXBsZW1lbnQgICAgOmFjdGl2ZSwgZDIsIGFmdGVyIGQxLCAxMGRcbiAgc2VjdGlvbiBMYXVuY2hcbiAgVGVzdCAgICAgICAgIDpjcml0LCAgIGQzLCBhZnRlciBkMiwgNGRcbiAgU2hpcCAgICAgICAgIDptaWxlc3RvbmUsIGQ0LCBhZnRlciBkMywgMGRcbmBgYFxuIn0" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c6">```mermaid
+gantt
+  title Release plan
+  dateFormat YYYY-MM-DD
+  excludes weekends
+  section Build
+  Design       :done,   d1, 2026-03-02, 5d
+  Implement    :active, d2, after d1, 10d
+  section Launch
+  Test         :crit,   d3, after d2, 4d
+  Ship         :milestone, d4, after d3, 0d
+```</pre><div class="ex-out md"><pre data-lang="mermaid"><code class="hljs">gantt
+  title Release plan
+  dateFormat YYYY-MM-DD
+  excludes weekends
+  section Build
+  Design       :done,   d1, 2026-03-02, 5d
+  Implement    :active, d2, after d1, 10d
+  section Launch
+  Test         :crit,   d3, after d2, 4d
+  Ship         :milestone, d4, after d3, 0d</code></pre>
+</div></div></figure>
+<h2 id="class-state-and-entity-relationship-diagrams">Class, state and <em>entity-relationship diagrams</em></h2>
+<p><strong>Class diagrams</strong> list a class&#39;s members inside braces, with <code>+</code> for public and <code>-</code> for private. <code>&lt;|--</code> means inherits from, <code>--&gt;</code> is an association and <code>&quot;1&quot;</code> or <code>&quot;*&quot;</code> next to a class shows how many.</p>
+<figure class="diagram"><div class="code"><div class="code-h"><span>mermaid · Class diagram</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c10">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiY2xhc3MtZGlhZ3JhbS5tZCIsInQiOiJgYGBtZXJtYWlkXG5jbGFzc0RpYWdyYW1cbiAgY2xhc3MgVGVtcGxhdGUge1xuICAgICtTdHJpbmcgbmFtZVxuICAgICtvcGVuKClcbiAgfVxuICBjbGFzcyBSZWFkbWVcbiAgY2xhc3MgTWVldGluZ05vdGVzXG4gIFRlbXBsYXRlIDx8LS0gUmVhZG1lXG4gIFRlbXBsYXRlIDx8LS0gTWVldGluZ05vdGVzXG5gYGBcbiJ9" rel="nofollow">Open in editor</a></span></div><pre id="c10"><code>classDiagram
+  class Template {
+    +String name
+    +open()
+  }
+  class Readme
+  class MeetingNotes
+  Template &lt;|-- Readme
+  Template &lt;|-- MeetingNotes</code></pre></div><div class="diagram-img"><img class="only-light" src="/assets/diagrams/class-light.svg" width="282" height="294" alt="Class diagram: a Template class with name and open(), extended by Readme and MeetingNotes." loading="lazy" decoding="async"><img class="only-dark" src="/assets/diagrams/class-dark.svg" width="282" height="294" alt="Class diagram: a Template class with name and open(), extended by Readme and MeetingNotes." loading="lazy" decoding="async"></div></figure>
+<p><strong>State diagrams</strong> describe the states of one thing and what moves it between them. <code>[*]</code> marks the start and the end, and the text after the colon labels the transition.</p>
+<figure class="diagram"><div class="code"><div class="code-h"><span>mermaid · State diagram</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c12">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoic3RhdGUtZGlhZ3JhbS5tZCIsInQiOiJgYGBtZXJtYWlkXG5zdGF0ZURpYWdyYW0tdjJcbiAgWypdIC0tPiBEcmFmdFxuICBEcmFmdCAtLT4gUmV2aWV3IDogc3VibWl0XG4gIFJldmlldyAtLT4gRHJhZnQgOiBjaGFuZ2VzIHJlcXVlc3RlZFxuICBSZXZpZXcgLS0-IFB1Ymxpc2hlZCA6IGFwcHJvdmVcbiAgUHVibGlzaGVkIC0tPiBbKl1cbmBgYFxuIn0" rel="nofollow">Open in editor</a></span></div><pre id="c12"><code>stateDiagram-v2
+  [*] --&gt; Draft
+  Draft --&gt; Review : submit
+  Review --&gt; Draft : changes requested
+  Review --&gt; Published : approve
+  Published --&gt; [*]</code></pre></div><div class="diagram-img"><img class="only-light" src="/assets/diagrams/state-light.svg" width="227" height="414" alt="State diagram: Draft goes to Review on submit; Review returns to Draft when changes are requested or moves to Published on approval." loading="lazy" decoding="async"><img class="only-dark" src="/assets/diagrams/state-dark.svg" width="227" height="414" alt="State diagram: Draft goes to Review on submit; Review returns to Draft when changes are requested or moves to Published on approval." loading="lazy" decoding="async"></div></figure>
+<p><strong>Entity-relationship diagrams</strong> show how data relates. The symbols around the line give how many of each side: <code>||</code> exactly one, <code>o|</code> zero or one, <code>|{</code> one or more, <code>o{</code> zero or more. Add attributes in braces with a type, a name and an optional <code>PK</code> or <code>FK</code>.</p>
+<figure class="diagram"><div class="code"><div class="code-h"><span>mermaid · Entity-relationship diagram</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c11">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXItZGlhZ3JhbS5tZCIsInQiOiJgYGBtZXJtYWlkXG5lckRpYWdyYW1cbiAgQVVUSE9SIHx8LS1veyBQT1NUIDogd3JpdGVzXG4gIFBPU1QgfHwtLXx7IFRBRyA6IFwiaXMgdGFnZ2VkIHdpdGhcIlxuYGBgXG4ifQ" rel="nofollow">Open in editor</a></span></div><pre id="c11"><code>erDiagram
+  AUTHOR ||--o{ POST : writes
+  POST ||--|{ TAG : "is tagged with"</code></pre></div><div class="diagram-img"><img class="only-light" src="/assets/diagrams/er-light.svg" width="140" height="465" alt="Entity-relationship diagram: an author writes many posts, and each post is tagged with one or more tags." loading="lazy" decoding="async"><img class="only-dark" src="/assets/diagrams/er-dark.svg" width="140" height="465" alt="Entity-relationship diagram: an author writes many posts, and each post is tagged with one or more tags." loading="lazy" decoding="async"></div></figure>
+<figure class="ex"><div class="ex-title"><span>ER diagram with attributes</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c7">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoiZXhhbXBsZS5tZCIsInQiOiJgYGBtZXJtYWlkXG5lckRpYWdyYW1cbiAgQVVUSE9SIHx8LS1veyBQT1NUIDogd3JpdGVzXG4gIFBPU1QgfHwtLXx7IENPTU1FTlQgOiByZWNlaXZlc1xuICBBVVRIT1Ige1xuICAgIGludCBpZCBQS1xuICAgIHN0cmluZyBuYW1lXG4gIH1cbiAgUE9TVCB7XG4gICAgaW50IGlkIFBLXG4gICAgc3RyaW5nIHRpdGxlXG4gICAgaW50IGF1dGhvcl9pZCBGS1xuICB9XG5gYGBcbiJ9" rel="nofollow">Open in editor</a></span></div><div class="ex-body"><pre class="ex-src" id="c7">```mermaid
+erDiagram
+  AUTHOR ||--o{ POST : writes
+  POST ||--|{ COMMENT : receives
+  AUTHOR {
+    int id PK
+    string name
+  }
+  POST {
+    int id PK
+    string title
+    int author_id FK
+  }
+```</pre><div class="ex-out md"><pre data-lang="mermaid"><code class="hljs">erDiagram
+  AUTHOR ||--o{ POST : writes
+  POST ||--|{ COMMENT : receives
+  AUTHOR {
+    int id PK
+    string name
+  }
+  POST {
+    int id PK
+    string title
+    int author_id FK
+  }</code></pre>
+</div></div></figure>
+<h2 id="pie-charts-and-mind-maps">Pie charts and <em>mind maps</em></h2>
+<p>A <strong>pie chart</strong> takes a title and quoted labels with positive numbers. Add <code>showData</code> after <code>pie</code> to print the values in the legend. Mermaid works out the percentages, so the numbers do not need to add up to 100.</p>
+<figure class="diagram"><div class="code"><div class="code-h"><span>mermaid · Pie chart</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c14">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoicGllLWRpYWdyYW0ubWQiLCJ0IjoiYGBgbWVybWFpZFxucGllIHRpdGxlIFdoZXJlIHdyaXRpbmcgdGltZSBnb2VzXG4gIFwiRHJhZnRpbmdcIiA6IDQ1XG4gIFwiRWRpdGluZ1wiIDogMzVcbiAgXCJGb3JtYXR0aW5nXCIgOiAxMFxuICBcIlB1Ymxpc2hpbmdcIiA6IDEwXG5gYGBcbiJ9" rel="nofollow">Open in editor</a></span></div><pre id="c14"><code>pie title Where writing time goes
+  "Drafting" : 45
+  "Editing" : 35
+  "Formatting" : 10
+  "Publishing" : 10</code></pre></div><div class="diagram-img"><img class="only-light" src="/assets/diagrams/pie-light.svg" width="595" height="450" alt="Pie chart of where writing time goes: drafting 45, editing 35, formatting 10 and publishing 10." loading="lazy" decoding="async"><img class="only-dark" src="/assets/diagrams/pie-dark.svg" width="595" height="450" alt="Pie chart of where writing time goes: drafting 45, editing 35, formatting 10 and publishing 10." loading="lazy" decoding="async"></div></figure>
+<p>A <strong>mind map</strong> uses indentation for each level of the hierarchy. The first line under <code>mindmap</code> is the root, and wrapping it in double parentheses makes it a circle.</p>
+<figure class="diagram"><div class="code"><div class="code-h"><span>mermaid · Mind map</span><span class="code-actions"><button type="button" class="copy-btn" data-copy-from="#c13">Copy</button><a class="open-btn" href="/#d=u.eyJuIjoibWluZG1hcC1kaWFncmFtLm1kIiwidCI6ImBgYG1lcm1haWRcbm1pbmRtYXBcbiAgcm9vdCgoTWFya2Rvd24pKVxuICAgIFdyaXRlXG4gICAgICBIZWFkaW5nc1xuICAgICAgTGlzdHNcbiAgICBGb3JtYXRcbiAgICAgIEJvbGRcbiAgICAgIExpbmtzXG4gICAgRXhwb3J0XG4gICAgICBQREZcbiAgICAgIFdvcmRcbmBgYFxuIn0" rel="nofollow">Open in editor</a></span></div><pre id="c13"><code>mindmap
+  root((Markdown))
+    Write
+      Headings
+      Lists
+    Format
+      Bold
+      Links
+    Export
+      PDF
+      Word</code></pre></div><div class="diagram-img"><img class="only-light" src="/assets/diagrams/mindmap-light.svg" width="483" height="411" alt="Mind map with Markdown at the center and three branches: Write (headings, lists), Format (bold, links) and Export (PDF, Word)." loading="lazy" decoding="async"><img class="only-dark" src="/assets/diagrams/mindmap-dark.svg" width="483" height="411" alt="Mind map with Markdown at the center and three branches: Write (headings, lists), Format (bold, links) and Export (PDF, Word)." loading="lazy" decoding="async"></div></figure>
+<h2 id="keeping-diagrams-readable">Keeping <em>diagrams readable</em></h2>
+<ul class="cardlist">
+<li><strong>Aim for about a dozen nodes.</strong> Past that, split the diagram or move detail into text.</li>
+<li><strong>Keep labels to a few words.</strong> A long label makes one box huge and distorts the whole layout.</li>
+<li><strong>Choose the direction for the page.</strong> <code>LR</code> suits wide layouts; <code>TD</code> suits portrait pages and PDFs.</li>
+<li><strong>Name the arrows that matter.</strong> Label decision branches (<code>Yes</code>, <code>No</code>) and leave the obvious ones bare.</li>
+<li><strong>Describe the diagram in the sentence above it.</strong> It helps readers who skim, use screen readers or can&#39;t see the image.</li>
+<li><strong>Use consistent wording.</strong> If one step says &quot;Send&quot; and the next says &quot;Dispatch&quot; for the same action, readers will look for a difference.</li>
+</ul>
+<h2 id="five-common-jobs-fastest-route-for-each">Five common jobs, fastest route <em>for each</em></h2>
+<ul class="cardlist">
+<li><strong>Explain a process or workflow in a README or doc.</strong> Use a flowchart. Choose <code>TD</code> for a portrait page and <code>LR</code> for a wide one, label the decision branches (Yes, No) and leave the obvious arrows bare. GitHub renders the same block, so it works in your repository unchanged. See the <a href="/docs/readme-template">README guide</a>.</li>
+<li><strong>Show how systems talk to each other.</strong> Use a sequence diagram. Declare the participants first to control their order, use dashed arrows for replies, and wrap a failure path in an <code>alt</code> block.</li>
+<li><strong>Add a schedule to a proposal you&#39;ll send as a PDF.</strong> Use a Gantt chart with <code>after</code> links so the schedule stays correct when one date moves, and set <code>excludes weekends</code> for working-day plans. Export to PDF and check the diagram in the print preview. See <a href="/docs/markdown-to-pdf">Markdown to PDF</a>.</li>
+<li><strong>Document a database or a design.</strong> Use an ER diagram for tables and their relationships, or a class diagram for types and inheritance. Add attributes with <code>PK</code> and <code>FK</code> markers where they help.</li>
+<li><strong>Turn Mermaid code from an AI chat into a working diagram.</strong> Paste the code into a fence tagged <code>mermaid</code>, and check that the first line names a valid type. If you see a Diagram error, compare the line the message names with the examples on this page. The usual culprits are parentheses in an unquoted label and the lowercase word <code>end</code>.</li>
+</ul>
+<h2 id="common-errors-and-how-to-fix-them">Common errors and how to <em>fix them</em></h2>
+<p>When Mermaid can&#39;t parse a diagram, the preview shows an error message that usually names the offending line. Match it against the table.</p>
+<div class="tbl"><table><thead><tr>
+<th>Symptom</th>
+<th>Likely cause</th>
+<th>Fix</th>
+</tr>
+</thead><tbody><tr>
+<td>Code is shown as text, no drawing</td>
+<td>The fence isn&#39;t tagged <code>mermaid</code>, or it is never closed</td>
+<td>Write <code>```mermaid</code> and close with three backticks</td>
+</tr>
+<tr>
+<td>A &quot;Diagram error&quot; box with a parse message</td>
+<td>A typo in the type keyword, such as <code>flowchar</code>, or a missing arrow</td>
+<td>Check the first line against the table above, then the line the message names</td>
+</tr>
+<tr>
+<td>Error on a label with brackets</td>
+<td><code>A[Costs (USD)]</code> has parentheses inside brackets</td>
+<td>Quote it: <code>A[&quot;Costs (USD)&quot;]</code></td>
+</tr>
+<tr>
+<td>A subgraph or the whole chart breaks</td>
+<td>A node or label named <code>end</code> in lowercase</td>
+<td>Use <code>End</code> or <code>&quot;end&quot;</code></td>
+</tr>
+<tr>
+<td>Mind map nests wrongly</td>
+<td>Inconsistent indentation</td>
+<td>Indent every level with the same number of spaces</td>
+</tr>
+<tr>
+<td>Gantt bars land in the wrong place</td>
+<td>A date that doesn&#39;t match <code>dateFormat</code>, or an <code>after</code> that names an id that doesn&#39;t exist</td>
+<td>Match dates to the format and check the ids</td>
+</tr>
+<tr>
+<td>Pie chart fails</td>
+<td>A label without quotes, or a non-numeric value</td>
+<td>Write <code>&quot;Label&quot; : 40</code></td>
+</tr>
+<tr>
+<td>Boxes are huge or text overflows</td>
+<td>Very long labels</td>
+<td>Shorten the label and put the detail in the prose</td>
+</tr>
+</tbody></table></div>
+<aside class="callout callout-tip"><p class="callout-title">Tip</p><p>Fix errors from the top. One early mistake, such as a missing keyword, can make every later line look wrong.</p>
+</aside>
+<h2 id="diagrams-in-exports-and-other-tools">Diagrams in exports and <em>other tools</em></h2>
+<ul class="cardlist">
+<li><strong>PDF.</strong> Choose Export, then PDF. The browser&#39;s print dialog opens and you pick Save as PDF; diagrams appear as they do in the preview. The <a href="/docs/markdown-to-pdf">Markdown to PDF guide</a> has page-setup tips.</li>
+<li><strong>Word (.docx).</strong> Diagrams are exported as images, so they look right but can&#39;t be edited in Word. Keep the Mermaid source in your <code>.md</code> file. See <a href="/docs/markdown-to-word">Markdown to Word</a>.</li>
+<li><strong>GitHub.</strong> <code>mermaid</code> blocks render in Markdown files, issues and pull requests, so the same source works there.</li>
+<li><strong>Other platforms.</strong> Support varies, so check before you publish. When it is missing, the block appears as ordinary code.</li>
+</ul>
+<p>For everything else you can put in a document, see the <a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a>. To add formulas beside your diagrams, read <a href="/docs/math-in-markdown">how to write math in Markdown</a>.</p>
+<h2 id="other-ways-to-add-a-diagram-to-a-document">Other ways to add a diagram to <em>a document</em></h2>
+<div class="tbl"><table><thead><tr>
+<th>Where</th>
+<th>Good for</th>
+<th>Trade-offs</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>Quilldown with Mermaid</strong></td>
+<td>Diagrams that live in your text, with a live preview that works offline</td>
+<td>Layout is automatic, so you can&#39;t drag boxes around</td>
+</tr>
+<tr>
+<td><strong>GitHub and other platforms that render Mermaid</strong></td>
+<td>Diagrams inside READMEs, issues and pull requests</td>
+<td>Support varies by platform, and an unsupported one shows the block as plain code</td>
+</tr>
+<tr>
+<td><strong>Drag-and-drop diagram apps</strong></td>
+<td>Polished, hand-placed visuals</td>
+<td>The diagram lives outside your text, so version control and editing take more effort</td>
+</tr>
+<tr>
+<td><strong>A screenshot or picture</strong></td>
+<td>Quick one-off sharing</td>
+<td>Can&#39;t be edited, searched or diffed</td>
+</tr>
+</tbody></table></div>
+<h2 id="what-diagrams-in-quilldown-cant-do">What diagrams in Quilldown can&#39;t do</h2>
+<div class="fx-limits dia-limits"><p class="fx-limits-intro">Knowing the limits saves time.</p><ul><li><b>Layout is automatic.</b> Mermaid works out where boxes go, so you can't position them by hand.</li><li><b>Colors follow your theme.</b> You can highlight nodes with <code>classDef</code>, but keep the labels carrying the meaning.</li><li><b>Word exports contain diagrams as images,</b> so they can't be edited in Word. Keep the Mermaid source in your Markdown.</li><li><b>Other platforms may not render Mermaid at all,</b> in which case the block appears as ordinary code.</li><li><b>Very large diagrams get cramped.</b> Aim for about a dozen nodes and split anything bigger.</li><li><b>A syntax mistake anywhere can break the whole diagram,</b> and later lines may look wrong because of one early error.</li></ul></div>
+
+<h2 id="faq">Frequently asked questions</h2>
+<div class="faq-panel"><div class="faq"><details name="gfaq"><summary>How do I add a diagram to Markdown?</summary><div class="ans"><p>Add a fenced code block whose language is <code>mermaid</code> and write the diagram description inside it, starting with the diagram type such as <code>flowchart TD</code>. An editor that supports Mermaid, like Quilldown, draws it live in the preview.</p></div></details><details name="gfaq"><summary>Which diagram type should I choose?</summary><div class="ans"><p>Use a flowchart for steps and decisions, a sequence diagram for messages between systems over time, a Gantt chart for schedules, a class or ER diagram for structure, a state diagram for a lifecycle, a pie chart for parts of a whole and a mind map for brainstorming. The chooser table on this page lists the first line for each type.</p></div></details><details name="gfaq"><summary>Can I export Markdown diagrams to PDF or Word?</summary><div class="ans"><p>Yes. In a <a href="/docs/markdown-to-pdf">PDF export</a> the diagrams appear as they do in the preview, and a <a href="/docs/markdown-to-word">Word export</a> contains them as images. The images can&#39;t be edited in Word, so keep the Mermaid source in your Markdown file.</p></div></details><details name="gfaq"><summary>Do Mermaid diagrams work on GitHub?</summary><div class="ans"><p>Yes. GitHub renders <code>mermaid</code> code blocks in Markdown files, issues and pull requests, so a diagram you draft in Quilldown can be pasted into a repository unchanged. Other sites vary, and a platform without Mermaid support will show the block as plain code.</p></div></details><details name="gfaq"><summary>Why do I see "Diagram error" instead of my diagram?</summary><div class="ans"><p>Mermaid couldn&#39;t parse the text. Common causes are a misspelled diagram type on the first line, parentheses inside an unquoted label, the lowercase word <code>end</code> used as a label, or inconsistent indentation in a mind map. Read the line number in the message and compare that line with the examples above.</p></div></details><details name="gfaq"><summary>Do diagrams work offline?</summary><div class="ans"><p>Yes. Quilldown works offline after your first visit, so diagrams keep drawing without a connection.</p></div></details><details name="gfaq"><summary>How do I make a flowchart in Markdown?</summary><div class="ans"><p>Add a code fence tagged <code>mermaid</code>, start with <code>flowchart TD</code> (top to bottom) or <code>flowchart LR</code> (left to right), then connect nodes with arrows, for example <code>A[Start] --&gt; B[Next step]</code>. Put decision labels on arrows with pipes, such as <code>C --&gt;|Yes| D</code>.</p></div></details><details name="gfaq"><summary>How do I make a Gantt chart in Markdown?</summary><div class="ans"><p>Use a <code>mermaid</code> fence that starts with <code>gantt</code>, add <code>dateFormat YYYY-MM-DD</code>, group tasks under <code>section</code> lines, and write each task as a name, a colon, an optional status, an id, a start and a duration. Start a task with <code>after a1</code> to chain it to another task by id.</p></div></details><details name="gfaq"><summary>How do I make a sequence diagram in Markdown?</summary><div class="ans"><p>Start a <code>mermaid</code> fence with <code>sequenceDiagram</code>, declare your participants, then write messages as <code>A-&gt;&gt;B: text</code>. Use <code>--&gt;&gt;</code> for replies, and <code>alt</code>, <code>loop</code> and <code>opt</code> blocks for branches and repetition.</p></div></details><details name="gfaq"><summary>How do I add a diagram to a GitHub README?</summary><div class="ans"><p>Put the diagram in a code fence tagged <code>mermaid</code> in your README. GitHub renders it, and you can draft and preview it in Quilldown first. See the <a href="/docs/readme-template">README guide</a>.</p></div></details><details name="gfaq"><summary>How do I paste a Mermaid diagram from an AI chat into Markdown?</summary><div class="ans"><p>Wrap the code in a fence tagged <code>mermaid</code>, make sure the first line is a valid diagram type, and check the preview. If it shows a Diagram error, quote any label that contains parentheses, avoid the lowercase word <code>end</code>, and check the indentation on mind maps.</p></div></details><details name="gfaq"><summary>How do I save a diagram as an image?</summary><div class="ans"><p>Export as PNG saves the whole document as one image, so put the diagram in its own document to get only the diagram. Copy as HTML, or Export as HTML, includes the diagram as inline SVG if you need the vector version.</p></div></details><details name="gfaq"><summary>Can I use parentheses, slashes or colons in a label?</summary><div class="ans"><p>Yes, if you wrap the label in double quotes, for example <code>A[&quot;Costs (USD)&quot;]</code>. Without quotes, characters that have a meaning in Mermaid can break the diagram.</p></div></details><details name="gfaq"><summary>What's the difference between a flowchart and a sequence diagram?</summary><div class="ans"><p>A flowchart shows steps and decisions in a process, without a time axis. A sequence diagram shows messages between people or systems in the order they happen, top to bottom.</p></div></details></div></div>
+    </article>
+  </div>
+  <nav class="pn" aria-label="More guides"><a class="pn-prev" href="/docs/math-in-markdown"><span>Previous</span><strong>Math in Markdown</strong></a><a class="pn-next" href="/docs/readme-template"><span>Next</span><strong>README template</strong></a></nav>
+  <div class="after">
+    <div class="rel-head"><div class="eyebrow">Keep reading</div><h2>Related <em>guides</em></h2></div><div class="cards rel-cards"><a class="gcard" href="/docs/math-in-markdown"><strong>Math in Markdown</strong><span class="d">Equations with KaTeX.</span><svg class="i"><use href="#i-arrow"/></svg></a><a class="gcard" href="/docs/markdown-cheat-sheet"><strong>Markdown cheat sheet</strong><span class="d">Every syntax, with live examples.</span><svg class="i"><use href="#i-arrow"/></svg></a><a class="gcard" href="/docs/markdown-to-pdf"><strong>Markdown to PDF</strong><span class="d">A clean PDF without uploading anything.</span><svg class="i"><use href="#i-arrow"/></svg></a></div>
+    <section class="cta-band"><div><h2>Draw your first diagram</h2><p>Use the Diagram menu in Quilldown to insert a ready-made template, then edit the text and watch the drawing update.</p></div><a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-arrow"/></svg></a></section>
+  </div>
+</main>
+<footer class="footer"><div class="container">
+  <div class="footer-cols">
+    <div><a class="brand" href="/#top"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>Quilldown is a free, private Markdown editor with live preview, math and diagrams. It works offline, and your writing never leaves your browser.</p></div>
+    <div><h3>Learn Markdown</h3><ul><li><a href="/docs/what-is-markdown">What is Markdown?</a></li><li><a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a></li><li><a href="/docs/emoji-in-markdown">Emoji shortcodes</a></li></ul></div>
+    <div><h3>Convert &amp; export</h3><ul><li><a href="/docs/markdown-to-pdf">Markdown to PDF</a></li><li><a href="/docs/markdown-to-word">Markdown to Word &amp; Google Docs</a></li><li><a href="/docs/markdown-to-html">Markdown to HTML</a></li></ul></div>
+    <div><h3>Write better documents</h3><ul><li><a href="/docs/markdown-table-generator">Markdown tables</a></li><li><a href="/docs/math-in-markdown">Math in Markdown</a></li><li><a href="/docs/diagrams-in-markdown">Diagrams in Markdown</a></li><li><a href="/docs/readme-template">README template</a></li></ul></div>
+    <div><h3>Contact</h3><ul>
+      <li><a href="https://github.com/Dhruv-Dhameliya" target="_blank" rel="me noopener noreferrer">GitHub profile</a></li>
+      <li><a href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">Report an issue</a></li>
+      <li><a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">Source code</a></li>
+      <li><a href="/about">About</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-base"><span>© 2026 Quilldown · Built and maintained as an open-source project. Your Markdown never leaves your browser.</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Documentation</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span></div>
+</div></footer>
+<script src="/js/site.js" defer></script>
+<script src="/js/tools.js" defer></script>
+</body>
+</html>

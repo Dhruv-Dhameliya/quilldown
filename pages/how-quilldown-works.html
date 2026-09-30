@@ -1,0 +1,292 @@
+<!-- Body of /how-quilldown-works. Edit the text here, then run: node tools/build-pages.mjs
+     Meta title, description and dates live in pages/how-quilldown-works.md (front matter).
+     Behaviour (timeline, sticky demo, export chooser, mini editor) is in js/how.js. -->
+
+<header class="hero fx-hero">
+  <div class="container">
+    <span class="pill"><span class="dot"></span>How it works</span>
+    <h1 class="fx-h1">How Quilldown works, <em>from first word to finished file</em></h1>
+    <p class="fx-lede">Quilldown is a free online Markdown editor with a live preview. You write on one side, see the finished page on the other, then copy it or export it in the format you need. This page walks through each step and explains what happens to your writing along the way.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-max"/></svg></a>
+      <a class="text-link" href="/features">See the features <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <ul class="fx-glance" aria-label="Quilldown at a glance">
+      <li><b>3</b><span>simple steps</span></li>
+      <li><b>0</b><span>accounts needed</span></li>
+      <li><b>7</b><span>export formats</span></li>
+      <li><b>0</b><span>uploads</span></li>
+    </ul>
+    <nav class="fx-jump" aria-label="Jump to a section">
+      <a href="#three-steps">The three steps</a><a href="#try-it">Try it in a minute</a><a href="#behind-the-scenes">Behind the scenes</a><a href="#tips">Tips</a><a href="#questions">Questions</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container hw-main">
+
+  <!-- ============ THE SHORT VERSION ============ -->
+  <section class="section fx-sec" id="three-steps">
+    <div class="section-head">
+      <div class="eyebrow">The short version</div>
+      <h2 class="title">Three steps, <em>no setup</em></h2>
+      <p>There's nothing to install and no account to make. Open the page and you're already in the editor.</p>
+    </div>
+    <ol class="hw-brief">
+      <li><span class="hw-n">1</span><div><strong>Write or paste</strong><span>Type, paste existing Markdown, drop in a file or start from a template.</span></div></li>
+      <li><span class="hw-n">2</span><div><strong>Watch it render</strong><span>The preview updates as you type.</span></div></li>
+      <li><span class="hw-n">3</span><div><strong>Copy or export</strong><span>Choose the format at the end, when you know where the document is going.</span></div></li>
+    </ol>
+  </section>
+
+  <!-- ============ THE THREE STEPS, IN DETAIL ============ -->
+  <section class="section fx-sec" id="steps">
+    <div class="hw-steps">
+      <div class="hw-timeline">
+
+        <!-- STEP 1 -->
+        <article class="hw-step" id="step-1">
+          <span class="hw-num" aria-hidden="true">1</span>
+          <h2 class="hw-h2">Step 1: Start with <em>whatever you have</em></h2>
+          <p class="hw-intro">You can begin four ways, and all of them end up in the same editor.</p>
+          <ul class="hw-opts">
+            <li><b>Type from scratch.</b> Click into the editor and write. The toolbar has around 45 one-click snippets for headings, lists, tables, math and diagrams. If you know Markdown, you can ignore it and just type.</li>
+            <li><b>Paste Markdown.</b> Paste text you've already written, from a README, a notes app or an AI chat, and it renders right away.</li>
+            <li><b>Open or drop a file.</b> Use Open (<kbd>Ctrl</kbd> <kbd>O</kbd>) or drag .md, .markdown or .txt files onto the page. Several files at once are fine, and each opens in its own tab.</li>
+            <li><b>Start from a template.</b> Under New → Templates you'll find a README, meeting notes, résumé, blog post, email, tables, to-do list and general notes. Each opens in its own tab.</li>
+          </ul>
+          <div class="fx-note"><h3>Pictures work too</h3><p>You can also paste a screenshot or drop in a picture. Quilldown resizes it, keeps it inside the document and includes it when you export.</p></div>
+
+          <h3>New to Markdown?</h3>
+          <p class="hw-intro">You only need a few symbols to get going.</p>
+          <div class="hw-syn">
+            <div class="hw-syn-card"><div class="hw-syn-src"><code># Big heading</code><code>## Smaller one</code></div><div class="hw-syn-out"><span class="hw-r1">Big heading</span><span class="hw-r2">Smaller one</span></div><p>A <code>#</code> and a space before a line makes it a heading. Use <code>##</code> for a smaller one.</p></div>
+            <div class="hw-syn-card"><div class="hw-syn-src"><code>**bold** and *italic*</code></div><div class="hw-syn-out"><span><strong>bold</strong> and <em>italic</em></span></div><p>Put <code>**</code> around words to make them bold, and <code>*</code> around words for italics.</p></div>
+            <div class="hw-syn-card"><div class="hw-syn-src"><code>- First idea</code><code>- Second idea</code></div><div class="hw-syn-out"><ul><li>First idea</li><li>Second idea</li></ul></div><p>A <code>-</code> and a space at the start of a line makes a bullet.</p></div>
+            <div class="hw-syn-card"><div class="hw-syn-src"><code>[Quilldown](https://quilldown.vercel.app)</code></div><div class="hw-syn-out"><span class="hw-link">Quilldown</span></div><p>Text in square brackets followed by a web address in round brackets makes a link.</p></div>
+          </div>
+          <p class="hw-after">The <a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a> shows every symbol with a live example.</p>
+
+          <div class="hw-shot" aria-hidden="true">
+            <div class="hw-win"><div class="hw-bar"><i></i><i></i><i></i><span>untitled.md</span></div>
+              <div class="hw-body"><pre># Weekly update
+
+Ship **fast**, write _well_.<span class="hw-caret"></span></pre></div></div>
+            <p class="hw-cap">Step 1: write, paste or open</p>
+          </div>
+        </article>
+
+        <!-- STEP 2 -->
+        <article class="hw-step" id="step-2">
+          <span class="hw-num" aria-hidden="true">2</span>
+          <h2 class="hw-h2">Step 2: See the finished page <em>as you write</em></h2>
+          <p class="hw-intro">The preview updates as you type. Headings become headings, lists become lists, and tables, task lists and code blocks show up as they'll look in the final document.</p>
+          <h3>What you'll see rendered</h3>
+          <ul class="hw-chips">
+            <li>GitHub-style Markdown, including tables, task lists and strikethrough</li>
+            <li>Code with syntax highlighting</li>
+            <li>LaTeX equations, drawn with KaTeX</li>
+            <li>Diagrams, drawn from text with Mermaid</li>
+            <li>Footnotes, numbered and linked both ways</li>
+            <li>Callouts such as Note, Tip and Warning</li>
+          </ul>
+          <ul class="hw-opts">
+            <li><b>Two panes that move together.</b> Scroll either side and the other follows, lined up block by block, so a long table won't leave the panes out of step.</li>
+            <li><b>Change the view.</b> Use split view, editor only or preview only, and drag the divider to resize. On a phone you see one pane at a time, and you switch with the buttons in the top bar.</li>
+            <li><b>Your work is saved as you go.</b> Every tab autosaves in your browser, so closing the page doesn't lose your draft.</li>
+          </ul>
+
+          <div class="hw-shot" aria-hidden="true">
+            <div class="hw-win"><div class="hw-bar"><i></i><i></i><i></i><span>untitled.md</span></div>
+              <div class="hw-body hw-two"><pre># Weekly update
+
+Ship **fast**, write _well_.
+
+- Draft
+- Review</pre><div class="hw-render"><span class="hw-r1">Weekly update</span><p>Ship <strong>fast</strong>, write <em>well</em>.</p><ul><li>Draft</li><li>Review</li></ul></div></div></div>
+            <p class="hw-cap">Step 2: the preview follows every keystroke</p>
+          </div>
+        </article>
+
+        <!-- STEP 3 -->
+        <article class="hw-step" id="step-3">
+          <span class="hw-num" aria-hidden="true">3</span>
+          <h2 class="hw-h2">Step 3: Choose <em>where it goes</em></h2>
+          <p class="hw-intro">You decide the format last. The same source can become any of these.</p>
+
+          <div class="hw-choose" aria-label="Which format should I pick?">
+            <h3>Not sure which to pick?</h3>
+            <div class="hw-choose-tabs" role="tablist" aria-label="What are you doing with it?">
+              <button type="button" role="tab" id="hc-t0" aria-controls="hc-p0" aria-selected="true">Send to Google Docs</button>
+              <button type="button" role="tab" id="hc-t1" aria-controls="hc-p1" aria-selected="false">Print or submit</button>
+              <button type="button" role="tab" id="hc-t2" aria-controls="hc-p2" aria-selected="false">Publish online</button>
+              <button type="button" role="tab" id="hc-t3" aria-controls="hc-p3" aria-selected="false">Read on an e-reader</button>
+              <button type="button" role="tab" id="hc-t4" aria-controls="hc-p4" aria-selected="false">Share a link</button>
+            </div>
+            <div class="hw-choose-panel" role="tabpanel" id="hc-p0" aria-labelledby="hc-t0"><strong>Use Copy for Docs.</strong><p>Heading sizes Docs understands, and it takes on the font of your document. Prefer a file? Export a Word (.docx) document, which also opens in Google Docs.</p><span class="hw-limit">Good to know: Word keeps equations as TeX source text, and diagrams become images.</span></div>
+            <div class="hw-choose-panel" role="tabpanel" id="hc-p1" aria-labelledby="hc-t1"><strong>Export to PDF.</strong><p>A print-ready document, and your equations look exactly as they do in the preview.</p><span class="hw-limit">Good to know: choose "Save as PDF" in the print dialog, and turn on "Background graphics" if code blocks or tables look flat.</span></div>
+            <div class="hw-choose-panel" role="tabpanel" id="hc-p2" aria-labelledby="hc-t2"><strong>Copy HTML, or export an HTML page.</strong><p>Copy HTML gives you clean markup for a website or CMS. Export HTML gives you a standalone, styled web page.</p></div>
+            <div class="hw-choose-panel" role="tabpanel" id="hc-p3" aria-labelledby="hc-t3"><strong>Export to EPUB.</strong><p>An e-book for Apple Books, Kobo and other readers.</p></div>
+            <div class="hw-choose-panel" role="tabpanel" id="hc-p4" aria-labelledby="hc-t4"><strong>Click Share.</strong><p>Quilldown builds a link that contains your document. Whoever opens it gets their own private copy in a new tab. You can also choose a preview-only link.</p><span class="hw-limit">Good to know: long documents make long links, and pasted images aren't included.</span></div>
+          </div>
+
+          <h3>If you're pasting into another app</h3>
+          <ul class="hw-opts">
+            <li><b>Copy formatted text</b> to paste into an email, a note or another editor.</li>
+            <li><b>Copy for Google Docs</b> uses heading sizes Docs understands (H1 at 23 pt, H2 at 17 pt, H3 at 14 pt, body text at 12 pt) and sets no font, so it takes on the font of your document.</li>
+            <li><b>Copy HTML</b> gives you clean markup for a website or CMS.</li>
+            <li><b>Copy Markdown</b> gives you the source again.</li>
+          </ul>
+          <h3>If you're saving a file</h3>
+          <ul class="hw-opts">
+            <li><b>PDF.</b> Choose Export → PDF, then pick "Save as PDF" in the print dialog. Best when you want a print-ready document or your equations to look exactly as they do in the preview.</li>
+            <li><b>Word (.docx).</b> A real Word document that also opens in Google Docs and Pages.</li>
+            <li><b>PNG.</b> An image of the whole document, for quick sharing.</li>
+            <li><b>EPUB.</b> An e-book for Apple Books, Kobo and other readers.</li>
+            <li><b>HTML.</b> A standalone, styled web page.</li>
+            <li><b>Markdown (.md) and plain text (.txt).</b> The source with or without markup.</li>
+          </ul>
+          <h3>If you're sending it to someone</h3>
+          <p class="hw-para">Click Share and Quilldown builds a link that contains your document. Whoever opens it gets their own private copy in a new tab. You can also choose a preview-only link.</p>
+          <div class="fx-note"><h3>Exports are always light</h3><p>Exports always come out in a clean, light, print-friendly style, even if you write in dark mode.</p></div>
+
+          <div class="hw-shot" aria-hidden="true">
+            <div class="hw-win"><div class="hw-bar"><i></i><i></i><i></i><span>Export</span></div>
+              <ul class="hw-menu"><li class="on"><b>PDF</b><small>Save as PDF</small></li><li><b>Word</b><small>.docx</small></li><li><b>Image</b><small>.png</small></li><li><b>E-book</b><small>.epub</small></li><li><b>Web page</b><small>.html</small></li><li><b>Markdown</b><small>.md</small></li><li><b>Plain text</b><small>.txt</small></li></ul></div>
+            <p class="hw-cap">Step 3: pick the format you need</p>
+          </div>
+        </article>
+
+      </div>
+
+      <aside class="hw-demo" aria-hidden="true">
+        <div class="hw-panels"></div>
+        <div class="hw-dots"><i></i><i></i><i></i></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ TRY IT IN ONE MINUTE ============ -->
+  <section class="section fx-sec" id="try-it">
+    <div class="section-head">
+      <div class="eyebrow">Try it in a minute</div>
+      <h2 class="title">Make your first document <em>in about a minute</em></h2>
+      <p>A quick walk-through you can follow in the editor.</p>
+    </div>
+    <div class="hw-try">
+      <div class="fx-item fx-item-lg hw-list">
+        <h3>Your first minute</h3>
+        <ol class="hw-check">
+          <li><label><input type="checkbox"><span>Open the editor and click New → Templates → Meeting notes. A new tab opens with a starter document.</span></label></li>
+          <li><label><input type="checkbox"><span><b>Change the title.</b> Replace the first line, and watch the preview change as you type.</span></label></li>
+          <li><label><input type="checkbox"><span><b>Add a task list.</b> Type a dash, a space and <code>[ ]</code> before an item, then keep going. Each line becomes a checkbox in the preview.</span></label></li>
+          <li><label><input type="checkbox"><span><b>Add a table.</b> Click Table, type in the grid or paste rows from a spreadsheet, and insert it.</span></label></li>
+          <li><label><input type="checkbox"><span><b>Export it.</b> Choose Export → PDF and save it, or use Copy for Docs and paste into a Google Doc.</span></label></li>
+        </ol>
+        <a class="btn btn-primary" href="/#editor">Open the editor and try it <svg class="i"><use href="#i-max"/></svg></a>
+      </div>
+      <div class="fx-item fx-item-lg hw-mini">
+        <h3>Or try it right here</h3>
+        <p>Change the text and the preview updates. Nothing you type leaves this page.</p>
+        <div class="hw-mini-grid">
+          <label class="hw-mini-in"><span class="sr">Markdown</span><textarea id="hwText" spellcheck="false" rows="11"># My first note
+
+Write **bold** words, then add a list:
+
+- [ ] Try the editor
+- [ ] Export it
+
+| Format | Best for |
+| --- | --- |
+| PDF | Printing |
+| Word | Editing |</textarea></label>
+          <div class="hw-mini-out md" id="hwOut" aria-live="polite"></div>
+        </div>
+        <a class="text-link" id="hwOpen" href="/#editor">Open this in the full editor <svg class="i"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BEHIND THE SCENES ============ -->
+  <section class="section fx-sec" id="behind-the-scenes">
+    <div class="section-head">
+      <div class="eyebrow">Behind the scenes</div>
+      <h2 class="title">What happens <em>to your writing</em></h2>
+      <p>Quilldown is built so your document stays on your device. Here's what that means in practice.</p>
+    </div>
+    <figure class="hw-flow">
+      <svg viewBox="0 0 760 300" role="img" aria-labelledby="hwFlowT hwFlowD">
+        <title id="hwFlowT">Where your writing goes</title>
+        <desc id="hwFlowD">Your text, the live preview, saved drafts and exports all stay inside your browser. Nothing is sent to a server.</desc>
+        <rect class="f-browser" x="10" y="14" width="500" height="272" rx="22"/>
+        <text class="f-label" x="34" y="46">Your browser</text>
+        <g class="f-node"><rect x="40" y="70" width="190" height="72" rx="14"/><text x="135" y="112" text-anchor="middle">Your text</text></g>
+        <g class="f-node"><rect x="290" y="70" width="190" height="72" rx="14"/><text x="385" y="112" text-anchor="middle">Live preview</text></g>
+        <g class="f-node"><rect x="40" y="180" width="190" height="72" rx="14"/><text x="135" y="222" text-anchor="middle">Saved drafts</text></g>
+        <g class="f-node"><rect x="290" y="180" width="190" height="72" rx="14"/><text x="385" y="222" text-anchor="middle">Exports</text></g>
+        <path class="f-arrow" d="M232 106 H288 M135 144 V178 M232 216 H288" />
+        <path class="f-dash" d="M512 150 H584" />
+        <g class="f-x"><circle cx="548" cy="150" r="15"/><path d="M541 143 L555 157 M555 143 L541 157"/></g>
+        <g class="f-server"><rect x="590" y="100" width="160" height="100" rx="16"/><text x="670" y="144" text-anchor="middle">A server</text><text class="f-sub" x="670" y="168" text-anchor="middle">nothing is sent</text></g>
+      </svg>
+      <figcaption>Everything happens inside the box on the left.</figcaption>
+    </figure>
+    <div class="fx-grid">
+      <article class="fx-item"><h3>Rendering happens in your browser</h3><p>The preview is produced on your own device as you type. Nothing is sent anywhere to draw it.</p></article>
+      <article class="fx-item"><h3>Saving happens on your device</h3><p>Drafts autosave to your browser's local storage. There is no account, so there is no cloud copy. Because of that, clearing your browser data also deletes your saved tabs, and they can't be recovered. Export anything important as a .md file, or press <kbd>Ctrl</kbd> <kbd>S</kbd>.</p></article>
+      <article class="fx-item"><h3>Exports are made locally</h3><p>PDF, Word, PNG, EPUB, HTML and the rest are created in your browser, and the files go straight to your device. Nothing is uploaded to produce them.</p></article>
+      <article class="fx-item"><h3>Sharing puts the document in the link</h3><p>When you click Share, your document is compressed and packed into the link itself. The part of a link after the <code>#</code> symbol isn't sent to a server, so the document isn't stored anywhere. Long documents make long links. There's a warning above about 8,000 characters and a hard stop at 64,000, and pasted images aren't included.</p></article>
+      <article class="fx-item"><h3>Offline works after your first visit</h3><p>Every library and font is bundled with the site, and a service worker caches it. After that, Quilldown loads and exports without a connection. In browsers that support it, you can install it as an app.</p></article>
+      <article class="fx-item fx-item-quiet"><h3>You can check all of this</h3><p>Open your browser's network panel while you write and you'll see nothing leaving. The code is also <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">public on GitHub</a>. More in the <a href="/privacy">privacy details</a>.</p></article>
+    </div>
+    <div class="hw-verify">
+      <b>Check it yourself</b>
+      <p>Press <kbd>F12</kbd> and open the <b>Network</b> tab. Now write for a minute: you'll see no requests carrying your text.</p>
+    </div>
+  </section>
+
+  <!-- ============ TIPS ============ -->
+  <section class="section fx-sec" id="tips">
+    <div class="section-head">
+      <div class="eyebrow">Tips for good results</div>
+      <h2 class="title">Small things <em>that make a difference</em></h2>
+    </div>
+    <div class="hw-tips">
+      <article class="hw-tip"><h3>Export to PDF when you have equations</h3><p>Word keeps equations as TeX source text, and diagrams become images. PDF shows them exactly as in the preview.</p></article>
+      <article class="hw-tip"><h3>Flat code blocks or tables in a PDF?</h3><p>Turn on "Background graphics" in the print options.</p></article>
+      <article class="hw-tip"><h3>Use PDF instead of PNG for long documents</h3><p>A very long page is too tall for a single image.</p></article>
+      <article class="hw-tip"><h3>Use Chrome or Edge to save back to the original file</h3><p>That's where Ctrl+S saves straight back to the file. In other browsers, Ctrl+S downloads a .md copy.</p></article>
+      <article class="hw-tip"><h3>Keep a backup of anything important</h3><p>Export a .md file now and then, since drafts live only in your browser.</p></article>
+      <article class="hw-tip"><h3>Keep images modest</h3><p>They're stored in your browser with the document, so many large images can reach the browser's storage limit (typically around 5 MB per site) before text ever would.</p></article>
+      <article class="hw-tip"><h3>Use Undo if you close a tab by accident</h3><p>The message that appears has an Undo button.</p></article>
+    </div>
+  </section>
+
+  <!-- ============ QUESTIONS ============ -->
+  <section class="section fx-sec" id="questions">
+    <div class="section-head">
+      <div class="eyebrow">Questions about how it works</div>
+      <h2 class="title">Common <em>questions</em></h2>
+    </div>
+    <div class="faq-panel"><div class="faq">
+      <details name="hw-faq" open><summary>Do I need to install or sign up for anything?</summary><div class="ans"><p>No. Open the page and start writing. If you like, you can install it as an app in browsers that offer an Install button, but it isn't required.</p></div></details>
+      <details name="hw-faq"><summary>What happens to my document when I close the tab?</summary><div class="ans"><p>It's saved in your browser and will be there when you come back on the same device and browser.</p></div></details>
+      <details name="hw-faq"><summary>Can I move my drafts to another device?</summary><div class="ans"><p>There's no cloud sync, so drafts don't travel on their own. Export a .md file and open it on the other device, or use Share to send yourself a link.</p></div></details>
+      <details name="hw-faq"><summary>How can I be sure nothing is uploaded?</summary><div class="ans"><p>Open your browser's network panel and write for a minute. You'll see no requests carrying your text. The source code is also public on <a href="https://github.com/Dhruv-Dhameliya/quilldown" target="_blank" rel="noopener noreferrer">GitHub</a>.</p></div></details>
+      <details name="hw-faq"><summary>Can I use it without internet?</summary><div class="ans"><p>Yes, after your first visit. The site is cached, so it loads and exports offline.</p></div></details>
+    </div></div>
+    <p class="hw-more"><a class="text-link" href="/faq">See the full FAQ <svg class="i"><use href="#i-arrow"/></svg></a></p>
+  </section>
+
+</div>
+
+<section class="cta fx-cta">
+  <div class="container">
+    <h2 class="title">Ready <em>to try it?</em></h2>
+    <p class="cta-lead">Open the editor and write your first line. It takes a few seconds, and nothing leaves your browser.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-max"/></svg></a>
+      <a class="text-link" href="/docs">Read the guides <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>

@@ -142,11 +142,11 @@ Copy buttons sit right on each pane:
 
 Free tutorials live alongside the app at <https://quilldown.vercel.app/guides>. Every example opens in the editor with one click.
 
-- [What is Markdown?](https://quilldown.vercel.app/guides/what-is-markdown) — a beginner's guide
-- [Markdown cheat sheet](https://quilldown.vercel.app/guides/markdown-cheat-sheet) — every piece of syntax with live examples
-- [Markdown to PDF](https://quilldown.vercel.app/guides/markdown-to-pdf), [to Word and Google Docs](https://quilldown.vercel.app/guides/markdown-to-word) and [to HTML](https://quilldown.vercel.app/guides/markdown-to-html)
-- [Markdown tables](https://quilldown.vercel.app/guides/markdown-table-generator), [math with LaTeX](https://quilldown.vercel.app/guides/latex-math-in-markdown) and [Mermaid diagrams](https://quilldown.vercel.app/guides/mermaid-diagrams-in-markdown)
-- [Emoji shortcodes](https://quilldown.vercel.app/guides/markdown-emoji-shortcodes) and a [README template](https://quilldown.vercel.app/guides/readme-template)
+- [What is Markdown?](https://quilldown.vercel.app/docs/what-is-markdown) — a beginner's guide
+- [Markdown cheat sheet](https://quilldown.vercel.app/docs/markdown-cheat-sheet) — every piece of syntax with live examples
+- [Markdown to PDF](https://quilldown.vercel.app/docs/markdown-to-pdf), [to Word and Google Docs](https://quilldown.vercel.app/docs/markdown-to-word) and [to HTML](https://quilldown.vercel.app/docs/markdown-to-html)
+- [Markdown tables](https://quilldown.vercel.app/docs/markdown-table-generator), [math with LaTeX](https://quilldown.vercel.app/docs/math-in-markdown) and [Mermaid diagrams](https://quilldown.vercel.app/docs/diagrams-in-markdown)
+- [Emoji shortcodes](https://quilldown.vercel.app/docs/emoji-in-markdown) and a [README template](https://quilldown.vercel.app/docs/readme-template)
 
 ## Works offline
 
@@ -194,14 +194,21 @@ Quilldown has no accounts, no analytics and no server-side storage. Documents, i
 
 ## Built with
 
-Plain HTML, CSS and JavaScript, with no build step. Libraries, all bundled: [marked](https://marked.js.org) (Markdown), [DOMPurify](https://github.com/cure53/DOMPurify) (sanitising), [highlight.js](https://highlightjs.org) (code), [KaTeX](https://katex.org) (math), [Mermaid](https://mermaid.js.org) (diagrams), [docx](https://docx.js.org) (Word), [html2canvas](https://html2canvas.hertzen.com) (PNG) and [Emojibase](https://emojibase.dev) (emoji data). Fonts: Inter, Instrument Serif and JetBrains Mono.
+Plain HTML, CSS and JavaScript, with no build step. Libraries, all bundled: [marked](https://marked.js.org) (Markdown), [DOMPurify](https://github.com/cure53/DOMPurify) (sanitizing), [highlight.js](https://highlightjs.org) (code), [KaTeX](https://katex.org) (math), [Mermaid](https://mermaid.js.org) (diagrams), [docx](https://docx.js.org) (Word), [html2canvas](https://html2canvas.hertzen.com) (PNG) and [Emojibase](https://emojibase.dev) (emoji data). Fonts: Nunito, Fraunces and JetBrains Mono.
 
 ```text
 index.html     the landing page and the editor
-guides/        the guide pages
+docs/          the generated documentation pages (do not edit)
+pages/         the sources of the site pages and guides
+tools/         the page generator and site checks
+LICENSE        the MIT License
 css/           styles
 js/            app logic, sample document, templates, preview typography
 vendor/        bundled libraries, fonts and emoji data
 icons/         app icons
 sw.js          offline support
 ```
+
+## License
+
+Quilldown is released under the [MIT License](LICENSE). The bundled libraries and fonts keep their own licenses.

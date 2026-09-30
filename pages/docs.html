@@ -1,0 +1,174 @@
+<!-- The /docs hub page. Edit the text here, then run: node tools/build-pages.mjs
+     {{mins:slug}} = the reading time of that guide (calculated), {{count}} filled in by the build.
+     Each guide card carries data-cat (learn | convert | write) and data-text (extra search words). -->
+
+<header class="hero fx-hero dx-hero">
+  <div class="container">
+    <span class="pill"><span class="dot"></span>Documentation</span>
+    <h1 class="fx-h1">Quilldown <em>documentation</em></h1>
+    <p class="fx-lede">Guides and a cheat sheet for writing, formatting and exporting Markdown. Every example opens in the editor with one click, and nothing you type leaves your browser.</p>
+    <label class="docs-search dx-search" for="docsSearch">
+      <svg class="i"><use href="#i-search"/></svg>
+      <input type="search" id="docsSearch" placeholder="Search the documentation (press / to focus)" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
+      <kbd>/</kbd>
+    </label>
+    <div class="dx-chips" role="group" aria-label="Filter by topic">
+      <button type="button" aria-pressed="true" data-cat="all">All</button><button type="button" aria-pressed="false" data-cat="learn">Learn Markdown</button><button type="button" aria-pressed="false" data-cat="convert">Convert and export</button><button type="button" aria-pressed="false" data-cat="write">Write better documents</button>
+    </div>
+    <p class="faq-status" id="dxStatus" aria-live="polite">{{count}} guides · Free · No account needed</p>
+  </div>
+</header>
+
+<div class="container dx-main" id="dxMain">
+
+  <!-- ============ START HERE ============ -->
+  <section class="section fx-sec dx-static" id="start-here">
+    <div class="section-head">
+      <div class="eyebrow">Start here</div>
+      <h2 class="title">Start <em>here</em></h2>
+      <p>Three pages cover most of what people come for.</p>
+    </div>
+    <div class="dx-start">
+      <a class="dx-big" href="/docs/what-is-markdown"><span class="dx-num">1</span><span class="dx-k">New to Markdown?</span><strong>What is Markdown?</strong><span class="dx-d">A plain-English introduction: what Markdown is, why people use it, and the few symbols you need to start writing today.</span><span class="dx-f"><span>{{mins:what-is-markdown}} min read</span><svg class="i"><use href="#i-arrow"/></svg></span></a>
+      <a class="dx-big" href="/docs/markdown-cheat-sheet"><span class="dx-num">2</span><span class="dx-k">Keep it open</span><strong>Markdown cheat sheet</strong><span class="dx-d">Every piece of syntax in one place, from headings and tables to math and callouts, each with a live example you can try.</span><span class="dx-f"><span>{{mins:markdown-cheat-sheet}} min read</span><svg class="i"><use href="#i-arrow"/></svg></span></a>
+      <a class="dx-big" href="/docs/markdown-to-pdf"><span class="dx-num">3</span><span class="dx-k">Most popular task</span><strong>Markdown to PDF</strong><span class="dx-d">Turn Markdown into a clean PDF in your browser. No upload, no account, and it works offline.</span><span class="dx-f"><span>{{mins:markdown-to-pdf}} min read</span><svg class="i"><use href="#i-arrow"/></svg></span></a>
+    </div>
+  </section>
+
+  <!-- ============ WHAT DO YOU WANT TO DO ============ -->
+  <section class="section fx-sec dx-static" id="goals">
+    <div class="section-head">
+      <div class="eyebrow">Find your guide</div>
+      <h2 class="title">What do you <em>want to do?</em></h2>
+      <p>Pick the goal closest to yours and go straight to the right guide.</p>
+    </div>
+    <ul class="dx-goals">
+      <li><span>I'm new and want to understand Markdown</span><a href="/docs/what-is-markdown">What is Markdown?</a></li>
+      <li><span>I need to look up a symbol or piece of syntax</span><a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a></li>
+      <li><span>I want a PDF I can print or submit</span><a href="/docs/markdown-to-pdf">Markdown to PDF</a></li>
+      <li><span>I need a Word file, or to paste into Google Docs</span><a href="/docs/markdown-to-word">Markdown to Word and Google Docs</a></li>
+      <li><span>I'm publishing to a website or CMS</span><a href="/docs/markdown-to-html">Markdown to HTML</a></li>
+      <li><span>I want to add a table, without typing every pipe</span><a href="/docs/markdown-table-generator">Markdown tables</a></li>
+      <li><span>I'm writing equations for notes or a paper</span><a href="/docs/math-in-markdown">Math in Markdown</a></li>
+      <li><span>I want a flowchart, timeline or mind map</span><a href="/docs/diagrams-in-markdown">Diagrams in Markdown</a></li>
+      <li><span>I'm starting a project and need a README</span><a href="/docs/readme-template">README template</a></li>
+      <li><span>I want emoji in my documents</span><a href="/docs/emoji-in-markdown">Emoji shortcodes</a></li>
+    </ul>
+  </section>
+
+  <!-- ============ READING PATHS ============ -->
+  <section class="section fx-sec dx-static" id="paths">
+    <div class="section-head">
+      <div class="eyebrow">Reading paths</div>
+      <h2 class="title">Or follow <em>a path</em></h2>
+      <p>Not sure what order to read in? These four routes work well.</p>
+    </div>
+    <div class="dx-paths">
+      <article class="dx-path" style="--pc:#5b42e3">
+        <h3>From zero</h3>
+        <ol><li><a href="/docs/what-is-markdown">What is Markdown?</a></li><li><a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a></li><li><a href="/docs/markdown-table-generator">Markdown tables</a></li></ol>
+        <p>For anyone who has never written Markdown. About 35 minutes, and you'll be comfortable with the basics.</p>
+      </article>
+      <article class="dx-path" style="--pc:#0e8f7e">
+        <h3>For students and researchers</h3>
+        <ol><li><a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a></li><li><a href="/docs/math-in-markdown">Math in Markdown</a></li><li><a href="/docs/markdown-to-pdf">Markdown to PDF</a></li></ol>
+        <p>Take notes with equations and hand in a clean PDF.</p>
+      </article>
+      <article class="dx-path" style="--pc:#c2680a">
+        <h3>For developers</h3>
+        <ol><li><a href="/docs/readme-template">README template</a></li><li><a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a></li><li><a href="/docs/diagrams-in-markdown">Diagrams in Markdown</a></li></ol>
+        <p>Write a README that people read, with diagrams that explain how things fit together.</p>
+      </article>
+      <article class="dx-path" style="--pc:#c026a3">
+        <h3>For writers and bloggers</h3>
+        <ol><li><a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a></li><li><a href="/docs/markdown-to-html">Markdown to HTML</a></li><li><a href="/docs/markdown-to-word">Markdown to Word and Google Docs</a></li></ol>
+        <p>Draft in plain text, then publish or hand over in whichever format you need.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ ALL DOCUMENTATION ============ -->
+  <section class="section fx-sec" id="all-documentation">
+    <div class="section-head">
+      <div class="eyebrow">All documentation</div>
+      <h2 class="title">All <em>documentation</em></h2>
+      <p>Ten guides in three groups. Filter by group above, or search by keyword.</p>
+    </div>
+
+    <div class="dx-group" data-group="learn">
+      <h3 class="dx-gh">Learn Markdown</h3>
+      <div class="dx-grid">
+        <a class="dx-card" href="/docs/what-is-markdown" data-cat="learn" data-slug="what-is-markdown" data-text="what is markdown beginner introduction plain text formatting symbols word processors html"><span class="dx-top"><span class="dx-cat">Learn Markdown</span><span>Beginner · {{mins:what-is-markdown}} min</span></span><strong>What is Markdown?</strong><span class="dx-d">What Markdown is, how it compares with word processors and HTML, and the basic symbols to know.</span><span class="dx-tick" aria-hidden="true"></span></a>
+        <a class="dx-card" href="/docs/markdown-cheat-sheet" data-cat="learn" data-slug="markdown-cheat-sheet" data-text="markdown cheat sheet syntax reference headings lists links images tables code task lists footnotes callouts math diagrams"><span class="dx-top"><span class="dx-cat">Learn Markdown</span><span>Beginner · {{mins:markdown-cheat-sheet}} min</span></span><strong>Markdown cheat sheet</strong><span class="dx-d">Every syntax with a live example: headings, lists, links, images, tables, code, task lists, footnotes, callouts, math and diagrams.</span><span class="dx-tick" aria-hidden="true"></span></a>
+        <a class="dx-card" href="/docs/emoji-in-markdown" data-cat="learn" data-slug="emoji-in-markdown" data-text="emoji shortcodes list colon picker rocket"><span class="dx-top"><span class="dx-cat">Learn Markdown</span><span>Beginner · {{mins:emoji-in-markdown}} min</span></span><strong>Emoji shortcodes</strong><span class="dx-d">Type a colon and a few letters, like :roc, and pick 🚀. A searchable list of shortcodes and how they work in Quilldown.</span><span class="dx-tick" aria-hidden="true"></span></a>
+      </div>
+    </div>
+
+    <div class="dx-group" data-group="convert">
+      <h3 class="dx-gh">Convert and export</h3>
+      <div class="dx-grid">
+        <a class="dx-card" href="/docs/markdown-to-pdf" data-cat="convert" data-slug="markdown-to-pdf" data-text="markdown to pdf print save export page breaks equations code blocks"><span class="dx-top"><span class="dx-cat">Convert and export</span><span>Beginner · {{mins:markdown-to-pdf}} min</span></span><strong>Markdown to PDF</strong><span class="dx-d">Save a print-ready PDF from Markdown using your browser's print dialog, with tips for code blocks, page breaks and equations.</span><span class="dx-tick" aria-hidden="true"></span></a>
+        <a class="dx-card" href="/docs/markdown-to-word" data-cat="convert" data-slug="markdown-to-word" data-text="markdown to word docx google docs copy paste heading sizes"><span class="dx-top"><span class="dx-cat">Convert and export</span><span>Beginner · {{mins:markdown-to-word}} min</span></span><strong>Markdown to Word and Google Docs</strong><span class="dx-d">Export a real .docx, or copy into Google Docs with proper heading sizes. What carries over, and what doesn't.</span><span class="dx-tick" aria-hidden="true"></span></a>
+        <a class="dx-card" href="/docs/markdown-to-html" data-cat="convert" data-slug="markdown-to-html" data-text="markdown to html website cms clean markup standalone page"><span class="dx-top"><span class="dx-cat">Convert and export</span><span>Intermediate · {{mins:markdown-to-html}} min</span></span><strong>Markdown to HTML</strong><span class="dx-d">Copy clean HTML for a website or CMS, or export a standalone styled page.</span><span class="dx-tick" aria-hidden="true"></span></a>
+      </div>
+    </div>
+
+    <div class="dx-group" data-group="write">
+      <h3 class="dx-gh">Write better documents</h3>
+      <div class="dx-grid">
+        <a class="dx-card" href="/docs/markdown-table-generator" data-cat="write" data-slug="markdown-table-generator" data-text="markdown tables generator visual grid excel google sheets alignment"><span class="dx-top"><span class="dx-cat">Write better documents</span><span>Beginner · {{mins:markdown-table-generator}} min</span></span><strong>Markdown tables</strong><span class="dx-d">Build tables in a visual grid, paste rows from Excel or Google Sheets, and set column alignment.</span><span class="dx-tick" aria-hidden="true"></span></a>
+        <a class="dx-card" href="/docs/math-in-markdown" data-cat="write" data-slug="math-in-markdown" data-text="math latex katex equations fractions sums matrices formulas"><span class="dx-top"><span class="dx-cat">Write better documents</span><span>Intermediate · {{mins:math-in-markdown}} min</span></span><strong>Math in Markdown</strong><span class="dx-d">Write inline and display equations with LaTeX syntax, from fractions and sums to matrices, rendered with KaTeX.</span><span class="dx-tick" aria-hidden="true"></span></a>
+        <a class="dx-card" href="/docs/diagrams-in-markdown" data-cat="write" data-slug="diagrams-in-markdown" data-text="mermaid diagrams flowchart sequence gantt mind map class state pie"><span class="dx-top"><span class="dx-cat">Write better documents</span><span>Intermediate · {{mins:diagrams-in-markdown}} min</span></span><strong>Diagrams in Markdown</strong><span class="dx-d">Draw flowcharts, sequence diagrams, Gantt charts and mind maps from plain text with Mermaid.</span><span class="dx-tick" aria-hidden="true"></span></a>
+        <a class="dx-card" href="/docs/readme-template" data-cat="write" data-slug="readme-template" data-text="readme template github project documentation sections"><span class="dx-top"><span class="dx-cat">Write better documents</span><span>Beginner · {{mins:readme-template}} min</span></span><strong>README template</strong><span class="dx-d">A copy-ready README with the sections most projects need, plus tips on writing one people read.</span><span class="dx-tick" aria-hidden="true"></span></a>
+      </div>
+    </div>
+
+    <div class="dx-empty" id="dxEmpty" hidden>
+      <b>No guide matches that.</b>
+      <p>Try a different word, like “PDF”, “table” or “math”, or suggest a guide.</p>
+      <a class="btn" id="dxAsk" href="https://github.com/Dhruv-Dhameliya/quilldown/issues/new?title=Guide%20suggestion%3A%20" target="_blank" rel="noopener noreferrer">Suggest a guide on GitHub</a>
+    </div>
+    <p class="dx-note">A tick appears on guides you have opened. Ticks are saved on your device only.</p>
+  </section>
+
+  <!-- ============ GOOD TO KNOW ============ -->
+  <section class="section fx-sec dx-static" id="good-to-know">
+    <div class="fx-limits dx-know">
+      <div class="eyebrow">Good to know</div>
+      <h2 class="title">Good to know <em>before you start</em></h2>
+      <ul>
+        <li><b>You don't need Quilldown to follow along.</b> Markdown works in any editor. The examples simply open in Quilldown so you can try them.</li>
+        <li>Examples open in a new tab, so your current document isn't replaced.</li>
+        <li>Limits worth knowing: files up to 5 MB each, up to 30 tabs open at once, and about 5 MB of browser storage in total.</li>
+        <li>Because nothing is stored on a server, export important documents as .md files.</li>
+      </ul>
+      <p class="fx-limits-close"><a href="/faq">See the full FAQ</a></p>
+    </div>
+  </section>
+
+  <!-- ============ QUICK QUESTIONS ============ -->
+  <section class="section fx-sec dx-static" id="quick-questions">
+    <div class="section-head">
+      <div class="eyebrow">Quick questions</div>
+      <h2 class="title">Quick <em>questions</em></h2>
+    </div>
+    <div class="faq-panel"><div class="faq">
+      <details name="dx-faq" open><summary>Are the guides free?</summary><div class="ans"><p>Yes. There's no account, sign-up or paywall.</p></div></details>
+      <details name="dx-faq"><summary>Do the examples upload what I type?</summary><div class="ans"><p>No. Examples open in the editor in your browser, and nothing is sent to a server.</p></div></details>
+      <details name="dx-faq"><summary>I can't find what I'm looking for. What now?</summary><div class="ans"><p>Try the search box, browse the <a href="/faq">FAQ</a>, or <a href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">suggest a guide on GitHub</a>.</p></div></details>
+    </div></div>
+    <p class="hw-more"><a class="text-link" href="/faq">All questions <svg class="i"><use href="#i-arrow"/></svg></a></p>
+  </section>
+
+</div>
+
+<section class="cta fx-cta">
+  <div class="container">
+    <h2 class="title">Start <em>writing</em></h2>
+    <p class="cta-lead">Open Quilldown and try any example from these guides. It takes one click, and nothing leaves your browser.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-max"/></svg></a>
+      <a class="text-link" href="https://github.com/Dhruv-Dhameliya/quilldown/issues" target="_blank" rel="noopener noreferrer">Suggest a guide on GitHub <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>

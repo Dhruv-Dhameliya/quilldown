@@ -6,45 +6,141 @@
     {
       "source": "/sw.js",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
-        { "key": "Service-Worker-Allowed", "value": "/" }
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/"
+        }
       ]
     },
     {
       "source": "/sw-assets.js",
-      "headers": [{ "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
     },
     {
       "source": "/manifest.webmanifest",
       "headers": [
-        { "key": "Content-Type", "value": "application/manifest+json; charset=utf-8" },
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Content-Type",
+          "value": "application/manifest+json; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     },
     {
       "source": "/vendor/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
     },
     {
       "source": "/icons/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
     },
     {
       "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
     },
     {
       "source": "/social/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/guides/markdown-emoji-shortcodes",
+      "destination": "/docs/emoji-in-markdown",
+      "permanent": true
+    },
+    {
+      "source": "/docs/markdown-emoji-shortcodes",
+      "destination": "/docs/emoji-in-markdown",
+      "permanent": true
+    },
+    {
+      "source": "/guides/mermaid-diagrams-in-markdown",
+      "destination": "/docs/diagrams-in-markdown",
+      "permanent": true
+    },
+    {
+      "source": "/docs/mermaid-diagrams-in-markdown",
+      "destination": "/docs/diagrams-in-markdown",
+      "permanent": true
+    },
+    {
+      "source": "/guides/latex-math-in-markdown",
+      "destination": "/docs/math-in-markdown",
+      "permanent": true
+    },
+    {
+      "source": "/docs/latex-math-in-markdown",
+      "destination": "/docs/math-in-markdown",
+      "permanent": true
+    },
+    {
+      "source": "/how-it-works",
+      "destination": "/how-quilldown-works",
+      "permanent": true
+    },
+    {
+      "source": "/guides",
+      "destination": "/docs",
+      "permanent": true
+    },
+    {
+      "source": "/guides/:slug",
+      "destination": "/docs/:slug",
+      "permanent": true
     }
   ]
 }

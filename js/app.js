@@ -265,7 +265,7 @@ function mermaidSVG(code, theme) {
   if (mermaidCache.has(key)) return Promise.resolve(mermaidCache.get(key));
   const job = mermaidQueue.then(async () => {
     const m = await loadMermaid();
-    m.initialize({ startOnLoad: false, securityLevel: 'strict', theme, suppressErrorRendering: true, fontFamily: 'Inter, system-ui, sans-serif' });
+    m.initialize({ startOnLoad: false, securityLevel: 'strict', theme, suppressErrorRendering: true, fontFamily: 'Nunito, system-ui, sans-serif' });
     const id = 'mmd' + (++mermaidSeq);
     try {
       const { svg } = await m.render(id, code);
@@ -972,7 +972,7 @@ async function copyHTMLSource() {
   toast(ok ? 'HTML copied' : 'Copy failed — your browser blocked clipboard access');
 }
 
-const EXPORT_VARS = `:root{--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+const EXPORT_VARS = `:root{--font-sans:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 --md-text:#1c1c1f;--md-muted:#5b5b63;--md-line:#e6e6e2;--md-line-strong:#cfcfca;--md-code-bg:#f1f1ef;--md-pre-bg:#f7f7f5;--md-link:#4f46e5;--md-mark:#fff1a8;--md-th-bg:#f6f6f4;--md-stripe:#fbfbfa;
 --tok-kw:#7c3aed;--tok-str:#0f8f62;--tok-num:#c2680a;--tok-com:#9a9aa3;--tok-fn:#2563eb;--tok-type:#c026a3;--tok-attr:#0e7490;
 --al-note:#2563eb;--al-tip:#0f8f62;--al-important:#7c3aed;--al-warning:#c2680a;--al-caution:#dc2626}`;
@@ -981,12 +981,12 @@ body{margin:0;background:#fff;color:#1c1c1f}.md{max-width:780px;margin:0 auto;pa
 .md pre{white-space:pre-wrap;overflow:visible}.md math[display="block"]{display:block math;margin:1em 0}
 @page{margin:18mm 16mm}
 @media print{.md{max-width:none;padding:0}.md pre,.md table,.md img,.md svg,.md blockquote,.md .math-block,.md details{break-inside:avoid}.md h1,.md h2,.md h3,.md h4,.md h5,.md h6{break-after:avoid}.md a{color:inherit}}`;
-/** `local` = link the bundled fonts (used for the print frame, works offline); otherwise link Google Fonts so a downloaded .html stays portable. */
+/** `local` = link the bundled fonts (used for the print frame, works offline); otherwise add no font link, so a downloaded .html never contacts a third party. */
 function standaloneHTML(body, title, local) {
   const css = window.QUILLDOWN_DOC_CSS;
   const fonts = local
     ? '<link rel="stylesheet" href="' + new URL('vendor/fonts/fonts.css', location.href).href + '">'
-    : '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">';
+    : '';   // a downloaded .html makes no web requests when opened: it falls back to the system fonts
   return `<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)}</title>
 ${fonts}
 <style>${EXPORT_VARS}\n${css}\n${EXPORT_PAGE}</style></head><body><article class="md">\n${body}\n</article></body></html>`;
@@ -1983,14 +1983,14 @@ function setFull(on) {
 const startIsHome = () => store.get('start', 'home') !== 'editor';
 function syncStartPref() {
   const editorFirst = !startIsHome();
-  $$('[data-starteditor]').forEach(i => { i.checked = editorFirst; });
+  $$('[data-starteditor]').forEach(i => { i.setAttribute('aria-checked', String(editorFirst)); });
 }
 function setStartPref(home, quiet) {
   store.set('start', home ? 'home' : 'editor');
   syncStartPref();
   if (!quiet) toast(home ? 'Quilldown will open on the homepage' : 'Quilldown will open the full-screen editor');
 }
-document.addEventListener('change', e => { if (e.target.matches && e.target.matches('[data-starteditor]')) setStartPref(!e.target.checked); });
+document.addEventListener('click', e => { const sw = e.target.closest && e.target.closest('[data-starteditor]'); if (sw) setStartPref(sw.getAttribute('aria-checked') === 'true'); });
 
 /* ---------------------------------------------------------------
    Landing page: cheat sheet, reveal, nav

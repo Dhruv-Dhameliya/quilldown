@@ -36,7 +36,7 @@
   },
   "mindmap": {
     "title": "Mind map",
-    "alt": "Mind map with Markdown at the centre and three branches: Write (headings, lists), Format (bold, links) and Export (PDF, Word).",
+    "alt": "Mind map with Markdown at the center and three branches: Write (headings, lists), Format (bold, links) and Export (PDF, Word).",
     "source": "mindmap\n  root((Markdown))\n    Write\n      Headings\n      Lists\n    Format\n      Bold\n      Links\n    Export\n      PDF\n      Word"
   }
 }
