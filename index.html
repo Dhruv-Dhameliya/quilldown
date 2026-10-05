@@ -386,83 +386,29 @@
             <!-- ========================= THE TOOL ========================= -->
             <div class="tool-shell" id="tool" role="application" aria-label="Markdown editor">
               <div class="tool-top">
-                <button type="button" class="brand-mini" data-act="home" title="Back to the Quilldown homepage" aria-label="Quilldown homepage"><svg class="logo">
-                    <use href="#i-logo" />
-                  </svg><span>Quilldown</span></button>
-                <label class="fname" title="File name">
-                  <svg class="i">
-                    <use href="#i-file" />
-                  </svg>
-                  <input id="fileName" value="untitled.md" spellcheck="false" autocomplete="off" aria-label="File name">
-                </label>
-                <span class="grow"></span>
-
-                <button class="tbtn" data-act="open" title="Open a Markdown file (Ctrl+O)"><svg class="i">
-                    <use href="#i-open" />
-                  </svg><span class="lbl">Open</span></button>
-                <button class="tbtn" data-menu="new" title="New document"><svg class="i">
-                    <use href="#i-newfile" />
-                  </svg><span class="lbl">New</span><svg class="i chev">
-                    <use href="#i-chev" />
-                  </svg></button>
-                <span class="tb-sep"></span>
-                <button class="tbtn" data-menu="copy" title="Copy"><svg class="i">
-                    <use href="#i-copy" />
-                  </svg><span class="lbl">Copy</span><svg class="i chev">
-                    <use href="#i-chev" />
-                  </svg></button>
-                <button class="tbtn" data-menu="export" title="Export"><svg class="i">
-                    <use href="#i-download" />
-                  </svg><span class="lbl">Export</span><svg class="i chev">
-                    <use href="#i-chev" />
-                  </svg></button>
-                <button class="tbtn" data-act="share" title="Share as a link"><svg class="i">
-                    <use href="#i-share" />
-                  </svg><span class="lbl">Share</span></button>
-                <button class="tbtn" data-act="install" hidden title="Install Quilldown as an app"><svg class="i">
-                    <use href="#i-download" />
-                  </svg><span class="lbl">Install</span></button>
-                <span class="tb-sep"></span>
-
-                <button class="tbtn icon" id="btnFind" data-act="find" title="Find &amp; replace (Ctrl+F)"
-                  aria-label="Find and replace"><svg class="i">
-                    <use href="#i-search" />
-                  </svg></button>
-                <button class="tbtn icon" id="btnOutline" data-act="outline" aria-pressed="false"
-                  title="Outline (headings)" aria-label="Toggle outline"><svg class="i">
-                    <use href="#i-outline" />
-                  </svg></button>
-                <div class="seg" role="group" aria-label="View mode">
-                  <button data-act="mode:editor" aria-pressed="false" title="Editor only"><svg class="i">
-                      <use href="#i-pen" />
-                    </svg></button>
-                  <button data-act="mode:split" aria-pressed="true" title="Split view"><svg class="i">
-                      <use href="#i-cols" />
-                    </svg></button>
-                  <button data-act="mode:preview" aria-pressed="false" title="Preview only"><svg class="i">
-                      <use href="#i-eye" />
-                    </svg></button>
+                <button type="button" class="brand-mini" data-act="home" title="Back to the Quilldown homepage" aria-label="Quilldown homepage"><svg class="logo"><use href="#i-logo" /></svg></button>
+                <div class="tabs" id="tabs" role="tablist" aria-label="Open documents"></div>
+                <div class="tool-actions">
+                  <button class="tbtn icon" data-act="open" title="Open a Markdown file (Ctrl+O)" aria-label="Open"><svg class="i"><use href="#i-open" /></svg></button>
+                  <button class="tbtn" data-menu="new" title="New document" aria-label="New document" aria-haspopup="menu" aria-expanded="false"><svg class="i"><use href="#i-newfile" /></svg><svg class="i chev"><use href="#i-chev" /></svg></button>
+                  <span class="tb-sep"></span>
+                  <button class="tbtn" data-menu="copy" title="Copy" aria-label="Copy" aria-haspopup="menu" aria-expanded="false"><svg class="i"><use href="#i-copy" /></svg><svg class="i chev"><use href="#i-chev" /></svg></button>
+                  <button class="tbtn" data-menu="export" title="Export" aria-label="Export" aria-haspopup="menu" aria-expanded="false"><svg class="i"><use href="#i-download" /></svg><svg class="i chev"><use href="#i-chev" /></svg></button>
+                  <button class="tbtn icon" data-act="share" title="Share as a link" aria-label="Share"><svg class="i"><use href="#i-share" /></svg></button>
+                  <button class="tbtn icon" data-act="install" hidden title="Install Quilldown as an app" aria-label="Install"><svg class="i"><use href="#i-download" /></svg></button>
+                  <span class="tb-sep"></span>
+                  <button class="tbtn icon" id="btnFind" data-act="find" title="Find &amp; replace (Ctrl+F)" aria-label="Find and replace"><svg class="i"><use href="#i-search" /></svg></button>
+                  <button class="tbtn icon" id="btnOutline" data-act="outline" aria-pressed="false" title="Outline (headings)" aria-label="Toggle outline"><svg class="i"><use href="#i-outline" /></svg></button>
+                  <div class="seg" role="group" aria-label="View mode">
+                    <button data-act="mode:editor" aria-pressed="false" title="Editor only"><svg class="i"><use href="#i-pen" /></svg></button>
+                    <button data-act="mode:split" aria-pressed="true" title="Split view"><svg class="i"><use href="#i-cols" /></svg></button>
+                    <button data-act="mode:preview" aria-pressed="false" title="Preview only"><svg class="i"><use href="#i-eye" /></svg></button>
+                  </div>
+                  <button class="tbtn icon" id="btnSync" data-act="sync" aria-pressed="true" title="Sync scroll" aria-label="Sync scroll"><svg class="i"><use href="#i-sync" /></svg></button>
+                  <button class="tbtn icon" data-act="theme" title="Toggle light / dark" aria-label="Toggle light or dark theme"><svg class="i theme-icon-sun"><use href="#i-sun" /></svg><svg class="i theme-icon-moon"><use href="#i-moon" /></svg></button>
+                  <button class="tbtn icon" id="btnFull" data-act="full" title="Exit full screen (Esc)" aria-label="Toggle full screen"><svg class="i full-max"><use href="#i-max" /></svg><svg class="i full-min"><use href="#i-min" /></svg></button>
                 </div>
-                <button class="tbtn icon" id="btnSync" data-act="sync" aria-pressed="true" title="Sync scroll"><svg
-                    class="i">
-                    <use href="#i-sync" />
-                  </svg></button>
-                <button class="tbtn icon" data-act="theme" title="Toggle light / dark"><svg class="i theme-icon-sun">
-                    <use href="#i-sun" />
-                  </svg><svg class="i theme-icon-moon">
-                    <use href="#i-moon" />
-                  </svg></button>
-                <button class="tbtn icon" id="btnFull" data-act="full" title="Exit full screen (Esc)"
-                  aria-label="Toggle full screen">
-                  <svg class="i full-max">
-                    <use href="#i-max" />
-                  </svg><svg class="i full-min">
-                    <use href="#i-min" />
-                  </svg>
-                </button>
               </div>
-
-              <div class="tabs" id="tabs" role="tablist" aria-label="Open documents"></div>
 
               <div class="snippet-bar" id="snippetBar" role="toolbar" aria-label="Markdown snippets"></div>
 
@@ -480,7 +426,7 @@
                       <span class="pane-actions"><button type="button" class="pbtn" data-act="copy-md"
                           title="Copy the Markdown source"><svg class="i">
                             <use href="#i-copy" />
-                          </svg>Copy Markdown</button></span>
+                          </svg><span class="pl">Copy Markdown</span></button></span>
                     </div>
                     <div class="editor-wrap">
                       <div id="hl" class="ed-text" aria-hidden="true"></div>
@@ -534,11 +480,11 @@
                         <button type="button" class="pbtn" data-act="copy-rich" title="Copy formatted text"><svg
                             class="i">
                             <use href="#i-copy" />
-                          </svg>Copy</button>
+                          </svg><span class="pl">Copy</span></button>
                         <button type="button" class="pbtn" data-act="copy-docs"
                           title="Copy with Google Docs sizes: H1 23 · H2 17 · H3 14 · text 12 pt"><svg class="i">
                             <use href="#i-docs" />
-                          </svg>Copy for Docs</button>
+                          </svg><span class="pl">Copy for Docs</span></button>
                       </span>
                     </div>
                     <div class="preview-scroll" id="previewPane">

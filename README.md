@@ -120,6 +120,8 @@ Copy buttons sit right on each pane:
 - **Copy for Docs** copies with point sizes Google Docs and Word understand: **H1 23 pt, H2 17 pt, H3 14 pt, body 12 pt**. No font is set, so pasted text takes on the font of your document.
 - **Copy HTML** (in the top-bar Copy menu) copies clean markup.
 
+Every copy button turns into a green check mark for a moment once the text is on your clipboard, and into a red cross if the browser blocked it.
+
 ### Export
 
 | Format | Notes |

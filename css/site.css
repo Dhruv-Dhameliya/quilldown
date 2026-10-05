@@ -414,24 +414,24 @@ button.brand-mini:hover{background:var(--hover)}
 
 /* ---- phones: a more compact editor (chrome only — every control is still there) ---- */
 @media (max-width:640px){
-  .tool-top{height:46px;padding:0 8px;gap:2px}
-  .tool-top>.fname,.tool-top>.grow,.tool-top>.tb-sep{display:none}
-  .tool-top>.brand-mini{order:0;padding:4px;margin:0}
-  .tool-top>[data-act="open"]{order:1}
-  .tool-top>[data-menu="new"]{order:2}
-  .tool-top>[data-menu="copy"]{order:3}
-  .tool-top>[data-menu="export"]{order:4}
-  .tool-top>.seg{order:5;margin:0 4px}
-  .tool-top>#btnFull{order:6}
-  .tool-top>[data-act="share"]{order:7}
-  .tool-top>#btnFind{order:8}
-  .tool-top>#btnOutline{order:9}
-  .tool-top>#btnSync{order:10}
-  .tool-top>[data-act="theme"]{order:11}
-  .tool-top>[data-act="install"]{order:12}
-  .tool-top .tbtn{padding:0 7px;gap:3px}
-  .tool-top .tbtn.icon{padding:0}
-  .tabs{height:34px;padding:6px 8px 0}
+  .tool-top{padding:0 4px}
+  .tool-actions>.tb-sep{display:none}
+  .tool-actions>[data-act="open"]{order:1}
+  .tool-actions>[data-menu="new"]{order:2}
+  .tool-actions>[data-menu="copy"]{order:3}
+  .tool-actions>[data-menu="export"]{order:4}
+  .tool-actions>.seg{order:5;margin:0 4px}
+  .tool-actions>#btnFull{order:6}
+  .tool-actions>[data-act="share"]{order:7}
+  .tool-actions>#btnFind{order:8}
+  .tool-actions>#btnOutline{order:9}
+  .tool-actions>#btnSync{order:10}
+  .tool-actions>[data-act="theme"]{order:11}
+  .tool-actions>[data-act="install"]{order:12}
+  .tool-actions .tbtn{padding:0 5px}
+  .tool-actions .tbtn.icon{padding:0}
+  .tabs{height:32px;padding:4px 0 0}
+  .tab{height:28px}
   .snippet-bar{height:38px;padding:0 6px}
   .sbtn{min-width:30px;height:28px;padding:0 5px}
   .pane-label{height:26px;padding:0 14px}

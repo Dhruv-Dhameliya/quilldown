@@ -26,7 +26,7 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ic = n => `<svg class="i"><use href="#i-${n}"/></svg>`;
 
 const editor = $('#editor'), mirror = $('#mirror'), preview = $('#preview'), pane = $('#previewPane');
-const panes = $('#panes'), shell = $('#tool'), gutter = $('#gutter'), fileNameInput = $('#fileName');
+const panes = $('#panes'), shell = $('#tool'), gutter = $('#gutter');
 const SAMPLE = window.QUILLDOWN_SAMPLE || '';
 const state = {
   theme: document.documentElement.getAttribute('data-theme') || 'light',
@@ -651,7 +651,7 @@ const A = {
   },
   'copy-rich': () => copyFormatted('rich'),
   'copy-docs': () => copyFormatted('docs'),
-  'copy-md': async () => { const { text, n } = markdownWithImages(); const ok = await writeClipboard({ text }); toast(ok ? (n ? `Markdown copied (${n} image${n > 1 ? 's' : ''} embedded)` : 'Markdown copied') : 'Copy failed — your browser blocked clipboard access'); },
+  'copy-md': async () => { const { text, n } = markdownWithImages(); const ok = await writeClipboard({ text }); toast(ok ? (n ? `Markdown copied (${n} image${n > 1 ? 's' : ''} embedded)` : 'Markdown copied') : 'Copy failed — your browser blocked clipboard access'); return ok; },
   'copy-html': () => copyHTMLSource(),
   'export-pdf': () => exportPDF(),
   'export-docx': () => exportDOCX(),
@@ -776,9 +776,11 @@ document.addEventListener('click', e => {
   const ab = e.target.closest('[data-act]');
   if (!ab) return;
   const [name, arg] = ab.dataset.act.split(':');
+  const anchor = openAnchor;
   closeMenus();
   const fn = A[name]; if (!fn) return;
-  fn(arg);
+  const result = fn(arg);
+  if (COPY_ACTS.has(name)) Promise.resolve(result).then(ok => { if (typeof ok === 'boolean') flashCopy(ab.closest('.menu') ? anchor : ab, ok); });
 });
 document.addEventListener('keydown', e => {
   if (!openMenuId) return;
@@ -792,7 +794,7 @@ window.addEventListener('resize', closeMenus);
 /* ---------------------------------------------------------------
    Copy / export
 --------------------------------------------------------------- */
-const baseName = () => (fileNameInput.value.trim() || 'untitled').replace(/\.(md|markdown|mdown|mkd|txt|text)$/i, '').replace(/[\\/:*?"<>|]+/g, '-') || 'untitled';
+const baseName = () => ((activeTab() && activeTab().name || '').trim() || 'untitled').replace(/\.(md|markdown|mdown|mkd|txt|text)$/i, '').replace(/[\\/:*?"<>|]+/g, '-') || 'untitled';
 const mdName = () => baseName() + '.md';
 /** Pasted/uploaded images are kept as short img:<id> references while editing; exporting Markdown embeds them as data URIs. */
 function downloadMarkdown() {
@@ -913,6 +915,25 @@ function applyInlineStyles(root, flavor) {
   });
 }
 
+/** Show whether a copy worked: swap the button's icon (and label) to a check, or a cross if it failed, then restore it. */
+function flashCopy(btn, ok) {
+  if (!btn) return;
+  const use = $('svg.i:not(.chev) use', btn), lbl = $('.pl', btn);
+  if (!use) return;
+  if (!btn._copyOrig) btn._copyOrig = { href: use.getAttribute('href'), label: lbl ? lbl.textContent : '' };
+  const o = btn._copyOrig;
+  use.setAttribute('href', ok ? '#i-check' : '#i-x');
+  if (lbl) lbl.textContent = ok ? 'Copied' : 'Failed';
+  btn.classList.remove('done', 'fail'); void btn.offsetWidth;
+  btn.classList.add(ok ? 'done' : 'fail');
+  clearTimeout(btn._copyTimer);
+  btn._copyTimer = setTimeout(() => {
+    use.setAttribute('href', o.href); if (lbl) lbl.textContent = o.label;
+    btn.classList.remove('done', 'fail'); btn._copyOrig = null;
+  }, 1600);
+}
+const COPY_ACTS = new Set(['copy-rich', 'copy-docs', 'copy-md', 'copy-html']);
+
 async function writeClipboard({ html, text }, builder) {
   try {
     if (navigator.clipboard && window.ClipboardItem && (html || builder)) {
@@ -963,6 +984,7 @@ async function copyFormatted(flavor) {
   const ok = await writeClipboard({}, builder);
   toast(ok ? (docs ? 'Copied for Docs — paste it into Google Docs or Word' : 'Formatted text copied — paste it anywhere')
            : 'Copy failed — your browser blocked clipboard access');
+  return ok;
 }
 async function copyHTMLSource() {
   if (!editor.value.trim()) return toast('Nothing to copy yet');
@@ -970,6 +992,7 @@ async function copyHTMLSource() {
   const html = Array.from(root.childNodes).map(n => n.nodeType === 1 ? n.outerHTML : n.textContent.trim()).filter(Boolean).join('\n');
   const ok = await writeClipboard({ text: html });
   toast(ok ? 'HTML copied' : 'Copy failed — your browser blocked clipboard access');
+  return ok;
 }
 
 const EXPORT_VARS = `:root{--font-sans:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -1528,7 +1551,6 @@ function captureView() {
 function loadActive() {
   const t = activeTab();
   editor.value = t.text;
-  fileNameInput.value = t.name;
   const [s, e] = t.sel || [0, 0];
   editor.setSelectionRange(Math.min(s, t.text.length), Math.min(e, t.text.length));
   linesDirty = blocksDirty = true;
@@ -1591,7 +1613,7 @@ function renderTabs() {
   });
   host.addEventListener('auxclick', e => { const tab = e.target.closest('.tab'); if (tab && e.button === 1) { e.preventDefault(); closeTab(tab.dataset.id); } });
   host.addEventListener('mousedown', e => { if (e.button === 1) e.preventDefault(); });
-  host.addEventListener('dblclick', e => { if (e.target.closest('.tab-name')) { fileNameInput.focus(); fileNameInput.select(); } });
+  host.addEventListener('dblclick', e => { const tab = e.target.closest('.tab'); if (tab && !e.target.closest('.tab-x,.tab-input')) renameTab(tab.dataset.id); });
   host.addEventListener('dragstart', e => { const tab = e.target.closest('.tab'); if (!tab) return; dragId = tab.dataset.id; e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/x-quilldown-tab', dragId); });
   host.addEventListener('dragover', e => {
     if (!dragId) return; e.preventDefault();
@@ -1654,14 +1676,31 @@ editor.addEventListener('input', ev => {
   if (fb.open) { clearTimeout(fbTimer); fbTimer = setTimeout(() => fbCompute(editor.selectionStart), 120); }
 });
 ['keyup', 'click', 'focus'].forEach(ev => editor.addEventListener(ev, updateCursor));
-function commitName() {
-  const t = activeTab(); if (!t) return;
-  const v = fileNameInput.value.trim() || 'untitled.md';
-  t.name = v; fileNameInput.value = v; persistTabs(); renderTabs();
+/** Rename a tab in place (double-click): Enter or clicking away saves, Esc cancels. */
+function renameTab(id) {
+  const t = tabs.find(x => x.id === id); if (!t) return;
+  if (id !== activeId) switchTab(id);
+  const tabEl = $('#tabs .tab[data-id="' + id + '"]'), nameEl = tabEl && $('.tab-name', tabEl);
+  if (!nameEl || $('.tab-input', tabEl)) return;
+  const input = document.createElement('input');
+  input.className = 'tab-input'; input.value = t.name; input.spellcheck = false; input.autocomplete = 'off'; input.setAttribute('aria-label', 'File name');
+  tabEl.draggable = false; nameEl.replaceWith(input);
+  input.focus(); input.select();
+  let done = false;
+  const finish = save => {
+    if (done) return; done = true;
+    if (save) t.name = input.value.trim() || 'untitled.md';
+    persistTabs(); renderTabs();
+    if (save) editor.focus({ preventScroll: true });
+  };
+  input.addEventListener('keydown', e => {
+    e.stopPropagation();
+    if (e.key === 'Enter') { e.preventDefault(); finish(true); }
+    else if (e.key === 'Escape') { e.preventDefault(); finish(false); editor.focus({ preventScroll: true }); }
+  });
+  input.addEventListener('blur', () => finish(true));
+  input.addEventListener('click', e => e.stopPropagation());
 }
-fileNameInput.addEventListener('change', commitName);
-fileNameInput.addEventListener('input', () => { const t = activeTab(), el = $('.tab[aria-selected="true"] .tab-name'); if (t && el) el.textContent = fileNameInput.value || 'untitled.md'; });
-fileNameInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); commitName(); editor.focus(); } });
 
 /* ---------------------------------------------------------------
    Editor keyboard behaviour
@@ -1710,7 +1749,7 @@ preview.addEventListener('click', async e => {
   const b = e.target.closest('.code-copy'); if (!b) return;
   const code = b.parentElement.querySelector('code');
   const ok = await writeClipboard({ text: code ? code.textContent : '' });
-  b.textContent = ok ? 'Copied' : 'Failed'; setTimeout(() => b.textContent = 'Copy', 1400);
+  b.textContent = ok ? '✓ Copied' : 'Failed'; b.classList.toggle('done', ok); setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('done'); }, 1400);
 });
 
 /* ---------------------------------------------------------------
@@ -2523,7 +2562,6 @@ if (enginesReady) setupMarked();
 
 loadTabsFromStorage();
 editor.value = activeTab().text;
-fileNameInput.value = activeTab().name;
 renderTabs();
 
 setMode(['editor', 'split', 'preview'].includes(state.mode) ? state.mode : 'split');

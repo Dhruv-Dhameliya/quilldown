@@ -32,6 +32,7 @@
 .md pre[data-lang]::before{content:attr(data-lang);position:absolute;top:8px;right:12px;font:500 10.5px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--tok-com)}
 .md .code-copy{position:absolute;top:6px;right:8px;padding:3px 9px;border:1px solid var(--md-line);border-radius:7px;background:var(--md-pre-bg);color:var(--md-muted);font:500 11.5px var(--font-sans);opacity:0;transition:opacity .15s}
 .md pre:hover .code-copy,.md .code-copy:focus-visible{opacity:1}
+.md .code-copy.done{opacity:1;color:#16a34a;border-color:#16a34a}
 .md pre:hover[data-lang]::before{opacity:0}
 .md table{display:block;width:max-content;max-width:100%;overflow:auto;border-collapse:collapse;margin:0 0 1.2em;font-size:.95em}
 .md th,.md td{padding:.55em .95em;border:1px solid var(--md-line);text-align:left}
