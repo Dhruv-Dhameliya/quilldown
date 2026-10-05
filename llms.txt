@@ -13,6 +13,10 @@ Quilldown is open source (MIT license). Drafts are saved in the visitor's own br
 - [FAQ](https://quilldown.vercel.app/faq): Answers about Quilldown, the free online Markdown editor: privacy, PDF and Word export, opening .md files, math, diagrams, offline use, sharing and fixes.
 - [About](https://quilldown.vercel.app/about): Quilldown is a free Markdown editor that runs in your browser, released under the MIT License. Learn why it exists, what it doesn't do, and how to get in touch.
 
+## Use Quilldown
+
+- [How to use Quilldown, one button at a time](https://quilldown.vercel.app/docs-md/how-to-use.md): Learn how to use the Quilldown Markdown editor with an interactive tour. Click any button in the editor copy to see what it does, with examples.
+
 ## Learn Markdown
 
 - [What is Markdown? A beginner's guide](https://quilldown.vercel.app/docs-md/what-is-markdown.md): What is Markdown? Learn who created it, why it exists, how it beats plain text, where it's used and how to write your first document in minutes.

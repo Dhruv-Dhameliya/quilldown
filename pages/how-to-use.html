@@ -1,0 +1,189 @@
+<!-- Body of /how-to-use. Words for every button live in pages/how-to-use.data.mjs.
+     Placeholders {{top-actions}} {{snippets}} {{equation}} {{tour-steps}} {{ref-chips}} {{reference}} {{n-features}} {{n-steps}} {{n-groups}}
+     are filled in by tools/build-pages.mjs. Behaviour (scroll tour, pointer, popups) is in js/guide.js.
+     Meta title, description and dates live in pages/how-to-use.md (front matter). Run: node tools/build-pages.mjs -->
+
+{{editor-sprite}}
+
+<header class="hero fx-hero gd-hero">
+  <div class="container">
+    {{crumbs}}
+    <span class="pill"><span class="dot"></span>How to use Quilldown</span>
+    <h1 class="fx-h1">How to use Quilldown, <em>one button at a time</em></h1>
+    <p class="fx-lede">Scroll and a pointer walks you around a copy of the editor, showing what every button does. Or skip ahead and click anything in the copy to see an explanation with an example. It is the quickest way to learn the whole tool.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#tour">Start the tour <svg class="i" style="transform:rotate(90deg)"><use href="#i-arrow"/></svg></a>
+      <a class="text-link" href="/#editor">Or open the editor <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <ul class="fx-glance" aria-label="This guide at a glance">
+      <li><b>{{n-features}}</b><span>buttons explained</span></li>
+      <li><b>{{n-steps}}</b><span>tour steps</span></li>
+      <li><b>{{n-groups}}</b><span>areas covered</span></li>
+      <li><b>0</b><span>sign-ups</span></li>
+    </ul>
+    <nav class="fx-jump" aria-label="Jump to a section">
+      <a href="#tour">The tour</a><a href="#reference">Every feature, explained</a><a href="#questions">Questions</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================ THE TOUR ============================ -->
+<section class="gd" id="tour" aria-labelledby="tour-h">
+  <h2 class="sr-only" id="tour-h">A guided tour of the editor</h2>
+  <div class="container wide gd-track">
+    <div class="gd-sticky"><gd-skip>
+
+      <div class="gd-hud">
+        <span class="gd-count" aria-hidden="true">Step <b id="gdNum">&ndash;</b> of {{n-steps}}</span>
+        <span class="gd-bar" aria-hidden="true"><i id="gdFill"></i></span>
+        <a class="gd-skip" href="#reference">Skip to the content <svg class="i" viewBox="0 0 24 24"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></a>
+        <span class="gd-click"><svg class="i"><use href="#i-arrow"/></svg><span>Click anything in the editor to learn it</span></span>
+        <span class="gd-navs">
+          <button type="button" class="gd-nav" data-dir="-1" aria-label="Previous step"><svg class="i" viewBox="0 0 24 24"><path d="M11 7l-5 5 5 5M18 7l-5 5 5 5"/></svg><span>Previous</span></button>
+          <button type="button" class="gd-nav gd-next" data-dir="1" aria-label="Next step"><span>Next</span><svg class="i" viewBox="0 0 24 24"><path d="M6 7l5 5-5 5M13 7l5 5-5 5"/></svg></button>
+        </span>
+      </div>
+
+      <div class="gd-frame" id="gdFrame">
+        <div class="gd-scaler" id="gdScaler">
+
+          <!-- ======== REPLICA OF THE EDITOR (decorative copy: every part is a button that opens an explanation) ======== -->
+          <div class="gd-tool" id="gdTool" role="group" aria-label="A copy of the Quilldown editor. Select any part of it to learn what it does.">
+            <div class="tool-top">
+              <button type="button" class="brand-mini gd-hot" data-f="logo" aria-label="Quilldown logo"><svg class="logo"><use href="#i-logo"/></svg></button>
+              <div class="tabs">
+                <div class="tab" aria-selected="true"><button type="button" class="tab-name gd-hot" data-f="tab" data-ring=".tab">welcome.md</button><button type="button" class="tab-x gd-hot" data-f="tab-x" aria-label="Close tab"><svg class="i"><use href="#i-x"/></svg></button></div>
+                <div class="tab" aria-selected="false"><button type="button" class="tab-name gd-hot" data-f="tab" data-ring=".tab">notes.md</button><span class="tab-x" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span></div>
+                <div class="tab" aria-selected="false"><button type="button" class="tab-name gd-hot" data-f="tab" data-ring=".tab">readme.md</button><span class="tab-x" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span></div>
+                <button type="button" class="tab-new gd-hot" data-f="tab-new" aria-label="New tab"><svg class="i"><use href="#i-plus"/></svg></button>
+              </div>
+              <div class="tool-actions">{{top-actions}}</div>
+            </div>
+
+            <div class="snippet-bar">{{snippets}}</div>
+
+            <div class="work">
+              <div class="panes" data-mode="split">
+                <section class="pane pane-editor" aria-label="Markdown source">
+                  <div class="pane-label"><span>Markdown</span>
+                    <span class="pane-actions"><button type="button" class="pbtn gd-hot" data-f="copy-md"><svg class="i"><use href="#i-copy"/></svg><span class="pl">Copy Markdown</span></button></span>
+                  </div>
+                  <div class="editor-wrap gd-hot gd-area" data-f="editor" role="button" tabindex="0" aria-label="The editor">
+<pre class="ed-text gd-src"><b># Launch notes</b>
+
+Ship **fast**, write _well_.
+
+- [ ] Draft the post
+- [ ] Check the numbers
+
+| Plan   | Price |
+| :----- | ----: |
+| Editor |  Free |
+
+&gt; [!TIP]
+&gt; Press Ctrl+B to bold text.
+
+$$\int_0^1 x^2\,dx$$</pre>
+                  </div>
+                </section>
+                <div class="gutter gd-hot" data-f="gutter" role="button" tabindex="0" aria-label="Pane divider"></div>
+                <section class="pane pane-preview" aria-label="Preview">
+                  <div class="pane-label"><span>Preview</span>
+                    <span class="pane-actions" data-g="previewcopy">
+                      <button type="button" class="pbtn gd-hot" data-f="copy-rich"><svg class="i"><use href="#i-copy"/></svg><span class="pl">Copy</span></button>
+                      <button type="button" class="pbtn gd-hot" data-f="copy-docs"><svg class="i"><use href="#i-docs"/></svg><span class="pl">Copy for Docs</span></button>
+                    </span>
+                  </div>
+                  <div class="preview-scroll gd-hot gd-area" data-f="preview" role="button" tabindex="0" aria-label="The preview">
+                    <div class="md gd-md">
+                      <p class="md-h md-h1">Launch notes</p>
+                      <p>Ship <strong>fast</strong>, write <em>well</em>.</p>
+                      <ul class="gd-tasks"><li><span class="gd-box"></span>Draft the post</li><li><span class="gd-box"></span>Check the numbers</li></ul>
+                      <table><thead><tr><th align="left">Plan</th><th align="right">Price</th></tr></thead><tbody><tr><td align="left">Editor</td><td align="right">Free</td></tr></tbody></table>
+                      <blockquote class="alert alert-tip"><p class="alert-title">Tip</p><p>Press Ctrl+B to bold text.</p></blockquote>
+                      <div class="math-block gd-eq">{{equation}}</div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+
+            <div class="status">
+              <span class="gd-hot gd-stat" data-f="stats" role="button" tabindex="0" aria-label="Word count"><span><b>41</b> words</span><span><b>231</b> characters</span><span><b>1</b> min read</span></span>
+              <span class="grow"></span>
+              <span class="gd-hot" data-f="cursor" role="button" tabindex="0" aria-label="Cursor position">Ln <b>1</b>, Col <b>1</b></span>
+              <span class="offline-pill gd-hot" data-f="offline" role="button" tabindex="0" aria-label="Works offline"><svg class="i"><use href="#i-zap"/></svg>Works offline</span>
+              <span class="saved gd-hot" data-f="saved" role="button" tabindex="0" aria-label="Saved locally"><svg class="i"><use href="#i-check"/></svg>Saved locally</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gd-ring" id="gdRing" aria-hidden="true"></div>
+        <div class="gd-pointer" id="gdPointer" aria-hidden="true">
+          <span class="gd-ripple"></span>
+          <svg viewBox="0 0 28 32" width="16" height="18"><path d="M3 2.5v22.2l5.6-5.2 3.9 8.7 4.1-1.9-3.9-8.6 7.7-.5z" fill="var(--accent)" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <aside class="gd-cap" id="gdCap" aria-hidden="true">
+        <button type="button" class="gd-close" aria-label="Close this tip"><svg class="i"><use href="#i-x"/></svg></button>
+        <span class="gd-cap-n">Step <b>1</b></span>
+        <p class="gd-cap-t"></p>
+        <p class="gd-cap-p"></p>
+        <div class="gd-cap-a">
+          <button type="button" class="gd-more">Learn more <svg class="i"><use href="#i-arrow"/></svg></button>
+          <a class="btn btn-primary btn-sm gd-cta" href="/#editor" hidden>Open the editor <svg class="i"><use href="#i-max"/></svg></a>
+        </div>
+        <span class="gd-cap-hint">Click any icon inside the highlight.</span>
+      </aside>
+    </gd-skip></div>
+
+    <ol class="gd-steps" aria-label="Tour steps">
+{{tour-steps}}
+    </ol>
+  </div>
+</section>
+
+<div class="container gd-main">
+
+  <!-- ============================ REFERENCE ============================ -->
+  <section class="section fx-sec" id="reference">
+    <div class="section-head">
+      <div class="eyebrow">The full reference</div>
+      <h2 class="title">Every feature, <em>explained</em></h2>
+      <p>The same explanations the tour shows, in one place. Pick an area to narrow the list. On a Mac, read <span class="kbd">Ctrl</span> as <span class="kbd">&#8984;</span>.</p>
+    </div>
+    <div class="gd-chips" role="group" aria-label="Filter by area">{{ref-chips}}</div>
+    <div class="gd-ref">
+{{reference}}
+    </div>
+  </section>
+
+  <!-- ============================ QUESTIONS ============================ -->
+  <section class="section fx-sec" id="questions">
+    <div class="section-head">
+      <div class="eyebrow">Questions about this guide</div>
+      <h2 class="title">Common <em>questions</em></h2>
+    </div>
+    <div class="faq-panel"><div class="faq">
+      <details name="gd-faq" open><summary>Is the editor on this page the real one?</summary><div class="ans"><p>It is a faithful copy built for learning, so nothing you click here changes any document. When you are ready to try things for real, <a href="/#editor">open the editor</a>.</p></div></details>
+      <details name="gd-faq"><summary>Do I need to know Markdown before I start?</summary><div class="ans"><p>No. The toolbar writes the symbols for you, and the preview shows the result straight away. If you would like to learn the syntax behind each button, the <a href="/docs/markdown-cheat-sheet">Markdown cheat sheet</a> lists all of it with examples.</p></div></details>
+      <details name="gd-faq"><summary>What are the most useful keyboard shortcuts?</summary><div class="ans"><p><kbd>Ctrl</kbd> <kbd>B</kbd> for bold, <kbd>Ctrl</kbd> <kbd>I</kbd> for italic, <kbd>Ctrl</kbd> <kbd>K</kbd> for a link, <kbd>Ctrl</kbd> <kbd>F</kbd> to find, <kbd>Ctrl</kbd> <kbd>O</kbd> to open a file and <kbd>Ctrl</kbd> <kbd>S</kbd> to save. On a Mac, use <kbd>&#8984;</kbd> instead of <kbd>Ctrl</kbd>. Hover over any toolbar button in the editor to see its shortcut.</p></div></details>
+      <details name="gd-faq"><summary>Does Quilldown work on a phone?</summary><div class="ans"><p>Yes. The editor shows one pane at a time on a small screen, and you switch between writing and preview with the view buttons in the top bar. On this page the copy shrinks to fit, and the <b>Learn more</b> button under each tour step explains the part being pointed at.</p></div></details>
+      <details name="gd-faq"><summary>Where is my writing saved?</summary><div class="ans"><p>In your own browser, on your own device. Nothing is uploaded. Clearing your browser data removes saved tabs, so export anything you cannot afford to lose. The <a href="/privacy">privacy page</a> has the details.</p></div></details>
+    </div></div>
+    <p class="hw-more"><a class="text-link" href="/faq">See the full FAQ <svg class="i"><use href="#i-arrow"/></svg></a></p>
+  </section>
+
+</div>
+
+<section class="cta fx-cta">
+  <div class="container">
+    <h2 class="title">Your turn. <em>Write something.</em></h2>
+    <p class="cta-lead">Open the editor and try the buttons you just met. It takes a few seconds, and nothing leaves your browser.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/#editor">Open the editor <svg class="i"><use href="#i-max"/></svg></a>
+      <a class="text-link" href="/docs">All documentation <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>

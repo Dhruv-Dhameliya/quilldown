@@ -6,7 +6,7 @@
 import { readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 import vm from 'node:vm';
 
@@ -22,6 +22,7 @@ const GITHUB_PROFILE = 'https://github.com/Dhruv-Dhameliya';
 const AUTHOR = 'Dhruv-Dhameliya';
 const OG_IMAGE = SITE + '/social/og-image.png?v=2';
 const CATEGORIES = [
+  { id: 'use', title: 'Use Quilldown', blurb: 'Learn the editor itself, one button at a time.' },
   { id: 'learn', title: 'Learn Markdown', blurb: 'The basics and the reference.' },
   { id: 'convert', title: 'Convert & export', blurb: 'Turn Markdown into PDF, Word, HTML or an e-book — privately, in your browser.' },
   { id: 'write', title: 'Write better documents', blurb: 'Tables, math, diagrams, emoji and READMEs — the parts of Markdown people search for most.' }
@@ -259,7 +260,7 @@ const footLabel = p => (p.short || p.h1).replace(/Markdown/g, 'MD').replace(/ & 
 const footerHTML = guides => `<footer class="footer"><div class="container">
   <div class="footer-cols">
     <div><a class="brand" href="/#top"><svg class="logo"><use href="#i-logo"/></svg>Quilldown</a><p>Quilldown is a free, private Markdown editor with live preview, math and diagrams. It works offline, and your writing never leaves your browser.</p></div>
-    ${CATEGORIES.map(c => `<div><h3>${esc(FOOT_TITLES[c.id] || c.title)}</h3><ul>${guides.filter(p => p.category === c.id).map(p => `<li><a href="/docs/${p.slug}">${esc(footLabel(p))}</a></li>`).join('')}</ul></div>`).join('\n    ')}
+    ${CATEGORIES.filter(c => c.id !== 'use').map(c => `<div><h3>${esc(FOOT_TITLES[c.id] || c.title)}</h3><ul>${guides.filter(p => p.category === c.id || (c.id === 'learn' && p.category === 'use')).map(p => `<li><a href="/docs/${p.slug}">${esc(footLabel(p))}</a></li>`).join('')}</ul></div>`).join('\n    ')}
     <div><h3>Contact</h3><ul>
       <li><a href="${GITHUB_PROFILE}" target="_blank" rel="me noopener noreferrer">GitHub profile</a></li>
       <li><a href="${GITHUB}/issues" target="_blank" rel="noopener noreferrer">Report an issue</a></li>
@@ -267,7 +268,7 @@ const footerHTML = guides => `<footer class="footer"><div class="container">
       <li><a href="/about">About</a></li>
     </ul></div>
   </div>
-  <div class="footer-base"><span>© 2026 Quilldown · Open source · Your writing never leaves your browser</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Docs</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span><label class="wide-opt" title="Let the pages use the full width of a large screen"><input type="checkbox" id="wideToggle"><span>Wide screen</span></label></div>
+  <div class="footer-base"><span>© 2026 Quilldown · Open source · Your writing never leaves your browser</span><span><a href="/#editor">Editor</a> · <a href="/features">Features</a> · <a href="/how-quilldown-works">How it works</a> · <a href="/docs/how-to-use">How to use</a> · <a href="/privacy">Privacy</a> · <a href="/docs">Docs</a> · <a href="/faq">FAQ</a> · <a href="/about">About</a></span><label class="wide-opt" title="Let the pages use the full width of a large screen"><input type="checkbox" id="wideToggle"><span>Wide screen</span></label></div>
 </div></footer>`;
 const h1HTML = p => {
   const t = p.h1; let em = p.h1em;
@@ -402,6 +403,68 @@ const pnHTML = p => { const i = pages.indexOf(p), a = pages[i - 1], b = pages[i 
 
 /* ---------- build each page ---------- */
 await mkdir(path.join(ROOT, 'docs'), { recursive: true });
+
+/* ---------- /how-to-use: replica, tour steps and reference are generated from pages/how-to-use.data.mjs ---------- */
+async function howToUseHTML(src) {
+  const D = await import(pathToFileURL(path.join(ROOT, 'pages', 'how-to-use.data.mjs')).href + '?v=' + Date.now());
+  const F = new Map(D.FEATURES.map(f => [f.id, f]));
+  const feat = id => { const f = F.get(id); if (!f) throw new Error('how-to-use: unknown feature "' + id + '"'); return f; };
+  const chev = '<svg class="i chev"><use href="#i-chev"/></svg>';
+  const lead = f => f.badge ? '<span class="sbadge">' + f.badge + '</span>' : '<svg class="i"><use href="#i-' + f.icon + '"/></svg>';
+  const SUN = '<svg class="i theme-icon-sun"><use href="#i-sun"/></svg><svg class="i theme-icon-moon"><use href="#i-moon"/></svg>';
+  const MAX = '<svg class="i full-max"><use href="#i-max"/></svg><svg class="i full-min"><use href="#i-min"/></svg>';
+  const topBtn = id => {
+    const f = feat(id);
+    const inner = id === 'theme' ? SUN : id === 'full' ? MAX : lead(f);
+    return '<button type="button" class="tbtn' + (f.chev ? '' : ' icon') + ' gd-hot" data-f="' + id + '" aria-label="' + escAttr(f.name) + '">' + inner + (f.chev ? chev : '') + '</button>';
+  };
+  const seg = '<div class="seg" data-g="seg" role="group" aria-label="View mode">' + D.SEG.map(id => { const f = feat(id); return '<button type="button" class="gd-hot" data-f="' + id + '" aria-pressed="' + (id === 'view-split') + '" aria-label="' + escAttr(f.name) + '">' + lead(f) + '</button>'; }).join('') + '</div>';
+  const top = D.TOP_LAYOUT.map(c => c === '|' ? '<span class="tb-sep"></span>' : c.items.map(id => id === 'seg' ? seg : topBtn(id)).join('')).join('');
+  const snippets = D.SNIP_LAYOUT.map(c => '<span class="gd-g" data-g="' + c.id + '">' + c.items.map(id => {
+    const f = feat(id);
+    return '<button type="button" class="sbtn gd-hot" data-f="' + id + '" aria-label="' + escAttr(f.name) + '">' + lead(f) + (f.chev ? chev : '') + '</button>';
+  }).join('') + '</span>').join('<span class="sb-sep"></span>');
+
+  const eq = (await renderBody('$$\\int_0^1 x^2\\,dx = \\tfrac{1}{3}$$', 'how-to-use')).html.replace(/<\/?p>/g, '').trim();
+
+  // icons for the replica: the editor's own symbols (the generated pages only carry a few)
+  const have = new Set([...SPRITE.matchAll(/<symbol id="(i-[a-z0-9-]+)"/g)].map(m => m[1]));
+  const syms = [...indexHtml.matchAll(/<symbol id="(i-[a-z0-9-]+)"[\s\S]*?<\/symbol>/g)].filter(m => !have.has(m[1])).map(m => m[0].replace(/\s*\n\s*/g, ' '));
+  const sprite = '<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>' + syms.join('') + '</defs></svg>';
+
+  const steps = D.TOUR.map(t => '      <li class="gd-step" data-t="' + t.t + '"' + (t.cta ? ' data-cta="1"' : '') + (t.hint ? ' data-hint="1"' : '') + '><h3 class="gd-st">' + esc(t.title) + '</h3><p>' + esc(t.text) + '</p></li>').join('\n');
+
+  const art = async f => {
+    const keys = f.keys ? '<span class="gf-keys">' + f.keys.map(k => '<kbd>' + esc(k) + '</kbd>').join('') + '</span>' : '';
+    const ex = f.ex ? (await renderBody('````example title="' + f.ex.title.replace(/"/g, '') + '"\n' + f.ex.md + '\n````', 'how-to-use')).html : '';
+    return '<article class="gf" id="f-' + f.id + '" data-g="' + f.g + '"><header class="gf-h"><span class="gf-ico" aria-hidden="true">' + lead(f) + '</span><h4 class="gf-t">' + esc(f.name) + '</h4>' + keys + '</header>'
+      + '<p class="gf-lead">' + esc(f.lead) + '</p>'
+      + '<div class="gf-body">' + f.body.map(b => '<p>' + b + '</p>').join('') + (f.steps ? '<ol class="gf-steps">' + f.steps.map(x => '<li>' + x + '</li>').join('') + '</ol>' : '') + '</div>'
+      + (ex ? '<div class="gf-ex">' + ex + '</div>' : '')
+      + (f.tip ? '<p class="gf-tip"><b>Good to know.</b> ' + f.tip + '</p>' : '')
+      + (f.docs ? '<p class="gf-docs"><a class="text-link" href="' + f.docs[0] + '">' + esc(f.docs[1]) + ' ' + ARROW + '</a></p>' : '')
+      + '</article>';
+  };
+  let reference = '';
+  for (const g of D.GROUPS) {
+    const list = D.FEATURES.filter(f => f.g === g.id);
+    if (!list.length) { warn('how-to-use: group "' + g.id + '" has no features'); continue; }
+    reference += '<section class="gd-rg" id="ref-' + g.id + '" data-g="' + g.id + '"><h3 class="gd-rg-h">' + esc(g.name) + '</h3><p class="gd-rg-blurb">' + esc(g.blurb) + '</p><div class="gd-cards">' + (await Promise.all(list.map(art))).join('\n') + '</div></section>\n';
+  }
+  for (const f of D.FEATURES) if (!D.GROUPS.some(g => g.id === f.g)) warn('how-to-use: feature "' + f.id + '" has an unknown group "' + f.g + '"');
+  const chips = '<button type="button" aria-pressed="true" data-g="all">All <span>' + D.FEATURES.length + '</span></button>' + D.GROUPS.map(g => '<button type="button" aria-pressed="false" data-g="' + g.id + '">' + esc(g.name) + ' <span>' + D.FEATURES.filter(f => f.g === g.id).length + '</span></button>').join('');
+
+  let out = src.replace('{{editor-sprite}}', () => sprite).replace('{{top-actions}}', () => top).replace('{{snippets}}', () => snippets).replace('{{equation}}', () => eq)
+    .replace('{{tour-steps}}', () => steps).replace('{{ref-chips}}', () => chips).replace('{{reference}}', () => reference)
+    .split('{{n-features}}').join(String(D.FEATURES.length)).split('{{n-steps}}').join(String(D.TOUR.length)).split('{{n-groups}}').join(String(D.GROUPS.length));
+
+  // every tour target and every replica button must resolve to something
+  const hot = new Set([...out.matchAll(/data-f="([a-z0-9-]+)"/g)].map(m => m[1])), grp = new Set([...out.matchAll(/data-g="([a-z0-9-]+)"/g)].map(m => m[1]));
+  for (const t of D.TOUR) { const [k, id] = t.t.split(':'); if (k === 'f' ? !hot.has(id) : !grp.has(id)) warn('how-to-use: tour step "' + t.title + '" points at "' + t.t + '", which is not in the replica'); }
+  for (const id of hot) if (!F.has(id)) warn('how-to-use: replica button "' + id + '" has no explanation in the data file');
+  return out;
+}
+
 const built = [];
 for (const p of allPages) {
   const urlPath = p.isSite ? `/${p.slug}` : `/docs/${p.slug}`, url = SITE + urlPath;
@@ -474,8 +537,9 @@ for (const p of allPages) {
       }).join('');
       src = src.replace('{{doc}}', () => doc).replace('{{source}}', () => sourceHtml).split('{{words}}').join(String(dwc)).split('{{mins}}').join(String(dmins));
     }
+    if (p.slug === 'how-to-use') src = await howToUseHTML(src);
     src = src.split('{{updated}}').join(fmtDate(p.updated));
-    custom = src; html = src;
+    custom = src; html = src; p.customHtml = src;
     const qa = [...src.matchAll(/<summary>([\s\S]*?)<\/summary><div class="ans">([\s\S]*?)<\/div><\/details>/g)].map(m => ({ q: stripTags(m[1]), a: m[2], html: m[2] }));
     if (qa.length && p.slug !== 'faq') faqItems = qa;
   }
@@ -528,7 +592,7 @@ ${html}
 ${p.copymd ? `<textarea id="cheat-md" hidden readonly aria-hidden="true">${escAttr(cleanCopy(p.body))}</textarea>\n` : ''}${(p.scripts || '').split(',').map(x => x.trim()).filter(Boolean).map(x => `<script src="${x}" defer></script>\n`).join('')}</body>
 </html>
 `;
-  if (custom) p.html = headHTML({ title: p.title, description: p.description, url, type: 'website', math: true, ld: graph(nodes) }) + navHTML({ about: 'about', features: 'features', 'how-quilldown-works': 'how', privacy: 'privacy', faq: 'faq' }[p.slug] || 'about') + (custom.includes('<main class="ab">') ? '\n' + custom + '\n' : '\n<main class="fx">\n' + custom + '\n</main>\n') + footerHTML(pages) + '\n<script src="/js/site.js" defer></script>\n' + (p.scripts || '').split(',').map(x => x.trim()).filter(Boolean).map(x => `<script src="${x}" defer></script>\n`).join('') + '</body>\n</html>\n';
+  if (custom) p.html = headHTML({ title: p.title, description: p.description, url, type: p.isSite ? 'website' : 'article', article: p.isSite ? null : { published: p.published || p.updated, modified: p.updated, section: eyebrow }, math: true, ld: graph(nodes) }) + navHTML(p.isSite ? ({ about: 'about', features: 'features', 'how-quilldown-works': 'how', privacy: 'privacy', faq: 'faq' }[p.slug] || 'about') : 'docs') + (custom.includes('<main class="ab">') ? '\n' + custom + '\n' : '\n<main class="fx">\n' + custom.replace('{{crumbs}}', () => crumbsHTML(crumbs)) + '\n</main>\n') + footerHTML(pages) + '\n<script src="/js/site.js" defer></script>\n' + (p.scripts || '').split(',').map(x => x.trim()).filter(Boolean).map(x => `<script src="${x}" defer></script>\n`).join('') + '</body>\n</html>\n';
   await writeFile(path.join(ROOT, p.isSite ? `${p.slug}.html` : `docs/${p.slug}.html`), p.html);
   built.push({ slug: p.slug, words: wc, mins, faq: faqItems.length, title: p.title.length, desc: p.description.length });
 }
@@ -545,9 +609,11 @@ const minsOf = slug => (built.find(b => b.slug === slug) || {}).mins || 5;
     webPageNode(url, title, description, { '@type': 'CollectionPage', breadcrumb: { '@id': url + '#breadcrumb' }, datePublished: FIRST_PUBLISHED, dateModified: LAST_UPDATED, mainEntity: { '@id': url + '#list' } }),
     breadcrumbNode(url, crumbs),
     { '@type': 'ItemList', '@id': url + '#list', name: 'Quilldown documentation: Markdown guides and cheat sheet', numberOfItems: pages.length, itemListElement: pages.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}/docs/${p.slug}`, name: p.h1 })) }];
+  const HD = await import(pathToFileURL(path.join(ROOT, 'pages', 'how-to-use.data.mjs')).href + '?v=' + Date.now());
   let tpl = (await readFile(path.join(ROOT, 'pages', 'docs.html'), 'utf8')).replace(/\r\n/g, '\n').replace(/<!--[\s\S]*?-->/g, '');
   tpl = tpl.replace(/\{\{mins:([\w-]+)\}\}/g, (m, slug) => { if (!slugs.has(slug)) warn(`docs.html: unknown guide "${slug}"`); return String(minsOf(slug)); })
-    .split('{{updated}}').join(fmtDate(LAST_UPDATED)).split('{{count}}').join(String(pages.length));
+    .split('{{updated}}').join(fmtDate(LAST_UPDATED)).split('{{count}}').join(String(pages.length))
+    .split('{{n-features}}').join(String(HD.FEATURES.length)).split('{{n-steps}}').join(String(HD.TOUR.length));
   for (const m of tpl.matchAll(/href="\/docs\/([^"#]+)/g)) if (!slugs.has(m[1])) warn(`docs.html: broken link /docs/${m[1]}`);
   const qa = [...tpl.matchAll(/<summary>([\s\S]*?)<\/summary><div class="ans">([\s\S]*?)<\/div><\/details>/g)].map(m => ({ q: stripTags(m[1]), a: m[2], html: m[2] }));
   if (qa.length) nodes.push(faqNode(url, qa));
@@ -642,14 +708,14 @@ const minsOf = slug => (built.find(b => b.slug === slug) || {}).mins || 5;
     return decode(m).split('\n').map(l => l.replace(/^[ \t]+|[ \t]+$/g, '')).join('\n').replace(/\n{3,}/g, '\n\n').trim();
   };
   /** A guide's Markdown source without the site-only widgets (jump chips, tool mounts, generated diagram/emoji fences). */
-  const guideMd = p => cleanCopy(p.body).replace(/<section class="tool"[^>]*><\/section>\n*/g, '').replace(new RegExp('^(' + String.fromCharCode(96) + '{3,})(?:diagram|emoji-table)[^\\n]*\\n[\\s\\S]*?\\n\\1\\n*', 'gm'), '').replace(/\n{3,}/g, '\n\n').trim();
+  const guideMd = p => p.customHtml ? htmlToMd('<main>' + p.customHtml.replace(/<gd-skip>[\s\S]*?<\/gd-skip>/g, '').replace('{{crumbs}}', '') + '</main>').replace(/\n{3,}/g, '\n\n').trim() : cleanCopy(p.body).replace(/<section class="tool"[^>]*><\/section>\n*/g, '').replace(new RegExp('^(' + String.fromCharCode(96) + '{3,})(?:diagram|emoji-table)[^\\n]*\\n[\\s\\S]*?\\n\\1\\n*', 'gm'), '').replace(/\n{3,}/g, '\n\n').trim();
   const head = (p, url) => '# ' + p.h1 + '\n\n> ' + p.description + '\n\nSource: <' + url + '>  \nUpdated: ' + p.updated + '\n\n';
 
   await mkdir(path.join(ROOT, 'docs-md'), { recursive: true });
   for (const p of pages) await writeFile(path.join(ROOT, 'docs-md', p.slug + '.md'), head(p, SITE + '/docs/' + p.slug) + guideMd(p) + '\n');
 
   const order = ['features', 'how-quilldown-works', 'privacy', 'faq', 'about'].map(sl => sitePages.find(p => p.slug === sl)).filter(Boolean);
-  const CAT_LABEL = { learn: 'Learn Markdown', convert: 'Convert and export', write: 'Write better documents' };
+  const CAT_LABEL = { use: 'Use Quilldown', learn: 'Learn Markdown', convert: 'Convert and export', write: 'Write better documents' };
   const llms = ['# Quilldown', '',
     '> Quilldown is a free online Markdown editor with live preview, tabs, LaTeX math, Mermaid diagrams and export to PDF, Word (.docx), HTML, PNG, EPUB and plain text. It runs entirely in the browser: nothing a user writes is uploaded, no account is needed, and it works offline after the first visit.', '',
     'Quilldown is open source (MIT license). Drafts are saved in the visitor\'s own browser storage; there is no server-side copy. The guides below are plain-language documentation about Markdown itself and about using Quilldown.', '',
@@ -664,7 +730,7 @@ const minsOf = slug => (built.find(b => b.slug === slug) || {}).mins || 5;
   await writeFile(path.join(ROOT, 'llms.txt'), llms);
 
   const full = ['# Quilldown: full text', '', '> The complete text of Quilldown\'s product pages and guides in one file, for language models and other automated readers. Canonical addresses are given under each title.', ''];
-  for (const p of order) full.push('---', '', htmlToMd(p.html), '', 'Source: ' + SITE + '/' + p.slug, '');
+  for (const p of order) full.push('---', '', htmlToMd(p.html.replace(/<gd-skip>[\s\S]*?<\/gd-skip>/g, '')), '', 'Source: ' + SITE + '/' + p.slug, '');
   for (const p of pages) full.push('---', '', head(p, SITE + '/docs/' + p.slug).trimEnd(), '', guideMd(p), '');
   await writeFile(path.join(ROOT, 'llms-full.txt'), full.join('\n').replace(/\n{3,}/g, '\n\n') + '\n');
 }

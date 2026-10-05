@@ -144,6 +144,8 @@ Every copy button turns into a green check mark for a moment once the text is on
 
 Free tutorials live alongside the app at <https://quilldown.vercel.app/guides>. Every example opens in the editor with one click.
 
+New here? Take the interactive tour at <https://quilldown.vercel.app/docs/how-to-use>. As you scroll, a pointer walks around a copy of the editor, and you can click any button in the copy to see what it does, with an example.
+
 - [What is Markdown?](https://quilldown.vercel.app/docs/what-is-markdown) — a beginner's guide
 - [Markdown cheat sheet](https://quilldown.vercel.app/docs/markdown-cheat-sheet) — every piece of syntax with live examples
 - [Markdown to PDF](https://quilldown.vercel.app/docs/markdown-to-pdf), [to Word and Google Docs](https://quilldown.vercel.app/docs/markdown-to-word) and [to HTML](https://quilldown.vercel.app/docs/markdown-to-html)
