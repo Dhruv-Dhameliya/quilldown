@@ -16,7 +16,7 @@
   var steps = $$('.gd-step');
   var DW = 1180, DH = 580;
   var cur = -1, ready = false, aimed = null, popOpen = false, dismissed = false, lit = false;
-  var compact = false, frameW = 0, frameH = 0, basePad = 14, baseScale = 1, cam = { s: 1, x: 0, y: 0 };
+  var compact = false, frameW = 0, frameH = 0, basePad = 14, baseScale = 1;
 
   /* ---------------------------------------------------------------- reference filter (works on its own) */
   (function chips() {
@@ -81,7 +81,6 @@
     return { s: s, x: clamp(frameW / 2 - cx * s, frameW - DW * s - 6, 6), y: clamp(frameH / 2 - cy * s, frameH - DH * s - 6, 6) };
   }
   function applyCam(c, instant) {
-    cam = c;
     if (instant) scaler.style.transition = 'none';
     scaler.style.transform = 'translate3d(' + c.x + 'px,' + c.y + 'px,0) scale(' + c.s + ')';
     if (instant) { void scaler.offsetWidth; scaler.style.transition = ''; }

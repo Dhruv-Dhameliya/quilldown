@@ -221,7 +221,7 @@
       CLI: { start: '```bash\nnpm install --global NAME\nNAME --help\n```\n\n```bash\nNAME greet Ada --loud\n# HELLO, ADA!\n```', feat: ['One command, clear output', 'Works in scripts and pipelines', 'Helpful error messages'], cfg: [['--loud', 'flag', 'off', 'Shout the greeting'], ['--lang', 'string', '"en"', 'Language of the greeting']] },
       Data: { start: 'Load the data with any tool that reads CSV:\n\n```python\nimport pandas as pd\n\ndata = pd.read_csv("data.csv")\nprint(data.head())\n```', feat: ['Cleaned and documented', 'Source and license stated', 'Steps to reproduce the results'], cfg: [['date', 'string', '', 'Collection date (YYYY-MM-DD)'], ['value', 'number', '', 'The measured value']] }
     };
-    function table(head, rows) { var w = head.map(function (h, i) { return Math.max(h.length, 3); }); return '| ' + head.join(' | ') + ' |\n| ' + w.map(function (n) { return '-'.repeat(n); }).join(' | ') + ' |\n' + rows.map(function (r) { return '| ' + r.map(function (c) { return c === '' ? ' ' : '`' + c + '`'; }).join(' | ') + ' |'; }).join('\n'); }
+    function table(head, rows) { var w = head.map(function (h) { return Math.max(h.length, 3); }); return '| ' + head.join(' | ') + ' |\n| ' + w.map(function (n) { return '-'.repeat(n); }).join(' | ') + ' |\n' + rows.map(function (r) { return '| ' + r.map(function (c) { return c === '' ? ' ' : '`' + c + '`'; }).join(' | ') + ' |'; }).join('\n'); }
     function make() {
       var n = i1.value.trim() || 'project-name', d = i2.value.trim(), S = SETUP[st.type], o = st.on, p = [];
       p.push('# ' + n);
@@ -230,7 +230,7 @@
       if (o.screenshot) p.push('![Screenshot of ' + n + ' showing the main screen](docs/screenshot.png)');
       if (o.features) p.push('## Features\n\n' + S.feat.map(function (x) { return '- ' + x; }).join('\n'));
       if (o.start) p.push('## Quick start\n\n' + S.start.split('NAME').join(n));
-      if (o.config) p.push('## ' + (st.type === 'Data' ? 'Columns' : 'Configuration') + '\n\n' + (st.type === 'Data' ? table(['Column', 'Type', 'Default', 'Description'], S.cfg.map(function (r) { return r.concat(); })) : table(['Option', 'Type', 'Default', 'Description'], S.cfg)));
+      if (o.config) p.push('## ' + (st.type === 'Data' ? 'Columns' : 'Configuration') + '\n\n' + (st.type === 'Data' ? table(['Column', 'Type', 'Default', 'Description'], S.cfg) : table(['Option', 'Type', 'Default', 'Description'], S.cfg)));
       if (o.roadmap) p.push('## Roadmap\n\n- [x] First release\n- [ ] Next feature\n- [ ] Documentation site');
       if (o.contributing) p.push('## Contributing\n\nBug reports and pull requests are welcome. Please open an issue before starting large changes.');
       if (o.license) p.push('## License\n\nReleased under the [MIT License](LICENSE).');
@@ -238,7 +238,13 @@
       out.value = m; openA.href = editorLink(m, 'README.md');
       lib('/vendor/marked.min.js', function () { return !!window.marked; }).then(function () { return lib('/vendor/purify.min.js', function () { return !!window.DOMPurify; }); }).then(function () {
         var h = window.marked.parse(m, { gfm: true }); h = h.replace(/<(\/?)h([1-6])([ >])/g, function (x, sl, lv, e) { return sl ? '</div>' : '<div class="hd hd' + lv + '"' + (e === '>' ? '>' : ' '); });
-        prev.innerHTML = window.DOMPurify.sanitize(h);
+        var inert = new DOMParser().parseFromString(window.DOMPurify.sanitize(h), 'text/html');   // inert document: nothing is fetched while it is being edited
+        [].slice.call(inert.querySelectorAll('img')).forEach(function (im) {
+          if (/^(https?:)?\/\//i.test(im.getAttribute('src') || '')) return;   // web images (badges) still show
+          var ph = inert.createElement('span'); ph.className = 'img-ph'; ph.setAttribute('role', 'img'); ph.setAttribute('aria-label', im.alt || 'image'); ph.textContent = '🖼 ' + (im.alt || 'image');
+          im.replaceWith(ph);   // files named in a generated README don't exist here: a placeholder instead of a broken image
+        });
+        prev.innerHTML = inert.body.innerHTML;
       }, function () { prev.textContent = m; });
     }
     i1.addEventListener('input', make); i2.addEventListener('input', make);

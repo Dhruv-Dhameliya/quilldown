@@ -120,7 +120,8 @@ function exampleHTML(src, args, pageSlug) {
 async function diagramHTML(name) {
   const d = diagrams[name]; if (!d) { warn(`unknown diagram "${name}"`); return ''; }
   const dim = async mode => { const svg = await readFile(path.join(ROOT, `assets/diagrams/${name}-${mode}.svg`), 'utf8'); return [/ width="(\d+)"/.exec(svg)[1], / height="(\d+)"/.exec(svg)[1]]; };
-  const [w, h] = await dim('light'), id = 'c' + (++codeSeq);
+  const id = 'c' + (++codeSeq);                       // taken before the first await, so ids follow document order on every build
+  const [w, h] = await dim('light');
   const img = mode => `<img class="only-${mode}" src="/assets/diagrams/${name}-${mode}.svg" width="${w}" height="${h}" alt="${escAttr(d.alt)}" loading="lazy" decoding="async">`;
   return `<figure class="diagram"><div class="code"><div class="code-h"><span>mermaid · ${esc(d.title)}</span><span class="code-actions">${copyButton(id)}<a class="open-btn" href="${openInEditor('```mermaid\n' + d.source + '\n```\n', name + '-diagram.md')}" rel="nofollow">Open in editor</a></span></div><pre id="${id}"><code>${esc(d.source)}</code></pre></div><div class="diagram-img">${img('light')}${img('dark')}</div></figure>\n`;
 }
@@ -205,24 +206,9 @@ function splitFaq(md) {
   return { md: md.slice(0, m.index), faq: items };
 }
 const inlineHtml = md => new Marked({ gfm: true, extensions: extensions({ order: [], defs: {} }) }).parse(md).trim();
-/** Homepage FAQ: questions grouped under h3 headings, generous spacing (styled in styles.css). */
-function faqGroupsHTML(items) {
-  const groups = [];
-  for (const i of items) { let g = groups.find(x => x.name === i.group); if (!g) groups.push(g = { name: i.group, items: [] }); g.items.push(i); }
-  const tabs = groups.map((g, gi) => `<button type="button" role="tab" id="faq-tab-${gi}" aria-controls="faq-panel-${gi}" aria-selected="${gi === 0}">${esc(g.name)}<span>${g.items.length}</span></button>`).join('');
-  const panels = groups.map((g, gi) => `<div class="faq-panel" role="tabpanel" id="faq-panel-${gi}" aria-labelledby="faq-tab-${gi}"><h3 class="faq-group">${esc(g.name)}</h3><div class="faq">${g.items.map((i, n) => `<details name="faq-${gi}"${gi === 0 && n === 0 ? ' open' : ''}><summary>${esc(i.q)}</summary><div class="ans">${i.a}</div></details>`).join('')}</div></div>`).join('');
-  return `<div class="faq-tabs" role="tablist" aria-label="FAQ topics">${tabs}</div>${panels}`;
-}
 /** Homepage FAQ: a short, flat list (single-open accordion). */
 function faqFlatHTML(items) {
   return `<div class="faq-panel"><div class="faq">${items.map((i, n) => `<details name="faq-home"${n === 0 ? ' open' : ''}><summary>${esc(i.q)}</summary><div class="ans">${i.a}</div></details>`).join('')}</div></div>`;
-}
-/** /faq page: every group as an h2 with its questions. */
-function faqPageHTML(items) {
-  const groups = [];
-  for (const i of items) { let g = groups.find(x => x.name === i.group); if (!g) groups.push(g = { name: i.group, id: slugify(i.group), items: [] }); g.items.push(i); }
-  const html = groups.map(g => `<h2 id="${g.id}">${esc(g.name)}</h2>\n<div class="faq">${g.items.map(i => `<details><summary>${esc(i.q)}</summary><div class="ans">${i.a}</div></details>`).join('')}</div>`).join('\n');
-  return { html, toc: groups.map(g => ({ id: g.id, text: g.name })) };
 }
 function faqHTML(items, asMarkdown) {
   return `<div class="faq-panel"><div class="faq">${items.map(i => `<details name="gfaq"><summary>${esc(i.q)}</summary><div class="ans">${asMarkdown ? inlineHtml(i.a) : i.a}</div></details>`).join('')}</div></div>`;
@@ -473,12 +459,7 @@ for (const p of allPages) {
   const { html: bodyHtml, toc } = await renderBody(md, p.slug, !p.isSite);
   let html = bodyHtml;
   let faqItems = faq.map(i => ({ q: i.q, a: i.a, html: inlineHtml(i.a) }));
-  let faqPage = false;
-  if (p.slug === 'faq') {
-    const fp = faqPageHTML(faqHome); html = bodyHtml.replace('<p>FAQ_LIST</p>', () => fp.html); toc.length = 0; toc.push(...fp.toc);
-    faqItems = faqHome.map(i => ({ q: i.q, a: i.a, html: i.a })); faqPage = true;
-  }
-  if (faqItems.length && !faqPage) { toc.push({ id: 'faq', text: 'Frequently asked questions' }); html += `<h2 id="faq">Frequently asked questions</h2>\n${faqHTML(faqItems, true)}`; }
+  if (faqItems.length) { toc.push({ id: 'faq', text: 'Frequently asked questions' }); html += `<h2 id="faq">Frequently asked questions</h2>\n${faqHTML(faqItems, true)}`; }
   let custom = null;
   if (existsSync(path.join(ROOT, 'pages', p.slug + '.html'))) {
     let src = (await readFile(path.join(ROOT, 'pages', p.slug + '.html'), 'utf8')).replace(/\r\n/g, '\n').replace(/<!--[\s\S]*?-->/g, '');
@@ -530,12 +511,7 @@ for (const p of allPages) {
         .replace(/<input[^>]*type="checkbox"[^>]*>\s?/g, '<span class="ab-tick" aria-hidden="true"></span>')
         .replace(/<a href="([^"]*)"([^>]*)>Read more<\/a>/g, (m, h, rest) => `<a class="ab-more" href="${h}"${rest}>Read more</a>`)
         .replace('callout-warning"><p class="callout-title">Warning', 'callout-warning"><p class="callout-title">Good to know');
-      const raw = '# ' + p.h1 + '\n\n' + p.lead + '\n\n' + p.body.trim() + '\n';
-      const sourceHtml = raw.split('\n').map((line, i) => {
-        const t = esc(line).replace(/(^#{1,6}\s)|(\*\*)|(\|)|(^- \[[ x]\]\s)|(^&gt;\s)|(\[\^?[^\]]*\]\()/g, m => `<span class="m">${m}</span>`);
-        return `<span class="ln" data-n="${i + 1}">${t || ' '}</span>`;
-      }).join('');
-      src = src.replace('{{doc}}', () => doc).replace('{{source}}', () => sourceHtml).split('{{words}}').join(String(dwc)).split('{{mins}}').join(String(dmins));
+      src = src.replace('{{doc}}', () => doc).split('{{words}}').join(String(dwc)).split('{{mins}}').join(String(dmins));
     }
     if (p.slug === 'how-to-use') src = await howToUseHTML(src);
     src = src.split('{{updated}}').join(fmtDate(p.updated));

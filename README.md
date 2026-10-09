@@ -142,7 +142,7 @@ Every copy button turns into a green check mark for a moment once the text is on
 
 ## Guides
 
-Free tutorials live alongside the app at <https://quilldown.vercel.app/guides>. Every example opens in the editor with one click.
+Free tutorials live alongside the app at <https://quilldown.vercel.app/docs>. Every example opens in the editor with one click.
 
 New here? Take the interactive tour at <https://quilldown.vercel.app/docs/how-to-use>. As you scroll, a pointer walks around a copy of the editor, and you can click any button in the copy to see what it does, with an example.
 

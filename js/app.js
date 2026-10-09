@@ -179,25 +179,17 @@ function demoteH1(root) {
     h.replaceWith(n);
   });
 }
-/** Headings inside the landing page's syntax cards are examples, not page headings → styled paragraphs. */
-function headingsToParagraphs(root) {
-  $$('h1,h2,h3,h4,h5,h6', root).forEach(h => {
-    const p = document.createElement('p');
-    p.className = 'md-h md-h' + h.tagName[1];
-    while (h.firstChild) p.appendChild(h.firstChild);
-    h.replaceWith(p);
-  });
-}
 
 function slugify(s) {
   return s.trim().toLowerCase().replace(/[^\p{L}\p{N}\s-]/gu, '').replace(/\s+/g, '-') || 'section';
 }
-function assignIds(root) {
+/** `prefix` keeps the live preview's heading ids from colliding with the page's own ids (#features, #faq, #editor …). */
+function assignIds(root, prefix = '') {
   const seen = {};
   $$('h1,h2,h3,h4,h5,h6', root).forEach(h => {
     let id = slugify(h.textContent); const n = seen[id] = (seen[id] || 0) + 1;
     if (n > 1) id += '-' + (n - 1);
-    h.id = id;
+    h.id = prefix + id;
   });
 }
 
@@ -329,7 +321,7 @@ function render() {
   preview.innerHTML = html;
   demoteH1(preview);
   postProcess(preview, 'preview');
-  assignIds(preview);
+  assignIds(preview, 'pv-');
   renderMermaidIn(preview, mermaidTheme(), true);
   blocksDirty = true;
   updateOutline();
@@ -533,17 +525,6 @@ function indentLines(dir) {
   });
   const total = deltas.reduce((a, b) => a + b, 0), text = out.join('\n');
   replace(ls, le, text, Math.max(ls, s + deltas[0]), Math.max(ls, e + total));
-}
-function setText(text, keepSelection) {
-  editor.focus({ preventScroll: true });
-  editor.select();
-  replace(0, editor.value.length, text, 0, 0);
-  if (!keepSelection) { editor.scrollTop = 0; pane.scrollTop = 0; }
-}
-function appendMarkdown(md) {
-  const v = editor.value, gap = !v.trim() ? '' : v.endsWith('\n\n') ? '' : v.endsWith('\n') ? '\n' : '\n\n';
-  replace(v.length, v.length, gap + md + '\n');
-  editor.scrollTop = editor.scrollHeight;
 }
 
 /* ---------------------------------------------------------------
@@ -1064,6 +1045,7 @@ function domToText(root) {
     const out = [];
     for (const c of node.children) {
       const tag = c.tagName.toLowerCase();
+      if (c.classList.contains('mermaid-block') || c.classList.contains('math')) { out.push(c.textContent); continue; }   // "[Diagram]" / "$$…$$" placeholders set above (plain text, no child elements)
       if (tag === 'ul' || tag === 'ol') out.push(list(c, 0));
       else if (tag === 'pre') out.push(c.textContent.replace(/\n$/, ''));
       else if (tag === 'table') out.push(Array.from(c.querySelectorAll('tr')).map(tr => Array.from(tr.children).map(flat).join(' | ')).join('\n'));
@@ -1188,9 +1170,9 @@ async function domToDocx(root, d) {
     return new Table({ width: { size: cols * w, type: WidthType.DXA }, columnWidths: Array(cols).fill(w), rows,
       borders: { top: b, bottom: b, left: b, right: b, insideHorizontal: b, insideVertical: b } });
   }
-  async function listItems(list, ctx, ref, level) {
+  async function listItems(list, ctx, level) {
     const out = [], ordered = list.tagName === 'OL';
-    ref = ordered ? newOrdered() : 'ink-bullets';
+    const ref = ordered ? newOrdered() : 'ink-bullets';
     for (const li of Array.from(list.children).filter(x => x.tagName === 'LI')) {
       const task = !!li.querySelector(':scope > input[type="checkbox"], :scope > p > input[type="checkbox"]');
       let first = true, buf = [];
@@ -1201,7 +1183,7 @@ async function domToDocx(root, d) {
         first = false; buf = [];
       };
       for (const c of Array.from(li.childNodes)) {
-        if (c.nodeType === 1 && (c.tagName === 'UL' || c.tagName === 'OL')) { await flush(); out.push(...await listItems(c, ctx, ref, Math.min(level + 1, 8))); }
+        if (c.nodeType === 1 && (c.tagName === 'UL' || c.tagName === 'OL')) { await flush(); out.push(...await listItems(c, ctx, Math.min(level + 1, 8))); }
         else if (c.nodeType === 1 && c.tagName === 'P') { await flush(); buf = Array.from(c.childNodes); await flush(); }
         else if (c.nodeType === 1 && /^(PRE|TABLE|BLOCKQUOTE|DIV)$/.test(c.tagName)) { await flush(); out.push(...await blocks([c], ctx)); }
         else buf.push(c);
@@ -1222,7 +1204,7 @@ async function domToDocx(root, d) {
       } else if (tag === 'p') {
         const title = n.classList.contains('alert-title');
         out.push(await para(n.childNodes, title ? { bold: true, color: ctx && ctx.quote } : {}, title ? { spacing: { after: 60 } } : {}, ctx));
-      } else if (tag === 'ul' || tag === 'ol') out.push(...await listItems(n, ctx, null, 0));
+      } else if (tag === 'ul' || tag === 'ol') out.push(...await listItems(n, ctx, 0));
       else if (tag === 'blockquote') {
         const al = (n.className.match(/alert-(\w+)/) || [])[1];
         out.push(...await blocks(Array.from(n.childNodes), { ...ctx, quote: al ? ALERT[al] : 'CCCCCC' }));
@@ -1913,7 +1895,7 @@ function goToHeading(h) {
   if (state.mode !== 'preview') editor.focus({ preventScroll: true });
   updateOutlineActive(); updateCursor();
 }
-function setOutline(on, quiet) {
+function setOutline(on) {
   work.classList.toggle('has-outline', on); store.set('outline', on ? '1' : '0');
   const b = $('#btnOutline'); b.setAttribute('aria-pressed', String(on)); b.classList.toggle('on', on);
   olKey = ''; linesDirty = blocksDirty = true; updateOutline();
@@ -1929,10 +1911,10 @@ preview.addEventListener('click', e => {
   const link = e.target.closest('a[href^="#"]'); if (!link) return;
   e.preventDefault();
   let id = link.getAttribute('href').slice(1); try { id = decodeURIComponent(id); } catch (err) {}
-  const el = id && preview.querySelector('[id="' + id.replace(/"/g, '\\"') + '"]');
+  const find = i => preview.querySelector('[id="' + i.replace(/"/g, '\\"') + '"]');
+  const el = id && (find(id) || find('pv-' + id));                       // heading ids carry a "pv-" prefix in the live preview
   if (el) pane.scrollTo({ top: Math.max(0, el.offsetTop - 20), behavior: reducedMotion ? 'auto' : 'smooth' });
 });
-document.addEventListener('click', e => { if (e.target.closest('.cheat-out a[href^="#"]')) e.preventDefault(); });
 
 /* ---------------------------------------------------------------
    Global shortcuts
@@ -1976,7 +1958,6 @@ function setTheme(t) {
   document.documentElement.setAttribute('data-theme', t);
   const meta = $('meta[name="theme-color"]'); if (meta) meta.content = t === 'dark' ? '#09090b' : '#fbfbfa';
   render();
-  renderCheats();
 }
 (function initGutter() {
   let dragging = false;
@@ -2032,44 +2013,8 @@ function setStartPref(home, quiet) {
 document.addEventListener('click', e => { const sw = e.target.closest && e.target.closest('[data-starteditor]'); if (sw) setStartPref(sw.getAttribute('aria-checked') === 'true'); });
 
 /* ---------------------------------------------------------------
-   Landing page: cheat sheet, reveal, nav
+   Landing page: reveal, nav
 --------------------------------------------------------------- */
-const CHEATS = [
-  { t: 'Headings', md: '# Heading 1\n## Heading 2\n### Heading 3' },
-  { t: 'Emphasis', md: '**bold**  _italic_\n~~strikethrough~~\n`inline code`' },
-  { t: 'Lists', md: '- Apples\n- Pears\n  - Nested\n\n1. First\n2. Second' },
-  { t: 'Task list', md: '- [x] Write\n- [ ] Review\n- [ ] Publish' },
-  { t: 'Quote & callouts', md: '> A wise quote.\n\n> [!WARNING]\n> Heads up!' },
-  { t: 'Code', md: '```js\nconst answer = 42;\n```' },
-  { t: 'Table', md: '| Name | Role |\n| --- | --- |\n| Ada | Engineer |\n| Lin | Designer |' },
-  { t: 'Math', md: '$$\nx = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}\n$$' },
-  { t: 'Diagram', md: '```mermaid\nflowchart LR\n  A[Idea] --> B[Draft] --> C[Ship]\n```' },
-  { t: 'Links & images', md: '[Anchor text](https://commonmark.org)\n\n![Alt text](image.png "Title")' },
-  { t: 'Footnotes', md: 'A claim that needs a source.[^1]\n\n[^1]: Here is the source.' }
-];
-const CHEATS_VISIBLE = 4;                      // the rest sit behind "Show all syntax"
-function renderCheats() {
-  const first = $('#cheats'), more = $('#cheatsMore'); if (!first || !more) return;
-  if (!first.children.length) {
-    const card = (c, i) => `<article class="cheat"><div class="cheat-h"><span>${c.t}</span><button type="button" data-try="${i}">Try it</button></div><div class="cheat-b"><pre class="cheat-src">${escapeHtml(c.md)}</pre><div class="cheat-out md" data-i="${i}"></div></div></article>`;
-    first.innerHTML = CHEATS.slice(0, CHEATS_VISIBLE).map((c, i) => card(c, i)).join('');
-    more.innerHTML = CHEATS.slice(CHEATS_VISIBLE).map((c, i) => card(c, i + CHEATS_VISIBLE)).join('');
-    [first, more].forEach(h => h.addEventListener('click', e => {
-      const b = e.target.closest('[data-try]'); if (!b) return;
-      appendMarkdown(CHEATS[+b.dataset.try].md); setFull(true); toast('Added to your document');
-    }));
-    const n = $('#syntaxCount'); if (n) n.textContent = '+' + (CHEATS.length - CHEATS_VISIBLE);
-  }
-  if (!enginesReady) return;
-  $$('.cheat-out', document).forEach(out => {
-    const md = CHEATS[+out.dataset.i].md;
-    if (/!\[/.test(md)) { out.innerHTML = '<p style="color:var(--md-muted)">Renders an image with alt text and an optional title.</p>'; return; }
-    out.innerHTML = mdToHTML(md, false);
-    headingsToParagraphs(out);
-    postProcess(out, 'landing');
-    renderMermaidIn(out, mermaidTheme(), true);
-  });
-}
 /* "Show more" panels — keep the landing page short, everything else one click away */
 function setExpanded(btn, open) {
   const panel = document.getElementById(btn.getAttribute('aria-controls')); if (!panel) return;
@@ -2587,28 +2532,9 @@ if (location.hash === '#editor') history.replaceState(null, '', location.pathnam
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 })();
 setOutline(store.get('outline', '0') === '1');
-updateStats(); updateCursor(); render(); renderCheats();
+updateStats(); updateCursor(); render();
 if (enginesReady) renderMath($('#features'), 'html'); else $$('#features .math').forEach(el => el.textContent = dec(el.dataset.tex));
 observeReveals();
-(function faqTabs() {   // FAQ topics: without JS every topic is listed; with JS the tabs show one topic at a time
-  const main = $('#faqMain'), tabs = main && $('.faq-tabs', main);
-  if (!tabs) return;
-  const btns = $$('[role="tab"]', tabs), panels = $$('.faq-panel', main);
-  const show = (i, focus) => {
-    btns.forEach((b, j) => { b.setAttribute('aria-selected', String(i === j)); b.tabIndex = i === j ? 0 : -1; });
-    panels.forEach((p, j) => { p.hidden = i !== j; });
-    if (focus) btns[i].focus();
-    if (i) btns[i].scrollIntoView({ block: 'nearest', inline: 'center', behavior: reducedMotion ? 'instant' : 'smooth' });
-  };
-  btns.forEach((b, i) => {
-    b.addEventListener('click', () => show(i));
-    b.addEventListener('keydown', e => {
-      const d = { ArrowRight: 1, ArrowLeft: -1, Home: -btns.length, End: btns.length }[e.key];
-      if (d) { e.preventDefault(); show(e.key === 'Home' ? 0 : e.key === 'End' ? btns.length - 1 : (i + d + btns.length) % btns.length, true); }
-    });
-  });
-  main.classList.add('js'); show(0);
-})();
 if (!startHome) editor.focus({ preventScroll: true });
 openSharedFromHash();
 

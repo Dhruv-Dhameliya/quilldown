@@ -2,7 +2,8 @@
    Runs entirely in the browser; the address never leaves it. */
 (function () {
   'use strict';
-  var path = decodeURIComponent(location.pathname || '/');
+  var path = location.pathname || '/';
+  try { path = decodeURIComponent(path); } catch (e) { /* malformed %-escape: show the address as typed */ }
   var out = document.getElementById('nfPath');
   if (out) out.textContent = path.length > 60 ? path.slice(0, 57) + '…' : path;
 
